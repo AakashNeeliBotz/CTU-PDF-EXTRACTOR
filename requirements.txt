@@ -1,0 +1,16 @@
+crawl4ai
+httpx
+pymupdf
+pytesseract
+pandas
+openpyxl
+apscheduler
+camelot-py[base]
+requests
+beautifulsoup4
+transformers 
+torch
+pillow
+pymupdf
+torchvision
+llama-cpp-python
