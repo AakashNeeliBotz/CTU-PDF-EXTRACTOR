@@ -1,9 +1,12 @@
 # This file contains the master configuration for the entire pipeline.
 # It defines all data sources and how they map to the sheets and prompts.
 
-# Ollama model configuration (LLM served locally)
-OLLAMA_MODEL = "gemma3:4b"
-OLLAMA_URL = "http://localhost:11434"
+# Hugging Face Transformers model configuration (direct GPU inference)
+HF_MODEL = "google/gemma-3-4b-it"  # Gemma 3 4B instruction-tuned model
+
+# Legacy Ollama settings (kept for reference, not used)
+# OLLAMA_MODEL = "gemma3:4b"
+# OLLAMA_URL = "http://localhost:11434"
 
 # Part 1: Define all data source URLs
 # This dictionary maps a unique source ID (SNx) to its URL.

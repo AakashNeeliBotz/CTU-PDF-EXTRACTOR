@@ -1,16 +1,31 @@
+# Core dependencies
 crawl4ai
 httpx
-pymupdf
-pytesseract
+requests
+beautifulsoup4
 pandas
 openpyxl
 apscheduler
-camelot-py[base]
-requests
-beautifulsoup4
-transformers 
-torch
-pillow
+
+# PDF processing
 pymupdf
+camelot-py[base]
+
+# Docling for advanced PDF parsing and OCR
+docling
+
+# ML/AI - Hugging Face Transformers with GPU support
+transformers>=4.51.3
+torch>=2.4.0
 torchvision
-llama-cpp-python
+accelerate>=0.20.0
+sentencepiece
+
+# OCR dependencies (for Docling/Tesseract)
+# Note: Tesseract must be installed separately on your system
+# Installation: https://tesseract-ocr.github.io/tessdoc/Installation.html
+pytesseract
+pillow
+
+# Legacy (not used anymore)
+# llama-cpp-python

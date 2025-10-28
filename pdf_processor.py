@@ -1,124 +1,249 @@
 import os
 import fitz  # PyMuPDF
-from PIL import Image
-import torch
-from transformers import AutoProcessor, AutoModelForImageTextToText
-import io
+from pathlib import Path
+import os
+import pandas as pd
+from typing import List, Dict, Any, Optional, Tuple
+
+# --- Camelot for table extraction ---
+try:
+    import camelot
+    CAMELOT_AVAILABLE = True
+except ImportError:
+    CAMELOT_AVAILABLE = False
+    print("[!] Camelot not installed. Table extraction will be limited.")
+    print("    Install with: pip install camelot-py[base]")
+
+# --- Docling imports for OCR ---
+try:
+    from docling.document_converter import DocumentConverter
+    from docling.datamodel.base_models import InputFormat
+    from docling.datamodel.pipeline_options import (
+        PdfPipelineOptions,
+        TesseractCliOcrOptions,
+    )
+    from docling.document_converter import PdfFormatOption
+    DOCLING_AVAILABLE = True
+except ImportError:
+    DOCLING_AVAILABLE = False
+    print("[!] Docling not installed. OCR will not be available.")
+    print("    Install with: pip install docling")
 
 # --- Configuration ---
-# Check for GPU availability for faster processing, otherwise use CPU.
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-print(f"--- Using device: {DEVICE} ---")
+print(f"--- PDF Processor initialized ---")
+print(f"--- Camelot table extraction available: {CAMELOT_AVAILABLE} ---")
+print(f"--- Docling OCR available: {DOCLING_AVAILABLE} ---")
 
-# --- Lazy OCR Model Loader ---
-processor = None
-model = None
-ocr_load_failed = False  # Track if OCR loading failed to avoid retry loops
+# --- Camelot Table Extraction ---
 
-def _ensure_ocr_loaded():
-    """Load OCR model on-demand only when needed (skip if already loaded)."""
-    global processor, model, ocr_load_failed
+def extract_tables_with_camelot(pdf_path: str, flavor: str = 'lattice') -> List[pd.DataFrame]:
+    """
+    Extract tables from PDF using Camelot.
     
-    # If we already tried and failed, don't retry
-    if ocr_load_failed:
-        print("[!] OCR loading previously failed, skipping retry.")
+    Args:
+        pdf_path: Path to PDF file
+        flavor: 'lattice' (more accurate, needs Ghostscript) or 'stream' (simpler)
+        
+    Returns:
+        List of pandas DataFrames, one per table found
+    """
+    if not CAMELOT_AVAILABLE:
+        print("[!] Camelot not available. Cannot extract tables.")
+        return []
+    
+    try:
+        print(f"    [*] Attempting Camelot table extraction (flavor='{flavor}')...")
+        
+        # Try to extract tables
+        tables = camelot.read_pdf(
+            pdf_path,
+            pages='all',
+            flavor=flavor,
+            suppress_stdout=True,  # Reduce noise
+        )
+        
+        if len(tables) == 0:
+            print(f"    [~] No tables found with flavor='{flavor}'.")
+            
+            # Try alternate flavor as fallback
+            if flavor == 'lattice':
+                print("    [*] Retrying with flavor='stream'...")
+                return extract_tables_with_camelot(pdf_path, flavor='stream')
+            
+            return []
+        
+        print(f"    [+] Found {len(tables)} table(s) using Camelot!")
+        
+        # Convert to DataFrames
+        dataframes = []
+        for i, table in enumerate(tables):
+            df = table.df
+            
+            # Basic cleaning: remove empty rows/columns
+            df = df.replace('', pd.NA).dropna(how='all').dropna(axis=1, how='all')
+            
+            if not df.empty:
+                print(f"      Table {i+1}: {df.shape[0]} rows × {df.shape[1]} columns")
+                dataframes.append(df)
+        
+        return dataframes
+    
+    except Exception as e:
+        print(f"    [!] Camelot extraction failed: {e}")
+        
+        # If lattice failed (often due to missing Ghostscript on Windows), try stream
+        if flavor == 'lattice' and 'ghostscript' in str(e).lower():
+            print("    [!] Ghostscript not found. Falling back to 'stream' flavor...")
+            return extract_tables_with_camelot(pdf_path, flavor='stream')
+        
+        return []
+
+
+def convert_tables_to_records(tables: List[pd.DataFrame]) -> List[Dict[str, Any]]:
+    """
+    Convert Camelot-extracted tables to list of records.
+    Assumes first row is header.
+    
+    Args:
+        tables: List of DataFrames from Camelot
+        
+    Returns:
+        List of dictionaries (records)
+    """
+    all_records = []
+    
+    for table_idx, df in enumerate(tables):
+        if df.empty:
+            continue
+        
+        # Use first row as header
+        df.columns = df.iloc[0]
+        df = df[1:].reset_index(drop=True)
+        
+        # Convert to records
+        records = df.to_dict('records')
+        print(f"      [*] Extracted {len(records)} records from table {table_idx + 1}")
+        
+        all_records.extend(records)
+    
+    return all_records
+
+# --- Lazy Docling Converter Loader ---
+_docling_converter = None
+docling_load_failed = False  # Track if Docling loading failed to avoid retry loops
+
+def _ensure_docling_loaded():
+    """Load Docling converter on-demand only when needed (lazy loading)."""
+    global _docling_converter, docling_load_failed
+    
+    if not DOCLING_AVAILABLE:
+        print("[!] Docling not available. Cannot perform OCR.")
         return False
     
-    if processor is not None and model is not None:
-        print("[*] OCR model already loaded, reusing...")
+    # If we already tried and failed, don't retry
+    if docling_load_failed:
+        print("[!] Docling loading previously failed, skipping retry.")
+        return False
+    
+    if _docling_converter is not None:
+        print("[*] Docling converter already loaded, reusing...")
         return True
     
     try:
-        print("[*] Loading Nanonets OCR model on-demand...")
-        print("    This may take 1-3 minutes on CPU...")
-        model_id = "nanonets/Nanonets-OCR-s"
+        print("[*] Initializing Docling converter with Tesseract OCR...")
+        print("    Note: Ensure Tesseract is installed on your system.")
+        print("    Install: https://tesseract-ocr.github.io/tessdoc/Installation.html")
         
-        # Load processor first
-        print("    [1/3] Loading processor...")
-        processor = AutoProcessor.from_pretrained(
-            model_id, 
-            trust_remote_code=True, 
-            use_fast=False,
-            local_files_only=False  # Allow download if needed
+        # Configure Tesseract OCR with auto language detection
+        ocr_options = TesseractCliOcrOptions(lang=["eng"])  # English, can use ["auto"] for auto-detect
+        
+        # Set up PDF pipeline with OCR enabled
+        pipeline_options = PdfPipelineOptions(
+            do_ocr=True,
+            force_full_page_ocr=True,  # Force OCR for all pages
+            ocr_options=ocr_options
         )
         
-        # Load model with explicit settings
-        print("    [2/3] Loading model checkpoint shards (this is slow on CPU)...")
-        compute_dtype = torch.bfloat16 if DEVICE == "cuda" else torch.float32
-        model = AutoModelForImageTextToText.from_pretrained(
-            model_id,
-            trust_remote_code=True,
-            torch_dtype=compute_dtype,
-            low_cpu_mem_usage=True,  # Reduce memory footprint
-            device_map="auto" if DEVICE == "cuda" else None
+        # Create converter with PDF options
+        _docling_converter = DocumentConverter(
+            format_options={
+                InputFormat.PDF: PdfFormatOption(
+                    pipeline_options=pipeline_options,
+                )
+            }
         )
         
-        # Move to device
-        print("    [3/3] Moving model to device...")
-        if DEVICE == "cpu":
-            model = model.to(DEVICE)  # type: ignore[attr-defined]
-        
-        print("[+] OCR model loaded successfully and ready.")
+        print("[+] Docling converter initialized successfully!")
         return True
         
     except KeyboardInterrupt:
-        print("\n[!] OCR loading interrupted by user.")
-        processor = None
-        model = None
-        ocr_load_failed = True
+        print("\n[!] Docling initialization interrupted by user.")
+        _docling_converter = None
+        docling_load_failed = True
         return False
     except Exception as e:
-        print(f"[!] CRITICAL ERROR loading OCR model: {e}")
+        print(f"[!] ERROR initializing Docling: {e}")
         print(f"[!] Error type: {type(e).__name__}")
+        print("[!] Make sure Tesseract is installed and in your system PATH.")
         import traceback
         traceback.print_exc()
-        processor = None
-        model = None
-        ocr_load_failed = True
+        _docling_converter = None
+        docling_load_failed = True
         return False
 
-def run_ocr_on_image(image):
+def run_ocr_with_docling(pdf_path):
     """
-    Performs OCR on a single PIL Image using the Nanonets model.
+    Performs OCR on a PDF file using Docling with Tesseract.
+    Returns the extracted text as a string.
     """
-    success = _ensure_ocr_loaded()
-    if not success or model is None or processor is None:
-        print("[!] OCR model not available. Skipping OCR for this page.")
+    success = _ensure_docling_loaded()
+    if not success or _docling_converter is None:
+        print("[!] Docling converter not available. Skipping OCR.")
         return ""
 
     try:
-        # The prompt tells the model which task to perform.
-        prompt = "<OCR>"
-        inputs = processor(text=prompt, images=image, return_tensors="pt").to(DEVICE)
-
-        # Generate the text from the image.
-        pixel_dtype = torch.bfloat16 if DEVICE == "cuda" else torch.float32
-        generated_ids = model.generate(
-            input_ids=inputs["input_ids"],
-            pixel_values=inputs["pixel_values"].to(pixel_dtype),
-            max_new_tokens=2048,
-            do_sample=False
-        )
-
-        # Decode the output to get the text.
-        generated_text = processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
+        print(f"    [*] Running Docling OCR on PDF...")
         
-        # The model's output includes the prompt, so we parse it to get only the result.
-        parsed_text = generated_text.split('<OCR>')[-1].strip()
-        return parsed_text
+        # Convert PDF using Docling
+        result = _docling_converter.convert(pdf_path)
+        doc = result.document
+        
+        # Export to markdown format (clean and structured)
+        text = doc.export_to_markdown()
+        
+        print(f"    [+] Docling OCR completed. Extracted {len(text)} characters.")
+        return text
     
     except Exception as e:
-        print(f"[!] Error during OCR inference: {e}")
+        print(f"[!] Error during Docling OCR: {e}")
+        import traceback
+        traceback.print_exc()
         return ""
 
-def extract_text_from_pdf(pdf_path):
+def extract_text_from_pdf(pdf_path: str) -> Tuple[str, List[pd.DataFrame]]:
     """
-    Extracts text from a PDF. It first tries direct text extraction.
-    If that fails or yields minimal text, it performs OCR on each page.
+    Extracts data from a PDF using a 3-tier approach:
+    1. Camelot (for tabular PDFs)
+    2. PyMuPDF (for digital text PDFs  
+    3. Docling OCR (for scanned PDFs)
+    
+    Returns:
+        Tuple of (text_content, list_of_table_dataframes)
     """
+    tables = []
     full_text = ""
+    
     try:
-        # --- 1. Attempt to extract text directly (for digital PDFs) ---
+        # --- TIER 1: Try Camelot for table extraction first ---
+        if CAMELOT_AVAILABLE:
+            tables = extract_tables_with_camelot(pdf_path)
+            
+            if tables:
+                print(f"  [+] Camelot extracted {len(tables)} table(s) from '{os.path.basename(pdf_path)}'.")
+                print(f"  [*] Tabular PDF detected - skipping text extraction for optimal speed.")
+                return "", tables  # Early return: skip PyMuPDF and OCR for tabular PDFs
+                
+        # --- TIER 2: PyMuPDF for digital text extraction ---
         doc = fitz.open(pdf_path)
         for pno in range(doc.page_count):
             page = doc.load_page(pno)
@@ -129,45 +254,32 @@ def extract_text_from_pdf(pdf_path):
                 full_text += str(txt)
         doc.close()
 
-        # --- 2. If direct extraction gives very little text, assume it's a scanned PDF ---
+        # --- TIER 3: If minimal text, use Docling OCR ---
         if len(full_text.strip()) < 100:
-            print(f"  [~] Minimal text found in '{os.path.basename(pdf_path)}'. Switching to OCR.")
+            print(f"  [~] Minimal text found in '{os.path.basename(pdf_path)}'. Switching to Docling OCR.")
             
-            # Check if OCR is available before attempting
-            if ocr_load_failed:
-                print(f"  [!] OCR unavailable. Skipping file '{os.path.basename(pdf_path)}'.")
-                return ""  # Return empty string to skip this file
+            # Check if Docling is available before attempting
+            if not DOCLING_AVAILABLE or docling_load_failed:
+                print(f"  [!] Docling OCR unavailable. Skipping file '{os.path.basename(pdf_path)}'.")
+                return full_text, tables
             
-            full_text = "" # Reset text to fill with OCR results
-            
-            # Re-open the document to process pages as images
-            doc = fitz.open(pdf_path)
-            for pno in range(doc.page_count):
-                page = doc.load_page(pno)
-                print(f"    - Processing page {pno+1} with OCR...")
-                try:
-                    # Render page to a medium-resolution image for speed
-                    pix = page.get_pixmap(dpi=150)
-                    image = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
-                    
-                    # Run OCR on the image
-                    page_text = run_ocr_on_image(image)
-                    full_text += page_text + "\n"
-                except Exception as e:
-                    print(f"    [!] Error processing page {pno+1}: {e}")
-                    # Continue with next page
-                    continue
-            doc.close()
+            # Use Docling to OCR the entire PDF
+            full_text = run_ocr_with_docling(pdf_path)
             
             if not full_text.strip():
-                print(f"  [!] OCR failed to extract any text from '{os.path.basename(pdf_path)}'.")
+                print(f"  [!] Docling OCR failed to extract text from '{os.path.basename(pdf_path)}'.")
+            else:
+                # After OCR, try Camelot again on the OCR'd content if no tables found yet
+                if CAMELOT_AVAILABLE and not tables:
+                    print("  [*] Retrying Camelot extraction after OCR...")
+                    tables = extract_tables_with_camelot(pdf_path)
         else:
             print(f"  [+] Successfully extracted text directly from '{os.path.basename(pdf_path)}'.")
 
     except Exception as e:
         print(f"  [!] An error occurred while processing {pdf_path}: {e}")
     
-    return full_text
+    return full_text, tables
 
 if __name__ == '__main__':
     # ==============================================================================
@@ -175,22 +287,33 @@ if __name__ == '__main__':
     # This block allows you to test the processor on a single PDF file.
     # ==============================================================================
     
-    # --- STEP 1: Open 'downloaded_pdfs' and paste a real filename below ---
-    test_pdf_filename = "172378378657Bidding Calendar as on 31-07-2024.docx.pdf" # <-- Paste your filename here
-    
-    # --- STEP 2: RUN THE SCRIPT ---
+    # --- STEP 1: Find a PDF in 'downloaded_pdfs' folder ---
     download_dir = "downloaded_pdfs"
-    test_pdf_path = os.path.join(download_dir, test_pdf_filename)
-
-    # Corrected Logic: First check if the filename is the placeholder. 
-    # Then, check if the file actually exists before trying to process it.
-    if "PASTE_YOUR_FILENAME_HERE" in test_pdf_filename:
-        print("\n[!] Please open pdf_processor.py and change the 'test_pdf_filename' variable to a real file.")
-    elif not os.path.exists(test_pdf_path):
-        print(f"\n[!] Error: The file '{test_pdf_filename}' was not found in the '{download_dir}' directory.")
-        print("Please check the filename spelling and that the 'downloaded_pdfs' folder exists.")
-    else:
-        print(f"\n--- Processing test file: {test_pdf_filename} ---")
+    
+    # Try to find any PDF file for testing
+    test_pdf_path = None
+    if os.path.exists(download_dir):
+        for root, dirs, files in os.walk(download_dir):
+            for file in files:
+                if file.lower().endswith('.pdf'):
+                    test_pdf_path = os.path.join(root, file)
+                    break
+            if test_pdf_path:
+                break
+    
+    if test_pdf_path and os.path.exists(test_pdf_path):
+        print(f"\n--- Testing Docling PDF Processor ---")
+        print(f"--- File: {os.path.basename(test_pdf_path)} ---")
+        print(f"--- Path: {test_pdf_path} ---\n")
+        
         extracted_content = extract_text_from_pdf(test_pdf_path)
-        print("\n--- Extracted Content (First 1000 Chars) ---")
-        print(extracted_content[:1000] + "...")
+        
+        print("\n" + "="*60)
+        print("--- Extracted Content (First 1000 Chars) ---")
+        print("="*60)
+        print(extracted_content[:1000])
+        if len(extracted_content) > 1000:
+            print(f"\n... (truncated, total {len(extracted_content)} characters)")
+    else:
+        print("\n[!] No PDF files found in 'downloaded_pdfs' directory.")
+        print("    Please run the scraper/downloader first or place a test PDF in the folder.")

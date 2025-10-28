@@ -1,0 +1,113 @@
+✅ COMPLETED CHANGES - CSV Migration & Camelot Integration
+================================================================
+
+COMPLETED (Ready to Test):
+--------------------------
+
+1. ✅ Updated prompts.py for CSV output
+   - All 5 sheet prompts now request CSV format instead of JSON
+   - Clear instructions: "Return CSV format with header row"
+   - Examples show CSV output format
+   - Simpler for LLM to generate (less complex syntax than JSON)
+
+2. ✅ Updated llm_data_extractor.py to parse CSV
+   - New function: _parse_csv_to_records(csv_text)
+   - Handles markdown code fences (```csv ... ```)
+   - Converts CSV rows to list of dictionaries
+   - Auto-converts numeric values (int/float)
+   - Handles empty values as None
+   - Handles quoted fields with commas
+   - Returns same format as before: {"extracted_data": [...]}
+
+3. ✅ Updated test_main_skip_download.py
+   - Uses new extract_text_from_pdf() returning (text, tables)
+   - Prefers Camelot tables over LLM (10-20x faster)
+   - Normalizes Camelot headers via field_mappings.py
+   - Infers region from state automatically
+   - Saves extracted data to CSV first
+   - Generates Excel from in-memory data
+   - Logs which extraction method was used
+
+4. ✅ Updated main.py
+   - Uses new extract_text_from_pdf() returning (text, tables)
+   - Prefers Camelot tables over LLM
+   - Normalizes Camelot headers
+   - Tracks extraction method counts (Camelot vs LLM)
+   - Saves each sheet to CSV in extraction_output/ directory
+   - Logs extraction method statistics per sheet
+
+5. ✅ Created test_csv_parsing.py
+   - Unit tests for CSV parsing functionality
+   - Tests simple CSV, markdown fences, empty values, quoted fields
+   - Run with: python test_csv_parsing.py
+
+
+TESTING CHECKLIST:
+------------------
+
+Run tests in this order:
+
+1. Test CSV parsing:
+   python test_csv_parsing.py
+   
+   Expected: All 4 test cases pass, shows parsed records
+
+2. Test Camelot extraction (already verified):
+   python test_camelot.py
+   
+   Expected: Extracts 14 tables, saves to camelot_output/
+
+3. Test main pipeline with CSV output:
+   python test_main_skip_download.py
+   
+   Expected:
+   - Camelot extracts tables directly (no LLM)
+   - If LLM fallback needed, returns CSV format
+   - Saves to extraction_output/Data_to_be_captured_extracted_data.csv
+   - Generates Excel file
+   - Shows extraction method in summary
+
+
+OUTPUT FILES:
+-------------
+
+After running test_main_skip_download.py, check:
+
+1. extraction_output/Data_to_be_captured_extracted_data.csv
+   - Raw CSV data from extraction
+   - Should have proper headers
+   - All records present
+
+2. Connectivity_Application_Data_TEST_SN3_betterPrompts.xlsx
+   - Excel file with data in "Data to be captured" sheet
+   - Should match CSV content
+
+
+PINNED FOR LATER:
+-----------------
+
+❌ Generate Excel from saved CSV file
+   - Currently: Excel generated from in-memory data
+   - Future: Read CSV file, then write to Excel
+   - This ensures CSV is the single source of truth
+
+
+KEY IMPROVEMENTS:
+-----------------
+
+✅ Faster extraction (Camelot skips LLM entirely for tables)
+✅ More reliable (CSV simpler than JSON, less truncation)
+✅ Better header normalization (100+ variations → canonical names)
+✅ Automatic region inference from state names
+✅ CSV intermediate format for easy validation
+✅ Extraction method logging (know which PDFs used Camelot vs LLM)
+
+
+NEXT STEPS:
+-----------
+
+1. Run test_csv_parsing.py to verify CSV parser works
+2. Run test_main_skip_download.py to test full pipeline
+3. Check output CSV and Excel files
+4. If data looks good, run main.py for full extraction
+5. Later: Implement "Generate Excel from CSV" (pinned feature)

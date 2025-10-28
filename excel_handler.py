@@ -3,6 +3,34 @@ import os
 import openpyxl
 from openpyxl import load_workbook
 import shutil
+from field_mappings import DATA_TO_BE_CAPTURED_FIELDS
+
+
+def reindex_dataframe_to_template(df: pd.DataFrame, sheet_name: str) -> pd.DataFrame:
+    """
+    Reindex DataFrame columns to match template's canonical field order.
+    
+    Args:
+        df: DataFrame with data records
+        sheet_name: Name of target sheet
+        
+    Returns:
+        Reindexed DataFrame with columns in template order
+    """
+    # Get expected fields for this sheet
+    if sheet_name == "Data to be captured":
+        expected_fields = DATA_TO_BE_CAPTURED_FIELDS
+    else:
+        # TODO: Add field lists for other sheets
+        # For now, just return as-is
+        return df
+    
+    # Reindex to match template order
+    # Missing columns will be filled with NaN (converted to None later)
+    # Extra columns are dropped
+    df_reindexed = df.reindex(columns=expected_fields)
+    
+    return df_reindexed
 
 def write_to_excel(data_records, template_path, output_path, sheet_name):
     """
@@ -21,6 +49,11 @@ def write_to_excel(data_records, template_path, output_path, sheet_name):
     try:
         # Create a DataFrame from the list of dictionaries
         new_data_df = pd.DataFrame(data_records)
+        
+        # Reindex to template order to ensure column alignment
+        new_data_df = reindex_dataframe_to_template(new_data_df, sheet_name)
+        
+        print(f"[*] DataFrame reindexed to template order: {list(new_data_df.columns)[:10]}...")
 
         # Check if the output file already exists to append data
         if os.path.exists(output_path):
@@ -31,8 +64,8 @@ def write_to_excel(data_records, template_path, output_path, sheet_name):
                 sheet = workbook[sheet_name]
                 start_row = sheet.max_row
                 
-                # Write the new data, skipping the header
-                new_data_df.to_excel(writer, sheet_name=sheet_name, startrow=start_row, index=False, header=False)
+                # Write the new data, skipping the header, starting at column B (startcol=1 is 0-indexed)
+                new_data_df.to_excel(writer, sheet_name=sheet_name, startrow=start_row, startcol=1, index=False, header=False)
             print(f"[+] Appended {len(new_data_df)} new records to '{sheet_name}' in '{output_path}'.")
 
         else:
@@ -53,16 +86,19 @@ def write_to_excel(data_records, template_path, output_path, sheet_name):
                 start_col = 2
                 
                 # Write each record as a row
-                for record in data_records:
-                    for col_idx, key in enumerate(new_data_df.columns):
-                        cell_value = record.get(key)
+                for record_idx in range(len(new_data_df)):
+                    for col_idx, col_name in enumerate(new_data_df.columns):
+                        cell_value = new_data_df.iloc[record_idx][col_name]
+                        # Convert NaN to None for Excel
+                        if pd.isna(cell_value):
+                            cell_value = None
                         ws.cell(row=start_row, column=start_col + col_idx, value=cell_value)
                     start_row += 1
                 
                 wb.save(output_path)
                 wb.close()
                 
-                print(f"[+] Created new output file '{output_path}' and wrote {len(data_records)} records to '{sheet_name}'.")
+                print(f"[+] Created new output file '{output_path}' and wrote {len(new_data_df)} records to '{sheet_name}'.")
             else:
                 wb.close()
                 print(f"[!] Sheet '{sheet_name}' not found in template.")
@@ -72,6 +108,8 @@ def write_to_excel(data_records, template_path, output_path, sheet_name):
         print(f"[!] Error: The template file was not found at '{template_path}'.")
     except Exception as e:
         print(f"[!] An unexpected error occurred while writing to Excel: {e}")
+        import traceback
+        traceback.print_exc()
 
 # Maintain backward-compatible interface
 write_data_to_sheet = write_to_excel

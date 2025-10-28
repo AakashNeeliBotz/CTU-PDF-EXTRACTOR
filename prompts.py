@@ -2,62 +2,67 @@
 # Prompts are concise while retaining key accuracy improvements.
 
 # --- Prompt for the "Data to be captured" Sheet ---
-PROMPT_DATA_TO_BE_CAPTURED = """You are a data extraction specialist for Indian energy sector documents.
+PROMPT_DATA_TO_BE_CAPTURED = """Extract renewable energy application data from tables. Return CSV format with header row.
 
-Extract renewable energy connectivity application data. Return JSON: {"extracted_data": [<records>]}
+KEY FIELDS (use these exact column names in header):
+sr_no,region,state,substation,name_of_developers,group,application_id,type,application_quantum_mw,status_of_lta,application_date,mode,voltage_level_kv,remarks
 
-CRITICAL RULES:
-• Extract ALL records, use null for missing values
-• Be flexible with field names (e.g., "Developer"="Name of Developers"="Company")
-• Region (NR/SR/WR/ER/NER) ≠ State (Gujarat/Karnataka/etc.) - DON'T confuse these!
-• "Substation"="S/s"="SS"="Pooling Station"
-• Dates: convert to YYYY-MM-DD format
-• Numbers: extract value only (500 MW → 500)
+RULES:
+1. Extract EVERY table row as a CSV row
+2. Leave empty for missing values (no 'null' text)
+3. Dates: YYYY-MM-DD format
+4. Numbers: value only ("500 MW" → 500)
+5. Region codes: Gujarat/Rajasthan/Maharashtra→WR, Karnataka/TamilNadu→SR, Punjab/Haryana→NR, WestBengal/Bihar→ER
+6. Common mappings: "Sr No"→sr_no, "Developer"/"Applicant"→name_of_developers, "Capacity"→application_quantum_mw, "S/s"→substation
+7. Use quotes for fields containing commas
+8. First row MUST be the header
 
-FIELDS TO EXTRACT (35 total):
-sr_no, region, state, substation, coordinates, name_of_developers, group, application_id, application_id_enhancement_5_2_or_revision, cmets_lta_gna_approved, cmets_lta_gna_meeting_date, type, application_quantum_mw, status_of_lta, installed_breakup_capacity_mw (object: {solar, wind, hybrid}), battery (object: {mwh, injection_mw, drawl_mw}), psp (object: {mwh, injection_mw, drawl_mw}), commissioned (object: {tgna, gna}), application_date, mode, applied_start_of_connectivity, gna_operationalization, gna_operationalization_yes_no, date_for_additional_capacity, nature_of_applicant, voltage_level_kv, bay_no, cts_element_unique_code, ats_element_unique_code, dtl_element_unique_code, date_of_last_element_unique_code, in_principle_grant, final_grant, land_bg_conversion_date, remarks
-
-KEY DISAMBIGUATIONS:
-• region: NR/SR/WR/ER/NER (broad) vs state: Gujarat/Karnataka (specific)
-• If "Gujarat" appears in Region column → use "WR" (Western Region)
-• Common region mappings: Gujarat/Rajasthan/Maharashtra→WR, Karnataka/Tamil Nadu→SR, Punjab/Haryana→NR
-
-EXAMPLE:
-{"extracted_data": [{"sr_no": "1670426695890", "region": "WR", "state": "Gujarat", "substation": "KPS-1 (Sec-II)", "name_of_developers": "Sarjan Realities Pvt. Ltd.", "type": "Solar", "application_quantum_mw": 500, ...}]}
-
-Return ONLY valid JSON."""
+Return ONLY CSV data. No explanations or markdown."""
 
 # --- Prompt for the "RE Potential" Sheet ---
 PROMPT_RE_POTENTIAL = """Extract renewable energy potential data from Indian infrastructure documents.
 
-Return JSON: {"extracted_data": [<records>]}
+Return CSV format with header row.
 
-RULES:
-• Extract ALL records, use null for missing
-• Region (NR/SR/WR/ER/NER) vs State (Gujarat/Karnataka) - different fields!
-• "S/s"="Substation"="SS"
-• Numbers: value only (remove MW/kV units)
-• Unit conversion: MW to GW (divide by 1000)
+EXTRACTION RULES:
+• Extract EVERY row from tables - count rows and verify
+• Map PDF column names to our exact field names (see mapping below)
+• Leave empty for missing values, never skip records
 
-FIELDS (16 total):
-region, state, district, complex, substation, location_village_tehsil, solar_gw, wind_gw, hybrid_gw, others_ctuil_gw, re_potential_gw, installed_capacity_gw, uc_and_granted_capacity_gw, transmission_scheme, complex_status, remarks
+FIELD MAPPING (PDF → Our Fields):
+• "Region" / "Circle" → region (NR/SR/WR/ER/NER)
+• "State" / "Location" → state
+• "District" / "Dist" → district
+• "Complex" / "Zone" → complex
+• "Substation" / "S/s" / "SS" → substation
+• "Location" / "Village" / "Tehsil" → location_village_tehsil
+• "Solar (GW)" / "Solar Potential" → solar_gw
+• "Wind (GW)" / "Wind Potential" → wind_gw
+• "Hybrid (GW)" → hybrid_gw
+• "Others CTUiL (GW)" → others_ctuil_gw
+• "RE Potential (GW)" / "Total Potential" → re_potential_gw
+• "Installed Capacity (GW)" / "Operational" → installed_capacity_gw
+• "U/C and Granted Capacity" / "Under Construction" → uc_and_granted_capacity_gw
+• "Transmission Scheme" → transmission_scheme
+• "Complex Status" / "Status" → complex_status
+• "Remarks" / "Notes" → remarks
 
-DISAMBIGUATIONS:
-• solar_gw: theoretical solar capacity available
-• installed_capacity_gw: operational capacity
-• uc_and_granted_capacity_gw: under construction + approved
-• re_potential_gw should = solar + wind + hybrid + others
-• "U/C"="Under Construction"
+FORMATTING:
+• Numbers: value only, remove units
+• MW to GW: divide by 1000
+• Region: NR/SR/WR/ER/NER only
+• U/C = Under Construction
 
 EXAMPLE:
-{"extracted_data": [{"region": "WR", "state": "Rajasthan", "district": "Jaisalmer", "substation": "Bikaner ISTS", "solar_gw": 10.5, "wind_gw": 2.3, "installed_capacity_gw": 5.2, ...}]}
+region,state,district,substation,solar_gw,wind_gw
+WR,Rajasthan,Jaisalmer,Bikaner ISTS,10.5,2.3
 
-Return ONLY valid JSON."""
+Return ONLY CSV data. No explanations or markdown."""
 
 # --- Prompt for the "Margin" Sheet ---
 PROMPT_MARGIN = """Extract transmission margin and capacity data for Indian power grid infrastructure.
 
-Return JSON: {"extracted_data": [<records>]}
+Return CSV format with header row.
 
 RULES:
 • Extract ALL records, null for missing
@@ -77,14 +82,17 @@ KEY FIELDS:
 • total_mw should = 200kv_mw + 400kv_mw
 
 EXAMPLE:
-{"extracted_data": [{"sl_no": 1, "region": "NR", "state": "Rajasthan", "pooling_ss": "Bikaner PS", "re_potential": {"re_potential_mw": 5000, "bess_mw": 500, "ss_evacuation_capacity_mw": 4500}, "margin_for_connectivity": {"200kv_mw": 500, "400kv_mw": 1000, "total_mw": 1500}, ...}]}
+sl_no,region,state,pooling_ss,re_potential_mw,margin_200kv_mw,margin_400kv_mw
+1,NR,Rajasthan,Bikaner PS,5000,500,1000
 
-Return ONLY valid JSON."""
+Note: Flatten nested objects (re_potential.re_potential_mw → re_potential_mw)
+
+Return ONLY CSV data. No explanations or markdown."""
 
 # --- Prompt for the "Transformation Capacity" Sheet ---
 PROMPT_TRANSFORMATION_CAPACITY = """Extract transformer capacity data for power substations.
 
-Return JSON: {"extracted_data": [<records>]}
+Return CSV format with header row.
 
 RULES:
 • Extract ALL records, null for missing
@@ -104,14 +112,15 @@ KEY FIELDS:
 • "2x500 MVA" = 2 transformers of 500 MVA each = 1000 MVA total
 
 EXAMPLE:
-{"extracted_data": [{"s_no": 1, "region": "NR", "state": "Rajasthan", "substation": "Bikaner 400/220kV ISTS", "existing_mva": 1260, "under_implementation_mva": 630, "planned_mva": 500}, ...]}
+s_no,region,state,substation,existing_mva,under_implementation_mva,planned_mva
+1,NR,Rajasthan,Bikaner 400/220kV ISTS,1260,630,500
 
-Return ONLY valid JSON."""
+Return ONLY CSV data. No explanations or markdown."""
 
 # --- Prompt for the "Element Status" Sheet ---
 PROMPT_ELEMENT_STATUS = """Extract power transmission element status (lines, transformers, bays).
 
-Return JSON: {"extracted_data": [<records>]}
+Return CSV format with header row.
 
 RULES:
 • Extract ALL records, null for missing
@@ -133,6 +142,9 @@ KEY FIELDS:
 • Substation: extract MVA capacity, civil/equipment progress
 
 EXAMPLE:
-{"extracted_data": [{"element_code": "TL-NR-001", "inter_intra_tx_element": "Inter-State", "transmission_scheme": "Green Energy Corridor Phase-II", "transmission_scope": "400kV D/C line from Bikaner to Moga (520 km)", "status": "Under Construction", "mode_tbcb_rtm": "TBCB", "physical_progress_tx_line": {"length_km": 520, "foundation_percent": 85, "erection_percent": 65, "stringing_percent": 45}, "original_scod": "2026-06", "anticipated_scod": "2026-10", ...}]}
+element_code,inter_intra_tx_element,transmission_scheme,status,length_km,foundation_percent
+TL-NR-001,Inter-State,Green Energy Corridor Phase-II,Under Construction,520,85
 
-Return ONLY valid JSON."""
+Note: Flatten nested objects (physical_progress_tx_line.length_km → length_km)
+
+Return ONLY CSV data. No explanations or markdown."""

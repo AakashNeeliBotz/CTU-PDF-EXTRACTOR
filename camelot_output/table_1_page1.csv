@@ -1,0 +1,91 @@
+0,1,2,3,4,5,6,7,8,9
+Details of Connectivity/GNA granted to RE based sources to be made effective,,,,,,,,,
+As on 30.06.2025,,,,,,,,,
+Sl. No,Application ID,Name of Applicant,Region,"Type of 
+Project","Installed 
+capacity 
+(MW)","Present 
+Connectivity 
+/deemed GNA","Substation at 
+which 
+generation 
+connected/ 
+connectivity 
+granted","State 
+(Connectivity 
+Station)","Expected date of 
+connectivity/ GNA to 
+be made effective"
+1,2200001878,NTPC LIMITED,WR,Solar,13,13,Solapur PG,Maharashtra,30-09-25
+2,2200000131,AVAADA ENERGY PRIVATE LIMITED,WR,Solar,300,300,Lakadiya PS,Gujarat,30-09-25
+3,2200000200,AVAADA ENERGY PRIVATE LIMITED,WR,Solar,200,200,Lakadiya PS,Gujarat,30-09-25
+4,2200000218,NTPC RENEWABLE ENERGY LIMITED,WR,Wind,155,155,Bhuj PS,Gujarat,30-09-25
+5,2200000070,RENEW URJA SHACHAR PRIVATE LIMITED,WR,Wind,300,300,Indore (PG),"Madhya 
+Pradesh",30-09-25
+6,1200003331,"Gujarat State Electricity Corporation Limited
+Connectivity: 1200003331 (600MW);
+LTA: 1200003326 (100MW) & 1200003327 (500MW);",WR,Solar,600,600,KPS-2 (Sec-I),Gujarat,30-09-25
+7,1200003371,"Gujarat Industries Power Company Limited
+Connectivity: 1200003371;
+LTA: 1200003372;",WR,Solar,600,600,KPS-2 (Sec-I),Gujarat,30-09-25
+8,1200003585,"NTPC Renewable Energy Limited (NREL)
+Connectivity: 1200003585 (265MW);
+LTA: 1200003712 (265+100MW);",WR,Solar,265,265,KPS-2 (Sec-II),Gujarat,30-09-25
+9,1200003733,"NTPC Renewable Energy Limited (NREL)
+Connectivity: 1200003733 (100MW);
+LTA: 1200003712 (265+100MW);",WR,Solar,100,100,KPS-2 (Sec-II),Gujarat,30-09-25
+10,1200003953,"NTPC Renewable Energy Limited (NREL)
+Connectivity: 1200003953 (890MW);
+LTA: 0430700002 (500);",WR,Solar,890,500,KPS-2 (Sec-II),Gujarat,30-09-25
+11,0231400008,Renew Tej Shakti Private Limited(RTSPL),WR,Wind,180,180,Parli PG SS,Maharashtra,30-09-25
+12,0231400009,Renew Tej Shakti Private Limited(RTSPL),WR,Wind,69,69,Parli PG SS,Maharashtra,30-09-25
+13,0231400010,Renew Tej Shakti Private Limited(RTSPL),WR,Wind,51,51,Parli PG SS,Maharashtra,30-09-25
+14,2200000818,JSW NEO ENERGY LIMITED,SR,Hybrid (RHGS),175,150,Karur PS,Tamil Nadu,13-09-25
+15,2200000239,AYANA RENEWABLE POWER FOUR PRIVATE LIMITED,WR,Hybrid (RHGS),129.9,100,Bhuj PS,Gujarat,30-09-25
+16,230700008,"Adani Green Energy Limited
+Connectivity: 230700008;
+LTA: 430700009 (1050MW);",WR,Hybrid (RHGS),1250,1050,KPS-1 (Sec-I),Gujarat,30-09-25
+17,230700006,"Adani Green Energy Limited
+Connectivity: 230700006;
+LTA: 430700007 (1000MW);",WR,Hybrid (RHGS),1200,1000,KPS-1 (Sec-II),Gujarat,30-09-25
+18,230700007,"Adani Green Energy Limited
+Connectivity: 230700007;
+LTA: 430700008 (1000MW);",WR,Hybrid (RHGS),1166.4,1000,KPS-1 (Sec-II),Gujarat,30-09-25
+19,230700005,"Gujarat State Electricity Corporation Limited
+Connectivity: 230700005;",WR,Solar,1000,1000,KPS-2 (Sec-I),Gujarat,30-09-25
+20,230700009,"Adani Green Energy Limited
+Connectivity: 230700009;
+LTA: 430700010 (1050MW);",WR,Hybrid (RHGS),1250,1050,KPS-3 (Sec-I),Gujarat,30-09-25
+21,2200000011,AVAADA INCLEAN PRIVATE LIMITED,WR,Solar,50,50,Lakadiya PS,Gujarat,30-09-25
+22,2200000155,RENEW GREEN ENERGY SOLUTIONS PRIVATE LIMITED,WR,Wind,73,73,Solapur PG,Maharashtra,30-09-25
+23,0231400004,Serentica Renewables India 4 Pvt. Ltd. (SRI4PL),WR,Wind,10,10,Kallam PS,Maharashtra,05-10-25
+24,0331400007,Serentica Renewables India 4 Pvt. Ltd. (SRI4PL),WR,Wind,140,140,Kallam PS,Maharashtra,05-10-25
+25,1200003942,ReNew Green (MHP One) Private Limited,WR,Wind,33,33,Kallam PS,Maharashtra,05-10-25
+26,1200003901,TEQ Green Power XI Pvt. Ltd.(TGPXIPL),WR,Wind,200,200,Kallam PS,Maharashtra,05-10-25
+27,1200003944,TEQ Green Power XI Pvt. Ltd.(TGPXIPL),WR,Wind,99,99,Kallam PS,Maharashtra,05-10-25
+28,0331400002,TEQ Green Power XI Pvt. Ltd.(TGPXIPL),WR,Wind,21.6,21,Kallam PS,Maharashtra,05-10-25
+29,1670224223993,Torrent Solar Power Private Limited (TSPPL),WR,Wind,66,66,Kallam PS,Maharashtra,05-10-25
+30,0331400013,Torrent Solar Power Private Limited (TSPPL),WR,Wind,92,92,Kallam PS,Maharashtra,05-10-25
+31,2200000035,TEQ GREEN POWER XI PRIVATE LIMITED (TGPXIPL),WR,Wind,29.7,29,Kallam PS,Maharashtra,05-10-25
+32,2200000193,TATA POWER RENEWABLE ENERGY LIMITED,WR,Wind,101,101,Kallam PS,Maharashtra,05-10-25
+33,2200000198,TORRENT SOLAR POWER PRIVATE LIMITED,WR,Wind,250,250,Kallam PS,Maharashtra,05-10-25
+34,2200000277,SERENTICA RENEWABLES INDIA PRIVATE LIMITED,WR,Wind,200,200,Kallam PS,Maharashtra,05-10-25
+35,2200000302,SERENTICA RENEWABLES INDIA PRIVATE LIMITED,WR,Wind,100,100,Kallam PS,Maharashtra,05-10-25
+36,2200001090,SERENTICA RENEWABLES INDIA PRIVATE LIMITED,WR,Wind,150,150,Kallam PS,Maharashtra,05-10-25
+37,2200001244,TATA POWER RENEWABLE ENERGY LIMITED,WR,Wind,111.8,10,Kallam PS,Maharashtra,05-10-25
+38,2200000317,SEVEN RENEWABLE POWER PRIVATE LIMITED,WR,Wind,50,50,Bhuj PS,Gujarat,31-10-25
+39,2200000386,NLC INDIA LIMITED,WR,Solar,200,200,Bhuj PS,Gujarat,31-10-25
+40,0231300002,Veh Jayin Renewables Private Limited,WR,Wind,151.8,151,Rajgarh SS,"Madhya 
+Pradesh",15-11-25
+41,0231300004,Veh Wind Energy Private Limited,WR,Wind,75,75,Rajgarh SS,"Madhya 
+Pradesh",15-11-25
+42,2200000162,"PROJECT NINE RENEWABLE POWER PRIVATE
+LIMITED",SR,Wind,295,295,Anantapur PS,Andhra Pradesh 30-11-25,
+43,2200000318,"AYANA RENEWABLE POWER FOUR PRIVATE
+LIMITED",SR,Wind,50,50,Anantapur PS,Andhra Pradesh 30-11-25,
+44,"St-II:1200002501 (300 MW) 
+LTA:1200003110 (211.65MW) (TSSPDCL)",NTPC Ltd.,NR,Solar,211.65,211,Bhadla-II,Rajasthan,30-11-25
+45,"St-II:1200002483 (300 MW) 
+LTA:1200003109 (211.65MW) (TSSPDCL)",NTPC Ltd.,NR,Solar,211.65,211,Bhadla-II,Rajasthan,30-11-25
+46,"St-II:1200002483 (300 MW) 
+LTA:1200003120 (88.35MW) (TSNPDCL)",NTPC Ltd.,NR,Solar,88.35,88,Bhadla-II,Rajasthan,30-11-25
