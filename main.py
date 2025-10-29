@@ -12,8 +12,7 @@ from excel_handler import write_to_excel
 from field_mappings import (
     normalize_header, 
     infer_region_from_state,
-    DATA_TO_BE_CAPTURED_FIELDS,
-    build_schema_alignment_prompt
+    DATA_TO_BE_CAPTURED_FIELDS
 )
 import concurrent.futures
 
@@ -38,159 +37,6 @@ def chunk_text(text, max_chars=6000, overlap=100):
         start = max(0, end - overlap)
     return chunks
 
-def process_table_through_llm(table_df: pd.DataFrame, sheet_name: str, expected_fields: list) -> List[Dict[str, Any]]:
-    """
-    Route a Camelot table through LLM for schema alignment.
-    
-    Args:
-        table_df: DataFrame from Camelot
-        sheet_name: Target sheet name
-        expected_fields: List of canonical field names in exact order
-        
-    Returns:
-        List of normalized records
-    """
-    try:
-        # Find header row
-        header_row_idx = 0
-        for idx in range(min(5, len(table_df))):
-            row_text = ' '.join(table_df.iloc[idx].astype(str).str.lower())
-            if any(indicator in row_text for indicator in ['sl. no', 'serial', 'application id', 'name of', 'applicant', 'region', 'type']):
-                header_row_idx = idx
-                break
-        
-        # Set header and get data rows
-        table_df.columns = table_df.iloc[header_row_idx].astype(str)
-        data_df = table_df.iloc[header_row_idx + 1:].reset_index(drop=True)
-        data_df = data_df.dropna(how='all')
-        
-        input_row_count = len(data_df)
-        
-        if input_row_count == 0:
-            print(f"      [~] No data rows after header, skipping table")
-            return []
-        
-        print(f"      [*] Table has {input_row_count} data rows")
-        
-        # Convert to CSV for LLM input
-        csv_buffer = io.StringIO()
-        table_df.iloc[header_row_idx:].to_csv(csv_buffer, index=False, header=False)
-        table_csv = csv_buffer.getvalue()
-        
-        # Build schema-alignment prompt
-        alignment_prompt = build_schema_alignment_prompt(sheet_name, expected_fields, input_row_count)
-        full_prompt = alignment_prompt + "\n" + table_csv
-        
-        print(f"      [*] Sending table to LLM for schema alignment...")
-        
-        # Call LLM with schema-alignment prompt
-        llm_response = extract_structured_data(full_prompt, alignment_prompt)
-        
-        if not llm_response or 'extracted_data' not in llm_response:
-            print(f"      [!] LLM failed to return structured data, falling back to direct normalization")
-            return fallback_normalize_table(data_df, expected_fields)
-        
-        records = llm_response['extracted_data']
-        output_row_count = len(records)
-        
-        # Validate row count
-        if output_row_count != input_row_count:
-            print(f"      [!] Row count mismatch: input={input_row_count}, output={output_row_count}")
-            print(f"      [*] Retrying with stricter prompt...")
-            
-            # Retry once with even stricter prompt
-            strict_prompt = alignment_prompt.replace(
-                "CRITICAL:",
-                f"ABSOLUTE REQUIREMENT - YOU MUST RETURN EXACTLY {input_row_count} DATA ROWS OR THE SYSTEM WILL FAIL:\n\nCRITICAL:"
-            )
-            full_prompt_retry = strict_prompt + "\n" + table_csv
-            
-            llm_response_retry = extract_structured_data(full_prompt_retry, strict_prompt)
-            
-            if llm_response_retry and 'extracted_data' in llm_response_retry:
-                records_retry = llm_response_retry['extracted_data']
-                if len(records_retry) == input_row_count:
-                    print(f"      [✅] Retry successful: {len(records_retry)} rows")
-                    records = records_retry
-                else:
-                    print(f"      [!] Retry still mismatched, falling back to direct normalization")
-                    return fallback_normalize_table(data_df, expected_fields)
-            else:
-                print(f"      [!] Retry failed, falling back to direct normalization")
-                return fallback_normalize_table(data_df, expected_fields)
-        
-        print(f"      [✅] LLM schema alignment successful: {len(records)} records")
-        return records
-        
-    except Exception as e:
-        print(f"      [!] Error in LLM table processing: {e}")
-        import traceback
-        traceback.print_exc()
-        print(f"      [*] Falling back to direct normalization")
-        # Use first row as header for fallback
-        if len(table_df) > 0:
-            table_df.columns = table_df.iloc[0].astype(str)
-            data_df_fallback = table_df.iloc[1:].reset_index(drop=True).dropna(how='all')
-            return fallback_normalize_table(data_df_fallback, expected_fields)
-        return []
-
-
-def fallback_normalize_table(data_df: pd.DataFrame, expected_fields: list) -> List[Dict[str, Any]]:
-    """
-    Fallback: direct normalization without LLM (legacy path).
-    
-    Args:
-        data_df: DataFrame with data rows (no header)
-        expected_fields: Expected field names
-        
-    Returns:
-        List of records
-    """
-    print(f"      [*] Using fallback normalization (no LLM)")
-    
-    # Basic normalization
-    records = data_df.to_dict('records')
-    normalized_records = []
-    
-    for record in records:
-        cleaned_record = {}
-        for key, value in record.items():
-            if pd.isna(value) or value == '' or value == 'nan':
-                cleaned_record[key] = None
-            else:
-                cleaned_record[key] = value
-        normalized_records.append(cleaned_record)
-    
-    return normalized_records
-
-
-def process_camelot_tables_with_llm(tables: List[pd.DataFrame], sheet_name: str, expected_fields: list) -> List[Dict[str, Any]]:
-    """
-    Process all Camelot tables through LLM for schema alignment.
-    
-    Args:
-        tables: List of DataFrames from Camelot
-        sheet_name: Target sheet name
-        expected_fields: List of canonical field names
-        
-    Returns:
-        List of all normalized records
-    """
-    all_records = []
-    
-    for table_idx, table_df in enumerate(tables):
-        if table_df.empty:
-            continue
-        
-        print(f"      [*] Processing table {table_idx + 1}/{len(tables)}: {table_df.shape[0]} rows × {table_df.shape[1]} columns")
-        
-        records = process_table_through_llm(table_df, sheet_name, expected_fields)
-        all_records.extend(records)
-        
-        print(f"      [+] Extracted {len(records)} records from table {table_idx + 1}")
-    
-    return all_records
-
 
 def process_pdf_file(pdf_path, prompt_for_sheet, sheet_name):
     """Extract data from PDF using Camelot first, fallback to LLM if needed."""
@@ -204,17 +50,109 @@ def process_pdf_file(pdf_path, prompt_for_sheet, sheet_name):
         
         # TIER 1: Try to use Camelot tables first (fastest, most accurate)
         if tables and len(tables) > 0:
-            print(f"      [+] Camelot found {len(tables)} table(s)! Using LLM schema alignment.")
+            print(f"      [+] Camelot found {len(tables)} table(s)! Converting directly to records.")
             
-            # Get expected fields for this sheet
-            if sheet_name == "Data to be captured":
-                expected_fields = DATA_TO_BE_CAPTURED_FIELDS
+            # First, extract header rows and data from each table
+            import pandas as pd
+            processed_tables = []
+            
+            # Find the header row from the first table (assume all tables share same headers)
+            first_table_headers = None
+            if len(tables) > 0 and not tables[0].empty:
+                table_df = tables[0]
+                header_row_idx = 0
+                
+                # Find header row in first table
+                for idx in range(min(5, len(table_df))):
+                    row_text = ' '.join(table_df.iloc[idx].astype(str).str.lower())
+                    non_null_count = table_df.iloc[idx].notna().sum()
+                    if non_null_count < 3:
+                        continue
+                    
+                    # Count how many header keywords are found
+                    keyword_matches = 0
+                    if any(kw in row_text for kw in ['sl. no', 'sl.no', 'serial', 's.no', 's no']):
+                        keyword_matches += 1
+                    if any(kw in row_text for kw in ['application id', 'app id', 'applicant']):
+                        keyword_matches += 1
+                    if any(kw in row_text for kw in ['name of', 'developer', 'company']):
+                        keyword_matches += 1
+                    if any(kw in row_text for kw in ['region', 'state']):
+                        keyword_matches += 1
+                    if any(kw in row_text for kw in ['substation', 'connectivity', 'date']):
+                        keyword_matches += 1
+                    if any(kw in row_text for kw in ['capacity', 'quantum', 'mw']):
+                        keyword_matches += 1
+                    
+                    # Require at least 3 keyword matches to consider it a header row
+                    if keyword_matches >= 3:
+                        header_row_idx = idx
+                        break
+                
+                if header_row_idx == 0 and len(table_df) > 2:
+                    # If still at row 0, default to row 2 (common case for these PDFs)
+                    header_row_idx = 2
+                
+                # Extract and normalize headers from first table
+                raw_headers = table_df.iloc[header_row_idx].astype(str).tolist()
+                normalized_headers = [normalize_header(h) for h in raw_headers]
+                
+                # Handle duplicate column names by making them unique
+                seen = {}
+                unique_headers = []
+                for header in normalized_headers:
+                    if header in seen:
+                        seen[header] += 1
+                        unique_headers.append(f"{header}_{seen[header]}")
+                    else:
+                        seen[header] = 0
+                        unique_headers.append(header)
+                
+                first_table_headers = unique_headers
+                
+                # Process first table data
+                data_df = table_df.iloc[header_row_idx + 1:].reset_index(drop=True)
+                data_df.columns = unique_headers
+                data_df = data_df.dropna(how='all')
+                if not data_df.empty:
+                    processed_tables.append(data_df)
+            
+            # Process remaining tables using the same headers
+            if first_table_headers:
+                for table_idx in range(1, len(tables)):
+                    table_df = tables[table_idx]
+                    if table_df.empty:
+                        continue
+                    
+                    # Skip first 2 rows (likely continuation markers or page breaks)
+                    data_df = table_df.iloc[2:].reset_index(drop=True) if len(table_df) > 2 else table_df
+                    data_df.columns = first_table_headers  # Use same headers as Table 1
+                    data_df = data_df.dropna(how='all')
+                    
+                    if not data_df.empty:
+                        processed_tables.append(data_df)
+            
+            # Merge all processed tables into one DataFrame with unified columns
+            # This prevents each table from having different column sets
+            if processed_tables:
+                import pandas as pd
+                # Concatenate all tables - pandas will align columns automatically
+                combined_df = pd.concat(processed_tables, ignore_index=True)
+                # Convert to records
+                records = combined_df.to_dict('records')
             else:
-                # For other sheets, use DATA_TO_BE_CAPTURED_FIELDS as default
-                # TODO: Add field lists for other sheets
-                expected_fields = DATA_TO_BE_CAPTURED_FIELDS
+                records = []
             
-            records = process_camelot_tables_with_llm(tables, sheet_name, expected_fields)
+            print(f"      [*] Total records extracted: {len(records)}")
+            
+            # Auto-infer region from state if missing
+            for record in records:
+                if 'state' in record and ('region' not in record or not record.get('region')):
+                    state_value = record.get('state')
+                    if state_value:
+                        region = infer_region_from_state(str(state_value))
+                        if region:
+                            record['region'] = region
             
             print(f"\n      {'='*60}")
             print(f"      [✅] CAMELOT EXTRACTION: {len(records)} records")

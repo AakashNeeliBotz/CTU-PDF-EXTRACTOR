@@ -99,13 +99,14 @@ def extract_tables_with_camelot(pdf_path: str, flavor: str = 'lattice') -> List[
         return []
 
 
-def convert_tables_to_records(tables: List[pd.DataFrame]) -> List[Dict[str, Any]]:
+def convert_tables_to_records(tables: List[pd.DataFrame], skip_header_detection: bool = False) -> List[Dict[str, Any]]:
     """
     Convert Camelot-extracted tables to list of records.
-    Assumes first row is header.
+    Intelligently finds the header row unless skip_header_detection=True.
     
     Args:
         tables: List of DataFrames from Camelot
+        skip_header_detection: If True, assumes columns are already named correctly
         
     Returns:
         List of dictionaries (records)
@@ -116,9 +117,42 @@ def convert_tables_to_records(tables: List[pd.DataFrame]) -> List[Dict[str, Any]
         if df.empty:
             continue
         
-        # Use first row as header
-        df.columns = df.iloc[0]
-        df = df[1:].reset_index(drop=True)
+        if not skip_header_detection:
+            # Find the header row by looking for common header indicators
+            header_row_idx = 0
+            for idx in range(min(5, len(df))):
+                # Convert row to string and check for header indicators
+                row_text = ' '.join(df.iloc[idx].astype(str).str.lower())
+                
+                # Skip title rows (usually have very few columns filled or are too long)
+                non_null_count = df.iloc[idx].notna().sum()
+                if non_null_count < 3:  # Skip rows with less than 3 non-null values
+                    continue
+                
+                # Look for common header keywords
+                if any(indicator in row_text for indicator in [
+                    'sl. no', 'sl.no', 'serial', 's.no', 's no',
+                    'application', 'app id', 'applicant',
+                    'name of', 'developer', 'company',
+                    'region', 'state', 'substation',
+                    'capacity', 'quantum', 'mw',
+                    'date', 'expected', 'connectivity'
+                ]):
+                    header_row_idx = idx
+                    print(f"      [*] Found header row at index {idx} for table {table_idx + 1}")
+                    break
+            
+            # Use identified row as header
+            df.columns = df.iloc[header_row_idx].astype(str)
+            # Get data rows (everything after header)
+            df = df.iloc[header_row_idx + 1:].reset_index(drop=True)
+        
+        # Remove completely empty rows
+        df = df.dropna(how='all')
+        
+        if len(df) == 0:
+            print(f"      [~] No data rows found after header in table {table_idx + 1}")
+            continue
         
         # Convert to records
         records = df.to_dict('records')

@@ -98,6 +98,8 @@ HEADER_MAPPINGS = {
     "technology": "type",
     "category": "type",
     "project type": "type",
+    "type of project": "type",  # Added
+    "type of nproject": "type",  # Handle newline case
     
     # Application Quantum (MW)
     "application quantum (mw)": "application_quantum_mw",
@@ -107,6 +109,32 @@ HEADER_MAPPINGS = {
     "quantum mw": "application_quantum_mw",
     "capacity mw": "application_quantum_mw",
     "capacity (mw)": "application_quantum_mw",
+    "installed capacity (mw)": "application_quantum_mw",  # Added
+    "installed ncapacity n(mw)": "application_quantum_mw",  # Handle newline case
+    "present connectivity /deemed gna": "application_quantum_mw",  # Added - seems to be capacity
+    "present nconnectivity n/deemed gna": "application_quantum_mw",  # Handle newline
+    
+    # Substation variations (extended)
+    "substation": "substation",
+    "s/s": "substation",
+    "ss": "substation",
+    "sub-station": "substation",
+    "sub station": "substation",
+    "pooling station": "substation",
+    "pooling ss": "substation",
+    "substation at which generation connected/ connectivity granted": "substation",  # Added
+    "substation at nwhich ngeneration nconnected/ nconnectivity ngranted": "substation",  # Newline case
+    
+    # State variations
+    "state": "state",
+    "location state": "state",
+    "state (connectivity station)": "state",  # Added
+    "state n(connectivity nstation)": "state",  # Newline case
+    
+    # Expected date
+    "expected date": "expected_date_of_connectivity",
+    "expected date of connectivity/ gna to be made effective": "expected_date_of_connectivity",  # Added
+    "expected date of nconnectivity/ gna to nbe made effective": "expected_date_of_connectivity",  # Newline,
     
     # Status of LTA
     "status of lta": "status_of_lta",
@@ -208,6 +236,8 @@ def normalize_header(header: str) -> str:
     normalized = str(header).lower().strip()
     normalized = normalized.replace("_", " ")
     normalized = normalized.replace("-", " ")
+    normalized = normalized.replace(".", "")  # Remove periods (e.g., "Sl. No" -> "sl no")
+    normalized = normalized.replace("\n", " ")  # Replace newlines with spaces
     
     # Remove extra whitespace
     normalized = " ".join(normalized.split())
