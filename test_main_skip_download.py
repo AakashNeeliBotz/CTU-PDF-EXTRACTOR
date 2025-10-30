@@ -34,13 +34,13 @@ import concurrent.futures
 # --- Test Configuration ---
 BASE_DOWNLOAD_DIR = "downloaded_pdfs"
 TEMPLATE_EXCEL_FILE = "Connectivity Application Data.xlsx"
-OUTPUT_EXCEL_FILE = "Connectivity_Application_Data_TEST_SN3_betterPrompts2.xlsx"
-MAX_WORKERS = 2
+OUTPUT_EXCEL_FILE = "Connectivity_Application_Data_TEST_SN3_betterPrompts3.xlsx"
+MAX_WORKERS = 1  # Set to 1 to avoid pypdfium2 threading issues on Windows
 
 # Test Settings: Process only "Data to be captured" sheet
 TEST_SHEET_NAME = "Data to be captured"  # Default sheet for testing
 TEST_SOURCE = None  # Will auto-detect first available source folder with PDFs
-MAX_TEST_PDFS = 1  # Limit number of PDFs to process (faster testing)
+MAX_TEST_PDFS = None  # Process ALL PDFs (set to None for unlimited)
 
 
 def chunk_text(text, max_chars=3000, overlap=100):
@@ -150,6 +150,12 @@ def process_pdf_file(pdf_path, prompt_for_sheet, sheet_name):
                     
                     # Skip first 2 rows (likely continuation markers or page breaks)
                     data_df = table_df.iloc[2:].reset_index(drop=True) if len(table_df) > 2 else table_df
+                    
+                    # Only apply headers if column count matches
+                    if len(data_df.columns) != len(first_table_headers):
+                        print(f"      [~] Table {table_idx + 1}: Skipping - column count mismatch ({len(data_df.columns)} vs {len(first_table_headers)} expected)")
+                        continue
+                    
                     data_df.columns = first_table_headers  # Use same headers as Table 1
                     data_df = data_df.dropna(how='all')
                     
@@ -185,44 +191,15 @@ def process_pdf_file(pdf_path, prompt_for_sheet, sheet_name):
             
             return ('camelot', records)
         
-        # TIER 2/3: Fallback to LLM if no tables found
-        print(f"      [~] No tables found by Camelot. Falling back to LLM extraction...")
+        # TIER 2/3: Skip LLM extraction for now - only use Camelot tables
+        print(f"      [~] No tables found by Camelot. Skipping PDF (Camelot-only mode).")
+        return ('skip', [])
         
-        if not raw_text or len(raw_text.strip()) < 50:
-            print("      [~] Insufficient text found. Skipping file.")
-            return ('skip', [])
-        
-        print(f"      [*] Extracted {len(raw_text)} characters from PDF")
-        
-        chunks = chunk_text(raw_text)
-        print(f"      [*] Split into {len(chunks)} chunks (3000 chars each, 100 overlap)")
-        print(f"      [*] Processing each chunk with LLM to extract records...")
-        
-        for i, chunk in enumerate(chunks):
-            print(f"\n      [*] Chunk {i+1}/{len(chunks)} sending to LLM (len={len(chunk)})...")
-            structured_data = extract_structured_data(chunk, prompt_for_sheet)
-            if structured_data and 'extracted_data' in structured_data:
-                data_list = structured_data['extracted_data']
-                if isinstance(data_list, list):
-                    print(f"      [+] Chunk {i+1}: Extracted {len(data_list)} records.")
-                    records.extend(data_list)
-                else:
-                    print("      [!] LLM returned data in a non-list format for a chunk. Skipping chunk.")
-            else:
-                print("      [!] Failed to extract structured data for a chunk.")
-        
-        print(f"\n      {'='*60}")
-        print(f"      [🤖] LLM EXTRACTION: {len(records)} records")
-        print(f"      {'='*60}")
-        print(f"      [!] NOTE: Overlapping chunks may create ~{len(chunks)-1} duplicate records")
-        print(f"      [!] Consider deduplicating in Excel based on 'sr_no' or 'application_id'")
-        
-        return ('llm', records)
     except Exception as e:
         print(f"      [!] Error processing '{pdf_path}': {e}")
         import traceback
         traceback.print_exc()
-        return []
+        return ('error', [])
 
 
 def run_test_pipeline():
@@ -254,35 +231,32 @@ def run_test_pipeline():
     # Get sheet config early
     sheet_config = SHEET_CONFIG[TEST_SHEET_NAME]
     
-    # Auto-detect source if not specified
+    # Auto-detect sources if not specified - find ALL sources with PDFs
     global TEST_SOURCE
+    sources_to_process = []
     if TEST_SOURCE is None:
-        print(f"\n[*] Auto-detecting source folder with PDFs...")
+        print(f"\n[*] Auto-detecting source folders with PDFs...")
         available_sources = sheet_config["sources"]
         for source_id in available_sources:
             source_folder = os.path.join(BASE_DOWNLOAD_DIR, source_id)
             if os.path.exists(source_folder):
                 pdfs = [f for f in os.listdir(source_folder) if f.lower().endswith('.pdf')]
                 if pdfs:
-                    TEST_SOURCE = source_id
+                    sources_to_process.append(source_id)
                     print(f"    [+] Found {len(pdfs)} PDF(s) in {source_id}")
-                    break
         
-        if TEST_SOURCE is None:
+        if not sources_to_process:
             print(f"\n[!] ERROR: No PDFs found in any source folder for '{TEST_SHEET_NAME}'")
             print(f"    Expected sources: {available_sources}")
             print(f"\n    Please add PDFs to one of these folders:")
             for src in available_sources:
                 print(f"      - {os.path.join(BASE_DOWNLOAD_DIR, src)}")
             return
+    else:
+        # Use specified source
+        sources_to_process = [TEST_SOURCE]
     
-    print(f"[*] Using source: {TEST_SOURCE}")
-
-    # Verify the source is valid for this sheet
-    if TEST_SOURCE not in sheet_config["sources"]:
-        print(f"\n[!] ERROR: {TEST_SOURCE} not in sources for '{TEST_SHEET_NAME}'")
-        print(f"    Expected sources: {sheet_config['sources']}")
-        return
+    print(f"[*] Will process sources: {sources_to_process}")
 
     # --- Process the Sheet ---
     print(f"\n{'='*70}")
@@ -297,42 +271,45 @@ def run_test_pipeline():
     sheet_records = []
     used_camelot = False  # Track which extraction method was used
 
-    # Process only SN3 source
-    source_folder = os.path.join(BASE_DOWNLOAD_DIR, TEST_SOURCE)
-    if not os.path.exists(source_folder):
-        print(f"  [!] Source folder '{source_folder}' not found. Cannot proceed.")
-        return
+    # Process all detected sources
+    for TEST_SOURCE in sources_to_process:
+        source_folder = os.path.join(BASE_DOWNLOAD_DIR, TEST_SOURCE)
+        if not os.path.exists(source_folder):
+            print(f"  [!] Source folder '{source_folder}' not found. Skipping.")
+            continue
 
-    print(f"  [*] Reading PDFs from source: {TEST_SOURCE}")
-    pdf_paths = [
-        os.path.join(source_folder, f)
-        for f in os.listdir(source_folder)
-        if f.lower().endswith('.pdf')
-    ]
-    
-    if not pdf_paths:
-        print("  [!] No PDFs found in source folder.")
-        return
-    
-    # Limit to MAX_TEST_PDFS for faster testing
-    pdf_paths = pdf_paths[:MAX_TEST_PDFS]
-    
-    print(f"  [+] Found {len(pdf_paths)} PDF(s) to process (limited to {MAX_TEST_PDFS} for testing):")
-    for pdf_path in pdf_paths:
-        print(f"      - {os.path.basename(pdf_path)}")
+        print(f"  [*] Reading PDFs from source: {TEST_SOURCE}")
+        pdf_paths = [
+            os.path.join(source_folder, f)
+            for f in os.listdir(source_folder)
+            if f.lower().endswith('.pdf')
+        ]
+        
+        if not pdf_paths:
+            print("  [!] No PDFs found in source folder.")
+            continue
+        
+        # Limit to MAX_TEST_PDFS for faster testing (None = process all)
+        if MAX_TEST_PDFS is not None:
+            pdf_paths = pdf_paths[:MAX_TEST_PDFS]
+            print(f"  [+] Found {len(pdf_paths)} PDF(s) to process (limited to {MAX_TEST_PDFS} for testing):")
+        else:
+            print(f"  [+] Found {len(pdf_paths)} PDF(s) to process (processing ALL):")
+        for pdf_path in pdf_paths:
+            print(f"      - {os.path.basename(pdf_path)}")
 
-    # Process PDFs (with parallelism for speed)
-    print(f"\n  [*] Starting parallel processing (MAX_WORKERS={MAX_WORKERS})...")
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        futures = [executor.submit(process_pdf_file, p, prompt_for_sheet, TEST_SHEET_NAME) for p in pdf_paths]
-        for future in concurrent.futures.as_completed(futures):
-            result = future.result()
-            if result:
-                method, recs = result
-                if method == 'camelot':
-                    used_camelot = True
-                if recs:
-                    sheet_records.extend(recs)
+        # Process PDFs (with parallelism for speed)
+        print(f"\n  [*] Starting parallel processing (MAX_WORKERS={MAX_WORKERS})...")
+        with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+            futures = [executor.submit(process_pdf_file, p, prompt_for_sheet, TEST_SHEET_NAME) for p in pdf_paths]
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                if result:
+                    method, recs = result
+                    if method == 'camelot':
+                        used_camelot = True
+                    if recs:
+                        sheet_records.extend(recs)
 
     print(f"\n  {'-'*60}")
     print(f"  [*] Total records collected for sheet '{TEST_SHEET_NAME}': {len(sheet_records)}")
@@ -376,7 +353,7 @@ def run_test_pipeline():
     print(f"  - CSV: extraction_output/{TEST_SHEET_NAME.replace(' ', '_')}_extracted_data.csv")
     print(f"  - Excel: {OUTPUT_EXCEL_FILE}")
     print(f"\n[Test Summary]")
-    print(f"  - PDFs processed: {len(pdf_paths)} (from {TEST_SOURCE})")
+    print(f"  - PDFs processed: {len(sheet_records)} records from sources: {sources_to_process}")
     print(f"  - Sheet processed: '{TEST_SHEET_NAME}'")
     print(f"  - Total records extracted: {len(sheet_records)}")
     print(f"  - Extraction method: {'Camelot (direct table extraction)' if used_camelot else 'LLM (text-based)'}")

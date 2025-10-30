@@ -108,7 +108,7 @@ Table 2: Row 0-1 = Page break markers (skipped)
 Result: 787 records with 10 normalized columns
 ```
 
-#### **TIER 2: PyMuPDF Text Extraction** (Fallback for digital PDFs)
+#### **TIER 2: PyMuPDF Text Extraction** (Fallback for digital PDFs)`
 - **When:** No tables found by Camelot
 - **How:**
   1. Extracts raw text using PyMuPDF (fitz)
