@@ -1,0 +1,131 @@
+state,name_of_station,capacity_mva,capacity_allocated_mw,margin_existing_220kv,margin_existing_400kv,line_bays_existing_220kv,line_bays_existing_400kv,margin_ict_220kv,margin_ict_400kv,line_bays_ict_220kv,line_bays_ict_400kv,transformers_required,remarks
+,Navinal (GIS) 765/400kV,"6x1500MVA, 765/400kV",1100,0,0,2,1,0,0,0,0,0,"Applications beyond 300MW require additional System 
+and are under deliberation"
+,"Halvad/Surendranagar 
+area",,1350,,,,,,,,,,"Applications for 820MW received in Halvad area & 
+530MW received in Surendranagar area which are under 
+deliberations."
+Maharashtra,"Aurangabad 
+765/400/220kV","2x1500MVA, 765/400kV 
+2x315MVA, 400/220kV",0,0,0,0,0,0,0,0,0,0,Overloading in 220kV downstream network.
+Maharashtra,Kolhapur 400kV,400kV Switching Station,0,0,0,0,0,0,0,1,0,0,"Overloading observed in 400kV Kolhapur (PG)- 
+Kolhapur(MSETCL) D/c line."
+Maharashtra,Parli (PG) 400/220kV,"2x500MVA, 400/220kV",300,0,0,0,0,0,0,0,0,0,"300MW capacity has been allocated at Parli (PG) S/s. 
+Overloading in 220kV downstream & Parli  400kV 
+network."
+Madhya Pradesh,Khandwa 400/220kV,"2x315+1x500MVA, 400/220kV",300,0,0,0,0,0,0,0,0,0,"300MW Stage-II connectivity & 300MW LTA from Masaya 
+Solar at Khandwa has also been granted.
+Overloading in 220kV downstream network."
+Madhya Pradesh,Indore 765/400/220kV,"2x500MVA, 400/220kV + (1x500MVA 
+with sectionalisation at 220kV for RE 
+injection)",1224.4,150.6,100,1,1,0,0,0,,0,"324.4MW LTA has been granted on 1x500MVA with 
+sectionalisation at 220kV for RE injection & 900 MW 
+(600+150+150) has been granted on 400kV bay."
+Madhya Pradesh,Jabalpur PS 765/400,2x1500MVA 765/400kV,0,0,0,0,0,0,0,0,0,0,765/400kV ICT overloading.
+Madhya Pradesh,Rajgarh 400/220kV,"2x315MVA, 400/220kV+ (2x500MVA 
+with sectionalisation at 220kV for RE 
+injection)",892,356,0,3,0,0,0,0,0,2,"Margins at 220kV bay of Srpng: 298.24MW has been 
+granted / agreed for grant to M/s Sprng. Overloading in 
+220kV downstream network.
+Margins at 400/220kV ICT-III& IV: 593.6MW has been 
+granted/agreed at extended 220kV bus of Rajgarh S/s  
+through addl. 400/220kV, 500MVA ICT(s) for RE injection."
+Madhya Pradesh,Karera 765/400/220kV,"2x1500 MVA, 765/400 kV, 2x500 MVA, 
+400/220 kV S/s",700,0,0,0,0,0,0,,,,
+Madhya Pradesh,Sidhi area,No ISTS Substation exists near Sidhi,300,0,0,0,0,0,0,,,,"Application received for 300MW (requested through LILO 
+of Vindhyachal - Satna line). Studies are underway."
+Madhya Pradesh,"Dharamjaygarh 
+765/400kV",2x1500MVA 765/400kV,0,0,0,0,0,0,0,0,0,0,765/400kV ICT overloading / Fault level issues
+Madhya Pradesh,Champa 765/400kV,6x1500MVA 765/400kV,0,0,0,0,0,0,0,0,0,0,765/400kV ICT overloading / Fault level issues
+Madhya Pradesh,Bilaspur PS 765/400kV,3x1500MVA 765/400kV,0,0,0,,0,0,0,0,0,0,765/400kV ICT overloading / Fault level issues
+Andhra Pradesh,"Kurnool (New) 
+765/400kV","2X1500 MVA, 765/400 kV",2714,0,0,,1,0,250,,0,1,
+Karnataka,Hiriyur 400/220kV,"2x315 MVA, 400/220 kV + 1x500 MVA, 
+400/220 kV",600.3,0,0,0,,0,0,,0,0,
+Kerala,Palakkad (400/220kV),"2x315 MVA, 400/220 kV + 1x500 MVA, 
+400/220 kV",0,300,0,2,0,0,0,2,0,0,
+Tamil Nadu,"Pugalur(Existing) 
+400/230kV","2X315 MVA + 1X500 MVA, 400/230 kV",655,0,0,,,0,0,,,0,"Pugalur(Existing) has been closed for all purpose regarding 
+grant of Connectivity."
+Tamil Nadu,"Malekottaiyur(Kalivenda
+pattu) 400/230kV","2X315 MVA + 1X500 MVA, 400/230 kV",NIL,500,0,2,,0,0,,0,0,
+Tamil Nadu,"Nagapattinam PS 
+765/400kV",Charged at 400 kV,NIL,0,1000,,2,0,0,,0,0,
+Tamil Nadu,NLC TS-II,2x250+1x315,160,0,0,0,,,,,,,Overloading at 230 kV network
+Rajasthan,Chittorgarh  765/400kV,765/400kV : 2x1500MVA,NIL,0,0,0,0,0,0,0,0,0,
+Rajasthan,Ajmer  765/400kV,765/400kV : 2x1500MVA,NIL,0,0,0,0,0,0,0,0,0,
+Rajasthan,Bassi,400/220 kV : 2x315MVA +1x500MVA,NIL,0,0,0,0,0,,,,0,220kV overloading
+Rajasthan,Bhiwadi,400/220 kV : 3x315MVA,NIL,0,0,0,0,0,,,,0,220kV overloading
+Rajasthan,Kankroli,400/220 kV : 3x315MVA,NIL,0,0,0,0,0,,,,0,220kV overloading
+Rajasthan,Kota,400/220 kV : 2x315MVA,NIL,0,0,0,0,0,,,,0,220kV overloading
+Rajasthan,Bhinmal,"400/220 kV : 2x315MVA+1x315 MVA 
+UC",NIL,0,0,0,0,0,0,0,0,0,220kV overloading
+Rajasthan,Sikar,400/220 kV : 2x315MVA +1x500MVA,NIL,0,0,0,0,0,,,,0,220kV overloading
+Rajasthan,Jaipur (South),400/220 kV : 2x500MVA,NIL,0,0,0,0,0,0,0,0,0,
+Rajasthan,Kotputli,"400/220 kV : 2x315MVA+1X500MVA 
+(Planned)",NIL,0,0,0,0,0,0,0,0,0,
+Haryana,Kaithal,400/220 kV : 3X315MVA,NIL,0,0,0,0,0,0,0,0,0,
+Haryana,Bahadurgarh,"400/220 kV : 315MVA 
++500MVA+500MVA (UC)",NIL,0,0,0,0,0,0,0,0,0,
+Haryana,Manesar,400/220 kV : 2X500MVA,NIL,0,0,1,0,0,0,0,0,0,400/220kv ICT over loading
+Uttar Pradesh,Kanpur(New),765/400 kV : 2x1500MVA+1x1500,NIL,0,500,0,1,0,0,0,0,0,220kV Not available
+Uttar Pradesh,Fatehpur,"765/400kV : 2x1500MVA; 400/220 kV :  
+2X315MVA",NIL,0,0,0,0,0,0,0,0,0,
+Uttar Pradesh,Lucknow (new),765/400 kV : 2x1500MVA,NIL,0,500,0,1,0,0,0,0,0,
+Uttar Pradesh,Balia,765/400 kV : 2x1500MVA,NIL,0,850,0,1,0,0,0,0,0,220kV Not available.
+Uttar Pradesh,Bareilly(New),765/400 kV : 2x1500MVA,NIL,0,500,0,1,0,0,0,0,0,
+Odisha,Jeypore,400/220kV: 2x630MVA,,1500,0,5,,,,,,,
+Odisha,Keonjhar,400/220kV: 2x315MVA,0,800,0,3,,,,,,,
+Odisha,Pandiabil,400/220kV: 3x500MVA,0,0,0,,,,,,,,
+Odisha,Rengali,400/220kV: 2x315MVA,0,500,0,2,,,,,,,
+Odisha,Angul,765/400: 4x1500MVA,0,0,0,,,,,,,,
+Odisha,Baripada,"400/220/132: 2x315MVA + 1x500MVA 
++ 2x160MVA",,300,,2,,,,,,,
+Odisha,Bolangir,400/220kV: 2x315MVA,,0,,,,,,,,,
+Odisha,Indravati,400/220kV: 1x315MVA,,0,,,,,,,,,
+Odisha,Rourkela,400/220kV: 4x315MVA,,0,,,,,,,,,
+Odisha,"Sundargarh B 
+(Jharsuguda)",765/400: 2x1500MVA,,,2500,,3,,,,,,
+Odisha,Paradeep,765/400: 2x1500MVA,,,3000,,3,,,,,,
+Odisha,Gopalpur,765/400: 2x1500MVA,,,3000,,3,,,,,,
+Jharkhand,Chaibasa,400/220kV: 2x315MVA,0,500,0,2,,0,0,0,0,0,
+Jharkhand,Daltonganj,400/220kV: 2x315MVA,0,500,0,2,,0,0,0,0,0,
+Jharkhand,Ranchi,400/220kV: 2x315MVA + 1x500MVA,,800,,3,,0,0,0,,0,
+Jharkhand,Ranchi (New),765/400kV: 2x1500MVA,0,0,0,,,0,0,0,0,0,
+Jharkhand,Chandwa,400kV switching,,0,0,,,0,0,0,0,0,
+Jharkhand,Dhanbad,400/200kV: 2x500MVA,,500,,2,,,,,,,
+Bihar,Banka,"400/132kV: 2x200MVA + 1x315MVA  
+400/220kV: 2x500MVA",0,600+700,0,5,0,400,0,0,0,0,"100MW at 132kV level in the existing system and 400MW 
+at 220kV level with the implementation of ""Augmentation 
+of 400/220kV, 2x500MVA ICT at Banka"" Scheme expected 
+by Oct 2024"
+Bihar,Lakhisarai,400/132kV: 2x200MVA + 1x315MVA,0,300,0,2,0,0,0,0,0,0,132kV level
+Bihar,Motihari,400/132kV: 2x200MVA + 1x315MVA,0,500,0,2,0,0,0,0,0,0,132kV level
+Bihar,Chandauti,400/220kV: 3x500MVA,0,0,0,0,0,0,0,0,0,0,
+Bihar,Muzaffarpur,400/220kV: 2x315MVA + 2x500MVA,0,800,0,3,0,0,0,0,0,0,line corridor  available for 2 lines
+Bihar,Saharsa,400/220kV: 2x500MVA,0,700,0,3,0,0,0,0,0,0,
+Bihar,Sitamarhi,400/220kV: 2x500MVA,0,800+200,0,4,0,0,0,,,,
+Bihar,Gaya,400/220kV: 2x500MVA + 1x315MVA,,2000+1000,,10,,,,,,,
+Bihar,Darbhanga,400/220kV: 2x500MVA,0,0,0,0,0,0,0,0,0,0,
+Bihar,Kishanganj,400/220kV: 2x500MVA,0,500,0,2,0,0,0,0,0,0,
+Bihar,New Purnea,400/220kV: 2x500MVA,0,1000,0,4,0,0,0,0,0,0,
+Bihar,Purnea,220/132kV: 3x160MVA,0,900,0,3,0,0,0,0,0,0,
+Bihar,Sasaram,220/132kV: 3x160MVA,0,600,0,2,0,0,0,0,0,0,
+West Bengal,Durgapur-B,400/220kV: 3x315MVA,0,0,,,,,,,,,220kV overloaded in present case under N-1.
+West Bengal,Maithon-B,400/220kV: 3x500MVA,0,0,,,,,,,,,220kV overloaded in Base case (Maithon B - Asansol).
+West Bengal,Subhasgram,400/220kV: 2x315MVA + 1x500MVA,0,0,0,0,,0,0,0,0,0,"220kV overloaded in present case under N-1 
+(Subhasgram)."
+West Bengal,Jeerat-New,765/400: 2x1500MVA,0,0,0,,0,0,0,0,0,0,400/220kV ICT overloaded in present case under N-1
+West Bengal,Medinipur,765/400: 2x1500MVA,0,0,0,,0,0,0,,,,400/220kV ICT overloaded in present case
+West Bengal,Alipurduar,400/220kV: 2x315MVA,0,0,,,,,,,,,
+West Bengal,Baharampur,400kV switching,0,0,,,,,,,,,
+West Bengal,Rajarhat,400/220kV: 3x500MVA,0,0,,,,,,,,,"220kV overloaded in present case under N-1 
+(Subhasgram)."
+West Bengal,Birpara,220/132kV: 2x160MVA,0,0,,,,,,,,,
+West Bengal,Dalkhola,220kV switching,0,0,,,,,,,,,
+West Bengal,Durgapur-A,400kV switching,0,0,,,,,,,,,
+West Bengal,Maithon-A,400kV switching,0,0,,,,,,,,,
+West Bengal,Farakka TPS,400/220kV: 2x315MVA,0,0,,,,,,,,,
+West Bengal,Malda,400/220kV: 2x500MVA,0,0,,,,,,,,,
+West Bengal,New Siliguri (Binaguri),400/220kV: 3x315MVA,0,0,,,,,,,,,132kV overloaded in present case under N-1 (Siliguri).
+West Bengal,Siliguri,220/132kV: 2x160MVA,0,0,,,,,,,,,132kV overloaded in present case under N-1 (Siliguri).

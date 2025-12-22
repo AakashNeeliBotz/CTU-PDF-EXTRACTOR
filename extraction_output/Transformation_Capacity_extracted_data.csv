@@ -1,0 +1,111 @@
+s_no,region,state,substation,existing_mva,under_implementation_mva,planned_mva
+1,WR,Gujarat,Jam Khambhaliya PS,"400/220kV, 
+4X500MVA,",,
+2,WR,Gujarat,Bhuj PS,"4x1500MVA, 
+765/400kV;
+8X500MVA, 
+400/220kV",,
+3,WR,Gujarat,Bhuj-II PS,"1x1500 MVA, 
+765/400 kV;
+4X500 MVA, 
+400/220 KV","1x1500 MVA, 
+765/400 kV;",
+4,WR,,Bhachau S/s,"2X315 MVA, 
+400/220 KV",,
+6,WR,Gujarat,Khavda PS-II,,"2x1500MVA, 
+765/400kV",0
+7,WR,,Banaskantha PS [GIS],"2x500 MVA, 
+400/220 KV",,
+8,WR,,Rajgarh S/s,"2x315 MVA, 
+400/220 KV",,"1x500 MVA, 
+400/220 kV 
+(segregated 
+from
+existing 220kV 
+bus through bus 
+section)"
+9,WR,,Indore S/s,"2x1500 MVA, 
+765/400 kV 3X500 
+MVA, 400/220 kV",,
+10,WR,Madhya Pradesh,Pachora PS,,"3x500MVA, 
+400/220kV",
+11,WR,Madhya Pradesh,Neemuch PS,,"2x500MVA, 
+400/220kV",
+12,WR,,Khandwa S/s (existing S/s),"2x315MVA + 
+1x500MVA, 
+400/220kV",,
+13,WR,,Raipur S/s (Existing S/s),"3x315MVA, 
+400/220kV",,
+15,WR,Maharashtra,Solapur (existing S/s),"2x1500 MVA, 
+765/400 kV;
+ 2X315 MVA, 
+400/220 kV;
+ 1X500 MVA 
+400/220 KV",,
+16,SR,Tamil Nadu,Tuticorin-II S/s,"3x500 MVA, 
+400/230 KV","2x500MVA, 
+400/230kV",
+17,SR,,Pugalur S/s,"2x315 MVA, 
+400/230 kV
+1x500 MVA, 
+400/230 KV",-,
+18,SR,,"Palakkad S/s 10°46'22""N 76°45'36""E","2x315 MVA, 
+400/220 kV","1x500 MVA, 
+400/220 kV",
+19,SR,Andhra Pradesh,NP Kunta S/s,"4x500 MVA, 
+400/220 kV",-,
+21,SR,,Hiriyur S/s,"2x315 MVA, 
+400/220 kV","1x500 MVA, 
+400/220 kV",
+22,SR,Andhra Pradesh,Kurnool S/s,"2x1500 MVA, 
+765/400 kV",,
+23,SR,Karnataka,Koppal S/s,-,"5x500 MVA, 
+400/220 kV",
+24,SR,Tamil Nadu,Karur S/s,-,"5x500 MVA, 
+400/230 kV",
+25,SR,Karnataka,Gadag S/s,-,"5x500 MVA, 
+400/220 kV",
+27,SR,Karnataka,Gadag-II PS,,,"4x500 MVA, 
+400/220 kV"
+29,NR,Rajasthan,Bikaner S/s,"2x1500MVA, 
+765/400kV
+2x500MVA, 
+400/220kV","1x1500MVA, 
+765/400kV, 
+1x500MVA, 
+400/220kV","1x1500MVA, 
+765/400kV"
+30,NR,Rajasthan,Fatehgarh PS,-,-,-
+31,NR,Rajasthan,Bhadla- II PS,"2x1500MVA, 
+765/400kV
+3X500MVA, 
+400/220kV","2x1500MVA, 
+765/400kV
+5X500MVA, 
+400/220kV","1x1500MVA, 
+765/400kV"
+32,NR,Rajasthan,Fatehgarh-II PS,"4x1500MVA, 
+765/400kV
+5X500MVA, 
+400/220kV","2x1500MVA, 
+765/400kV
+4X500MVA, 
+400/220kV","2x500MVA, 
+400/220kV"
+34,NR,Rajasthan,Bikaner-II PS,,"2x500MVA, 
+400/220kV","5x500MVA, 
+400/220kV"
+35,NR,Rajasthan,Fatehgarh-IV PS,,,"5x500MVA, 
+400/220kV"
+36,NR,Rajasthan,Bhadla- III PS,,,"2x1500MVA, 
+765/400kV
+10X500MVA, 
+400/220kV"
+37,NR,Rajasthan,Ramgarh PS,,,"3x1500MVA, 
+765/400kV
+2X500MVA, 
+400/220kV"
+38,NR,Rajasthan,Bikaner- III PS,,,"6x1500MVA, 
+765/400kV
+5X500MVA, 
+400/220kV"

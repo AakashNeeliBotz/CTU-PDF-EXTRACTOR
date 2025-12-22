@@ -1,0 +1,26 @@
+0,1,2,3,4,5,6,7,8
+,"Phase I  
+(by March, 2025)",,"Phase II 
+(by December 2027)",,"Phase III 
+(by December 2030)",,Total,
+,"Wind  
+(GW)","Solar  
+(GW)","Wind  
+(GW)","Solar  
+(GW)","Wind   
+(GW)","Solar  
+(GW)","Wind  
+(GW)","Solar  
+(GW)"
+Rajasthan,6,13,5,20,4,27,15,60
+Madhya Pradesh,2,0,0,3.1,0,2.9,2,6
+Maharashtra,2,3,0,0,0,2.5,2,5.5
+"Gujarat  
+(off-shore wind)",,,2,,3,,5,0
+Andhra Pradesh,4,8,7,11.5,7,13.5,18,33
+Telangana,3,2,0,7.5,0,0.5,3,10
+Karnataka,7,6,1,3,0,0,8,9
+"Tamil Nadu  
+(off-shore wind)",,,2,,3,,5,0
+Total,24,32,17,45.1,17,46.4,58,123.5
+Total (S+W),56,,62.1,,63.4,,181.5,

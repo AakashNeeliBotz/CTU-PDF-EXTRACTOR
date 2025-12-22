@@ -1,0 +1,24 @@
+0,1,2,3,4,5,6
+"State/District
+Pooling  
+Identified	Potential	 
+Maximum 
+BESS (GW) 
+Evacuation 
+Station
+(GW)
+Dispatch 
+(to be set up 
+System  
+(GW)
+by RE  
+(GW)
+Wind
+Solar 
+generators)",,,,,,
+Maharashtra,,,,,,
+Sholapur,Sholapur,0,1,1,0.5,0.5
+Dhule,Dhule,1,1,1.5,0.3,1.2
+Kallam,Kallam,1,1,1.5,0.3,1.2
+Location to be firmed up*,,0,2.5,2.5,0,2.5
+Sub Total (Maharashtra),,2,5.5,6.5,1.1,5.4

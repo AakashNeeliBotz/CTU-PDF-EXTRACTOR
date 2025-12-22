@@ -68,4 +68,3 @@ def scrape_all_sources(data_sources_dict):
             all_links[source_id] = links
         time.sleep(1) # Be respectful to the server by waiting a second
     return all_links
-

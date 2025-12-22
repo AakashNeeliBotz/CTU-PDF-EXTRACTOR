@@ -117,7 +117,7 @@ def process_pdf_file(pdf_path, prompt_for_sheet, sheet_name):
                 if not data_df.empty:
                     processed_tables.append(data_df)
             
-            # Process remaining tables using the same headers
+            # Process remaining tables using the same headers OR adaptive mapping
             if first_table_headers:
                 for table_idx in range(1, len(tables)):
                     table_df = tables[table_idx]
@@ -126,11 +126,79 @@ def process_pdf_file(pdf_path, prompt_for_sheet, sheet_name):
                     
                     # Skip first 2 rows (likely continuation markers or page breaks)
                     data_df = table_df.iloc[2:].reset_index(drop=True) if len(table_df) > 2 else table_df
-                    data_df.columns = first_table_headers  # Use same headers as Table 1
-                    data_df = data_df.dropna(how='all')
                     
-                    if not data_df.empty:
-                        processed_tables.append(data_df)
+                    # Check if column count matches Table 1
+                    if len(data_df.columns) == len(first_table_headers):
+                        # Same structure - use Table 1 headers directly
+                        data_df.columns = first_table_headers
+                        data_df = data_df.dropna(how='all')
+                        
+                        if not data_df.empty:
+                            processed_tables.append(data_df)
+                    else:
+                        # Different structure - detect own headers and map to canonical fields
+                        print(f"      [*] Table {table_idx + 1}: Different structure ({len(data_df.columns)} cols vs {len(first_table_headers)}), detecting own headers...")
+                        
+                        # Try to find header row in this table
+                        table_header_row_idx = None
+                        for idx in range(min(3, len(data_df))):
+                            row_text = ' '.join(data_df.iloc[idx].astype(str).str.lower())
+                            non_null_count = data_df.iloc[idx].notna().sum()
+                            if non_null_count < 2:
+                                continue
+                            
+                            # Count keyword matches
+                            keyword_matches = sum([
+                                any(kw in row_text for kw in ['sl. no', 'sl.no', 'serial', 's.no', 's no']),
+                                any(kw in row_text for kw in ['application id', 'app id', 'applicant', 'developer', 'name']),
+                                any(kw in row_text for kw in ['region', 'state', 'substation']),
+                                any(kw in row_text for kw in ['capacity', 'quantum', 'mw', 'type']),
+                                any(kw in row_text for kw in ['date', 'status', 'remarks'])
+                            ])
+                            
+                            if keyword_matches >= 2:
+                                table_header_row_idx = idx
+                                break
+                        
+                        if table_header_row_idx is not None:
+                            # Extract headers from this table
+                            table_headers = data_df.iloc[table_header_row_idx].astype(str).tolist()
+                            table_data = data_df.iloc[table_header_row_idx + 1:].reset_index(drop=True)
+                            
+                            # Normalize headers
+                            normalized_headers = [normalize_header(h) for h in table_headers]
+                            
+                            # Handle duplicates
+                            seen = {}
+                            unique_headers = []
+                            for header in normalized_headers:
+                                if header in seen:
+                                    seen[header] += 1
+                                    unique_headers.append(f"{header}_{seen[header]}")
+                                else:
+                                    seen[header] = 0
+                                    unique_headers.append(header)
+                            
+                            table_data.columns = unique_headers
+                            table_data = table_data.dropna(how='all')
+                            
+                            if not table_data.empty:
+                                # Map to canonical fields - keep only columns that match DATA_TO_BE_CAPTURED_FIELDS
+                                matched_columns = [col for col in unique_headers if col in DATA_TO_BE_CAPTURED_FIELDS]
+                                unmapped_columns = [col for col in unique_headers if col not in DATA_TO_BE_CAPTURED_FIELDS]
+                                
+                                # Require at least 3 canonical fields to include this table
+                                if len(matched_columns) >= 3:
+                                    # Reindex to canonical fields (missing columns will be NaN)
+                                    table_data_reindexed = table_data.reindex(columns=DATA_TO_BE_CAPTURED_FIELDS)
+                                    processed_tables.append(table_data_reindexed)
+                                    print(f"      [+] Table {table_idx + 1}: Mapped {len(matched_columns)}/{len(unique_headers)} columns, {len(table_data)} rows")
+                                    if unmapped_columns:
+                                        print(f"          [INFO] Unmapped columns: {unmapped_columns[:5]}{'...' if len(unmapped_columns) > 5 else ''}")
+                                else:
+                                    print(f"      [~] Table {table_idx + 1}: Skipped - insufficient canonical fields ({len(matched_columns)} < 3)")
+                        else:
+                            print(f"      [~] Table {table_idx + 1}: Skipped - no header row detected")
             
             # Merge all processed tables into one DataFrame with unified columns
             # This prevents each table from having different column sets

@@ -3,7 +3,47 @@ import os
 import openpyxl
 from openpyxl import load_workbook
 import shutil
-from field_mappings import DATA_TO_BE_CAPTURED_FIELDS
+from field_mappings import DATA_TO_BE_CAPTURED_FIELDS, MARGIN_FIELDS, TRANSFORMATION_CAPACITY_FIELDS
+
+
+def convert_to_numeric(value):
+    """
+    Convert a value to numeric type if possible, otherwise return as-is.
+    
+    Args:
+        value: The value to convert (can be string, int, float, None, etc.)
+        
+    Returns:
+        Numeric value (int or float) if conversion is possible, otherwise original value
+    """
+    # If already None or NaN, return None
+    if value is None or pd.isna(value):
+        return None
+    
+    # If already a number, return it
+    if isinstance(value, (int, float)):
+        return value
+    
+    # If it's a string, try to convert
+    if isinstance(value, str):
+        # Skip empty strings
+        if not value.strip():
+            return None
+        
+        # Try to convert to number
+        try:
+            # First try integer
+            if '.' not in value and 'e' not in value.lower():
+                return int(value)
+            else:
+                # Otherwise try float
+                return float(value)
+        except (ValueError, TypeError):
+            # If conversion fails, return original string
+            return value
+    
+    # For any other type, return as-is
+    return value
 
 
 def reindex_dataframe_to_template(df: pd.DataFrame, sheet_name: str) -> pd.DataFrame:
@@ -20,9 +60,13 @@ def reindex_dataframe_to_template(df: pd.DataFrame, sheet_name: str) -> pd.DataF
     # Get expected fields for this sheet
     if sheet_name == "Data to be captured":
         expected_fields = DATA_TO_BE_CAPTURED_FIELDS
+    elif sheet_name == "Margin":
+        expected_fields = MARGIN_FIELDS
+    elif sheet_name == "Transformation Capacity":
+        expected_fields = TRANSFORMATION_CAPACITY_FIELDS
     else:
-        # TODO: Add field lists for other sheets
-        # For now, just return as-is
+        # For other sheets, return as-is
+        print(f"[!] Warning: No field list defined for sheet '{sheet_name}', using DataFrame as-is")
         return df
     
     # Reindex to match template order
@@ -57,15 +101,42 @@ def write_to_excel(data_records, template_path, output_path, sheet_name):
 
         # Check if the output file already exists to append data
         if os.path.exists(output_path):
-            # Use openpyxl engine to load the workbook and append
-            with pd.ExcelWriter(output_path, engine='openpyxl', mode='a', if_sheet_exists='overlay') as writer:
-                # Get the existing sheet to find the last row
-                workbook = writer.book
-                sheet = workbook[sheet_name]
-                start_row = sheet.max_row
-                
-                # Write the new data, skipping the header, starting at column B (startcol=1 is 0-indexed)
-                new_data_df.to_excel(writer, sheet_name=sheet_name, startrow=start_row, startcol=1, index=False, header=False)
+            # Load the workbook using openpyxl directly (faster than pandas ExcelWriter for appending)
+            wb = load_workbook(output_path)
+            sheet = wb[sheet_name]
+            
+            # Find first empty row after headers (row 4 has headers, data starts at row 5)
+            # For "Data to be captured" sheet, headers are at row 4 (Excel 1-indexed)
+            start_row = 5  # Default starting position
+            
+            # Efficiently find first completely empty row by checking column B only
+            for row_idx in range(5, min(start_row + 2000, sheet.max_row + 1)):
+                # Check if cell in column B (index 2) is empty
+                if sheet.cell(row_idx, 2).value is None:
+                    start_row = row_idx
+                    break
+            else:
+                # If no empty row found in reasonable range, append after last row
+                start_row = sheet.max_row + 1
+            
+            print(f"[*] Writing data starting at row {start_row} (Excel row numbering)")
+            
+            # Write data directly using openpyxl (much faster than pandas for appending)
+            start_col = 2  # Column B
+            for record_idx in range(len(new_data_df)):
+                for col_idx, col_name in enumerate(new_data_df.columns):
+                    cell_value = new_data_df.iloc[record_idx][col_name]
+                    # Convert NaN to None for Excel
+                    if pd.isna(cell_value):
+                        cell_value = None
+                    else:
+                        # Convert to numeric type if possible
+                        cell_value = convert_to_numeric(cell_value)
+                    sheet.cell(row=start_row, column=start_col + col_idx, value=cell_value)
+                start_row += 1
+            
+            wb.save(output_path)
+            wb.close()
             print(f"[+] Appended {len(new_data_df)} new records to '{sheet_name}' in '{output_path}'.")
 
         else:
@@ -92,6 +163,9 @@ def write_to_excel(data_records, template_path, output_path, sheet_name):
                         # Convert NaN to None for Excel
                         if pd.isna(cell_value):
                             cell_value = None
+                        else:
+                            # Convert to numeric type if possible
+                            cell_value = convert_to_numeric(cell_value)
                         ws.cell(row=start_row, column=start_col + col_idx, value=cell_value)
                     start_row += 1
                 

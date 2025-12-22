@@ -4,8 +4,8 @@
 # --- Prompt for the "Data to be captured" Sheet ---
 PROMPT_DATA_TO_BE_CAPTURED = """Extract renewable energy application data from tables. Return CSV format with header row.
 
-KEY FIELDS (use these exact column names in header):
-sr_no,region,state,substation,name_of_developers,group,application_id,type,application_quantum_mw,status_of_lta,application_date,mode,voltage_level_kv,remarks
+KEY FIELDS (use these exact column names in header - 40 fields total):
+sr_no,region,state,substation,coordinates,name_of_developers,group,gna_st_ii_application_id,lta_application_id,application_id_enhancement_5_2_or_revision,cmets_gna_approved,cmets_lta_approved,cmets_gna_meeting_date,cmets_lta_meeting_date,type,application_quantum_mw,granted_quantum_gna_lta_mw,installed_breakup_solar_mw,installed_breakup_wind_mw,installed_breakup_hybrid_mw,battery_mwh,battery_injection_mw,battery_drawl_mw,psp_mwh,psp_injection_mw,psp_drawl_mw,commissioned_tgna,commissioned_gna,application_date,mode,applied_start_of_connectivity,gna_operationalization,gna_operationalization_yes_no,date_for_additional_capacity,nature_of_applicant,status_of_application,voltage_level_kv,bay_no,cts_element_unique_code,ats_element_unique_code
 
 RULES:
 1. Extract EVERY table row as a CSV row
@@ -13,9 +13,28 @@ RULES:
 3. Dates: YYYY-MM-DD format
 4. Numbers: value only ("500 MW" → 500)
 5. Region codes: Gujarat/Rajasthan/Maharashtra→WR, Karnataka/TamilNadu→SR, Punjab/Haryana→NR, WestBengal/Bihar→ER
-6. Common mappings: "Sr No"→sr_no, "Developer"/"Applicant"→name_of_developers, "Capacity"→application_quantum_mw, "S/s"→substation
+6. Common mappings:
+   - "Sr No"/"S.No"→sr_no
+   - "Developer"/"Applicant"→name_of_developers
+   - "Application ID" (default)→gna_st_ii_application_id
+   - "Application ID" starting with "LTA:"→lta_application_id (auto-split)
+   - "GNA Application ID"/"ST-II Application ID"→gna_st_ii_application_id
+   - "LTA Application ID"→lta_application_id
+   - "Capacity"/"Quantum"→application_quantum_mw
+   - "Granted Quantum"→granted_quantum_gna_lta_mw
+   - "S/s"/"SS"→substation
+   - "Solar"/"Wind"/"Hybrid"→installed_breakup_solar_mw/wind_mw/hybrid_mw
+   - "Battery"→battery_mwh, battery_injection_mw, battery_drawl_mw
+   - "PSP"→psp_mwh, psp_injection_mw, psp_drawl_mw
+   - "TGNA"/"GNA" (commissioned)→commissioned_tgna/commissioned_gna
+   - "Status"→status_of_application
+   - "CTS Element Code"→cts_element_unique_code
+   - "ATS Element Code"→ats_element_unique_code
 7. Use quotes for fields containing commas
 8. First row MUST be the header
+9. CMETS GNA and LTA are now SEPARATE fields (cmets_gna_approved, cmets_lta_approved)
+10. Meeting dates are also SEPARATE (cmets_gna_meeting_date, cmets_lta_meeting_date)
+11. Application IDs with "LTA:" prefix will be auto-extracted to lta_application_id
 
 Return ONLY CSV data. No explanations or markdown."""
 

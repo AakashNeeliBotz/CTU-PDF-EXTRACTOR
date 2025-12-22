@@ -89,12 +89,21 @@ def extract_tables_with_camelot(pdf_path: str, flavor: str = 'lattice') -> List[
         return dataframes
     
     except Exception as e:
+        error_str = str(e).lower()
         print(f"    [!] Camelot extraction failed: {e}")
         
-        # If lattice failed (often due to missing Ghostscript on Windows), try stream
-        if flavor == 'lattice' and 'ghostscript' in str(e).lower():
-            print("    [!] Ghostscript not found. Falling back to 'stream' flavor...")
-            return extract_tables_with_camelot(pdf_path, flavor='stream')
+        # Fallback to 'stream' flavor if lattice fails
+        if flavor == 'lattice':
+            # Check for common lattice flavor issues
+            if 'ghostscript' in error_str:
+                print("    [!] Ghostscript not found. Falling back to 'stream' flavor...")
+                return extract_tables_with_camelot(pdf_path, flavor='stream')
+            elif 'memory' in error_str or 'insufficient' in error_str:
+                print("    [!] OpenCV memory error with lattice. Falling back to 'stream' flavor...")
+                return extract_tables_with_camelot(pdf_path, flavor='stream')
+            elif 'opencv' in error_str:
+                print("    [!] OpenCV error with lattice. Falling back to 'stream' flavor...")
+                return extract_tables_with_camelot(pdf_path, flavor='stream')
         
         return []
 

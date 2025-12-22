@@ -1,0 +1,17 @@
+0,1,2,3,4,5
+,"RE Capacity  
+(GW) (A)","BESS@(GW)  
+(B)","Requirement of  
+Transmission  
+system (GW) 
+(C=A-B)","Tentative cost 
+of transmission 
+system  
+(` Cr.)@(D)","Average Cost of 
+Transmission 
+system(` Lakh/
+MW)(=D/C)"
+"On-shore RE Capacity  
+(Wind & Solar)",268.68,51.5,217.18,216100,99.5
+Offshore RE Capacity (Wind),10,0,10,28100,281
+Total RE capacity*,278.68,51.5,227.18,244200,107.5

@@ -1,0 +1,56 @@
+0,1,2,3,4,5,6
+"State/District
+Pooling  
+Identified	Potential	 
+Maximum 
+BESS (GW) 
+Evacuation 
+Station
+(GW)
+Dispatch 
+(to be set up 
+System (GW)
+(GW)
+by RE  
+Wind
+Solar 
+generators)",,,,,,
+Andhra Pradesh,,,,,,
+Anantapur,"Anantapur, 
+Anantapur-II",10,10,15,5,10
+Kurnool,"Kurnool-IV, 
+Kurnool-V",8,15,18,6,12
+Kadapa,Kadapa-II,0,8,8,3,5
+Sub Total (Andhra Pradesh),,18,33,41,14,27
+Karnataka,,,,,,
+Koppal,Koppal-II,2,2,3,1,2
+Gadag,Gadag-II,2,2,3,1,2
+"Devanagere/ 
+Chitragurga","Devanagere/ 
+Chitragurga",2,2,3,1,2
+Bijapur,Bijapur,2,0,2,,2
+Bellary,Bellary,0,1.5,1.5,,1.5
+Tumkur,Tumkur-II,0,1.5,1.5,,1.5
+Sub Total (Karnataka),,8,9,14,3,11
+Telangana,,,,,,
+Rangareddy,Rangareddy,1,2.5,3,1,2
+Medak,Medak,1,2.5,3,1,2
+Nizamabad,Nizamabad-II,1,2.5,3,1,2
+Karimnagar,Karimnagar,0,2.5,2.5,0,2.5
+Sub Total (Telangana),,3,10,11.5,3,8.5
+Tamil Nadu,,,,,,
+"Avaraikulam, Tirunelveli  
+Avaraikulam,  
+5
+0
+5
+0
+5
+(Off-shore)
+Tirinelveli",,,,,,
+"Total (Southern Region) 
+34
+52
+71.5
+20
+51.5",,,,,,

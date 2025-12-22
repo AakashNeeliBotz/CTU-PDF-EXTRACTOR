@@ -19,7 +19,7 @@ DATA_SOURCES = {
     "SN6": "https://cea.nic.in/transmission-reports/?lang=en",
     "SN7": "https://www.ctuil.in/uploads/assets/175040253742List%20of%20applicant%20due%20for%20complaince%20June%20to%20Aug%2725.pdf",
     "SN8": "https://www.ctuil.in/connectivityannexures",
-    "SN9": "https://www.ctuil.in/renewable-energy",
+    "SN9": "https://@www.ctuil.in/renewable-energy",
     "SN10a": "https://cea.nic.in/psp___a_i/transmission-system-for-integration-of-over-500-gw-non-fossil-capacity-by-2030/?lang=en",
     "SN10b": "https://cea.nic.in/comm-trans/national-committee-on-transmission/?lang=en",
     "SN10c_RECPDCL": "https://www.recpdcl.in/rectpcltender",
@@ -40,11 +40,14 @@ from prompts import (
     PROMPT_ELEMENT_STATUS
 )
 
+# Non RE sheet doesn't need an LLM prompt (uses direct Camelot extraction)
+PROMPT_NON_RE = ""  # Placeholder
+
 # Part 3: Define the configuration for each Excel sheet
 # This is the "brain" that connects sources and prompts to their target sheets.
 SHEET_CONFIG = {
     "Data to be captured": {
-        "sources": ["SN1", "SN2", "SN3", "SN4", "SN7", "SN8", "SN9", "SN11"],
+        "sources": ["SN1", "SN3", "SN2", "SN4", "SN7", "SN8", "SN9", "SN11"],  # SN1 added first, processes before SN3
         "prompt": PROMPT_DATA_TO_BE_CAPTURED
     },
     "RE Potential": {
@@ -58,6 +61,10 @@ SHEET_CONFIG = {
     "Transformation Capacity": {
         "sources": ["SN9"],
         "prompt": PROMPT_TRANSFORMATION_CAPACITY
+    },
+    "Non RE proposed RE Integration": {
+        "sources": ["SN9"],
+        "prompt": PROMPT_NON_RE
     },
     "Element Status": {
         "sources": ["SN10b", "SN10c_RECPDCL", "SN10c_PFCCL_Tender", "SN10c_PFCCL_Notice", "SN10d"],
