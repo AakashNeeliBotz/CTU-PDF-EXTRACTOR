@@ -76,7 +76,7 @@ def reindex_dataframe_to_template(df: pd.DataFrame, sheet_name: str) -> pd.DataF
     
     return df_reindexed
 
-def write_to_excel(data_records, template_path, output_path, sheet_name):
+def write_to_excel(data_records, template_path, output_path, sheet_name, clear_existing=False):
     """
     Writes a list of data records to a specific sheet in an Excel file.
 
@@ -85,6 +85,7 @@ def write_to_excel(data_records, template_path, output_path, sheet_name):
         template_path (str): The path to the Excel template file.
         output_path (str): The path where the updated Excel file will be saved.
         sheet_name (str): The name of the sheet to write the data to.
+        clear_existing (bool): If True, clear existing data in the sheet before writing. Default False.
     """
     if not data_records:
         print("[~] No data records to write to Excel. Skipping.")
@@ -105,19 +106,28 @@ def write_to_excel(data_records, template_path, output_path, sheet_name):
             wb = load_workbook(output_path)
             sheet = wb[sheet_name]
             
-            # Find first empty row after headers (row 4 has headers, data starts at row 5)
-            # For "Data to be captured" sheet, headers are at row 4 (Excel 1-indexed)
-            start_row = 5  # Default starting position
-            
-            # Efficiently find first completely empty row by checking column B only
-            for row_idx in range(5, min(start_row + 2000, sheet.max_row + 1)):
-                # Check if cell in column B (index 2) is empty
-                if sheet.cell(row_idx, 2).value is None:
-                    start_row = row_idx
-                    break
+            # If clear_existing is True, delete all data rows (keep headers)
+            if clear_existing:
+                print(f"[*] Clearing existing data in sheet '{sheet_name}'...")
+                # Delete all rows from row 5 onwards (rows 1-4 contain headers/formatting)
+                if sheet.max_row >= 5:
+                    sheet.delete_rows(5, sheet.max_row - 4)
+                    print(f"[*] Cleared {sheet.max_row - 4} existing data rows")
+                start_row = 5  # Start from row 5 after clearing
             else:
-                # If no empty row found in reasonable range, append after last row
-                start_row = sheet.max_row + 1
+                # Find first empty row after headers (row 4 has headers, data starts at row 5)
+                # For "Data to be captured" sheet, headers are at row 4 (Excel 1-indexed)
+                start_row = 5  # Default starting position
+                
+                # Efficiently find first completely empty row by checking column B only
+                for row_idx in range(5, min(start_row + 2000, sheet.max_row + 1)):
+                    # Check if cell in column B (index 2) is empty
+                    if sheet.cell(row_idx, 2).value is None:
+                        start_row = row_idx
+                        break
+                else:
+                    # If no empty row found in reasonable range, append after last row
+                    start_row = sheet.max_row + 1
             
             print(f"[*] Writing data starting at row {start_row} (Excel row numbering)")
             

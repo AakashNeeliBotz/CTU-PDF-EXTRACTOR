@@ -64,9 +64,9 @@ MARGIN_FIELDS = [
 #   - Column 4: Existing
 #   - Column 5: Under Implementation  
 #   - Column 6: Planned
-# ONLY 7 fields in Excel sheet - no coordinates, no remarks
+# Updated to include voltage_level_kv and renamed capacity columns
 TRANSFORMATION_CAPACITY_FIELDS = [
-    "s_no", "region", "state", "substation",
+    "s_no", "region", "state", "substation", "voltage_level_kv",
     "existing_mva", "under_implementation_mva", "planned_mva"
 ]
 
@@ -797,6 +797,127 @@ def lookup_state_from_margin(substation_name: str, margin_data: list) -> str:
     return best_match_state
 
 
+def lookup_state_from_data_to_be_captured(substation_name: str, dtbc_data: list) -> str:
+    """
+    Look up state from 'Data to be captured' sheet data by matching substation name.
+    
+    Uses the same fuzzy matching logic as lookup_state_from_margin:
+    - Exact match first
+    - Partial match (contains or is contained)
+    - Core name matching (strips suffixes like S/s, PS, roman numerals, etc.)
+    - Case-insensitive matching
+    
+    Args:
+        substation_name: Cleaned substation name from Transformation Capacity
+        dtbc_data: List of Data to be captured sheet records (dicts with 'substation' and 'state' keys)
+        
+    Returns:
+        State name if found, None otherwise
+    """
+    import re
+    
+    if not substation_name or not dtbc_data:
+        return None
+    
+    def extract_core_name(name):
+        """Extract core station name by removing common suffixes and patterns"""
+        if not name:
+            return ""
+        
+        core = name.lower().strip()
+        
+        # Remove voltage levels first (if any remain)
+        core = re.sub(r'^\d+(?:/\d+)*\s*k[Vv]\s*', '', core)
+        
+        # Remove technical suffixes in square brackets or parentheses
+        core = re.sub(r'\s*\[[^\]]+\]', '', core)  # [GIS], [AIS], etc.
+        core = re.sub(r'\s*\([^)]*(?:existing|gis|ais|hvdc)[^)]*\)', '', core, flags=re.IGNORECASE)
+        
+        # Remove common suffixes
+        for suffix in [' s/s', ' ps', ' complex', ' station', ' substation', ' ss']:
+            if core.endswith(suffix):
+                core = core[:-len(suffix)].strip()
+        
+        # Remove roman numerals and version numbers at the end
+        core = re.sub(r'[-\s]+(i{1,3}|iv|vi{0,3}|ix|x)\s*$', '', core, flags=re.IGNORECASE)
+        
+        # Remove single letter suffixes like -A, -B, -C
+        core = re.sub(r'[-\s]+[a-z]\s*$', '', core, flags=re.IGNORECASE)
+        
+        # Remove trailing special characters and numbers
+        core = re.sub(r'[-\s#*~+]+$', '', core)
+        
+        # Clean up extra whitespace
+        core = ' '.join(core.split())
+        
+        return core.strip()
+    
+    # Normalize the search term
+    search_term = substation_name.strip().lower()
+    search_core = extract_core_name(search_term)
+    
+    # First pass: Try exact match
+    for record in dtbc_data:
+        dtbc_substation = record.get('substation', '')
+        if dtbc_substation and isinstance(dtbc_substation, str):
+            if dtbc_substation.strip().lower() == search_term:
+                state = record.get('state')
+                if state:
+                    return state
+    
+    # Second pass: Try core name exact match
+    best_match_state = None
+    best_match_score = 0
+    
+    for record in dtbc_data:
+        dtbc_substation = record.get('substation', '')
+        if dtbc_substation and isinstance(dtbc_substation, str):
+            dtbc_core = extract_core_name(dtbc_substation)
+            
+            # Exact core name match (highest priority)
+            if search_core and dtbc_core and search_core == dtbc_core:
+                state = record.get('state')
+                if state:
+                    return state  # Return immediately for exact core match
+    
+    # Third pass: Try partial match on core names
+    for record in dtbc_data:
+        dtbc_substation = record.get('substation', '')
+        if dtbc_substation and isinstance(dtbc_substation, str):
+            dtbc_substation_lower = dtbc_substation.strip().lower()
+            dtbc_core = extract_core_name(dtbc_substation)
+            
+            # Check if cores are similar (one contains the other)
+            if search_core and dtbc_core:
+                if search_core in dtbc_core or dtbc_core in search_core:
+                    state = record.get('state')
+                    if state:
+                        match_score = min(len(search_core), len(dtbc_core))
+                        if match_score > best_match_score:
+                            best_match_state = state
+                            best_match_score = match_score
+    
+    if best_match_state:
+        return best_match_state
+    
+    # Fourth pass: Try matching on original terms (fallback)
+    for record in dtbc_data:
+        dtbc_substation = record.get('substation', '')
+        if dtbc_substation and isinstance(dtbc_substation, str):
+            dtbc_substation_lower = dtbc_substation.strip().lower()
+            
+            if search_term in dtbc_substation_lower or dtbc_substation_lower in search_term:
+                state = record.get('state')
+                if state:
+                    match_score = min(len(search_term), len(dtbc_substation_lower))
+                    if match_score > best_match_score:
+                        best_match_state = state
+                        best_match_score = match_score
+    
+    # No match found
+    return best_match_state
+
+
 def normalize_regional_hub_to_state(state_value: str) -> str:
     """
     Normalize regional hub/station names to their actual state names.
@@ -844,3 +965,281 @@ def normalize_regional_hub_to_state(state_value: str) -> str:
     
     # Otherwise return the original value
     return state_value
+
+
+def extract_voltage_level(text: str) -> int:
+    """
+    Extract the voltage level from a voltage string.
+    Returns the LAST (rightmost) number before 'kV'.
+    
+    Examples:
+    - '400/220kV' → 220
+    - '765/400kV' → 400
+    - '400/230 kV' → 230
+    - '220kV' → 220
+    
+    Args:
+        text: String containing voltage information
+        
+    Returns:
+        Voltage level as integer, or None if not found
+    """
+    import re
+    
+    if not text or not isinstance(text, str):
+        return None
+    
+    # Pattern to find all numbers followed by optional space and kV/KV (case insensitive)
+    # This will capture: 765/400kV, 400/220 kV, 400/220 KV, etc.
+    pattern = r'(\d+)\s*[Kk][Vv]'
+    matches = re.findall(pattern, text)
+    
+    if matches:
+        # Return the LAST match (rightmost voltage level)
+        return int(matches[-1])
+    
+    return None
+
+
+def calculate_mva_capacity(text: str) -> float:
+    """
+    Calculate MVA capacity from formula strings.
+    
+    Handles:
+    - Simple multiplication: '4x500MVA' → 2000
+    - Addition: '2x315MVA + 1x500MVA' → 1130
+    - Multiple terms: '2x315 + 3x200 + 1x500' → 630 + 600 + 500 = 1730
+    
+    Args:
+        text: String containing MVA formula (e.g., '4x500MVA', '2x315+1x500MVA')
+        
+    Returns:
+        Calculated MVA capacity as float, or None if no valid formula found
+    """
+    import re
+    
+    if not text or not isinstance(text, str):
+        return None
+    
+    # Pattern to find multiplication formulas: NxMMM or N×MMM
+    # Examples: 4x500, 2X315, 3×200
+    pattern = r'(\d+)\s*[xX×]\s*(\d+(?:\.\d+)?)'
+    
+    matches = re.findall(pattern, text)
+    
+    if not matches:
+        return None
+    
+    # Calculate sum of all multiplication terms
+    total = 0.0
+    for count, capacity in matches:
+        total += float(count) * float(capacity)
+    
+    return total if total > 0 else None
+
+
+def parse_capacity_segment(segment: str) -> dict:
+    """
+    Parse a single capacity segment to extract voltage level and MVA capacity.
+    
+    A segment is one part separated by semicolon, containing:
+    - MVA capacity formula (e.g., '4x500MVA', '2x315+1x500MVA')
+    - Voltage level (e.g., '400/220kV', '765/400kV')
+    
+    Examples:
+    - '4x500MVA, 400/220kV' → {'voltage_kv': 220, 'mva': 2000}
+    - '2x315MVA + 1x500MVA, 400/220kV' → {'voltage_kv': 220, 'mva': 1130}
+    
+    Args:
+        segment: String segment containing MVA formula and voltage
+        
+    Returns:
+        Dict with 'voltage_kv' and 'mva' keys, or None if parsing fails
+    """
+    if not segment or not isinstance(segment, str):
+        return None
+    
+    segment = segment.strip()
+    if not segment:
+        return None
+    
+    # Extract voltage level
+    voltage_kv = extract_voltage_level(segment)
+    
+    # Extract and calculate MVA capacity
+    mva = calculate_mva_capacity(segment)
+    
+    # Only return if we found at least voltage or MVA
+    if voltage_kv is not None or mva is not None:
+        return {
+            'voltage_kv': voltage_kv,
+            'mva': mva
+        }
+    
+    return None
+
+
+def normalize_capacity_string(text: str) -> str:
+    """
+    Normalize capacity strings by inserting semicolons where voltage specifications
+    are directly followed by capacity formulas (no space/separator) OR where multiple
+    voltage specifications appear in the same string.
+    
+    This handles cases where PDF extraction concatenates segments like:
+    - "2x1500MVA, 765/400kV2x500MVA, 400/220kV" (no space after kV)
+    - "1x1500MVA, 765/400kV, 1x500MVA, 400/220kV" (comma instead of semicolon)
+    - "2x1500MVA, 765/400kV 2x500MVA, 400/220kV" (single space separator)
+    
+    And converts them to:
+    - "2x1500MVA, 765/400kV; 2x500MVA, 400/220kV"
+    - "1x1500MVA, 765/400kV; 1x500MVA, 400/220kV"
+    - "2x1500MVA, 765/400kV; 2x500MVA, 400/220kV"
+    
+    But preserves:
+    - "400/220kV, 4X500MVA" (comma within same segment - voltage and formula together)
+    
+    Args:
+        text: Raw capacity string from PDF
+        
+    Returns:
+        Normalized string with semicolons inserted between segments
+    """
+    import re
+    
+    if not text or not isinstance(text, str):
+        return text
+    
+    # STEP 1: Handle case where kV is directly followed by a digit (no space)
+    # Pattern: "kV" or "KV" followed immediately by a digit (start of next formula)
+    # Example: "765/400kV2x500MVA" -> "765/400kV; 2x500MVA"
+    normalized = re.sub(r'([Kk][Vv])(\d)', r'\1; \2', text)
+    
+    # STEP 2: Handle case where kV is followed by comma/space and ANOTHER MVA formula
+    # that has its OWN voltage specification (indicating a new segment)
+    # Pattern: "kV" followed by ", " (with optional whitespace/newline) and then 
+    # a digit followed by "x" (indicating NxMVA formula)
+    # But we need to check if this new formula has its own voltage (contains kV later)
+    # Example: "1x1500MVA, 765/400kV, 1x500MVA, 400/220kV" -> split at second occurrence
+    # But NOT: "400/220kV, 4X500MVA" -> this is ONE segment (formula comes after voltage)
+    
+    # Strategy: Look for pattern "kV" + optional comma/whitespace + "NxMVA" + comma/space + voltage
+    # This indicates the NxMVA starts a NEW segment
+    # We need to check if there's another voltage spec (kV) after the formula
+    
+    # For now, use a simpler approach:
+    # Only insert semicolon if kV is followed by comma/space AND the next part contains BOTH
+    # a formula (NxMVA) AND another voltage (kV)
+    
+    # STEP 2a: Handle "kV, 1x500MVA, 400/220kV" - comma followed by formula with voltage
+    # Look ahead to see if there's a voltage spec after the MVA formula
+    # Pattern: kV followed by comma/space, then formula, then another kV
+    normalized = re.sub(
+        r'([Kk][Vv]),\s+(\d+[xX]\d+\s*MVA[^;,]*,\s*\d+)',
+        r'\1; \2',
+        normalized
+    )
+    
+    # STEP 3: Handle case where kV is followed by ONE OR MORE spaces and then a digit
+    # that starts a NEW segment (has its own voltage later)
+    # This catches patterns like "765/400kV 2x500MVA" (space-separated segments)
+    # Example: "2x1500MVA, 765/400kV 2x500MVA, 400/220kV" -> "2x1500MVA, 765/400kV; 2x500MVA, 400/220kV"
+    # But NOT: "400/220kV 4X500MVA" if there's no voltage after MVA (same segment)
+    
+    # Only add semicolon if there's a space followed by a formula that has its own voltage
+    # Pattern: kV + space + formula (NxMVA) that's followed by a voltage (contains kV)
+    normalized = re.sub(
+        r'([Kk][Vv])\s+(\d+[xX]\d+\s*MVA[^;]*\d+[Kk][Vv])',
+        r'\1; \2',
+        normalized
+    )
+    
+    return normalized
+
+
+def split_transformation_capacity_row(row: dict) -> list:
+    """
+    Split a Transformation Capacity row into multiple rows based on voltage levels.
+    
+    Process all three capacity columns:
+    - existing_mva
+    - under_implementation_mva
+    - planned_mva
+    
+    Each semicolon-separated segment creates a new row.
+    For example:
+        "1x1500 MVA, 765/400 kV; 4X500 MVA, 400/220 KV"
+        Should create 2 rows:
+        - Row 1: voltage=400, mva=1500 (from first segment)
+        - Row 2: voltage=220, mva=4000 (from second segment)
+    
+    Args:
+        row: Dictionary containing transformation capacity data
+        
+    Returns:
+        List of dictionaries (one per voltage level/segment)
+    """
+    # Collect segments from all three capacity columns
+    output_rows = []
+    
+    # Process each capacity column
+    for column_name in ['existing_mva', 'under_implementation_mva', 'planned_mva']:
+        value = row.get(column_name, '')
+        if value and isinstance(value, str) and value.strip():
+            # STEP 1: Normalize the capacity string to handle concatenated segments
+            # This converts "765/400kV2x500MVA" to "765/400kV; 2x500MVA"
+            normalized_value = normalize_capacity_string(value)
+            
+            # STEP 2: Split by semicolon to get individual segments
+            segments = [s.strip() for s in normalized_value.split(';') if s.strip()]
+            
+            for segment in segments:
+                parsed = parse_capacity_segment(segment)
+                if parsed and parsed.get('voltage_kv') is not None:
+                    voltage_kv = parsed['voltage_kv']
+                    mva = parsed['mva']
+                    
+                    # Check if we already have a row for this voltage in this column
+                    # Find existing row with this voltage
+                    existing_row = None
+                    for out_row in output_rows:
+                        if out_row.get('voltage_level_kv') == voltage_kv:
+                            # Check if this column is already populated
+                            if out_row.get(column_name) is None:
+                                existing_row = out_row
+                                break
+                    
+                    if existing_row:
+                        # Add MVA to existing row
+                        existing_row[column_name] = mva
+                    else:
+                        # Create new row for this voltage level
+                        new_row = {
+                            's_no': row.get('s_no'),
+                            'region': row.get('region'),
+                            'state': row.get('state'),
+                            'substation': row.get('substation'),
+                            'voltage_level_kv': voltage_kv,
+                            'existing_mva': None,
+                            'under_implementation_mva': None,
+                            'planned_mva': None
+                        }
+                        new_row[column_name] = mva
+                        output_rows.append(new_row)
+    
+    # If no rows were created, return a single row with None values
+    if not output_rows:
+        return [{
+            's_no': row.get('s_no'),
+            'region': row.get('region'),
+            'state': row.get('state'),
+            'substation': row.get('substation'),
+            'voltage_level_kv': None,
+            'existing_mva': None,
+            'under_implementation_mva': None,
+            'planned_mva': None
+        }]
+    
+    # Sort rows by voltage (descending - higher voltage first)
+    output_rows.sort(key=lambda x: x.get('voltage_level_kv') or 0, reverse=True)
+    
+    return output_rows

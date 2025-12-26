@@ -1,111 +1,46 @@
-s_no,region,state,substation,existing_mva,under_implementation_mva,planned_mva
-1,WR,Gujarat,Jam Khambhaliya PS,"400/220kV, 
-4X500MVA,",,
-2,WR,Gujarat,Bhuj PS,"4x1500MVA, 
-765/400kV;
-8X500MVA, 
-400/220kV",,
-3,WR,Gujarat,Bhuj-II PS,"1x1500 MVA, 
-765/400 kV;
-4X500 MVA, 
-400/220 KV","1x1500 MVA, 
-765/400 kV;",
-4,WR,,Bhachau S/s,"2X315 MVA, 
-400/220 KV",,
-6,WR,Gujarat,Khavda PS-II,,"2x1500MVA, 
-765/400kV",0
-7,WR,,Banaskantha PS [GIS],"2x500 MVA, 
-400/220 KV",,
-8,WR,,Rajgarh S/s,"2x315 MVA, 
-400/220 KV",,"1x500 MVA, 
-400/220 kV 
-(segregated 
-from
-existing 220kV 
-bus through bus 
-section)"
-9,WR,,Indore S/s,"2x1500 MVA, 
-765/400 kV 3X500 
-MVA, 400/220 kV",,
-10,WR,Madhya Pradesh,Pachora PS,,"3x500MVA, 
-400/220kV",
-11,WR,Madhya Pradesh,Neemuch PS,,"2x500MVA, 
-400/220kV",
-12,WR,,Khandwa S/s (existing S/s),"2x315MVA + 
-1x500MVA, 
-400/220kV",,
-13,WR,,Raipur S/s (Existing S/s),"3x315MVA, 
-400/220kV",,
-15,WR,Maharashtra,Solapur (existing S/s),"2x1500 MVA, 
-765/400 kV;
- 2X315 MVA, 
-400/220 kV;
- 1X500 MVA 
-400/220 KV",,
-16,SR,Tamil Nadu,Tuticorin-II S/s,"3x500 MVA, 
-400/230 KV","2x500MVA, 
-400/230kV",
-17,SR,,Pugalur S/s,"2x315 MVA, 
-400/230 kV
-1x500 MVA, 
-400/230 KV",-,
-18,SR,,"Palakkad S/s 10°46'22""N 76°45'36""E","2x315 MVA, 
-400/220 kV","1x500 MVA, 
-400/220 kV",
-19,SR,Andhra Pradesh,NP Kunta S/s,"4x500 MVA, 
-400/220 kV",-,
-21,SR,,Hiriyur S/s,"2x315 MVA, 
-400/220 kV","1x500 MVA, 
-400/220 kV",
-22,SR,Andhra Pradesh,Kurnool S/s,"2x1500 MVA, 
-765/400 kV",,
-23,SR,Karnataka,Koppal S/s,-,"5x500 MVA, 
-400/220 kV",
-24,SR,Tamil Nadu,Karur S/s,-,"5x500 MVA, 
-400/230 kV",
-25,SR,Karnataka,Gadag S/s,-,"5x500 MVA, 
-400/220 kV",
-27,SR,Karnataka,Gadag-II PS,,,"4x500 MVA, 
-400/220 kV"
-29,NR,Rajasthan,Bikaner S/s,"2x1500MVA, 
-765/400kV
-2x500MVA, 
-400/220kV","1x1500MVA, 
-765/400kV, 
-1x500MVA, 
-400/220kV","1x1500MVA, 
-765/400kV"
-30,NR,Rajasthan,Fatehgarh PS,-,-,-
-31,NR,Rajasthan,Bhadla- II PS,"2x1500MVA, 
-765/400kV
-3X500MVA, 
-400/220kV","2x1500MVA, 
-765/400kV
-5X500MVA, 
-400/220kV","1x1500MVA, 
-765/400kV"
-32,NR,Rajasthan,Fatehgarh-II PS,"4x1500MVA, 
-765/400kV
-5X500MVA, 
-400/220kV","2x1500MVA, 
-765/400kV
-4X500MVA, 
-400/220kV","2x500MVA, 
-400/220kV"
-34,NR,Rajasthan,Bikaner-II PS,,"2x500MVA, 
-400/220kV","5x500MVA, 
-400/220kV"
-35,NR,Rajasthan,Fatehgarh-IV PS,,,"5x500MVA, 
-400/220kV"
-36,NR,Rajasthan,Bhadla- III PS,,,"2x1500MVA, 
-765/400kV
-10X500MVA, 
-400/220kV"
-37,NR,Rajasthan,Ramgarh PS,,,"3x1500MVA, 
-765/400kV
-2X500MVA, 
-400/220kV"
-38,NR,Rajasthan,Bikaner- III PS,,,"6x1500MVA, 
-765/400kV
-5X500MVA, 
-400/220kV"
+s_no,region,state,substation,voltage_level_kv,existing_mva,under_implementation_mva,planned_mva
+1,WR,Gujarat,Jam Khambhaliya PS,220.0,2000.0,,
+2,WR,Gujarat,Bhuj PS,400.0,6000.0,,
+2,WR,Gujarat,Bhuj PS,220.0,4000.0,,
+3,WR,Gujarat,Bhuj-II PS,400.0,1500.0,1500.0,
+3,WR,Gujarat,Bhuj-II PS,220.0,2000.0,,
+4,WR,,Bhachau S/s,220.0,630.0,,
+6,WR,Gujarat,Khavda PS-II,400.0,,3000.0,
+7,WR,,Banaskantha PS [GIS],220.0,1000.0,,
+8,WR,"Madhya 
+Pradesh",Rajgarh S/s,220.0,630.0,,500.0
+9,WR,"Madhya 
+Pradesh",Indore S/s,220.0,4500.0,,
+10,WR,Madhya Pradesh,Pachora PS,220.0,,1500.0,
+11,WR,Madhya Pradesh,Neemuch PS,220.0,,1000.0,
+12,WR,,Khandwa S/s (existing S/s),220.0,1130.0,,
+13,WR,,Raipur S/s (Existing S/s),220.0,945.0,,
+15,WR,Maharashtra,Solapur (existing S/s),400.0,3000.0,,
+15,WR,Maharashtra,Solapur (existing S/s),220.0,630.0,,
+15,WR,Maharashtra,Solapur (existing S/s),220.0,500.0,,
+16,SR,Tamil Nadu,Tuticorin-II S/s,230.0,1500.0,1000.0,
+17,SR,"Tamil 
+Nadu",Pugalur S/s,230.0,1130.0,,
+18,SR,,"Palakkad S/s 10°46'22""N 76°45'36""E",220.0,630.0,500.0,
+19,SR,Andhra Pradesh,NP Kunta S/s,220.0,2000.0,,
+21,SR,Karnataka,Hiriyur S/s,220.0,630.0,500.0,
+22,SR,Andhra Pradesh,Kurnool S/s,400.0,3000.0,,
+23,SR,Karnataka,Koppal S/s,220.0,,2500.0,
+24,SR,Tamil Nadu,Karur S/s,230.0,,2500.0,
+25,SR,Karnataka,Gadag S/s,220.0,,2500.0,
+27,SR,Karnataka,Gadag-II PS,220.0,,,2000.0
+29,NR,Rajasthan,Bikaner S/s,400.0,3000.0,1500.0,1500.0
+29,NR,Rajasthan,Bikaner S/s,220.0,1000.0,500.0,
+30,NR,Rajasthan,Fatehgarh PS,,,,
+31,NR,Rajasthan,Bhadla- II PS,400.0,3000.0,3000.0,1500.0
+31,NR,Rajasthan,Bhadla- II PS,220.0,1500.0,2500.0,
+32,NR,Rajasthan,Fatehgarh-II PS,400.0,6000.0,3000.0,
+32,NR,Rajasthan,Fatehgarh-II PS,220.0,2500.0,2000.0,1000.0
+34,NR,Rajasthan,Bikaner-II PS,220.0,,1000.0,2500.0
+35,NR,Rajasthan,Fatehgarh-IV PS,220.0,,,2500.0
+36,NR,Rajasthan,Bhadla- III PS,400.0,,,3000.0
+36,NR,Rajasthan,Bhadla- III PS,220.0,,,5000.0
+37,NR,Rajasthan,Ramgarh PS,400.0,,,4500.0
+37,NR,Rajasthan,Ramgarh PS,220.0,,,1000.0
+38,NR,Rajasthan,Bikaner- III PS,400.0,,,9000.0
+38,NR,Rajasthan,Bikaner- III PS,220.0,,,2500.0

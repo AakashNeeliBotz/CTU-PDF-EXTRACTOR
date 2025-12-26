@@ -33,8 +33,10 @@ from field_mappings import (
     split_lta_from_application_id,  # Add the new function
     extract_additional_info_from_pooling_ss,  # Add the pooling S/s parser
     clean_substation_name,  # Add substation name cleaner
-    lookup_state_from_margin,  # Add state lookup function
-    normalize_regional_hub_to_state  # Add regional hub normalizer
+    lookup_state_from_margin,  # Add state lookup function from Margin sheet
+    lookup_state_from_data_to_be_captured,  # Add state lookup function from Data to be captured sheet
+    normalize_regional_hub_to_state,  # Add regional hub normalizer
+    split_transformation_capacity_row  # Add transformation capacity row splitter
 )
 import concurrent.futures
 
@@ -218,7 +220,7 @@ def propagate_state_to_parent_complex(records):
 # --- Test Configuration ---
 BASE_DOWNLOAD_DIR = "downloaded_pdfs"
 TEMPLATE_EXCEL_FILE = "Connectivity Application Data.xlsx"
-OUTPUT_EXCEL_FILE = "Connectivity_Application_Data_TEST_ALL_SHEETS23.xlsx"
+OUTPUT_EXCEL_FILE = "Connectivity_Application_Data_TEST_ALL_SHEETS26.xlsx"
 MAX_WORKERS = 1  # Set to 1 to avoid pypdfium2 threading issues on Windows
 
 # Test Settings: Process multiple sheets from different sources
@@ -1730,13 +1732,15 @@ def run_test_pipeline():
             print(f"\n  [*] Applying state propagation from subcomplexes to parent complex rows...")
             sheet_records = propagate_state_to_parent_complex(sheet_records)
         
-        # Apply substation cleaning and state lookup for Transformation Capacity sheet
+        # Apply substation cleaning, state lookup, and row splitting for Transformation Capacity sheet
         if TEST_SHEET_NAME == "Transformation Capacity" and sheet_records:
             print(f"\n  [*] Processing Transformation Capacity sheet...")
             print(f"      - Cleaning substation names (removing voltage levels, GIS/AIS, special chars)")
-            print(f"      - Looking up states from Margin sheet data")
+            print(f"      - Looking up states from Margin sheet and Data to be captured sheet")
+            print(f"      - Extracting voltage levels and calculating MVA capacities")
+            print(f"      - Splitting rows by voltage level")
             
-            # First, load Margin sheet data for state lookup
+            # Load Margin sheet data for state lookup
             margin_csv_path = "extraction_output/Margin_extracted_data.csv"
             margin_data = []
             
@@ -1749,11 +1753,28 @@ def run_test_pipeline():
                     print(f"      [!] Could not load Margin data: {e}")
             else:
                 print(f"      [!] Margin CSV not found at {margin_csv_path}")
-                print(f"      [!] State lookup will not be available")
             
-            # Process each record
+            # Load Data to be captured sheet data for state lookup (fallback)
+            data_to_be_captured_csv_path = "extraction_output/Data_to_be_captured_extracted_data.csv"
+            data_to_be_captured_data = []
+            
+            if os.path.exists(data_to_be_captured_csv_path):
+                try:
+                    dtbc_df = pd.read_csv(data_to_be_captured_csv_path)
+                    data_to_be_captured_data = dtbc_df.to_dict('records')
+                    print(f"      [OK] Loaded {len(data_to_be_captured_data)} records from Data to be captured sheet for state lookup")
+                except Exception as e:
+                    print(f"      [!] Could not load Data to be captured data: {e}")
+            else:
+                print(f"      [!] Data to be captured CSV not found at {data_to_be_captured_csv_path}")
+            
+            if not margin_data and not data_to_be_captured_data:
+                print(f"      [!] No data sources available for state lookup")
+            
+            # STEP 1: Clean substation names and lookup states (before row splitting)
             cleaned_count = 0
-            state_lookup_count = 0
+            state_from_margin_count = 0
+            state_from_dtbc_count = 0
             
             for record in sheet_records:
                 original_substation = record.get('substation', '')
@@ -1770,17 +1791,78 @@ def run_test_pipeline():
                     # Update the record with cleaned name
                     record['substation'] = cleaned_substation
                     
-                    # Look up state from Margin data
+                    # First, try to look up state from Margin sheet
+                    state = None
+                    source = None
+                    
                     if margin_data:
                         state = lookup_state_from_margin(cleaned_substation, margin_data)
                         if state:
-                            record['state'] = state
-                            state_lookup_count += 1
-                            if state_lookup_count <= 5:  # Show first 5 examples
-                                print(f"      [State] '{cleaned_substation}' → {state}")
+                            source = 'Margin'
+                            state_from_margin_count += 1
+                    
+                    # If not found in Margin, try Data to be captured sheet
+                    if not state and data_to_be_captured_data:
+                        state = lookup_state_from_data_to_be_captured(cleaned_substation, data_to_be_captured_data)
+                        if state:
+                            source = 'Data to be captured'
+                            state_from_dtbc_count += 1
+                    
+                    # Update the record if state was found
+                    if state:
+                        record['state'] = state
+                        if (state_from_margin_count + state_from_dtbc_count) <= 5:  # Show first 5 examples
+                            print(f"      [State from {source}] '{cleaned_substation}' → {state}")
             
             print(f"      [Summary] Cleaned {cleaned_count} substation names")
-            print(f"      [Summary] Found states for {state_lookup_count} substations from Margin sheet")
+            print(f"      [Summary] Found states for {state_from_margin_count} substations from Margin sheet")
+            print(f"      [Summary] Found states for {state_from_dtbc_count} substations from Data to be captured sheet")
+            print(f"      [Summary] Total states filled: {state_from_margin_count + state_from_dtbc_count}")
+            
+            # STEP 2: Split rows by voltage level and calculate MVA
+            print(f"\n      [*] Splitting rows by voltage level and calculating MVA capacities...")
+            original_count = len(sheet_records)
+            transformed_records = []
+            
+            for record in sheet_records:
+                # DEBUG: Print Bhuj-II data before transformation
+                if 'Bhuj-II' in str(record.get('substation', '')):
+                    print(f"\n      [DEBUG Bhuj-II BEFORE transformation]:")
+                    print(f"        Substation: {record.get('substation')}")
+                    print(f"        Existing: {record.get('existing_mva')}")
+                    print(f"        Under Impl: {record.get('under_implementation_mva')}")
+                    print(f"        Planned: {record.get('planned_mva')}")
+                
+                # Split this row into multiple rows (one per voltage level)
+                split_rows = split_transformation_capacity_row(record)
+                
+                # DEBUG: Print Bhuj-II data after transformation
+                for split_row in split_rows:
+                    if 'Bhuj-II' in str(split_row.get('substation', '')):
+                        print(f"\n      [DEBUG Bhuj-II AFTER transformation]:")
+                        print(f"        Substation: {split_row.get('substation')}")
+                        print(f"        Voltage: {split_row.get('voltage_level_kv')} kV")
+                        print(f"        Existing: {split_row.get('existing_mva')}")
+                        print(f"        Under Impl: {split_row.get('under_implementation_mva')}")
+                        print(f"        Planned: {split_row.get('planned_mva')}")
+                
+                transformed_records.extend(split_rows)
+            
+            # Replace sheet_records with the transformed records
+            sheet_records = transformed_records
+            new_count = len(sheet_records)
+            
+            print(f"      [Summary] Original rows: {original_count}")
+            print(f"      [Summary] After splitting: {new_count} rows ({new_count - original_count} new rows created)")
+            
+            # Show first 3 examples of transformed data
+            print(f"\n      [*] First 3 transformed rows (example):")
+            for i, rec in enumerate(sheet_records[:3], 1):
+                voltage = rec.get('voltage_level_kv', 'N/A')
+                existing = rec.get('existing_mva', 'N/A')
+                under_impl = rec.get('under_implementation_mva', 'N/A')
+                planned = rec.get('planned_mva', 'N/A')
+                print(f"      {i}. {rec.get('substation', 'N/A'):30s} | Voltage: {voltage} kV | Existing: {existing} | Under Impl: {under_impl} | Planned: {planned}")
         
         # Apply post-processing cleaning for Non RE proposed RE Integration sheet
         if TEST_SHEET_NAME == "Non RE proposed RE Integration" and sheet_records:
@@ -1837,7 +1919,7 @@ def run_test_pipeline():
         if sheet_records:
             print(f"\n  [*] Writing {len(sheet_records)} records to Excel sheet '{TEST_SHEET_NAME}'...")
             try:
-                write_to_excel(sheet_records, TEMPLATE_EXCEL_FILE, OUTPUT_EXCEL_FILE, TEST_SHEET_NAME)
+                write_to_excel(sheet_records, TEMPLATE_EXCEL_FILE, OUTPUT_EXCEL_FILE, TEST_SHEET_NAME, clear_existing=True)
                 print(f"  [OK] Successfully wrote data to '{TEST_SHEET_NAME}' in Excel")
             except Exception as e:
                 print(f"  [!] Error writing to Excel: {e}")
