@@ -32,9 +32,9 @@ Madhya Pradesh,Karera,"2x1500 MVA, 765/400 kV, 2x500 MVA,
 400/220 kV S/s",700,0,0,0,0,0,0,,,,,WR
 Madhya Pradesh,Sidhi area,No ISTS Substation exists near Sidhi,300,0,0,0,0,0,0,,,,"Application received for 300MW (requested through LILO 
 of Vindhyachal - Satna line). Studies are underway.",WR
-Chhattisgarh,Dharamjaygarh,2x1500MVA 765/400kV,0,0,0,0,0,0,0,0,0,0,765/400kV ICT overloading / Fault level issues,
-Chhattisgarh,Champa,6x1500MVA 765/400kV,0,0,0,0,0,0,0,0,0,0,765/400kV ICT overloading / Fault level issues,
-Chhattisgarh,Bilaspur PS,3x1500MVA 765/400kV,0,0,0,,0,0,0,0,0,0,765/400kV ICT overloading / Fault level issues,
+Chhattisgarh,Dharamjaygarh,2x1500MVA 765/400kV,0,0,0,0,0,0,0,0,0,0,765/400kV ICT overloading / Fault level issues,WR
+Chhattisgarh,Champa,6x1500MVA 765/400kV,0,0,0,0,0,0,0,0,0,0,765/400kV ICT overloading / Fault level issues,WR
+Chhattisgarh,Bilaspur PS,3x1500MVA 765/400kV,0,0,0,,0,0,0,0,0,0,765/400kV ICT overloading / Fault level issues,WR
 Andhra Pradesh,Kurnool,"2X1500 MVA, 765/400 kV",2714,0,0,,1,0,250,,0,1,,SR
 Karnataka,Hiriyur,"2x315 MVA, 400/220 kV + 1x500 MVA, 
 400/220 kV",600.3,0,0,0,,0,0,,0,0,,SR
@@ -45,19 +45,19 @@ grant of Connectivity.",SR
 Tamil Nadu,Malekottaiyur(Kalivenda pattu),"2X315 MVA + 1X500 MVA, 400/230 kV",NIL,500,0,2,,0,0,,0,0,,SR
 Tamil Nadu,Nagapattinam PS,Charged at 400 kV,NIL,0,1000,,2,0,0,,0,0,,SR
 Tamil Nadu,NLC TS-II,2x250+1x315,160,0,0,0,,,,,,,Overloading at 230 kV network,SR
-Rajasthan,Chittorgarh,765/400kV : 2x1500MVA,NIL,0,0,0,0,0,0,0,0,0,,WR
-Rajasthan,Ajmer,765/400kV : 2x1500MVA,NIL,0,0,0,0,0,0,0,0,0,,WR
-Rajasthan,Bassi,400/220 kV : 2x315MVA +1x500MVA,NIL,0,0,0,0,0,,,,0,220kV overloading,WR
-Rajasthan,Bhiwadi,400/220 kV : 3x315MVA,NIL,0,0,0,0,0,,,,0,220kV overloading,WR
-Rajasthan,Kankroli,400/220 kV : 3x315MVA,NIL,0,0,0,0,0,,,,0,220kV overloading,WR
-Rajasthan,Kota,400/220 kV : 2x315MVA,NIL,0,0,0,0,0,,,,0,220kV overloading,WR
+Rajasthan,Chittorgarh,765/400kV : 2x1500MVA,NIL,0,0,0,0,0,0,0,0,0,,NR
+Rajasthan,Ajmer,765/400kV : 2x1500MVA,NIL,0,0,0,0,0,0,0,0,0,,NR
+Rajasthan,Bassi,400/220 kV : 2x315MVA +1x500MVA,NIL,0,0,0,0,0,,,,0,220kV overloading,NR
+Rajasthan,Bhiwadi,400/220 kV : 3x315MVA,NIL,0,0,0,0,0,,,,0,220kV overloading,NR
+Rajasthan,Kankroli,400/220 kV : 3x315MVA,NIL,0,0,0,0,0,,,,0,220kV overloading,NR
+Rajasthan,Kota,400/220 kV : 2x315MVA,NIL,0,0,0,0,0,,,,0,220kV overloading,NR
 Rajasthan,Bhinmal,"400/220 kV : 2x315MVA+1x315 MVA 
-UC",NIL,0,0,0,0,0,0,0,0,0,220kV overloading,WR
-Rajasthan,Neemarana,400/220 kV : 1x315MVA +1x500MVA,NIL,0,0,0,0,0,0,0,0,0,220kV overloading,WR
-Rajasthan,Sikar,400/220 kV : 2x315MVA +1x500MVA,NIL,0,0,0,0,0,,,,0,220kV overloading,WR
-Rajasthan,Jaipur,400/220 kV : 2x500MVA,NIL,0,0,0,0,0,0,0,0,0,,WR
+UC",NIL,0,0,0,0,0,0,0,0,0,220kV overloading,NR
+Rajasthan,Neemarana,400/220 kV : 1x315MVA +1x500MVA,NIL,0,0,0,0,0,0,0,0,0,220kV overloading,NR
+Rajasthan,Sikar,400/220 kV : 2x315MVA +1x500MVA,NIL,0,0,0,0,0,,,,0,220kV overloading,NR
+Rajasthan,Jaipur,400/220 kV : 2x500MVA,NIL,0,0,0,0,0,0,0,0,0,,NR
 Rajasthan,Kotputli,"400/220 kV : 2x315MVA+1X500MVA 
-(Planned)",NIL,0,0,0,0,0,0,0,0,0,,WR
+(Planned)",NIL,0,0,0,0,0,0,0,0,0,,NR
 Haryana,Kaithal,400/220 kV : 3X315MVA,NIL,0,0,0,0,0,0,0,0,0,,NR
 Haryana,Bahadurgarh,"400/220 kV : 315MVA 
 +500MVA+500MVA (UC)",NIL,0,0,0,0,0,0,0,0,0,,NR

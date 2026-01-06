@@ -1,0 +1,56 @@
+Element Status sheet structure:
+============================================================
+
+
+Row 1:
+
+Row 2:
+  Col 2: Element Code
+  Col 3: Inter/Intra Tx. Element
+  Col 4: Transmission Scheme
+  Col 5: Transmission Scope
+  Col 6: MVA
+  Col 7: Status
+  Col 8: Approval of Elements in which NCT
+  Col 9: Mode (TBCB/RTM)
+  Col 10: Tender Issuing Authority
+  Col 11: Date of tender issuance
+  Col 12:  Date of Bid Submission
+  Col 13: Execution Timeline
+  Col 14: Tentative SCOD
+  Col 15: Awarded To
+  Col 16: SPV Transfer Date
+  Col 17: Physical Progress S/s of Tx. Line
+
+Row 3:
+  Col 17: Length
+  Col 18: Location
+  Col 19: Foundation
+
+Row 4:
+  Col 13: 24
+  Col 14: =DATE(YEAR(TODAY()), MONTH(TODAY()+M4), DAY(TODAY()))
+
+Row 5:
+  Col 12: =TODAY()
+  Col 13: 21
+  Col 14: =DATE(YEAR(L5),MONTH(L5)+M5,DAY(L5))
+
+Row 6:
+  Col 1: Data Scoure (Sl. No.(s)1, 2, 5, 6, 10b, 10c, 10d, 10e, 12)
+
+Row 7:
+
+Row 8:
+
+Row 9:
+
+Row 10:
+
+Row 11:
+
+Row 12:
+
+Row 13:
+
+Row 14:

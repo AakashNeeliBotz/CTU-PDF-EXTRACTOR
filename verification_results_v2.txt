@@ -1,0 +1,87 @@
+﻿=== Substation Verification (Post-Fix) ===
+
+Juniper Green Energy Records: 53
+  FAIL: RAMGARH-II PS (Status: Granted)
+  FAIL: Barmer-I (Status: nan)
+  FAIL: Bhadla-III (Status: nan)
+  FAIL: Bhadla-III PS (Status: nan)
+  FAIL: Bhadla-III PS (Status: nan)
+  FAIL: Bikaner-II PS (Status: nan)
+  FAIL: Bikaner-II PS (Status: nan)
+  FAIL: Bikaner-III (Status: nan)
+  FAIL: Fatehgarh-IV 
+(Sec-I) (Status: nan)
+  FAIL: Fatehgarh-IV 
+(Sec-II) (Status: nan)
+  FAIL: Fatehgarh-IV 
+PS (Status: nan)
+  FAIL: Fatehgarh-IV 
+PS (Status: nan)
+  FAIL: nan (Status: nan)
+  FAIL: Ramgarh (Status: nan)
+  FAIL: Ramgarh (Status: nan)
+  FAIL: Jam 
+Khambhaliya 
+PS (Status: nan)
+  FAIL: Jam 
+Khambhaliya 
+PS (Status: nan)
+  FAIL: Jam 
+Khambhaliya 
+PS (Status: nan)
+  FAIL: Jam 
+Khambhaliya 
+PS (Status: nan)
+  FAIL: Lakadiya PS (Status: nan)
+  FAIL: Lakadiya PS (Status: nan)
+  FAIL: Mandsaur PS (Status: nan)
+  FAIL: Bikaner-II (Status: nan)
+  FAIL: Bikaner-II (Status: nan)
+  FAIL: Fatehgarh-IV (Sec-
+I) (Status: nan)
+  FAIL: Jam Khambhaliya 
+PS (Status: nan)
+  FAIL: Bhadla-III (Status: nan)
+  FAIL: Bhadla-III (Status: nan)
+  FAIL: Bhadla-III (Status: nan)
+  FAIL: Fatehgarh-IV (Sec-
+I) (Status: nan)
+  FAIL: Fatehgarh-IV (Sec-
+I) (Status: nan)
+  FAIL: Jam Khambhaliya 
+PS (Status: nan)
+  FAIL: Fatehgarh-IV (Sec-
+II) (Status: nan)
+  FAIL: Fatehgarh-IV (Sec-
+II) (Status: nan)
+  FAIL: Barmer-I (Status: nan)
+  FAIL: Lakadiya PS (Status: nan)
+  FAIL: Jam Khambhaliya 
+PS (Status: nan)
+  FAIL: Lakadiya PS (Status: nan)
+  FAIL: Solapur PS (400 
+Sec-II) (Status: nan)
+  FAIL: Merta-II (Status: nan)
+  FAIL: Dhule PS (Sec-I) (Status: nan)
+  FAIL: Jam Khambhaliya 
+PS (Status: nan)
+  FAIL: Lakadia-II (Sec-I) (Status: nan)
+  FAIL: Mandsaur PS 
+(Sec-I) (Status: nan)
+  FAIL: Kalyanpur PS 
+(Sec-I) (Status: nan)
+  FAIL: Kalyanpur PS 
+(Sec-I) (Status: nan)
+  FAIL: Ramgarh (Status: nan)
+  FAIL: Ramgarh (Status: nan)
+  FAIL: Lakadiya PS (Status: nan)
+  FAIL: Lakadia-II (Sec-I) (Status: nan)
+  >> Bikaner-V/5 Matches: 3/53
+
+Foxtrot Solar Records: 10
+  FAIL: BARMER-II PS (Status: nan)
+  FAIL: BARMER-II PS (Status: Granted)
+  FAIL: nan (Status: nan)
+  FAIL: nan (Status: nan)
+  FAIL: nan (Status: nan)
+  >> Barmer-III/3 Matches: 5/10

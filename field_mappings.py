@@ -44,7 +44,8 @@ DATA_TO_BE_CAPTURED_FIELDS = [
     "voltage_level_kv",  # Column 38
     "bay_no",  # Column 39
     "cts_element_unique_code",  # Column 40
-    "ats_element_unique_code"  # Column 41
+    "ats_element_unique_code",  # Column 41
+    "dtl_element_unique_code"  # Column 42
 ]
 
 # Margin sheet fields (flattened from nested structures)
@@ -79,6 +80,29 @@ NON_RE_FIELDS = [
     "margin_with_ict_220kv", "margin_with_ict_400kv",
     "line_bays_with_ict_220kv", "line_bays_with_ict_400kv",
     "no_of_transformers_required", "remarks"
+]
+
+# Element Status sheet fields (from SN1 PDFs)
+# Maps to columns in Element Status sheet
+ELEMENT_STATUS_FIELDS = [
+    "element_code",  # Column 2 - Unique code (CTS-001, DTL-001, ATS-001)
+    "inter_intra_tx_element",  # Column 3 - Element description
+    "transmission_scheme",  # Column 4
+    "transmission_scope",  # Column 5 - ATS/DTL/CTS
+    "mva",  # Column 6
+    "status",  # Column 7
+    "approval_nct",  # Column 8
+    "mode_tbcb_rtm",  # Column 9
+    "tender_issuing_authority",  # Column 10
+    "date_tender_issuance",  # Column 11
+    "date_bid_submission",  # Column 12
+    "execution_timeline",  # Column 13
+    "tentative_scod",  # Column 14
+    "awarded_to",  # Column 15 - Developer name
+    "spv_transfer_date",  # Column 16
+    "physical_progress_length",  # Column 17
+    "physical_progress_location",  # Column 18
+    "physical_progress_foundation"  # Column 19
 ]
 
 # Mapping from PDF column headers (variations) to canonical field names
@@ -306,27 +330,8 @@ HEADER_MAPPINGS = {
 
 # State to Region mapping
 STATE_TO_REGION = {
-    # Western Region (WR)
-    "gujarat": "WR",
-    "rajasthan": "WR",
-    "maharashtra": "WR",
-    "madhya pradesh": "WR",
-    "mp": "WR",
-    "goa": "WR",
-    "daman and diu": "WR",
-    "dadra and nagar haveli": "WR",
-    
-    # Southern Region (SR)
-    "karnataka": "SR",
-    "tamil nadu": "SR",
-    "kerala": "SR",
-    "andhra pradesh": "SR",
-    "telangana": "SR",
-    "puducherry": "SR",
-    "pondicherry": "SR",
-    "andaman and nicobar": "SR",
-    
-    # Northern Region (NR)
+    # Northern Region (NR) - Rajasthan moved here per user requirement
+    "rajasthan": "NR",
     "punjab": "NR",
     "haryana": "NR",
     "himachal pradesh": "NR",
@@ -337,6 +342,28 @@ STATE_TO_REGION = {
     "uttar pradesh": "NR",
     "up": "NR",
     "chandigarh": "NR",
+    "ladakh": "NR",
+    
+    # Western Region (WR)
+    "gujarat": "WR",
+    "maharashtra": "WR",
+    "madhya pradesh": "WR",
+    "mp": "WR",
+    "goa": "WR",
+    "daman and diu": "WR",
+    "dadra and nagar haveli": "WR",
+    "chhattisgarh": "WR",
+    
+    # Southern Region (SR)
+    "karnataka": "SR",
+    "tamil nadu": "SR",
+    "kerala": "SR",
+    "andhra pradesh": "SR",
+    "telangana": "SR",
+    "puducherry": "SR",
+    "pondicherry": "SR",
+    "andaman and nicobar": "SR",
+    "lakshadweep": "SR",
     
     # Eastern Region (ER)
     "west bengal": "ER",
@@ -619,15 +646,20 @@ def clean_substation_name(substation_value: str) -> str:
     
     Removes:
     1. Voltage levels at the beginning OR end (e.g., '400/220kV', '765/400/220kV', '765/400')
-    2. Technical suffixes in parentheses (e.g., '(GIS)', '(AIS)')
-    3. Special characters at the end (e.g., '#', '*')
+    2. Technical suffixes: GIS, AIS, PS, P.S., S/s, S/S (with or without parentheses/brackets)
+    3. Patterns in parentheses: (GIS), (AIS), (existing S/s), (Proposed), etc.
+    4. Patterns in square brackets: [GIS], [AIS], etc.
+    5. GPS coordinates (e.g., 10°46'22"N 76°45'36"E)
+    6. Special characters at the end (e.g., '#', '*')
     
     Examples:
-    - '400/220kV Jam Khambhaliya (GIS) PS #' → 'Jam Khambhaliya PS'
-    - '765/400/220kV Bhuj-II PS#' → 'Bhuj-II PS'
+    - '400/220kV Jam Khambhaliya (GIS) PS #' → 'Jam Khambhaliya'
+    - '765/400/220kV Bhuj-II PS#' → 'Bhuj-II'
+    - 'Tuticorin-II GIS' → 'Tuticorin-II'
+    - 'Banaskantha PS [GIS]' → 'Banaskantha'
+    - 'Khandwa S/s (existing S/s)' → 'Khandwa'
+    - 'Palakkad S/s 10°46'22"N 76°45'36"E' → 'Palakkad'
     - 'Navinal 765/400kV' → 'Navinal'
-    - 'Aurangabad 765/400/220kV' → 'Aurangabad'
-    - 'Jabalpur PS 765/400' → 'Jabalpur PS'
     
     Args:
         substation_value: The original substation name
@@ -641,6 +673,11 @@ def clean_substation_name(substation_value: str) -> str:
         return substation_value
     
     cleaned = substation_value.strip()
+    
+    # Remove GPS coordinates (e.g., 10°46'22"N 76°45'36"E or variations)
+    # Pattern: digits + degree symbol + digits + quote/apostrophe + digits + double-quote + N/S + space + similar for E/W
+    coord_pattern = r'\d+°\d+[\'′]\d+[\"″]?[NS]?\s*\d*°?\d*[\'′]?\d*[\"″]?[EW]?'
+    cleaned = re.sub(coord_pattern, '', cleaned, flags=re.IGNORECASE)
     
     # Remove voltage levels at the BEGINNING
     # Pattern: one or more voltage numbers separated by / followed by kV or KV
@@ -657,10 +694,22 @@ def clean_substation_name(substation_value: str) -> str:
     voltage_pattern_end = r'\s+\d+(?:/\d+)*(?:\s*k[Vv])?\s*$'
     cleaned = re.sub(voltage_pattern_end, '', cleaned)
     
-    # Remove technical suffixes in parentheses
-    # Pattern: (GIS), (AIS), (HVDC), etc.
-    technical_pattern = r'\s*\([A-Z]{2,}\)'
-    cleaned = re.sub(technical_pattern, '', cleaned, flags=re.IGNORECASE)
+    # Remove patterns in square brackets: [GIS], [AIS], etc.
+    bracket_pattern = r'\s*\[[^\]]+\]'
+    cleaned = re.sub(bracket_pattern, '', cleaned, flags=re.IGNORECASE)
+    
+    # Remove patterns in parentheses: (GIS), (AIS), (existing S/s), (Proposed), (expansion), etc.
+    paren_pattern = r'\s*\([^)]*\)'
+    cleaned = re.sub(paren_pattern, '', cleaned, flags=re.IGNORECASE)
+    
+    # Remove standalone technical suffixes at the end (without parentheses)
+    # GIS, AIS at end
+    cleaned = re.sub(r'\s+(?:GIS|AIS)\s*$', '', cleaned, flags=re.IGNORECASE)
+    
+    # Remove PS, P.S., S/s, S/S suffixes at the end
+    # Pattern: optional space + PS or P.S. or S/s or S/S at end
+    suffix_pattern = r'\s*(?:PS|P\.S\.|S/[sS]|S/S)\s*$'
+    cleaned = re.sub(suffix_pattern, '', cleaned, flags=re.IGNORECASE)
     
     # Remove special characters at the end (#, *, etc.)
     cleaned = cleaned.rstrip('#*~+ ')

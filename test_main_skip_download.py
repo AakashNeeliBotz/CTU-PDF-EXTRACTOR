@@ -217,10 +217,984 @@ def propagate_state_to_parent_complex(records):
     
     return records
 
+
+# =============================================================================
+# SN1 EXTRACTION HELPER FUNCTIONS (Adapted from AkashNeeli's code)
+# =============================================================================
+
+# Rajasthan districts for state extraction
+RAJASTHAN_DISTRICTS = [
+    "Ajmer", "Alwar", "Banswara", "Baran", "Barmer", "Bharatpur", "Bhilwara",
+    "Bikaner", "Bundi", "Chittorgarh", "Churu", "Dausa", "Dholpur", "Dungarpur",
+    "Hanumangarh", "Jaipur", "Jaisalmer", "Jalore", "Jhalawar", "Jhunjhunu",
+    "Jodhpur", "Karauli", "Kota", "Nagaur", "Pali", "Pratapgarh", "Rajsamand",
+    "Sawai Madhopur", "Sikar", "Sirohi", "Sri Ganganagar", "Tonk", "Udaipur",
+    "Balotra", "Beawar", "Kotputli-Behror", "Deeg", "Didwana-Kuchaman",
+    "Khairthal-Tijara", "Phalodi", "Salumbar"
+]
+
+# Gujarat districts for state extraction
+GUJARAT_DISTRICTS = [
+    "Ahmedabad", "Amreli", "Anand", "Aravalli", "Banaskantha", "Bharuch", "Bhavnagar",
+    "Botad", "Chhota Udaipur", "Dahod", "Dang", "Devbhoomi Dwarka", "Gandhinagar",
+    "Gir Somnath", "Jamnagar", "Junagadh", "Kheda", "Kutch", "Mahisagar", "Mehsana",
+    "Morbi", "Narmada", "Navsari", "Panchmahal", "Patan", "Porbandar", "Rajkot",
+    "Sabarkantha", "Surat", "Surendranagar", "Tapi", "Vadodara", "Valsad"
+]
+
+# Header keywords for SN1 table detection
+SN1_HEADER_KEYWORDS = ['sl', 'no', 'application', 'id', 'applicant', 'location', 'date',
+                        'nature', 'quantum', 'connectivity', 'region', 'criterion', 'mode']
+
+
+def normalize_roman_numerals(text):
+    """
+    Normalize Roman numerals in substation names to UPPERCASE.
+    
+    Examples:
+    - 'Merta-Iii' → 'Merta-III'
+    - 'Bhadla-Iv' → 'Bhadla-IV'
+    - 'Ramgarh-Ii' → 'Ramgarh-II'
+    - 'Fatehgarh-Vi' → 'Fatehgarh-VI'
+    
+    Args:
+        text: String containing potential Roman numerals
+        
+    Returns:
+        String with Roman numerals normalized to uppercase
+    """
+    import re
+    
+    if not text or not isinstance(text, str):
+        return text
+    
+    def replace_roman(match):
+        prefix = match.group(1)  # The hyphen/dash or space
+        roman = match.group(2).upper()  # Convert to uppercase
+        suffix = match.group(3) or ""  # Trailing part (space, end, etc.)
+        return prefix + roman + suffix
+    
+    # Pattern: hyphen/dash/space followed by Roman numerals (mixed case)
+    # Matches: -Iii, -IV, -ii, -Vi, etc. (case insensitive)
+    # The Roman numeral must be at word boundary (end of string, followed by space, or non-letter)
+    pattern = r'(-|–|\s)([IiVvXx]+)(\s|$|[^a-zA-Z])'
+    
+    return re.sub(pattern, replace_roman, text)
+
+
+def fix_sn1_column_alignment(table_df):
+    """
+    Fix common column alignment issues in SN1 extracted tables.
+    Handles cases where serial numbers get merged with application IDs.
+    
+    Args:
+        table_df: pandas DataFrame from Camelot extraction
+        
+    Returns:
+        pandas DataFrame with fixed alignment
+    """
+    df = table_df.copy()
+    
+    if df.shape[1] >= 2:
+        for i in range(len(df)):
+            first_col = str(df.iloc[i, 0]).strip() if not pd.isna(df.iloc[i, 0]) else ""
+            second_col = str(df.iloc[i, 1]).strip() if not pd.isna(df.iloc[i, 1]) else ""
+            
+            # If first column is empty and second column contains "1. 2200000788" pattern
+            if not first_col and "." in second_col:
+                parts = second_col.split(".", 1)
+                if len(parts) == 2 and parts[0].strip().isdigit():
+                    df.iloc[i, 0] = parts[0].strip()
+                    df.iloc[i, 1] = parts[1].strip()
+            
+            # If first column has merged serial number and data
+            elif first_col and not second_col and "." in first_col:
+                parts = first_col.split(".", 1)
+                if len(parts) == 2 and parts[0].strip().isdigit():
+                    df.iloc[i, 0] = parts[0].strip()
+                    df.iloc[i, 1] = parts[1].strip()
+    
+    return df
+
+
+def are_sn1_tables_related(df1, df2):
+    """
+    Check if two SN1 tables should be merged (continuation tables).
+    Uses serial number continuity detection.
+    
+    Args:
+        df1: First DataFrame
+        df2: Second DataFrame
+        
+    Returns:
+        bool: True if tables should be merged
+    """
+    try:
+        # Check if tables have the same number of columns
+        if df1.shape[1] != df2.shape[1]:
+            return False
+        
+        if df1.shape[0] == 0 or df2.shape[0] == 0:
+            return False
+        
+        # Find last serial number in df1
+        last_serial = None
+        for i in range(df1.shape[0] - 1, -1, -1):
+            cell_value = str(df1.iloc[i, 0]).strip() if not pd.isna(df1.iloc[i, 0]) else ""
+            # Remove period if present (e.g., "5." -> "5")
+            cell_value = cell_value.rstrip('.')
+            if cell_value.isdigit():
+                last_serial = int(cell_value)
+                break
+        
+        # Find first serial number in df2
+        first_serial = None
+        for i in range(min(5, df2.shape[0])):
+            cell_value = str(df2.iloc[i, 0]).strip() if not pd.isna(df2.iloc[i, 0]) else ""
+            cell_value = cell_value.rstrip('.')
+            if cell_value.isdigit():
+                first_serial = int(cell_value)
+                break
+        
+        # Check if serial numbers are consecutive
+        if last_serial is not None and first_serial is not None:
+            if first_serial == last_serial + 1:
+                return True
+        
+        return False
+        
+    except Exception as e:
+        print(f"      [!] Error checking table relation: {e}")
+        return False
+
+
+def remove_sn1_repeated_headers(df):
+    """
+    Remove repeated header rows from a merged SN1 DataFrame.
+    
+    Args:
+        df: pandas DataFrame
+        
+    Returns:
+        DataFrame with repeated headers removed
+    """
+    if df.shape[0] <= 1:
+        return df
+    
+    # Get the first row as reference header
+    header_row = df.iloc[0].tolist()
+    
+    rows_to_drop = []
+    for i in range(1, df.shape[0]):
+        current_row = df.iloc[i].tolist()
+        
+        if len(current_row) == len(header_row):
+            matching_cells = 0
+            total_non_empty = 0
+            
+            for j in range(len(header_row)):
+                header_cell = str(header_row[j]).strip()
+                current_cell = str(current_row[j]).strip()
+                
+                if header_cell:
+                    total_non_empty += 1
+                    if header_cell == current_cell:
+                        matching_cells += 1
+            
+            # If more than 80% match, it's a repeated header
+            if total_non_empty > 0 and (matching_cells / total_non_empty) > 0.8:
+                rows_to_drop.append(i)
+    
+    if rows_to_drop:
+        df = df.drop(df.index[rows_to_drop]).reset_index(drop=True)
+        print(f"      [SN1] Removed {len(rows_to_drop)} repeated header rows")
+    
+    return df
+
+
+def merge_sn1_related_tables(table_dfs):
+    """
+    Merge related SN1 tables that are continuations of each other.
+    
+    Args:
+        table_dfs: List of DataFrames from Camelot extraction
+        
+    Returns:
+        List of merged DataFrames
+    """
+    if not table_dfs:
+        return []
+    
+    merged_tables = []
+    i = 0
+    
+    while i < len(table_dfs):
+        current_df = table_dfs[i].copy()
+        merged = False
+        
+        j = i + 1
+        while j < len(table_dfs):
+            if are_sn1_tables_related(current_df, table_dfs[j]):
+                # Merge tables
+                current_df = pd.concat([current_df, table_dfs[j]], ignore_index=True)
+                current_df = remove_sn1_repeated_headers(current_df)
+                merged = True
+                j += 1
+            else:
+                break
+        
+        # Also remove repeated headers from standalone tables
+        current_df = remove_sn1_repeated_headers(current_df)
+        merged_tables.append(current_df)
+        
+        if merged:
+            i = j
+        else:
+            i += 1
+    
+    print(f"      [SN1] Merged {len(table_dfs)} tables into {len(merged_tables)} logical tables")
+    return merged_tables
+
+
+def detect_sn1_header_row(df):
+    """
+    Detect which row contains the header in an SN1 table.
+    
+    Args:
+        df: pandas DataFrame
+        
+    Returns:
+        Tuple of (header_row_index, column_mapping dict)
+    """
+    column_mapping = {}
+    header_row_idx = None
+    
+    for row_idx in range(min(10, len(df))):
+        row = df.iloc[row_idx]
+        row_values = [str(cell).strip().lower().replace('\n', ' ') if not pd.isna(cell) else "" for cell in row]
+        
+        # Count how many header keywords are found
+        header_matches = sum(1 for cell in row_values[:10] 
+                           if any(keyword in cell for keyword in SN1_HEADER_KEYWORDS))
+        
+        if header_matches >= 2:
+            header_row_idx = row_idx
+            
+            # Create column mapping
+            for j, cell in enumerate(row_values):
+                cell_clean = cell.lower()
+                if ('sl' in cell_clean and 'no' in cell_clean) or 'serial' in cell_clean:
+                    column_mapping['serial'] = j
+                elif 'application' in cell_clean and 'id' in cell_clean:
+                    column_mapping['app_id'] = j
+                elif 'project' in cell_clean and 'location' in cell_clean:
+                    column_mapping['location'] = j
+                elif 'submission' in cell_clean and 'date' in cell_clean:
+                    column_mapping['submission_date'] = j
+                elif 'region' in cell_clean and 'date' not in cell_clean and 'gnare' not in cell_clean:
+                    column_mapping['region'] = j
+                elif 'nature' in cell_clean and 'applicant' in cell_clean:
+                    column_mapping['nature_applicant'] = j
+                elif 'quantum' in cell_clean and 'mw' in cell_clean:
+                    column_mapping['quantum'] = j
+                elif ('start' in cell_clean and 'date' in cell_clean) or ('start' in cell_clean and 'connectivity' in cell_clean):
+                    column_mapping['start_date'] = j
+                elif 'applicant' in cell_clean and 'nature' not in cell_clean:
+                    column_mapping['applicant'] = j
+                elif 'criterion' in cell_clean or 'mode' in cell_clean:
+                    column_mapping['criterion'] = j
+                elif 'connectivity' in cell_clean and 'location' in cell_clean:
+                    column_mapping['connectivity_location'] = j
+            
+            break
+    
+    return header_row_idx, column_mapping
+
+
+def extract_state_from_location(location_text):
+    """
+    Extract state name from project location text.
+    Handles district-to-state mapping for Rajasthan and Gujarat.
+    
+    Args:
+        location_text: Raw location string from PDF
+        
+    Returns:
+        State name or the original location if no state detected
+    """
+    if not location_text or pd.isna(location_text):
+        return ""
+    
+    location_str = str(location_text).strip()
+    
+    # Check for direct state mention
+    location_lower = location_str.lower()
+    if 'rajasthan' in location_lower:
+        return 'Rajasthan'
+    if 'gujarat' in location_lower:
+        return 'Gujarat'
+    if 'maharashtra' in location_lower:
+        return 'Maharashtra'
+    if 'karnataka' in location_lower:
+        return 'Karnataka'
+    if 'tamil nadu' in location_lower:
+        return 'Tamil Nadu'
+    if 'andhra pradesh' in location_lower:
+        return 'Andhra Pradesh'
+    if 'telangana' in location_lower:
+        return 'Telangana'
+    if 'madhya pradesh' in location_lower:
+        return 'Madhya Pradesh'
+    
+    # Check for Rajasthan districts
+    for district in RAJASTHAN_DISTRICTS:
+        if district.lower() in location_lower:
+            return 'Rajasthan'
+    
+    # Check for Gujarat districts
+    for district in GUJARAT_DISTRICTS:
+        if district.lower() in location_lower:
+            return 'Gujarat'
+    
+    # If comma-separated, take last part (might be state)
+    if ',' in location_str:
+        last_part = location_str.split(',')[-1].strip()
+        # Check if it's a known state
+        normalized = normalize_state_name(last_part)
+        if normalized and normalized != last_part:
+            return normalized
+        return last_part
+    
+    return location_str
+
+
+def detect_status_for_developer(df, current_row_idx, developer_name):
+    """
+    Detect status (Withdrawn/Granted/Revoked) for a specific developer.
+    Only matches status if it's associated with the same developer.
+    
+    Args:
+        df: pandas DataFrame
+        current_row_idx: Current data row index
+        developer_name: Name of the developer to match
+        
+    Returns:
+        Status string or empty string if not found
+    """
+    if not developer_name:
+        return ""
+    
+    developer_lower = developer_name.lower().strip()
+    # Extract key words from developer name for matching (first 2-3 significant words)
+    dev_words = [w for w in developer_lower.split() if len(w) > 3][:3]
+    
+    status_keywords = {
+        'withdrawn': 'Withdrawn',
+        'closed': 'Withdrawn',
+        'granted': 'Granted',
+        'agreed': 'Granted',
+        'revoked': 'Revoked'
+    }
+    
+    # Look ahead up to 7 rows, but stop if we hit another serial number
+    for j in range(1, min(8, len(df) - current_row_idx)):
+        next_row = df.iloc[current_row_idx + j]
+        
+        # Check if we've hit the next record (new serial number)
+        first_cell = str(next_row.iloc[0]).strip() if not pd.isna(next_row.iloc[0]) else ""
+        first_cell_clean = first_cell.rstrip('.')
+        if first_cell_clean.isdigit():
+            # We've reached the next record, stop looking
+            break
+        
+        # Combine all cells in the row for checking
+        row_text = ' '.join([str(cell).lower() if not pd.isna(cell) else "" for cell in next_row])
+        
+        # Check if developer name (or key words) appears in this row
+        developer_mentioned = any(word in row_text for word in dev_words) if dev_words else True
+        
+        # If developer is mentioned (or no developer name to check), look for status
+        if developer_mentioned:
+            for keyword, status in status_keywords.items():
+                if keyword in row_text:
+                    return status
+    
+    return ""
+
+
+def process_sn1_quantum_value(quantum_str):
+    """
+    Process quantum value to separate application quantum from granted quantum.
+    E.g., "300 (reduced to 250)" -> ("300", "(reduced to 250)")
+    
+    Args:
+        quantum_str: Raw quantum string
+        
+    Returns:
+        Tuple of (application_quantum, granted_quantum)
+    """
+    import re
+    
+    if not quantum_str or pd.isna(quantum_str):
+        return "", ""
+    
+    quantum_str = str(quantum_str).strip()
+    
+    # Normalize whitespace
+    normalized = re.sub(r'\s+', ' ', quantum_str)
+    
+    # Pattern to match "NUMBER (text)" format
+    match = re.search(r'^([.\d]+(?:\s*[.\d]+)*)\s*\(([^)]+)\).*$', normalized)
+    if match:
+        app_quantum = match.group(1).strip()
+        granted_quantum = "(" + match.group(2).strip() + ")"
+        return app_quantum, granted_quantum
+    
+    # No parentheses, return original as application quantum
+    return quantum_str, ""
+
+
+def extract_sn1_substation_from_text(pdf_text, developer_name):
+    """
+    Extract confirmed substation for a developer from PDF narrative text.
+    Only extracts substation when there's confirmation (agreed, granted, approved).
+    
+    IMPORTANT: Uses STRICT developer matching to prevent cross-contamination.
+    Captures full substation names including parenthetical text like "Sirohi(HVDC) PS".
+    
+    Args:
+        pdf_text: Raw text from PDF (all pages or relevant sections)
+        developer_name: Name of developer to match
+        
+    Returns:
+        Substation name if confirmed, empty string otherwise
+    """
+    import re
+    
+    if not pdf_text or not developer_name:
+        return ""
+    
+    # Normalize developer name - extract key words for STRICT matching
+    dev_lower = developer_name.lower().strip()
+    # Remove common prefixes
+    dev_lower = re.sub(r'^m/s\.?\s*', '', dev_lower)
+    dev_lower = re.sub(r'^(messrs|shri|sri|smt)\.?\s*', '', dev_lower)
+    
+    # Get key words (ignore common words)
+    stop_words = {'and', 'the', 'pvt', 'ltd', 'private', 'limited', 'india', 'llp', 
+                  'energy', 'power', 'solar', 'wind', 'renewable', 'renewables', 'green',
+                  'company', 'corporation', 'enterprises', 'industries', 'group', 'holdings'}
+    dev_words = [w for w in dev_lower.split() if len(w) > 2 and w not in stop_words]
+    
+    if len(dev_words) < 1:
+        # Fallback: use any word > 3 chars (but not common words)
+        dev_words = [w for w in dev_lower.split() if len(w) > 3 and w not in stop_words][:2]
+    
+    if len(dev_words) < 1:
+        return ""
+    
+    # The FIRST TWO distinctive words are crucial for matching
+    # E.g., 'acme solar' vs 'acme sunny' - must match BOTH words
+    first_key_word = dev_words[0] if dev_words else ""
+    second_key_word = dev_words[1] if len(dev_words) > 1 else ""
+    
+    # Check pre-computed cache first (much faster)
+    cache_key = '_sn1_substation_cache'
+    if hasattr(extract_sn1_substation_from_text, cache_key):
+        cache = getattr(extract_sn1_substation_from_text, cache_key)
+        # Try to find developer in cache with VERY STRICT matching
+        for cached_dev, cached_substation in cache.items():
+            cached_lower = cached_dev.lower()
+            # STRICT: First key word must be present
+            if first_key_word and first_key_word in cached_lower:
+                # If we have a second key word, it MUST also be present
+                if second_key_word:
+                    if second_key_word in cached_lower:
+                        return cached_substation
+                    # else: don't match - second word is different
+                else:
+                    # Only one key word - match if present
+                    return cached_substation
+        return ""
+    
+    # First time - build the cache by scanning text ONCE
+    cache = {}
+    withdrawn_developers = set()  # Track developers who withdrew their applications
+    
+    # Normalize text for searching
+    text_lower = pdf_text.lower()
+    text_normalized = re.sub(r'\s+', ' ', text_lower)  # Normalize whitespace
+    
+    # STEP 1: First detect WITHDRAWN applications - these should NOT get substations
+    # Pattern: "M/s [Developer] has withdrawn" or "M/s [Developer] ... withdrawn their application"
+    withdrawn_patterns = [
+        r'm/s\.?\s*([^,]+?)\s+(?:has\s+)?withdrawn',
+        r'm/s\.?\s*([^,]+?)\s+[^.]*?withdrawn\s+(?:their|the)\s+application',
+        r'withdrawn[^.]*?(?:by\s+)?m/s\.?\s*([^,]+)',
+    ]
+    
+    for pattern in withdrawn_patterns:
+        for match in re.finditer(pattern, text_normalized, re.IGNORECASE):
+            withdrawn_dev = match.group(1).strip().lower()
+            if withdrawn_dev and len(withdrawn_dev) > 3:
+                withdrawn_developers.add(withdrawn_dev)
+    
+    # STEP 2: ENHANCED patterns that capture:
+    # 1. Parenthetical suffixes like (HVDC), (PG), etc.
+    # 2. Full substation suffix (PS, S/S, etc.)
+    # Substation pattern: Name + optional(parenthetical) + suffix
+    # Examples: Sirohi(HVDC) PS, Ramgarh-II PS, Bhadla-IV S/S
+    substation_pattern = r'([A-Za-z][A-Za-z0-9\-]+(?:[\-][IVXivx]+)?(?:\s*\([A-Za-z0-9]+\))?)\s*(ps|p\.s\.|s/s|substation|pooling\s*station)'
+    
+    # Trigger words that indicate a confirmed/proposed grant
+    # Captures: agreed to grant, proposed to grant, decided to grant, granted, approved
+    grant_triggers = r'(?:agreed|proposed|decided)\s+to\s+grant|granted|approved'
+    
+    # Multiple patterns to catch different sentence structures
+    confirmed_patterns = [
+        # Pattern 1: "[trigger] X MW connectivity to M/s [Developer] at [kV] [Substation] PS"
+        # Example: "agreed to grant 150 MW connectivity to M/s Adani at Bhadla-IV PS"
+        r'(?:' + grant_triggers + r')\s+[\d,]+\s*mw\s+connectivity[^.]*?(?:to\s+)?m/s\.?\s*([^,]+?)\s+at\s+(?:\d+(?:/\d+)?\s*k[vV]\s+)?' + substation_pattern,
+        
+        # Pattern 2: "[trigger] connectivity of X MW to M/s [Developer] at [kV] [Substation] PS"
+        # Example: "proposed to grant connectivity of 150 MW to M/s Adani at 400 kV Bhadla-IV PS"
+        r'(?:' + grant_triggers + r')\s+connectivity\s+of\s+[\d,]+\s*mw[^.]*?(?:to\s+)?m/s\.?\s*([^,]+?)\s+at\s+(?:\d+(?:/\d+)?\s*k[vV]\s+)?' + substation_pattern,
+        
+        # Pattern 3: "[trigger] X MW [anything] to M/s [Developer] at [Substation]"
+        # Example: "agreed to grant 350 MW connectivity to M/s Amplus Centaur at Sirohi(HVDC) PS"
+        r'(?:' + grant_triggers + r')\s+[\d,]+\s*mw[^.]*?(?:to\s+)?m/s\.?\s*([^,]+?)\s+at\s+(?:\d+(?:/\d+)?\s*k[vV]\s+)?' + substation_pattern,
+        
+        # Pattern 4: "connectivity to M/s [Developer] at [kV] [Substation] PS" (simpler, when grant is nearby)
+        r'connectivity[^.]*?to\s+m/s\.?\s*([^,]+?)\s+at\s+(?:\d+\s*k[vV]\s+)?' + substation_pattern,
+        
+        # Pattern 5: "grant [anything] to M/s [Developer] [anything] at [Substation]"
+        # Catches more flexible sentence structures
+        r'grant[^.]*?to\s+m/s\.?\s*([^,]+?)[^.]*?\s+at\s+(?:\d+(?:/\d+)?\s*k[vV]\s+)?' + substation_pattern,
+        
+        # Pattern 6: REVERSED ORDER - "M/s [Developer] was [earlier] granted connectivity [of X MW] at [of] [Substation]"
+        # Example: "M/s Adani Renewable Energy Holding Four Limited was earlier granted connectivity of 765 MW at of Bhadla-IV PS"
+        # Note: handles typo "at of" in PDF
+        r'm/s\.?\s*([^,\(]+?)(?:\s*\([^)]+\))?\s+was\s+(?:earlier\s+)?(?:granted|approved)\s+connectivity[^.]*?\s+at\s+(?:of\s+)?(?:\d+\s*k[vV]\s+)?' + substation_pattern,
+        
+        # Pattern 7: REVERSED ORDER simpler - "M/s [Developer] [anything] granted [anything] at [Substation]"
+        r'm/s\.?\s*([^,\(]+?)(?:\s*\([^)]+\))?[^.]*?(?:granted|approved)[^.]*?\s+at\s+(?:of\s+)?(?:\d+\s*k[vV]\s+)?' + substation_pattern,
+    ]
+    
+    for pattern in confirmed_patterns:
+        for match in re.finditer(pattern, text_normalized, re.IGNORECASE):
+            developer = match.group(1).strip()
+            substation_name = match.group(2).strip().rstrip('-')
+            substation_suffix = match.group(3).strip().upper()  # PS, S/S, etc.
+            
+            if developer and substation_name and len(substation_name) > 2:
+                # Check if this developer has withdrawn - if so, skip
+                dev_lower = developer.lower()
+                is_withdrawn = any(wd in dev_lower or dev_lower in wd for wd in withdrawn_developers)
+                if is_withdrawn:
+                    continue  # Skip - this developer withdrew
+                
+                # Build full substation name with suffix
+                # Normalize suffix: s/s -> S/S, ps -> PS
+                if substation_suffix.lower() in ['ps', 'p.s.']:
+                    substation_suffix = 'PS'
+                elif substation_suffix.lower() == 's/s':
+                    substation_suffix = 'S/S'
+                elif 'substation' in substation_suffix.lower():
+                    substation_suffix = 'Substation'
+                elif 'pooling' in substation_suffix.lower():
+                    substation_suffix = 'Pooling Station'
+                
+                # Apply Roman numeral normalization and build full name
+                full_substation = normalize_roman_numerals(substation_name.title()) + " " + substation_suffix
+                cache[developer] = full_substation
+    
+    # Store cache for future calls
+    setattr(extract_sn1_substation_from_text, cache_key, cache)
+    
+    # Now look up this developer with VERY STRICT matching
+    for cached_dev, cached_substation in cache.items():
+        cached_lower = cached_dev.lower()
+        # STRICT: First key word must be present
+        if first_key_word and first_key_word in cached_lower:
+            # If we have a second key word, it MUST also be present
+            if second_key_word:
+                if second_key_word in cached_lower:
+                    return cached_substation
+                # else: don't match - second word is different
+            else:
+                return cached_substation
+    
+    return ""
+
+
+def extract_agreed_substation_from_dtl(pdf_text, developer_name):
+    """
+    Extract the agreed substation from the DTL section (B. Transmission System under applicant scope).
+    
+    For developers who are GRANTED connectivity, the actually agreed substation often differs
+    from the applied substation (shown in the table column). The agreed substation appears in
+    the DTL section in patterns like:
+    "M/s Developer Name Solar Power Project – Bikaner-V PS 220 kV"
+    
+    Args:
+        pdf_text: Raw PDF text
+        developer_name: Name of the developer
+        
+    Returns:
+        Agreed substation name if found, empty string otherwise
+    """
+    import re
+    
+    if not pdf_text or not developer_name:
+        return ""
+    
+    # Normalize developer name for matching
+    dev_lower = developer_name.lower().strip()
+    dev_lower = re.sub(r'^m/s\.?\s*', '', dev_lower)
+    dev_lower = re.sub(r'\s*\(erstwhile[^)]*\)', '', dev_lower)
+    
+    # Get key words for matching
+    stop_words = {'and', 'the', 'pvt', 'ltd', 'private', 'limited', 'india', 'llp', 
+                  'energy', 'power', 'solar', 'wind', 'renewable', 'renewables', 'green',
+                  'project', 'projects', 'holding', 'holdings', 'company', 'corporation'}
+    dev_words = [w for w in dev_lower.split() if len(w) > 2 and w not in stop_words][:3]
+    
+    if not dev_words:
+        return ""
+    
+    text_normalized = re.sub(r'\s+', ' ', pdf_text.lower())
+    
+    # Find the DTL section (B. Transmission System under applicant scope) for this developer
+    # Pattern: Look for developer name followed by "Project" and then substation pattern
+    # Example: "M/s Juniper Green Energy Private Limited Solar Power Project – Bikaner-V PS 220 kV"
+    
+    # Build pattern to find developer + project + substation
+    dev_pattern = r'm/s\.?\s+[^–\-]*?' + re.escape(dev_words[0])
+    if len(dev_words) > 1:
+        dev_pattern += r'[^–\-]*?' + re.escape(dev_words[1])
+    
+    # Pattern to capture substation after developer name and project mention
+    # Substation patterns: "Bikaner-V PS", "Barmer-III PS", "Bhadla-IV PS", etc.
+    substation_pattern = dev_pattern + r'[^–\-]*?(?:project\s*[–\-]\s*|project\s+at\s+)?([a-z]+[\-\s]*[ivxlcdm\d]+\s*(?:ps|p\.s\.|pooling\s*station|substation|s/s))'
+    
+    match = re.search(substation_pattern, text_normalized, re.IGNORECASE)
+    if match:
+        substation = match.group(1).strip()
+        # Clean up and normalize
+        substation = re.sub(r'\s+', ' ', substation)
+        substation = substation.upper()
+        # Format consistently: "Bikaner-V PS"
+        substation = re.sub(r'(\w+)\s*[\-\s]\s*([IVXLCDM\d]+)\s*(PS|P\.S\.|POOLING STATION|SUBSTATION|S/S)', 
+                           r'\1-\2 \3', substation)
+        return substation
+    
+    # Fallback: Look for "agreed to grant ... connectivity ... at ... PS" pattern  
+    # Example: "Accordingly, it was agreed to grant 400 MW connectivity to M/s Juniper Green Energy Private Limited at 220 kV Bikaner-V PS"
+    agreed_pattern = r'agreed\s+to\s+grant[^.]*?' + re.escape(dev_words[0]) + r'[^.]*?at\s+(?:\d+\s*kv\s+)?([a-z]+[\-\s]*[ivxlcdm\d]+\s*(?:ps|p\.s\.|pooling\s*station))'
+    
+    match = re.search(agreed_pattern, text_normalized, re.IGNORECASE)
+    if match:
+        substation = match.group(1).strip()
+        substation = re.sub(r'\s+', ' ', substation)
+        substation = substation.upper()
+        substation = re.sub(r'(\w+)\s*[\-\s]\s*([IVXLCDM\d]+)\s*(PS|P\.S\.|POOLING STATION)', 
+                           r'\1-\2 \3', substation)
+        return substation
+    
+    return ""
+
+
+
+
+def extract_agreed_substation_from_dtl(pdf_text, developer_name):
+    """
+    Extract the agreed substation for a developer from the DTL section of PDF text.
+    
+    This function finds the developer's specific section in the PDF and extracts the 
+    substation mentioned in the "Transmission System under applicant scope" (DTL) section,
+    which represents the AGREED substation (vs the APPLIED substation from the table).
+    
+    Args:
+        pdf_text: Raw PDF text
+        developer_name: Name of developer
+        
+    Returns:
+        String containing the agreed substation name, or None if not found
+    """
+    import re
+    
+    if not pdf_text or not developer_name:
+        return None
+    
+    # Normalize developer name for matching - be more strict
+    dev_lower = developer_name.lower().strip()
+    dev_lower = re.sub(r'^m/s\.?\s*', '', dev_lower)
+    # Remove common suffixes and prefixes
+    dev_lower = re.sub(r'\s*\(erstwhile[^)]*\)', '', dev_lower)  # Remove (erstwhile...) clauses
+    
+    # Get key words for matching - require at least 2 unique words for better accuracy
+    stop_words = {'and', 'the', 'pvt', 'ltd', 'private', 'limited', 'india', 'llp', 
+                  'energy', 'power', 'solar', 'wind', 'renewable', 'renewables', 'green',
+                  'project', 'projects', 'holding', 'holdings', 'company', 'corporation'}
+    dev_words = [w for w in dev_lower.split() if len(w) > 2 and w not in stop_words]
+    
+    # Ensure we have at least 2 unique identifying words
+    if len(dev_words) < 2:
+        # Try to use the first 2 words regardless of length
+        dev_words = [w for w in dev_lower.split() if w not in stop_words][:2]
+    
+    if not dev_words:
+        return None
+    
+    text_lower = pdf_text.lower()
+    text_normalized = re.sub(r'\s+', ' ', text_lower)
+    
+    # Find sections for this developer - STRICT matching requiring multiple words
+    # Look for patterns like "M/s Developer Name ... Details of Transmission"
+    
+    section_start = -1
+    section_end = -1
+    
+    # Build a pattern that requires BOTH first two key words to appear in order
+    if len(dev_words) >= 2:
+        # Stricter pattern: both words must appear with some flexibility
+        section_pattern = rf'm/s\.?\s+[^.]*{re.escape(dev_words[0])}[^.]*{re.escape(dev_words[1])}[^.]*?details\s+of\s+transmission'
+    else:
+        section_pattern = rf'm/s\.?\s+[^.]*{re.escape(dev_words[0])}[^.]*?details\s+of\s+transmission'
+    
+    for match in re.finditer(section_pattern, text_normalized, re.IGNORECASE):
+        section_start = match.start()
+        # Find end of section (next "M/s" developer declaration or page break)
+        next_section = re.search(r'm/s\.?\s+\w+.*?details\s+of\s+transmission|page\s+\d+\s+of\s+\d+', 
+                                  text_normalized[match.end():match.end() + 5000], re.IGNORECASE)
+        if next_section:
+            section_end = match.end() + next_section.start()
+        else:
+            section_end = match.end() + 3000
+        break
+    
+    if section_start == -1:
+        # Fallback: Look for "Details of Transmission system" followed by the developer name
+        # This pattern finds developer-specific sections more accurately
+        details_pattern = r'details\s+of\s+transmission\s+system\s+for\s+connectivity\s+under\s+gna'
+        
+        for match in re.finditer(details_pattern, text_normalized):
+            # Check if this developer's name appears shortly before/after this section header
+            context_before = text_normalized[max(0, match.start()-400):match.start()]
+            context_after = text_normalized[match.end():match.end()+200]
+            
+            # Count how many key words match in the context
+            words_found = sum(1 for w in dev_words[:3] if w in context_before or w in context_after)
+            
+            # Require at least 2 matching words for a valid match
+            if words_found >= min(2, len(dev_words)):
+                section_start = match.start()
+                # Find end of section
+                next_section = re.search(r'details\s+of\s+transmission|page\s+\d+\s+of\s+\d+', 
+                                          text_normalized[match.end()+100:match.end() + 5000])
+                if next_section:
+                    section_end = match.end() + 100 + next_section.start()
+                else:
+                    section_end = match.end() + 3000
+                break
+    
+    if section_start == -1:
+        return None
+    
+    section_text = text_normalized[section_start:section_end]
+    
+    # Extract DTL (Transmission System under applicant scope) to find agreed substation
+    dtl_pattern = r'transmission\s+system\s+under\s+applicant\s+scope\s*[:\-]?\s*(?:\([^)]*\)\s*)?(.+?)(?=c\.|transmission\s+system\s+for\s+connectivity|$)'
+    dtl_match = re.search(dtl_pattern, section_text, re.IGNORECASE | re.DOTALL)
+    if dtl_match:
+        dtl_text = dtl_match.group(1).strip()
+        
+        # --- Extract Agreed Substation from DTL text ---
+        # Look for pattern: "... Project – [Substation Name] ..."
+        # OR "... Project at [Substation Name] ..."
+        substation_pattern = r'(?:project\s*[–\-\u2013]\s*|project\s+at\s+)([a-z]+[\-\s]*[ivxlcdm\d]+\s*(?:ps|p\.s\.|pooling\s*station|substation|s/s))'
+        sub_match = re.search(substation_pattern, dtl_text, re.IGNORECASE)
+        if sub_match:
+            return sub_match.group(1).strip()
+    
+    return None
+
+
+def extract_sn1_records_from_table(df, column_mapping, header_row_idx, canonical_fields, pdf_text=""):
+    """
+    Extract records from an SN1 table using the detected column mapping.
+    
+    Args:
+        df: pandas DataFrame
+        column_mapping: Dictionary mapping field names to column indices
+        header_row_idx: Index of the header row
+        canonical_fields: List of expected field names
+        pdf_text: Raw text from PDF for substation extraction (optional)
+        
+    Returns:
+        List of record dictionaries
+    """
+    records = []
+    
+    # Start from row after header
+    start_row = header_row_idx + 1 if header_row_idx is not None else 0
+    
+    for i in range(start_row, len(df)):
+        row = df.iloc[i]
+        
+        # Check if this is a data row (starts with serial number)
+        first_cell = str(row.iloc[0]).strip() if not pd.isna(row.iloc[0]) else ""
+        first_cell_clean = first_cell.rstrip('.')
+        
+        if not first_cell_clean.isdigit():
+            continue  # Skip non-data rows
+        
+        record = {field: "" for field in canonical_fields}
+        
+        # Extract serial number
+        sr_no = first_cell_clean
+        record['sr_no'] = sr_no
+        
+        # Extract Application ID
+        app_id = ""
+        app_id_col = column_mapping.get('app_id')
+        if app_id_col is not None and len(row) > app_id_col and not pd.isna(row.iloc[app_id_col]):
+            app_id = str(row.iloc[app_id_col]).strip()
+        elif len(row) > 1 and not pd.isna(row.iloc[1]):
+            app_id = str(row.iloc[1]).strip()
+        
+        # Route to GNA or LTA based on whether it's numeric
+        app_id_clean = app_id.replace('.', '', 1).replace(' ', '')
+        if app_id_clean.isdigit():
+            record['gna_st_ii_application_id'] = app_id
+            record['lta_application_id'] = ""
+        else:
+            record['lta_application_id'] = app_id
+            record['gna_st_ii_application_id'] = ""
+        
+        # Extract Project Location / Region
+        location = ""
+        location_col = column_mapping.get('location') or column_mapping.get('region')
+        if location_col is not None and len(row) > location_col and not pd.isna(row.iloc[location_col]):
+            location = str(row.iloc[location_col]).strip()
+        elif len(row) > 3 and not pd.isna(row.iloc[3]):
+            location = str(row.iloc[3]).strip()
+        
+        # Extract state from location and map to region code
+        state = extract_state_from_location(location)
+        record['state'] = state
+        # Map state to region code (NR, WR, SR, ER, NER)
+        record['region'] = infer_region_from_state(state)
+        
+        # Extract Applicant / Name of Developers
+        applicant = ""
+        applicant_col = column_mapping.get('applicant')
+        if applicant_col is not None and len(row) > applicant_col and not pd.isna(row.iloc[applicant_col]):
+            applicant = str(row.iloc[applicant_col]).strip()
+        elif len(row) > 2 and not pd.isna(row.iloc[2]):
+            applicant = str(row.iloc[2]).strip()
+        record['name_of_developers'] = applicant
+        
+        # Extract Submission Date
+        submission_date = ""
+        date_col = column_mapping.get('submission_date')
+        if date_col is not None and len(row) > date_col and not pd.isna(row.iloc[date_col]):
+            submission_date = str(row.iloc[date_col]).strip()
+        elif len(row) > 4 and not pd.isna(row.iloc[4]):
+            submission_date = str(row.iloc[4]).strip()
+        record['application_date'] = submission_date
+        
+        # Extract Nature of Applicant
+        nature = ""
+        nature_col = column_mapping.get('nature_applicant')
+        if nature_col is not None and len(row) > nature_col and not pd.isna(row.iloc[nature_col]):
+            nature = str(row.iloc[nature_col]).strip()
+        elif len(row) > 5 and not pd.isna(row.iloc[5]):
+            nature = str(row.iloc[5]).strip()
+        record['nature_of_applicant'] = nature
+        
+        # Extract Quantum (MW)
+        quantum = ""
+        quantum_col = column_mapping.get('quantum')
+        if quantum_col is not None and len(row) > quantum_col and not pd.isna(row.iloc[quantum_col]):
+            quantum = str(row.iloc[quantum_col]).strip()
+        elif len(row) > 7 and not pd.isna(row.iloc[7]):
+            quantum = str(row.iloc[7]).strip()
+        
+        app_quantum, granted_quantum = process_sn1_quantum_value(quantum)
+        record['application_quantum_mw'] = app_quantum
+        record['granted_quantum_gna_lta_mw'] = granted_quantum
+        
+        # Extract Start Date of Connectivity
+        start_date = ""
+        start_date_col = column_mapping.get('start_date')
+        if start_date_col is not None and len(row) > start_date_col and not pd.isna(row.iloc[start_date_col]):
+            start_date = str(row.iloc[start_date_col]).strip()
+        elif len(row) > 8 and not pd.isna(row.iloc[8]):
+            start_date = str(row.iloc[8]).strip()
+        record['applied_start_of_connectivity'] = start_date
+        
+        # Extract Criterion/Mode
+        criterion = ""
+        criterion_col = column_mapping.get('criterion')
+        if criterion_col is not None and len(row) > criterion_col and not pd.isna(row.iloc[criterion_col]):
+            criterion = str(row.iloc[criterion_col]).strip()
+        else:
+            # Fallback: check columns 6-7 for criterion keywords
+            for col_idx in range(6, min(8, len(row))):
+                if not pd.isna(row.iloc[col_idx]):
+                    cell_value = str(row.iloc[col_idx]).strip()
+                    if any(kw in cell_value.lower() for kw in ['land', 'route', 'bg']):
+                        criterion = cell_value
+                        break
+        record['mode'] = criterion
+        
+        # Detect Status (with developer name verification)
+        status = detect_status_for_developer(df, i, applicant)
+        record['status_of_application'] = status
+        
+        # Extract Substation - PRIORITY order:
+        # 1. For GRANTED developers: Check DTL section for agreed substation
+        # 2. Table column "Connectivity location (As per Application)" 
+        # 3. Fallback: Text extraction from narrative
+        substation = ""
+        applied_substation = ""  # Track what was in the table
+        
+        # Step 1: Get substation from table column (this is the APPLIED substation)
+        conn_loc_col = column_mapping.get('connectivity_location')
+        if conn_loc_col is not None and len(row) > conn_loc_col and not pd.isna(row.iloc[conn_loc_col]):
+            table_substation = str(row.iloc[conn_loc_col]).strip()
+            # Check if it looks like a valid substation format (contains PS, S/S, etc.)
+            substation_indicators = ['ps', 'p.s.', 's/s', 'substation', 'pooling', 'power']
+            if any(ind in table_substation.lower() for ind in substation_indicators):
+                # Valid substation from table - use it (apply Roman numeral normalization)
+                applied_substation = normalize_roman_numerals(table_substation)
+                substation = applied_substation
+        
+        # Step 2: Check DTL section for the AGREED substation
+        # We check even if status is empty, as DTL presence implies active application
+        if (status == 'Granted' or not status) and pdf_text and applicant:
+            agreed_sub = extract_agreed_substation_from_dtl(pdf_text, applicant)
+            if agreed_sub:
+                # Found agreed substation in DTL - use this instead of applied
+                substation = normalize_roman_numerals(agreed_sub)
+        
+        # Step 3: Fallback to text extraction if we still don't have a substation
+        if not substation and pdf_text and applicant:
+            substation = extract_sn1_substation_from_text(pdf_text, applicant)
+        
+        if substation:
+            record['substation'] = substation
+        
+        records.append(record)
+    
+    return records
+
+
 # --- Test Configuration ---
 BASE_DOWNLOAD_DIR = "downloaded_pdfs"
 TEMPLATE_EXCEL_FILE = "Connectivity Application Data.xlsx"
-OUTPUT_EXCEL_FILE = "Connectivity_Application_Data_TEST_ALL_SHEETS26.xlsx"
+OUTPUT_EXCEL_FILE = "Connectivity_Application_Data_TEST_ALL_SHEETS29.xlsx"
 MAX_WORKERS = 1  # Set to 1 to avoid pypdfium2 threading issues on Windows
 
 # Test Settings: Process multiple sheets from different sources
@@ -272,23 +1246,85 @@ def process_pdf_file(pdf_path, prompt_for_sheet, sheet_name):
         else:
             canonical_fields = DATA_TO_BE_CAPTURED_FIELDS  # Default
         
-        # Extract using 3-tier approach (returns text AND tables)
-        # For SN9 Transformation Capacity and Margin PDFs, try lattice flavor first for clean column separation
-        # For SN1 PDFs, use stream flavor as they have complex table structures
-        if folder_name == "SN1":
-            print(f"      [*] SN1 folder detected - using stream flavor for pages 11-25 (application data tables start from page 11)...")
+        # =============================================================================
+        # SN1-SPECIFIC EXTRACTION (CMETS Meeting Minutes PDFs)
+        # =============================================================================
+        if folder_name == "SN1" and sheet_name == "Data to be captured":
+            print(f"      [SN1] Detected SN1 PDF for 'Data to be captured' sheet")
+            print(f"      [SN1] Using specialized extraction (pages 11-end, table merging)")
+            
             try:
                 import camelot
-                # Extract only from pages 11-25 where application data tables are located
-                # Application table starts on page 11 as per user confirmation
-                tables = camelot.read_pdf(pdf_path, pages='11-25', flavor='stream', suppress_stdout=True)
-                tables = [t.df for t in tables]  # Convert to DataFrames
-                raw_text = ""  # Not needed for Camelot extraction
-                print(f"      [+] Stream extraction from pages 11-25 successful! Found {len(tables)} table(s)")
+                import fitz  # PyMuPDF for text extraction
+                
+                # Clear substation cache for this new PDF
+                if hasattr(extract_sn1_substation_from_text, '_sn1_substation_cache'):
+                    delattr(extract_sn1_substation_from_text, '_sn1_substation_cache')
+                
+                # Extract raw text from PDF for substation matching
+                pdf_text = ""
+                try:
+                    doc = fitz.open(pdf_path)
+                    for page in doc:
+                        pdf_text += page.get_text()
+                    doc.close()
+                    print(f"      [SN1] Extracted {len(pdf_text)} characters of raw text for substation matching")
+                except Exception as text_err:
+                    print(f"      [SN1] Warning: Could not extract text for substation matching: {text_err}")
+                
+                # Extract tables from pages 11 onwards (where data tables are located)
+                tables = camelot.read_pdf(pdf_path, pages='11-end', line_scale=40, suppress_stdout=True)
+                print(f"      [SN1] Camelot extracted {len(tables)} raw table(s) from pages 11-end")
+                
+                if not tables or len(tables) == 0:
+                    print(f"      [SN1] No tables found, returning empty result")
+                    return pd.DataFrame()
+                
+                # Convert to DataFrames and fix column alignment
+                table_dfs = []
+                for t in tables:
+                    fixed_df = fix_sn1_column_alignment(t.df)
+                    table_dfs.append(fixed_df)
+                
+                # Merge related tables (continuation tables)
+                merged_tables = merge_sn1_related_tables(table_dfs)
+                
+                # Extract records from all merged tables
+                all_records = []
+                for table_idx, table_df in enumerate(merged_tables):
+                    # Detect header row and column mapping
+                    header_row_idx, column_mapping = detect_sn1_header_row(table_df)
+                    
+                    if header_row_idx is None:
+                        print(f"      [SN1] Table {table_idx + 1}: No header detected, skipping")
+                        continue
+                    
+                    print(f"      [SN1] Table {table_idx + 1}: Header at row {header_row_idx}, columns mapped: {list(column_mapping.keys())}")
+                    
+                    # Extract records using the column mapping (with PDF text for substation extraction)
+                    records = extract_sn1_records_from_table(
+                        table_df, column_mapping, header_row_idx, canonical_fields, pdf_text
+                    )
+                    
+                    print(f"      [SN1] Table {table_idx + 1}: Extracted {len(records)} record(s)")
+                    all_records.extend(records)
+                
+                print(f"      [SN1] Total records extracted: {len(all_records)}")
+                
+                if all_records:
+                    return ('camelot', all_records)
+                else:
+                    return pd.DataFrame()
+                
             except Exception as e:
-                print(f"      [!] SN1 extraction failed ({e}), falling back to normal stream extraction...")
-                raw_text, tables = extract_text_from_pdf(pdf_path)
-        elif sheet_name == "Transformation Capacity" or sheet_name == "Margin" or sheet_name == "Non RE proposed RE Integration":
+                print(f"      [SN1] Extraction error: {e}")
+                import traceback
+                traceback.print_exc()
+                return pd.DataFrame()
+        
+        # Extract using 3-tier approach (returns text AND tables)
+        # For SN9 Transformation Capacity and Margin PDFs, try lattice flavor first for clean column separation
+        if sheet_name == "Transformation Capacity" or sheet_name == "Margin" or sheet_name == "Non RE proposed RE Integration":
             print(f"      [*] {sheet_name} sheet - trying lattice flavor for clean column separation...")
             try:
                 import camelot
@@ -574,6 +1610,10 @@ def process_pdf_file(pdf_path, prompt_for_sheet, sheet_name):
                         # Example: "Fatehgarh-III (Section-I)" -> pooling_ss="Fatehgarh-III", additional_info="Section-I"
                         clean_pooling_ss, additional_info = extract_additional_info_from_pooling_ss(pooling_ss_val)
                         
+                        # Apply standardization to remove GIS, PS, S/s, coordinates etc.
+                        if clean_pooling_ss:
+                            clean_pooling_ss = clean_substation_name(clean_pooling_ss)
+                        
                         # Build the record with column mapping - NUMERIC VALUES
                         num_cols = len(row)
                         record = {
@@ -710,69 +1750,6 @@ def process_pdf_file(pdf_path, prompt_for_sheet, sheet_name):
                     
                     # Skip the normal header detection and processing for Non RE PDFs
                     first_table_headers = NON_RE_FIELDS
-                    
-                elif (len(table_df.columns) == 11 and folder_name == "SN1" and sheet_name == "Data to be captured"):
-                    # **SPECIAL HANDLING FOR SN1 APPLICATION DATA TABLE**
-                    # SN1 has 11-column table with multi-row headers (rows 1-5) and narrative text (rows 6-9)
-                    is_sn9_pdf = True  # Mark to skip normal header detection
-                    print(f"      [DEBUG] Detected SN1 application data table (11 columns)")
-                    print(f"      [DEBUG] Combining multi-row headers from rows 1-5")
-                    
-                    # Combine header rows 1-5 to create full column names
-                    combined_headers = []
-                    for col_idx in range(11):
-                        parts = []
-                        for row_idx in range(6):  # Check rows 0-5
-                            val = table_df.iloc[row_idx, col_idx]
-                            if val and str(val).strip() and str(val).strip() not in ['nan', 'Minutes', 'of', 'Transmission']:
-                                parts.append(str(val).strip())
-                        combined = ' '.join(parts) if parts else f'Column_{col_idx}'
-                        combined_headers.append(combined)
-                    
-                    print(f"      [DEBUG] Combined headers: {combined_headers}")
-                    
-                    # Normalize headers to canonical field names
-                    normalized_headers = [normalize_header(h) for h in combined_headers]
-                    print(f"      [DEBUG] Normalized headers: {normalized_headers}")
-                    
-                    # Skip narrative rows (6-9) and extract data from row 10 onwards
-                    data_start_row = 10
-                    for row_idx in range(6, min(15, len(table_df))):
-                        row_text = ' '.join(str(v) for v in table_df.iloc[row_idx].tolist() if v and str(v).strip())
-                        # If we find a row that looks like data (starts with number), that's our data start
-                        first_col = str(table_df.iloc[row_idx, 0]).strip()
-                        if first_col and (first_col.isdigit() or (len(first_col) <= 3 and first_col[0].isdigit())):
-                            data_start_row = row_idx
-                            print(f"      [DEBUG] Data starts at row {data_start_row}")
-                            break
-                    
-                    # Extract data rows
-                    data_df = table_df.iloc[data_start_row:].reset_index(drop=True)
-                    data_df.columns = normalized_headers
-                    data_df = data_df.dropna(how='all')
-                    
-                    # Apply SN1 narrative filtering
-                    if len(normalized_headers) > 0:
-                        first_col = normalized_headers[0]
-                        if first_col in data_df.columns:
-                            narrative_keywords = ['it was informed', 'it was mentioned', 'it was also', 'accordingly',
-                                                 'm/s', 'details of transmission', 'associated transmission system',
-                                                 'applicant was asked', 'upon evolution']
-                            mask = data_df[first_col].astype(str).apply(
-                                lambda x: len(str(x).strip()) > 100 or
-                                         any(kw in str(x).lower()[:80] for kw in narrative_keywords)
-                            )
-                            filtered_count = mask.sum()
-                            data_df = data_df[~mask]
-                            if filtered_count > 0:
-                                print(f"      [SN1 Filter] Removed {filtered_count} narrative rows")
-                    
-                    if not data_df.empty:
-                        processed_tables.append(data_df)
-                        print(f"      [*] Table 1: Extracted {len(data_df)} rows using SN1 11-column mapping")
-                    
-                    # Set headers for continuation tables
-                    first_table_headers = normalized_headers
                     
                 elif (18 <= len(table_df.columns) <= 20 and sheet_name == "Transformation Capacity"):
                     # SN9 Transformation Capacity PDF detection
@@ -946,23 +1923,6 @@ def process_pdf_file(pdf_path, prompt_for_sheet, sheet_name):
                     data_df = table_df.iloc[header_row_idx + 1:].reset_index(drop=True)
                     data_df.columns = unique_headers
                     data_df = data_df.dropna(how='all')
-                    
-                    # SN1-specific filtering: Remove narrative text rows
-                    # SN1 tables contain meeting minutes mixed with data
-                    # Filter out rows where first column contains long narrative text
-                    if folder_name == "SN1":
-                        # Check first column for narrative patterns
-                        first_col = unique_headers[0] if len(unique_headers) > 0 else None
-                        if first_col and first_col in data_df.columns:
-                            # Narrative rows typically have long text (>100 chars) in first column or start with phrases like "It was"
-                            narrative_keywords = ['it was informed', 'it was mentioned', 'it was also', 'accordingly', 
-                                                 'm/s', 'details of transmission', 'associated transmission system']
-                            mask = data_df[first_col].astype(str).apply(
-                                lambda x: len(str(x).strip()) > 100 or 
-                                         any(kw in str(x).lower()[:50] for kw in narrative_keywords)
-                            )
-                            data_df = data_df[~mask]
-                            print(f"      [SN1 Filter] Removed {mask.sum()} narrative rows")
                     
                     if not data_df.empty:
                         processed_tables.append(data_df)
@@ -1378,109 +2338,6 @@ def process_pdf_file(pdf_path, prompt_for_sheet, sheet_name):
                             print(f"      [*] Table {table_idx + 1}: Extracted {len(extracted_data)} rows using SN9 mapping")
                         continue
                     
-                    # Check if this is an SN1 11-column application data table
-                    is_sn1_11col = (len(table_df.columns) == 11 and folder_name == "SN1" and sheet_name == "Data to be captured")
-                    
-                    if is_sn1_11col:
-                        print(f"      [*] Table {table_idx + 1}: SN1 11-column application table detected")
-                        
-                        # Combine header rows 0-5
-                        combined_headers = []
-                        for col_idx in range(11):
-                            parts = []
-                            for row_idx in range(min(6, len(table_df))):
-                                val = table_df.iloc[row_idx, col_idx]
-                                if val and str(val).strip() and str(val).strip() not in ['nan', 'Minutes', 'of', 'Transmission', '34th', 'Consultation']:
-                                    parts.append(str(val).strip())
-                            combined = ' '.join(parts) if parts else f'Column_{col_idx}'
-                            combined_headers.append(combined)
-                        
-                        # Normalize headers
-                        normalized_headers = [normalize_header(h) for h in combined_headers]
-                        
-                        # Find data start row - skip narrative rows
-                        # Start from row 6 and look for actual data
-                        data_start_row = None
-                        for row_idx in range(6, min(25, len(table_df))):
-                            # Get values from first few columns
-                            col_vals = [str(table_df.iloc[row_idx, c]).strip() for c in range(min(5, len(table_df.columns)))]
-                            
-                            # Check if this looks like a data row:
-                            # - First column (sl_no) is a short number/empty
-                            # - Second column (application_id) is not super long narrative
-                            # - At least one of the first 5 columns has content
-                            first_col = col_vals[0] if len(col_vals) > 0 else ""
-                            second_col = col_vals[1] if len(col_vals) > 1 else ""
-                            third_col = col_vals[2] if len(col_vals) > 2 else ""
-                            
-                            # Skip if second column has narrative keywords or is very long
-                            is_narrative = (
-                                'meeting' in second_col.lower() or
-                                'it was' in second_col.lower() or
-                                'transmission system' in second_col.lower() or
-                                'applicant was asked' in second_col.lower() or
-                                len(second_col) > 150
-                            )
-                            
-                            # Data row should have: short first column OR content in col 2/3
-                            has_content = any(len(v) > 0 and v != 'nan' for v in col_vals[:5])
-                            looks_like_data = (
-                                (len(first_col) <= 5 or first_col == '') and
-                                len(second_col) < 150 and
-                                (len(third_col) > 0 or len(second_col) > 0) and
-                                not is_narrative and
-                                has_content
-                            )
-                            
-                            if looks_like_data:
-                                data_start_row = row_idx
-                                print(f"      [SN1] Data starts at row {data_start_row}")
-                                break
-                        
-                        if data_start_row is None:
-                            print(f"      [SN1] No data found in table (all narrative), skipping")
-                            continue
-                        
-                        # Extract data
-                        data_df = table_df.iloc[data_start_row:].reset_index(drop=True)
-                        data_df.columns = normalized_headers
-                        data_df = data_df.dropna(how='all')
-                        
-                        # Apply narrative filtering
-                        if len(normalized_headers) > 0:
-                            first_col = normalized_headers[0]
-                            second_col = normalized_headers[1] if len(normalized_headers) > 1 else None
-                            
-                            if first_col in data_df.columns and second_col in data_df.columns:
-                                narrative_keywords = ['it was informed', 'it was mentioned', 'it was also', 'accordingly',
-                                                     'm/s', 'details of transmission', 'associated transmission system',
-                                                     'applicant was asked', 'upon evolution', 'meeting']
-                                mask = data_df.apply(
-                                    lambda row: (
-                                        len(str(row[first_col]).strip()) > 100 or
-                                        len(str(row[second_col]).strip()) > 150 or
-                                        any(kw in str(row[first_col]).lower()[:100] for kw in narrative_keywords) or
-                                        any(kw in str(row[second_col]).lower()[:100] for kw in narrative_keywords)
-                                    ),
-                                    axis=1
-                                )
-                                filtered_count = mask.sum()
-                                data_df = data_df[~mask]
-                                if filtered_count > 0:
-                                    print(f"      [SN1 Filter] Removed {filtered_count} narrative rows")
-                        
-                        # Skip table if too few data rows remain
-                        if len(data_df) < 3:
-                            print(f"      [SN1] Only {len(data_df)} data rows found, skipping table (likely all headers/narrative)")
-                            continue
-                        
-                        if not data_df.empty:
-                            # Reindex to canonical fields
-                            data_df_reindexed = data_df.reindex(columns=canonical_fields)
-                            processed_tables.append(data_df_reindexed)
-                            print(f"      [+] Table {table_idx + 1}: Extracted {len(data_df)} rows using SN1 11-column mapping")
-                        continue
-                    
                     # Normal processing for non-SN9 tables
                     # Skip first 2 rows (likely continuation markers or page breaks)
                     data_df = table_df.iloc[2:].reset_index(drop=True) if len(table_df) > 2 else table_df
@@ -1540,22 +2397,6 @@ def process_pdf_file(pdf_path, prompt_for_sheet, sheet_name):
                             
                             table_data.columns = unique_headers
                             table_data = table_data.dropna(how='all')
-                            
-                            # SN1-specific filtering: Remove narrative text rows
-                            if folder_name == "SN1" and not table_data.empty:
-                                # Check first column for narrative patterns
-                                first_col = unique_headers[0] if len(unique_headers) > 0 else None
-                                if first_col and first_col in table_data.columns:
-                                    narrative_keywords = ['it was informed', 'it was mentioned', 'it was also', 'accordingly', 
-                                                         'm/s', 'details of transmission', 'associated transmission system']
-                                    mask = table_data[first_col].astype(str).apply(
-                                        lambda x: len(str(x).strip()) > 100 or 
-                                                 any(kw in str(x).lower()[:50] for kw in narrative_keywords)
-                                    )
-                                    filtered_count = mask.sum()
-                                    table_data = table_data[~mask]
-                                    if filtered_count > 0:
-                                        print(f"          [SN1 Filter] Removed {filtered_count} narrative rows")
                             
                             if not table_data.empty:
                                 # Map to canonical fields - keep only columns that match the sheet's canonical fields
@@ -1646,6 +2487,10 @@ def run_test_pipeline():
     print(f"\n[*] Config has {len(SHEET_CONFIG)} sheets configured")
     print(f"[*] This test processes: {TEST_SHEETS}")
     
+    # Reset Element Status counters and records at start of processing
+    reset_element_code_counters()
+    print(f"[*] Element Status counters reset")
+    
     # Process each sheet
     all_sheets_used_camelot = False  # Track extraction method across all sheets
     for TEST_SHEET_NAME in TEST_SHEETS:
@@ -1663,6 +2508,12 @@ def run_test_pipeline():
         # Find sources with PDFs (search recursively in subdirectories)
         sources_with_pdfs = []
         for source_id in sheet_sources:
+            # Skip SN4 for "Data to be captured" sheet - SN4 extraction will be added later
+            # Note: SN1 extraction is now integrated
+            if source_id == "SN4" and TEST_SHEET_NAME == "Data to be captured":
+                print(f"      [SKIP] Skipping {source_id} for '{TEST_SHEET_NAME}' sheet (extraction not yet integrated)")
+                continue
+            
             source_folder = os.path.join(BASE_DOWNLOAD_DIR, source_id)
             if os.path.exists(source_folder):
                 # Collect all PDFs recursively
@@ -1928,6 +2779,35 @@ def run_test_pipeline():
         else:
             print(f"  [~] No records extracted for sheet '{TEST_SHEET_NAME}'. Check extraction logs above.")
 
+    # Write Element Status records to Excel
+    element_records = get_element_status_records()
+    if element_records:
+        print(f"\n[*] Writing {len(element_records)} Element Status records to Excel...")
+        try:
+            import openpyxl
+            wb = openpyxl.load_workbook(OUTPUT_EXCEL_FILE)
+            if 'Element Status' in wb.sheetnames:
+                ws = wb['Element Status']
+                # Find first empty row (after header in row 2)
+                start_row = 4  # Data starts at row 4 based on template structure
+                for idx, record in enumerate(element_records):
+                    row = start_row + idx
+                    ws.cell(row=row, column=2, value=record.get('element_code', ''))
+                    ws.cell(row=row, column=3, value=record.get('inter_intra_tx_element', ''))
+                    ws.cell(row=row, column=5, value=record.get('transmission_scope', ''))
+                    ws.cell(row=row, column=15, value=record.get('awarded_to', ''))
+                wb.save(OUTPUT_EXCEL_FILE)
+                print(f"  [+] Element Status sheet updated with {len(element_records)} records")
+            else:
+                print(f"  [!] 'Element Status' sheet not found in workbook")
+            wb.close()
+        except Exception as e:
+            print(f"  [!] Error writing Element Status: {e}")
+            import traceback
+            traceback.print_exc()
+    else:
+        print(f"\n[~] No Element Status records extracted")
+
     print(f"\n{'='*70}")
     print("=== TEST PIPELINE EXECUTION FINISHED ===")
     print(f"{'='*70}")
@@ -1936,6 +2816,7 @@ def run_test_pipeline():
     print(f"  - CSVs in: extraction_output/")
     print(f"\n[Test Summary]")
     print(f"  - Sheets processed: {TEST_SHEETS}")
+    print(f"  - Element Status records: {len(element_records) if element_records else 0}")
     print(f"  - Extraction method: {'Camelot (direct table extraction)' if all_sheets_used_camelot else 'LLM (text-based)'}")
     print(f"\n>> Review the CSV files first to validate data, then check the Excel output.")
     print(f"\n[Next steps]")

@@ -1,0 +1,36 @@
+﻿=== Element Status Audit ===
+
+Total records: 94
+
+=== Records per Developer ===
+ 37 records: Sunsure  Solarpark RJ  One Private  Limited
+ 37 records: Avaada  Energy Private  Limited
+  2 records: Enren-III Energy  Private Limited
+  2 records: Foxtrot Solar  Renewables Energy  Private Limited
+  2 records: Adani Renewable  Energy Holding  Eighteen Limited
+  2 records: TEQ Green  Power XV  Private Limited
+  2 records: Foxtrot Solar  Renewables  Energy Private  Limited
+  2 records: Diyos Three  Renewables Private  Limited
+  2 records: ACC Limited
+  2 records: 672
+  1 records: Amplus Centaur  Solar Private  Limited
+  1 records: Prespa Solar  Private  Limited
+  1 records: Juniper Green  Energy  Private  Limited
+  1 records: Renew Solar Power  Private Limited
+
+=== Potential Issues ===
+- Duplicate element descriptions: 14 unique elements appear multiple times
+    6x: "a. associated transmission system (ats): nil b. transmission..."
+    2x: "765kV Bhadla-IV PS û Bikaner-V PS D/c line..."
+    4x: "Establishment of 6000 MW, HVDC terminal station (4x1500 MW) ..."
+    2x: "Associated EHVAC system strengthening in WR/SR/ER..."
+    2x: "Bhadla-II PS û Sikar-II 765kV D/c line(2nd)..."
+
+=== Scope Distribution ===
+  CTS: 85 records
+  DTL: 8 records
+  ATS: 1 records
+
+=== Cross-checking with Status ===
+Withdrawn developers in Data sheet: 0
+No withdrawn developers with elements found!

@@ -283,8 +283,8 @@ def extract_text_from_pdf(pdf_path: str) -> Tuple[str, List[pd.DataFrame]]:
             
             if tables:
                 print(f"  [+] Camelot extracted {len(tables)} table(s) from '{os.path.basename(pdf_path)}'.")
-                print(f"  [*] Tabular PDF detected - skipping text extraction for optimal speed.")
-                return "", tables  # Early return: skip PyMuPDF and OCR for tabular PDFs
+                print(f"  [*] Tabular PDF detected - continuing text extraction...")
+                # Removed early return to ensure text is also extracted
                 
         # --- TIER 2: PyMuPDF for digital text extraction ---
         doc = fitz.open(pdf_path)
