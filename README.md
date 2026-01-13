@@ -73,6 +73,7 @@ After running the script, check the following files:
     *   `Margin_extracted_data.csv`
     *   `Transformation_Capacity_extracted_data.csv`
     *   `Non_RE_proposed_RE_Integration_extracted_data.csv`
+    *   `Element_Status_extracted_data.csv`
 
 ## Project Structure
 
@@ -82,3 +83,4 @@ After running the script, check the following files:
 - `PROJECT_DOCUMENTATION.md`: Detailed technical documentation of the extraction logic.
 - `field_mappings.py`: Definitions for column headers and data parsing rules.
 - `pdf_processor.py`: Core logic for Camelot and PyMuPDF extraction.
+- `element_status_processor.py`: Specialized processor for the "Element Status" sheet.
