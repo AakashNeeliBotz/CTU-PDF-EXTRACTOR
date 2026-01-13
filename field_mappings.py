@@ -590,10 +590,17 @@ def extract_additional_info_from_pooling_ss(pooling_ss_value: str) -> tuple:
     station_name = original
     additional_info = None
     
-    # Pattern 1: Extract content in parentheses at the end
+    # Pattern 1: Extract content in COMPLETE parentheses at the end
     # Match: (Section-I), (Sec-I & II), (expansion with ICTs), etc.
     parentheses_pattern = r'\s*\(([^)]+)\)\s*$'
     match = re.search(parentheses_pattern, station_name)
+    
+    # Pattern 1b: Also handle INCOMPLETE parentheses (missing closing paren)
+    # Common in PDF extraction where text is split across cells
+    # Match: (Section-II, (Sec-I, etc.
+    if not match:
+        incomplete_paren_pattern = r'\s*\(([^)]+)\s*$'
+        match = re.search(incomplete_paren_pattern, station_name)
     
     if match:
         # Extract the content inside parentheses
@@ -703,13 +710,16 @@ def clean_substation_name(substation_value: str) -> str:
     cleaned = re.sub(paren_pattern, '', cleaned, flags=re.IGNORECASE)
     
     # Remove standalone technical suffixes at the end (without parentheses)
-    # GIS, AIS at end
-    cleaned = re.sub(r'\s+(?:GIS|AIS)\s*$', '', cleaned, flags=re.IGNORECASE)
+    # GIS, AIS at end (with optional dash and version like GIS-II)
+    cleaned = re.sub(r'\s+(?:GIS|AIS)(?:\s*-?\s*[IVX]+)?\s*$', '', cleaned, flags=re.IGNORECASE)
     
-    # Remove PS, P.S., S/s, S/S suffixes at the end
-    # Pattern: optional space + PS or P.S. or S/s or S/S at end
-    suffix_pattern = r'\s*(?:PS|P\.S\.|S/[sS]|S/S)\s*$'
-    cleaned = re.sub(suffix_pattern, '', cleaned, flags=re.IGNORECASE)
+    # Remove PS, P.S., S/s, S/S from the name
+    # Pattern 1: PS followed by version (PS-II, PS-III) - keep the version, remove PS
+    cleaned = re.sub(r'\s+(?:PS|P\.S\.)\s*(-\s*[IVX\d]+)', r'\1', cleaned, flags=re.IGNORECASE)
+    # Pattern 2: PS at the end alone
+    cleaned = re.sub(r'\s*(?:PS|P\.S\.|S/[sS]|S/S)\s*$', '', cleaned, flags=re.IGNORECASE)
+    # Pattern 3: PS followed by space and more text (PS Complex, etc)
+    cleaned = re.sub(r'\s+(?:PS|P\.S\.)\s+', ' ', cleaned, flags=re.IGNORECASE)
     
     # Remove special characters at the end (#, *, etc.)
     cleaned = cleaned.rstrip('#*~+ ')
@@ -1048,6 +1058,44 @@ def extract_voltage_level(text: str) -> int:
         return int(matches[-1])
     
     return None
+
+
+def replace_multiplication_patterns(text: str) -> str:
+    """
+    Replace multiplication patterns (NxMMM) with their calculated products in text.
+    Preserves all surrounding context.
+    
+    Examples:
+    - '(3x1500)' → '(4500)'
+    - '(1x1500)' → '(1500)'
+    - 'Sec-II ICTs: Jun-26 (3x1500) & 2026-27 (1x1500)' → 'Sec-II ICTs: Jun-26 (4500) & 2026-27 (1500)'
+    
+    Args:
+        text: String that may contain multiplication patterns
+        
+    Returns:
+        String with multiplication patterns replaced by their products
+    """
+    import re
+    
+    if not text or not isinstance(text, str):
+        return text
+    
+    # Pattern to find multiplication formulas: NxMMM or N×MMM
+    # Examples: 3x1500, 2X315, 1×500
+    # Captures the entire match so we can replace it
+    pattern = r'(\d+)\s*[xX×]\s*(\d+(?:\.\d+)?)'
+    
+    def replace_match(match):
+        count = float(match.group(1))
+        capacity = float(match.group(2))
+        result = count * capacity
+        # Return as integer if it's a whole number
+        if result == int(result):
+            return str(int(result))
+        return str(result)
+    
+    return re.sub(pattern, replace_match, text)
 
 
 def calculate_mva_capacity(text: str) -> float:

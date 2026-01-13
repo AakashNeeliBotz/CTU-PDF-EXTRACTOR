@@ -21,7 +21,7 @@ import io
 from typing import List, Dict, Any
 from config import SHEET_CONFIG  # Import the full config from config.py
 from pdf_processor import extract_text_from_pdf
-from llm_data_extractor import extract_structured_data, _parse_csv_to_records
+# LLM extraction removed - using Camelot/PyMuPDF table extraction only
 from excel_handler import write_to_excel
 from field_mappings import (
     normalize_header, 
@@ -36,7 +36,8 @@ from field_mappings import (
     lookup_state_from_margin,  # Add state lookup function from Margin sheet
     lookup_state_from_data_to_be_captured,  # Add state lookup function from Data to be captured sheet
     normalize_regional_hub_to_state,  # Add regional hub normalizer
-    split_transformation_capacity_row  # Add transformation capacity row splitter
+    split_transformation_capacity_row,  # Add transformation capacity row splitter
+    replace_multiplication_patterns  # Add multiplication pattern replacer for capacity calculations
 )
 import concurrent.futures
 
@@ -1194,7 +1195,7 @@ def extract_sn1_records_from_table(df, column_mapping, header_row_idx, canonical
 # --- Test Configuration ---
 BASE_DOWNLOAD_DIR = "downloaded_pdfs"
 TEMPLATE_EXCEL_FILE = "Connectivity Application Data.xlsx"
-OUTPUT_EXCEL_FILE = "Connectivity_Application_Data_TEST_ALL_SHEETS29.xlsx"
+OUTPUT_EXCEL_FILE = "Connectivity_Application_Data_TEST_ALL_SHEETS32.xlsx"
 MAX_WORKERS = 1  # Set to 1 to avoid pypdfium2 threading issues on Windows
 
 # Test Settings: Process multiple sheets from different sources
@@ -1218,8 +1219,8 @@ def chunk_text(text, max_chars=3000, overlap=100):
     return chunks
 
 
-def process_pdf_file(pdf_path, prompt_for_sheet, sheet_name):
-    """Extract data from PDF using Camelot first, fallback to LLM if needed."""
+def process_pdf_file(pdf_path, sheet_name):
+    """Extract data from PDF using Camelot table extraction."""
     try:
         print(f"\n    - Processing file: {os.path.basename(pdf_path)}")
         
@@ -2216,6 +2217,10 @@ def process_pdf_file(pdf_path, prompt_for_sheet, sheet_name):
                             # Example: "Fatehgarh-III (Section-I)" -> pooling_ss="Fatehgarh-III", additional_info="Section-I"
                             clean_pooling_ss, additional_info = extract_additional_info_from_pooling_ss(pooling_ss_val)
                             
+                            # Apply standardization to remove GIS, PS, S/s, coordinates etc.
+                            if clean_pooling_ss:
+                                clean_pooling_ss = clean_substation_name(clean_pooling_ss)
+                            
                             # Build the record - NUMERIC VALUES
                             num_cols = len(row)
                             record = {
@@ -2487,9 +2492,7 @@ def run_test_pipeline():
     print(f"\n[*] Config has {len(SHEET_CONFIG)} sheets configured")
     print(f"[*] This test processes: {TEST_SHEETS}")
     
-    # Reset Element Status counters and records at start of processing
-    reset_element_code_counters()
-    print(f"[*] Element Status counters reset")
+    
     
     # Process each sheet
     all_sheets_used_camelot = False  # Track extraction method across all sheets
@@ -2536,7 +2539,8 @@ def run_test_pipeline():
         print(f"=== PROCESSING SHEET: '{TEST_SHEET_NAME}' ===")
         print(f"{'='*70}")
         
-        prompt_for_sheet = sheet_config["prompt"]
+        
+        # LLM prompts removed - using Camelot table extraction only
         sheet_records = []
         used_camelot = False  # Track which extraction method was used for this sheet
         
@@ -2558,7 +2562,7 @@ def run_test_pipeline():
             # Process PDFs (sequential to avoid Windows issues)
             print(f"\n  [*] Starting sequential processing (MAX_WORKERS={MAX_WORKERS})...")
             with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-                futures = [executor.submit(process_pdf_file, p, prompt_for_sheet, TEST_SHEET_NAME) for p in pdf_paths]
+                futures = [executor.submit(process_pdf_file, p, TEST_SHEET_NAME) for p in pdf_paths]
                 for future in concurrent.futures.as_completed(futures):
                     result = future.result()
                     # Check if result is a tuple (method, recs) or an empty DataFrame (skipped)
@@ -2582,6 +2586,34 @@ def run_test_pipeline():
         if TEST_SHEET_NAME == "Margin" and sheet_records:
             print(f"\n  [*] Applying state propagation from subcomplexes to parent complex rows...")
             sheet_records = propagate_state_to_parent_complex(sheet_records)
+            
+            # Post-processing: Clean all pooling_ss values
+            print(f"\n  [*] Post-processing Margin sheet: Cleaning pooling_ss values...")
+            cleaned_count = 0
+            for record in sheet_records:
+                original_pooling_ss = record.get('pooling_ss', '')
+                if original_pooling_ss:
+                    cleaned_pooling_ss = clean_substation_name(original_pooling_ss)
+                    if cleaned_pooling_ss != original_pooling_ss:
+                        cleaned_count += 1
+                        if cleaned_count <= 5:  # Show first 5 examples
+                            print(f"      [Clean] '{original_pooling_ss}' → '{cleaned_pooling_ss}'")
+                    record['pooling_ss'] = cleaned_pooling_ss
+            print(f"      [Summary] Cleaned {cleaned_count} pooling_ss names")
+            
+            # Post-processing: Calculate multiplication patterns in expected_cod_of_pooling_station
+            print(f"\n  [*] Post-processing Margin sheet: Calculating capacity patterns in Expected CoD...")
+            cod_calc_count = 0
+            for record in sheet_records:
+                original_cod = record.get('expected_cod_of_pooling_station', '')
+                if original_cod:
+                    calculated_cod = replace_multiplication_patterns(original_cod)
+                    if calculated_cod != original_cod:
+                        cod_calc_count += 1
+                        if cod_calc_count <= 5:  # Show first 5 examples
+                            print(f"      [Calc] '{original_cod}' → '{calculated_cod}'")
+                    record['expected_cod_of_pooling_station'] = calculated_cod
+            print(f"      [Summary] Calculated {cod_calc_count} multiplication patterns in Expected CoD")
         
         # Apply substation cleaning, state lookup, and row splitting for Transformation Capacity sheet
         if TEST_SHEET_NAME == "Transformation Capacity" and sheet_records:
@@ -2706,6 +2738,21 @@ def run_test_pipeline():
             print(f"      [Summary] Original rows: {original_count}")
             print(f"      [Summary] After splitting: {new_count} rows ({new_count - original_count} new rows created)")
             
+            # FINAL CLEANUP: Apply clean_substation_name to ALL records after splitting
+            # This ensures any values that may have bypassed earlier cleaning are caught
+            print(f"\n      [*] Final pass: Cleaning all substation names...")
+            final_cleaned_count = 0
+            for record in sheet_records:
+                original = record.get('substation', '')
+                if original:
+                    cleaned = clean_substation_name(original)
+                    if cleaned != original:
+                        final_cleaned_count += 1
+                        if final_cleaned_count <= 5:
+                            print(f"          [Clean] '{original}' → '{cleaned}'")
+                    record['substation'] = cleaned
+            print(f"      [Summary] Final cleanup: {final_cleaned_count} substation names cleaned")
+            
             # Show first 3 examples of transformed data
             print(f"\n      [*] First 3 transformed rows (example):")
             for i, rec in enumerate(sheet_records[:3], 1):
@@ -2779,35 +2826,6 @@ def run_test_pipeline():
         else:
             print(f"  [~] No records extracted for sheet '{TEST_SHEET_NAME}'. Check extraction logs above.")
 
-    # Write Element Status records to Excel
-    element_records = get_element_status_records()
-    if element_records:
-        print(f"\n[*] Writing {len(element_records)} Element Status records to Excel...")
-        try:
-            import openpyxl
-            wb = openpyxl.load_workbook(OUTPUT_EXCEL_FILE)
-            if 'Element Status' in wb.sheetnames:
-                ws = wb['Element Status']
-                # Find first empty row (after header in row 2)
-                start_row = 4  # Data starts at row 4 based on template structure
-                for idx, record in enumerate(element_records):
-                    row = start_row + idx
-                    ws.cell(row=row, column=2, value=record.get('element_code', ''))
-                    ws.cell(row=row, column=3, value=record.get('inter_intra_tx_element', ''))
-                    ws.cell(row=row, column=5, value=record.get('transmission_scope', ''))
-                    ws.cell(row=row, column=15, value=record.get('awarded_to', ''))
-                wb.save(OUTPUT_EXCEL_FILE)
-                print(f"  [+] Element Status sheet updated with {len(element_records)} records")
-            else:
-                print(f"  [!] 'Element Status' sheet not found in workbook")
-            wb.close()
-        except Exception as e:
-            print(f"  [!] Error writing Element Status: {e}")
-            import traceback
-            traceback.print_exc()
-    else:
-        print(f"\n[~] No Element Status records extracted")
-
     print(f"\n{'='*70}")
     print("=== TEST PIPELINE EXECUTION FINISHED ===")
     print(f"{'='*70}")
@@ -2816,8 +2834,7 @@ def run_test_pipeline():
     print(f"  - CSVs in: extraction_output/")
     print(f"\n[Test Summary]")
     print(f"  - Sheets processed: {TEST_SHEETS}")
-    print(f"  - Element Status records: {len(element_records) if element_records else 0}")
-    print(f"  - Extraction method: {'Camelot (direct table extraction)' if all_sheets_used_camelot else 'LLM (text-based)'}")
+    print(f"  - Extraction method: Camelot (direct table extraction)")
     print(f"\n>> Review the CSV files first to validate data, then check the Excel output.")
     print(f"\n[Next steps]")
     print(f"  1. Open CSVs in Excel to verify all data is captured")

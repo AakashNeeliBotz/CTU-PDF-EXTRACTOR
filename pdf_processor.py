@@ -14,25 +14,11 @@ except ImportError:
     print("[!] Camelot not installed. Table extraction will be limited.")
     print("    Install with: pip install camelot-py[base]")
 
-# --- Docling imports for OCR ---
-try:
-    from docling.document_converter import DocumentConverter
-    from docling.datamodel.base_models import InputFormat
-    from docling.datamodel.pipeline_options import (
-        PdfPipelineOptions,
-        TesseractCliOcrOptions,
-    )
-    from docling.document_converter import PdfFormatOption
-    DOCLING_AVAILABLE = True
-except ImportError:
-    DOCLING_AVAILABLE = False
-    print("[!] Docling not installed. OCR will not be available.")
-    print("    Install with: pip install docling")
+# Docling/OCR removed - not needed for current extraction pipeline
 
 # --- Configuration ---
 print(f"--- PDF Processor initialized ---")
 print(f"--- Camelot table extraction available: {CAMELOT_AVAILABLE} ---")
-print(f"--- Docling OCR available: {DOCLING_AVAILABLE} ---")
 
 # --- Camelot Table Extraction ---
 

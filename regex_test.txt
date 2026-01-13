@@ -1,2 +1,0 @@
-﻿Raw regex string [\u2013] matching EnDash: True
-Normal string ['û'] matching EnDash: True

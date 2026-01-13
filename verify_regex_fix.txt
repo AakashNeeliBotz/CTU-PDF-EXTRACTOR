@@ -1,5 +1,0 @@
-﻿=== Verification Round 2 ===
-App ID 2200001056 Substation: Bikaner-IV PS
-Remaining Bikaner-IV records: 37
-Remaining Barmer-II records: 68
-Bikaner-V/5 records: 32

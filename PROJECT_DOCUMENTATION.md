@@ -33,7 +33,7 @@
 |-----------|------------|-------------|
 | **Capacity String Normalization** | Transformation Capacity | Insert semicolons in concatenated strings |
 | **Regex-based Voltage Extraction** | Transformation Capacity | Extract rightmost voltage (handles kV and KV) |
-| **MVA Formula Calculation** | Transformation Capacity | Parse "4x500MVA" → 2000 |
+| **MVA Formula Calculation** | Transformation/Margin | Parse "4x500MVA" or "3x1500" → product |
 | **Row Splitting by Voltage** | Transformation Capacity | One source row → multiple output rows |
 | **State-to-Region Mapping** | SN1, All sheets | State name → Region code (Rajasthan → WR) |
 | **Dual-Source State Lookup** | Transformation Capacity | Try Margin first, then DTBC |
@@ -61,7 +61,7 @@
 | **Quantum Value Splitting** | SN1 | Split "300 (reduced to 250)" into app/granted quantum |
 | **Subtotal/Total Filtering** | Margin, Non RE | Skip summary rows |
 | **Footer Note Filtering** | Margin | Skip notes >50 chars with patterns |
-| **Substation Name Cleaning** | Transformation Capacity | Remove voltage prefix/suffix, (GIS)/(AIS) |
+| **Substation Name Cleaning** | All Sheets | Remove voltage, GIS/AIS, fix brackets "Fatehgarh-IV (Section-II" → "Fatehgarh-IV" |
 | **Regional Hub Normalization** | Non RE | "Paradeep" → "Odisha" |
 | **LTA ID Auto-Extraction** | Data to be captured | Split LTA: prefix from application IDs |
 | **Numeric Type Conversion** | Excel writing | Convert string numbers to numeric |
@@ -80,7 +80,7 @@
 |---------|---------|--------|
 | `([Kk][Vv])(\d)` | kV followed by digit | "kV2x500" → "kV; 2x500" |
 | `(\d+)\s*[Kk][Vv]` | Voltage extraction | "400/220kV" → 220 |
-| `(\d+)\s*[xX×]\s*(\d+)` | MVA formula | "4x500" → 2000 |
+| `(\d+)\s*[xX×]\s*(\d+(?:\.\d+)?)` | MVA/CoD Calc | "4x500" → 2000, "3x1500" → 4500 |
 | `LTA[:\s]*([\d]+)` | LTA ID extraction | "LTA:1234" → 1234 |
 | `^\d+(?:/\d+)*\s*k[Vv]\s*` | Voltage prefix removal | "400/220kV Jam..." → "Jam..." |
 | `(?:agreed\s+to\s+grant\|granted).*?at\s+([A-Za-z-]+)\s*(?:ps\|s/s)` | Substation from confirmed grant | "agreed to grant...at Ramgarh-II PS" → Ramgarh-II |
@@ -123,7 +123,6 @@ This project automates the extraction of renewable energy and power grid data fr
 | **openpyxl** | - | Excel file reading/writing |
 | **pandas** | - | Data manipulation and transformation |
 | **PyMuPDF (fitz)** | - | PDF text extraction (fallback) |
-| **Docling + Tesseract** | - | OCR for scanned PDFs (Tier 3 fallback) |
 
 ### Extraction Flavors
 - **Lattice**: Used for PDFs with clear table borders (SN9 Margin, Transformation Capacity)
@@ -137,8 +136,6 @@ This project automates the extraction of renewable energy and power grid data fr
 │  TIER 1: Camelot Table Extraction (Fastest, Most Accurate)      │
 │          ↓ (if no tables found)                                  │
 │  TIER 2: PyMuPDF Text Extraction                                 │
-│          ↓ (if minimal text < 100 chars)                         │
-│  TIER 3: Docling OCR with Tesseract                              │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -924,7 +921,6 @@ SHEET_CONFIG = {
 | Issue | Description | Current Status |
 |-------|-------------|----------------|
 | SN4 Integration | SN4 PDF extraction not yet integrated | ⏳ Pending (code exists in AkashNeeli folder) |
-| Scanned PDFs | OCR requires Tesseract installation | Tier 3 fallback available |
 | Complex merges | Cells merged across rows | May result in missing data |
 | Subtotals | Summary rows in Margin PDF | Filtered out (can be kept if needed) |
 
@@ -1136,7 +1132,7 @@ python test_main_skip_download.py
 - `extraction_output/Margin_extracted_data.csv`
 - `extraction_output/Transformation_Capacity_extracted_data.csv`
 - `extraction_output/Non_RE_proposed_RE_Integration_extracted_data.csv`
-- `Connectivity_Application_Data_TEST_ALL_SHEETS27.xlsx`
+- `Connectivity_Application_Data_TEST_ALL_SHEETS31.xlsx`
 
 ### Verification Steps
 1. Open CSV files to verify raw extracted data

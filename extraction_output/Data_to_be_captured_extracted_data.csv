@@ -20,7 +20,7 @@ Route",30.05.2026,,,,"Generator
 Solar Private 
 Limited",,2200000827,,,,,,,,350,,,,,,,,,,,,,20.05.2024,"Land BG 
 Route",30.04.2027,,,,"Generator 
-(Solar)",Granted,,,CTS-001,,
+(Solar)",Granted,,,,,
 5,NR,Rajasthan,"Nagaur 
 (MERTA-II) PS",,"ACME Solar 
 Holdings Limited 
@@ -39,7 +39,7 @@ Complex
 (Merta-II) PS",,"Enren-III Energy 
 Private Limited",,2200000860,,,,,,,,300,,,,,,,,,,,,,31.05.2024,"Land BG 
 Route",31.01.2027,,,,"Generator 
-(Solar)",Granted,,,CTS-002,ATS-001,
+(Solar)",Granted,,,,,
 8,NR,Rajasthan,,,"Sindhari Solar 
 Power Private 
 Limited",,2200000894,,,,,,,,300,,,,,,,,,,,,,31.05.2024,"Land BG 
@@ -54,13 +54,13 @@ Limited",,2200000832,,,,,,,,250,,,,,,,,,,,,,04.06.2024,"Land BG
 Route",31.12.2026,,,,"Renewable 
 Power Park 
 developer 
-(Solar)",,,,CTS-003,,
+(Solar)",,,,,,
 1,NR,Rajasthan,bikaner-V ps,,"Sunsure 
 Solarpark RJ 
 One Private 
 Limited",,2200001021,,,,,,,,350,,,,,,,,,,,,,05.07.2024,"Land BG 
 Route",31.03.2029,,,,"Generator 
-(Solar)",Granted,,,"CTS-004, CTS-005, CTS-006, CTS-007, CTS-008, CTS-009, CTS-010, CTS-011, CTS-012, CTS-013, CTS-014, CTS-015, CTS-016, CTS-017, CTS-018, CTS-019, CTS-020, CTS-021, CTS-022, CTS-023, CTS-024, CTS-025, CTS-026, CTS-027, CTS-028, CTS-029, CTS-030, CTS-031, CTS-032, CTS-033, CTS-034, CTS-035, CTS-036, CTS-037, CTS-038, CTS-039",,DTL-001
+(Solar)",Granted,,,,,
 2,NR,Rajasthan,Ramgarh-II PS,,"Sunbreeze 
 Renewables 
 Seven Private 
@@ -71,11 +71,11 @@ Park developer
 Energy 
 Private 
 Limited",,2200001056,,,,,,,,400,,,,,,,,,,,,,16.07.2024,"Land BG 
-Route",30.06.2029,,,,Generator (Solar),Granted,,,CTS-040,,
+Route",30.06.2029,,,,Generator (Solar),Granted,,,,,
 4,NR,Rajasthan,Barmer II PS,,"Foxtrot Solar 
 Renewables Energy 
 Private Limited",,2200001057,,,,,,,,100,,,,,,,,,,,,,17.07.2024,Land Route,31.12.2030,,,,"Generator 
-(Solar)",,,,CTS-041,,DTL-002
+(Solar)",,,,,,
 5,NR,Rajasthan,Fatehgarh-II PS,,"ACME Cleantech 
 Solutions Private 
 Limited",,2200001065,,,,,,,,150,,,,,,,,,,,,,17.07.2024,"Land BG 
@@ -84,36 +84,36 @@ Route",31.10.2026,,,,"Generator
 6,NR,Rajasthan,Barmer PS,,"Renew Solar Power 
 Private Limited",,2200001026,,,,,,,,200,,,,,,,,,,,,,19.07.2024,"REMCL 
 LOA",30.09.2026,,,,"Generator 
-(Solar)",Granted,,,CTS-042,,
+(Solar)",Granted,,,,,
 7,NR,Rajasthan,Bhadla - II PS,,"Adani Renewable 
 Energy Holding 
 Eighteen Limited",,2200001044,,,,,,,,150,(Reduced to 50 MW),,,,,,,,,,,,24.07.2024,Land Route,15.06.2025,,,,"Generator 
-(Solar)",Granted,,,CTS-043,,DTL-003
+(Solar)",Granted,,,,,
 8,NR,Rajasthan,Pali PS,,"TEQ Green 
 Power XV 
 Private Limited",,2200001089,,,,,,,,300,,,,,,,,,,,,,26.07.2024,"Land BG 
 Route",15.06.2027,,,,"Renewable Power 
 Park developer 
-(Solar)",Granted,,,CTS-044,,
+(Solar)",Granted,,,,,
 9,NR,Rajasthan,Jalore PS,,"TEQ Green 
 Power XV 
 Private Limited",,2200001087,,,,,,,,300,,,,,,,,,,,,,26.07.2024,"Land BG 
 Route",15.06.2027,,,,"Renewable Power 
 Park developer 
-(Solar)",Granted,,,CTS-045,,
+(Solar)",Granted,,,,,
 10,NR,Rajasthan,Barmer II PS,,"Foxtrot Solar 
 Renewables 
 Energy Private 
-Limited",,2200001088,,,,,,,,80,,,,,,,,,,,,,26.07.2024,Land Route,31.12.2031,,,,Generator (Solar),Granted,,,CTS-046,,DTL-004
+Limited",,2200001088,,,,,,,,80,,,,,,,,,,,,,26.07.2024,Land Route,31.12.2031,,,,Generator (Solar),Granted,,,,,
 11,NR,Rajasthan,bhadla-IV ps,,"Avaada 
 Energy Private 
-Limited",,2200001085,,,,,,,,700,,,,,,,,,,,,,26.07.2024,NHPC LOA,30.04.2026,,,,Generator (Solar),Granted,,,"CTS-047, CTS-048, CTS-049, CTS-050, CTS-051, CTS-052, CTS-053, CTS-054, CTS-055, CTS-056, CTS-057, CTS-058, CTS-059, CTS-060, CTS-061, CTS-062, CTS-063, CTS-064, CTS-065, CTS-066, CTS-067, CTS-068, CTS-069, CTS-070, CTS-071, CTS-072, CTS-073, CTS-074, CTS-075, CTS-076, CTS-077, CTS-078, CTS-079, CTS-080, CTS-081, CTS-082",,DTL-005
+Limited",,2200001085,,,,,,,,700,,,,,,,,,,,,,26.07.2024,NHPC LOA,30.04.2026,,,,Generator (Solar),Granted,,,,,
 12,NR,Rajasthan,Pali PS,,"Diyos Three 
 Renewables Private 
 Limited",,2200001100,,,,,,,,300,,,,,,,,,,,,,31.07.2024,"Land BG 
 Route",01.04.2031,,,,"Renewable 
 Power Park 
-developer (Solar)",Granted,,,CTS-083,,DTL-006
+developer (Solar)",Granted,,,,,
 1,,NR,,,"Asian 
 Fine 
 Cements 
@@ -132,7 +132,7 @@ connected to Intra State
 Transmission System",Granted,,,,,
 4,,NR,,,ACC Limited,,2200001081,,,,,,,,4.5,,,,,,,,,,,,,26.07.2024,,01.09.2024,,,,"Drawee entity 
 connected to Intra State 
-Transmission System",Granted,,,CTS-084,,DTL-007
+Transmission System",Granted,,,,,
 5,,NR,,,"Ambuja 
 Cements 
 Limited",,2200001101,,,,,,,,5.85,,,,,,,,,,,,,31.07.2024,,01.09.2024,,,,"Drawee entity 
@@ -140,7 +140,7 @@ connected to Intra State
 Transmission System",Granted,,,,,
 1,,16.11.2026,,,672,,,"Greenko  UP01 
 IREP 
-Private Limited",,,,,,,,,,,,,,,,,,,,610,,16.11.2026,,,,672,,,,CTS-085,,DTL-008
+Private Limited",,,,,,,,,,,,,,,,,,,,610,,16.11.2026,,,,672,,,,,,
 2,,31.03.2028,,,1120,,,"Avaada  Waterbattery 
 Private Limited",,,,,,,,,,,,,,,,,,,,900,,31.03.2028,,,,1120,,,,,,
 ,NR,Rajasthan,Barmer-I,,ENREN-I ENERGY PRIVATE LIMITED,,2200000286,,,,,,,Solar,300,,,,,,,,,,,,,,,,,,,,,,,,,

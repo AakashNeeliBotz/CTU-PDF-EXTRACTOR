@@ -19,7 +19,7 @@ with sectionalisation at 220kV for RE
 injection)",1224.4,150.6,100,1,1,0,0,0,,0,"324.4MW LTA has been granted on 1x500MVA with 
 sectionalisation at 220kV for RE injection & 900 MW 
 (600+150+150) has been granted on 400kV bay.",WR
-Madhya Pradesh,Jabalpur PS,2x1500MVA 765/400kV,0,0,0,0,0,0,0,0,0,0,765/400kV ICT overloading.,WR
+Madhya Pradesh,Jabalpur,2x1500MVA 765/400kV,0,0,0,0,0,0,0,0,0,0,765/400kV ICT overloading.,WR
 Madhya Pradesh,Rajgarh,"2x315MVA, 400/220kV+ (2x500MVA 
 with sectionalisation at 220kV for RE 
 injection)",892,356,0,3,0,0,0,0,0,2,"Margins at 220kV bay of Srpng: 298.24MW has been 
@@ -34,16 +34,16 @@ Madhya Pradesh,Sidhi area,No ISTS Substation exists near Sidhi,300,0,0,0,0,0,0,,
 of Vindhyachal - Satna line). Studies are underway.",WR
 Chhattisgarh,Dharamjaygarh,2x1500MVA 765/400kV,0,0,0,0,0,0,0,0,0,0,765/400kV ICT overloading / Fault level issues,WR
 Chhattisgarh,Champa,6x1500MVA 765/400kV,0,0,0,0,0,0,0,0,0,0,765/400kV ICT overloading / Fault level issues,WR
-Chhattisgarh,Bilaspur PS,3x1500MVA 765/400kV,0,0,0,,0,0,0,0,0,0,765/400kV ICT overloading / Fault level issues,WR
+Chhattisgarh,Bilaspur,3x1500MVA 765/400kV,0,0,0,,0,0,0,0,0,0,765/400kV ICT overloading / Fault level issues,WR
 Andhra Pradesh,Kurnool,"2X1500 MVA, 765/400 kV",2714,0,0,,1,0,250,,0,1,,SR
 Karnataka,Hiriyur,"2x315 MVA, 400/220 kV + 1x500 MVA, 
 400/220 kV",600.3,0,0,0,,0,0,,0,0,,SR
-Kerala,Palakkad (400/220kV),"2x315 MVA, 400/220 kV + 1x500 MVA, 
+Kerala,Palakkad,"2x315 MVA, 400/220 kV + 1x500 MVA, 
 400/220 kV",0,300,0,2,0,0,0,2,0,0,,SR
 Tamil Nadu,Pugalur,"2X315 MVA + 1X500 MVA, 400/230 kV",655,0,0,,,0,0,,,0,"Pugalur(Existing) has been closed for all purpose regarding 
 grant of Connectivity.",SR
-Tamil Nadu,Malekottaiyur(Kalivenda pattu),"2X315 MVA + 1X500 MVA, 400/230 kV",NIL,500,0,2,,0,0,,0,0,,SR
-Tamil Nadu,Nagapattinam PS,Charged at 400 kV,NIL,0,1000,,2,0,0,,0,0,,SR
+Tamil Nadu,Malekottaiyur,"2X315 MVA + 1X500 MVA, 400/230 kV",NIL,500,0,2,,0,0,,0,0,,SR
+Tamil Nadu,Nagapattinam,Charged at 400 kV,NIL,0,1000,,2,0,0,,0,0,,SR
 Tamil Nadu,NLC TS-II,2x250+1x315,160,0,0,0,,,,,,,Overloading at 230 kV network,SR
 Rajasthan,Chittorgarh,765/400kV : 2x1500MVA,NIL,0,0,0,0,0,0,0,0,0,,NR
 Rajasthan,Ajmer,765/400kV : 2x1500MVA,NIL,0,0,0,0,0,0,0,0,0,,NR
@@ -120,7 +120,7 @@ West Bengal,Birpara,220/132kV: 2x160MVA,0,0,,,,,,,,,,ER
 West Bengal,Dalkhola,220kV switching,0,0,,,,,,,,,,ER
 West Bengal,Durgapur-A,400kV switching,0,0,,,,,,,,,,ER
 West Bengal,Maithon-A,400kV switching,0,0,,,,,,,,,,ER
-West Bengal,Farakka TPS,400/220kV: 2x315MVA,0,0,,,,,,,,,,ER
+West Bengal,Farakka T,400/220kV: 2x315MVA,0,0,,,,,,,,,,ER
 West Bengal,Malda,400/220kV: 2x500MVA,0,0,,,,,,,,,,ER
 West Bengal,New Siliguri,400/220kV: 3x315MVA,0,0,,,,,,,,,132kV overloaded in present case under N-1 (Siliguri).,ER
 West Bengal,Siliguri,220/132kV: 2x160MVA,0,0,,,,,,,,,132kV overloaded in present case under N-1 (Siliguri).,ER

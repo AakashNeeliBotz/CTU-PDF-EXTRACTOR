@@ -130,9 +130,7 @@ dmypy.json
 .pyre/
 
 # Project-specific
-downloaded_pdfs/
-*.xlsx
-!Connectivity Application Data.xlsx
+
 models/
 *.gguf
 .DS_Store

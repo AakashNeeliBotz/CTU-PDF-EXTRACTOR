@@ -1,12 +1,7 @@
 # This file contains the master configuration for the entire pipeline.
-# It defines all data sources and how they map to the sheets and prompts.
+# It defines all data sources and how they map to the sheets.
 
-# Hugging Face Transformers model configuration (direct GPU inference)
-HF_MODEL = "google/gemma-3-4b-it"  # Gemma 3 4B instruction-tuned model
-
-# Legacy Ollama settings (kept for reference, not used)
-# OLLAMA_MODEL = "gemma3:4b"
-# OLLAMA_URL = "http://localhost:11434"
+# LLM/Transformers configuration removed - using Camelot/PyMuPDF table extraction only
 
 # Part 1: Define all data source URLs
 # This dictionary maps a unique source ID (SNx) to its URL.
@@ -30,44 +25,27 @@ DATA_SOURCES = {
     "SN12": "https://cea.nic.in/reports/monthly/transmission_construction/",
 }
 
-# Part 2: Import the prompts for each sheet
-# We keep the large prompt strings in a separate file for clarity.
-from prompts import (
-    PROMPT_DATA_TO_BE_CAPTURED,
-    PROMPT_RE_POTENTIAL,
-    PROMPT_MARGIN,
-    PROMPT_TRANSFORMATION_CAPACITY,
-    PROMPT_ELEMENT_STATUS
-)
+# Prompts removed - not using LLM extraction
 
-# Non RE sheet doesn't need an LLM prompt (uses direct Camelot extraction)
-PROMPT_NON_RE = ""  # Placeholder
-
-# Part 3: Define the configuration for each Excel sheet
-# This is the "brain" that connects sources and prompts to their target sheets.
+# Part 2: Define the configuration for each Excel sheet
+# This defines which sources map to which sheets (prompts removed - using Camelot extraction)
 SHEET_CONFIG = {
     "Data to be captured": {
         "sources": ["SN1", "SN3", "SN2", "SN4", "SN7", "SN8", "SN9", "SN11"],  # SN1 added first, processes before SN3
-        "prompt": PROMPT_DATA_TO_BE_CAPTURED
     },
     "RE Potential": {
         "sources": ["SN9", "SN10a"],
-        "prompt": PROMPT_RE_POTENTIAL
     },
     "Margin": {
         "sources": ["SN9"],
-        "prompt": PROMPT_MARGIN
     },
     "Transformation Capacity": {
         "sources": ["SN9"],
-        "prompt": PROMPT_TRANSFORMATION_CAPACITY
     },
     "Non RE proposed RE Integration": {
         "sources": ["SN9"],
-        "prompt": PROMPT_NON_RE
     },
     "Element Status": {
         "sources": ["SN10b", "SN10c_RECPDCL", "SN10c_PFCCL_Tender", "SN10c_PFCCL_Notice", "SN10d"],
-        "prompt": PROMPT_ELEMENT_STATUS
     }
 }
