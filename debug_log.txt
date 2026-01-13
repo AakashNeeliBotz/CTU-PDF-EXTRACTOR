@@ -1,0 +1,50 @@
+Debug Script for Element Status Processor
+----------------------------------------
+Created output file from template: c:\Users\Admin\Documents\CTU-automated-pdf-extraction\debug_output.xlsx
+Calling process_and_write...
+  [Element Status] Opening PDF: c:\Users\Admin\Documents\CTU-automated-pdf-extraction\downloaded_pdfs\SN_TBCB\Report_TBCB_UC.pdf
+  [Element Status] Found start on Page 3
+  [DEBUG] Scanning 14 tables for header...
+    [DEBUG] Table 0 Row 0: monitoring report of under construction tbcb projects no. of projects 91
+    [DEBUG] Table 0 Row 1: sn name of the transmission project &
+scope exec.
+agenc
+y lengt
+h mva cost
+(rs.
+cr) spv
+transfe
+r date target -
+org target -
+anticipate
+d total
+locs.
+(nos) found
+ation
+(nos) erecti
+on
+(nos) stringin
+g (ckm) civil
+works
+(%) eqpt.
+receive
+d (%) eqpt.
+erectio
+n (%) remarks / constraints & assistance required
+      -> MATCH FOUND at Table 0 Row 1
+  [DEBUG] Extracted Headers: ['SN', 'Name of the Transmission Project &\nScope', 'Exec.\nAgenc\ny', 'Lengt\nh', 'MVA', 'Cost\n(Rs.\nCr)', 'SPV\nTransfe\nr Date', 'Target -\nOrg', 'Target -\nAnticipate\nd', 'Total\nLocs.\n(Nos)', 'Found\nation\n(Nos)', 'Erecti\non\n(Nos)', 'Stringin\ng (ckm)', 'Civil\nworks\n(%)', 'Eqpt.\nReceive\nd (%)', 'Eqpt.\nErectio\nn (%)', 'Remarks / Constraints & assistance required']
+  [Element Status] Loaded 380 records from extracted tables.
+  [Element Status] Processing 3 rows in target Excel...
+  [DEBUG] src_keys len: 380
+  [DEBUG] matched indices count: 3
+  [DEBUG] unmatched indices count: 377
+  [Element Status] Appending 377 new records...
+  [Element Status] Completed. 25 updates made.
+process_and_write completed.
+Sheet 'Element Status' exists.
+Max Row: 383
+Value at E4: Transmission system strengthening scheme for evacuation of
+power from solar energy zones in Rajasthan (8.1 GW) under phase-
+II- Part G
+SPV Name: POWERGRID Narela Transmission Ltd.
+(CKM-408, MVA-4500)

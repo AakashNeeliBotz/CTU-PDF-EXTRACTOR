@@ -37,8 +37,10 @@ from field_mappings import (
     lookup_state_from_data_to_be_captured,  # Add state lookup function from Data to be captured sheet
     normalize_regional_hub_to_state,  # Add regional hub normalizer
     split_transformation_capacity_row,  # Add transformation capacity row splitter
+    split_transformation_capacity_row,  # Add transformation capacity row splitter
     replace_multiplication_patterns  # Add multiplication pattern replacer for capacity calculations
 )
+from element_status_processor import ElementStatusProcessor  # Import the new processor
 import concurrent.futures
 
 # State name normalization mapping
@@ -1195,11 +1197,11 @@ def extract_sn1_records_from_table(df, column_mapping, header_row_idx, canonical
 # --- Test Configuration ---
 BASE_DOWNLOAD_DIR = "downloaded_pdfs"
 TEMPLATE_EXCEL_FILE = "Connectivity Application Data.xlsx"
-OUTPUT_EXCEL_FILE = "Connectivity_Application_Data_TEST_ALL_SHEETS32.xlsx"
+OUTPUT_EXCEL_FILE = "Connectivity_Application_Data_TEST_ALL_SHEETS35.xlsx"
 MAX_WORKERS = 1  # Set to 1 to avoid pypdfium2 threading issues on Windows
 
 # Test Settings: Process multiple sheets from different sources
-TEST_SHEETS = ["Data to be captured", "Margin", "Transformation Capacity", "Non RE proposed RE Integration"]  # All sheets to test
+TEST_SHEETS = ["Data to be captured", "Margin", "Transformation Capacity", "Non RE proposed RE Integration", "Element Status"]  # All sheets to test
 MAX_TEST_PDFS = None  # Process ALL PDFs (set to None for unlimited)
 
 
@@ -1224,6 +1226,36 @@ def process_pdf_file(pdf_path, sheet_name):
     try:
         print(f"\n    - Processing file: {os.path.basename(pdf_path)}")
         
+        # -------------------------------------------------------------------------
+        # SPECIAL HANDLING FOR ELEMENT STATUS SHEET
+        # -------------------------------------------------------------------------
+        if sheet_name == "Element Status":
+             print(f"      [!] Using specialized Element Status Processor for {os.path.basename(pdf_path)}")
+             try:
+                 # Helper to access output file path - it's global
+                 output_file = OUTPUT_EXCEL_FILE 
+                 
+                 # Ensure output file exists (copy from template if needed)
+                 if not os.path.exists(output_file):
+                     import shutil
+                     template_file = TEMPLATE_EXCEL_FILE
+                     if os.path.exists(template_file):
+                         shutil.copy2(template_file, output_file)
+                         print(f"      [OK] Created output file from template: {output_file}")
+                     else:
+                         print(f"      [!] Error: Template file {template_file} not found!")
+                 
+                 processor = ElementStatusProcessor()
+                 processor.process_and_write(pdf_path, output_file)
+                 print(f"      [OK] Element Status processing completed for {os.path.basename(pdf_path)}")
+                 # Return empty DataFrame so main loop skips standard processing/writing
+                 return pd.DataFrame()
+             except Exception as e:
+                 print(f"      [!] Element Status specialized processing failed: {e}")
+                 import traceback
+                 traceback.print_exc()
+                 return pd.DataFrame()
+
         # Extract folder name from PDF path for folder-specific logic
         pdf_folder = os.path.dirname(pdf_path)
         folder_name = os.path.basename(pdf_folder)

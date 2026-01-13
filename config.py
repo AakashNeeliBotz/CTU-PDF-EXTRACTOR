@@ -46,6 +46,6 @@ SHEET_CONFIG = {
         "sources": ["SN9"],
     },
     "Element Status": {
-        "sources": ["SN10b", "SN10c_RECPDCL", "SN10c_PFCCL_Tender", "SN10c_PFCCL_Notice", "SN10d"],
+        "sources": ["SN_TBCB"],  # Matches Report_TBCB_UC.pdf
     }
 }

@@ -26,6 +26,7 @@
 | **Serial Number Continuity Detection** | SN1 | Detect continuation tables (table1 ends 5, table2 starts 6) |
 | **Repeated Header Removal** | SN1 | Remove duplicate header rows after table merging |
 | **Dynamic Header Detection** | SN1, All PDFs | Keyword matching with column mapping |
+| **Header Heuristic with Slice** | Element Status | Detect data table by searching first 5 rows for "SN" + "Scope" |
 | **Continuation Table Handling** | All sheets | Persist headers across page breaks |
 
 ### Data Transformation Techniques
@@ -123,6 +124,7 @@ This project automates the extraction of renewable energy and power grid data fr
 | **openpyxl** | - | Excel file reading/writing |
 | **pandas** | - | Data manipulation and transformation |
 | **PyMuPDF (fitz)** | - | PDF text extraction (fallback) |
+| **pdfplumber** | - | Table extraction for Element Status sheet |
 
 ### Extraction Flavors
 - **Lattice**: Used for PDFs with clear table borders (SN9 Margin, Transformation Capacity)
@@ -203,6 +205,9 @@ SHEET_CONFIG = {
     },
     "Non RE proposed RE Integration": {
         "sources": ["SN9"]  # From "non RE" subfolder
+    },
+    "Element Status": {
+        "sources": ["SN_TBCB"]  # From Report_TBCB_UC.pdf
     }
 }
 ```
@@ -745,6 +750,43 @@ def normalize_regional_hub_to_state(state_value):
 # DO NOT reset current_state between tables
 # This maintains context (e.g., Sundargarh in Table 4 belongs to Paradeep state from Table 3)
 ```
+
+---
+
+### 5.5 Element Status Sheet
+
+#### Source
+- **SN_TBCB**: `Report_TBCB_UC.pdf` (Monitoring Report of Under Construction TBCB Projects)
+
+#### PDF Structure
+- **Table-based PDF** extracted using `pdfplumber` (via new `element_status_processor.py`)
+- **Header Detection**: Uses heuristic to find table start (row containing "SN" and "Scope"/"Name")
+- **Columns**: Variable, mapped via keywords like "Scope", "SPV", "Locs", "Found", etc.
+
+#### Column Mapping (Strict & Fuzzy)
+The processor maps source columns to these target fields:
+- `Scope` (Name/Scope) -> Transmission Scope (Col E)
+- `SPV` (SPV/Transfe) -> SPV Name
+- `Length` (Length/ckm) -> Line Length
+- `Locs` (Total/Locs) -> Total Locations
+- `Found` (Found/ation) -> Foundation
+- `Erect` (Erecti/on) -> Erection
+- `String` (Stringin/g) -> Stringing
+- `Civil`, `EqptRec`, `EqptEre` -> Substation progress fields
+- `OrgSCOD`, `AntSCOD` -> SCOD dates
+
+#### Key Logic
+1.  **Specialized Processor**: Uses `ElementStatusProcessor` instead of generic `PDFExtractor`.
+2.  **Strict Header Search**: Scans first 5 rows of each extracted table to find the *true* data table, ignoring page headers.
+3.  **Calculated Fields**:
+    - `CALC_FOUND`: Found / Locs
+    - `CALC_ERECT`: Erect / Locs
+    - `CALC_STRING`: String / Length
+4.  **Data Population**:
+    - **Strict Match**: Updates existing rows where "Transmission Scope" matches exactly.
+    - **Fuzzy Match**: Updates rows where scope name is a substring.
+    - **Append**: Adds new rows for any unmapped source records.
+    - **Output Creation**: Copies template if output file doesn't exist.
 
 ---
 
