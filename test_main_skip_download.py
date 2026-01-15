@@ -1197,7 +1197,7 @@ def extract_sn1_records_from_table(df, column_mapping, header_row_idx, canonical
 # --- Test Configuration ---
 BASE_DOWNLOAD_DIR = "downloaded_pdfs"
 TEMPLATE_EXCEL_FILE = "Connectivity Application Data.xlsx"
-OUTPUT_EXCEL_FILE = "Connectivity_Application_Data_TEST_ALL_SHEETS35.xlsx"
+OUTPUT_EXCEL_FILE = "Connectivity_Application_Data_TEST_ALL_SHEETS36.xlsx"
 MAX_WORKERS = 1  # Set to 1 to avoid pypdfium2 threading issues on Windows
 
 # Test Settings: Process multiple sheets from different sources

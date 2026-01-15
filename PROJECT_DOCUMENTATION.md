@@ -110,7 +110,7 @@ This project automates the extraction of renewable energy and power grid data fr
 | SN10a | cea.nic.in | RE Integration transmission data | ✅ Working |
 
 ### Output
-- **Excel File**: `Connectivity_Application_Data_TEST_ALL_SHEETS27.xlsx`
+- **Excel File**: `Connectivity_Application_Data_TEST_ALL_SHEETS36.xlsx`
 - **CSV Files**: Individual CSV files in `extraction_output/` folder for each sheet
 
 ---
@@ -777,16 +777,27 @@ The processor maps source columns to these target fields:
 
 #### Key Logic
 1.  **Specialized Processor**: Uses `ElementStatusProcessor` instead of generic `PDFExtractor`.
-2.  **Strict Header Search**: Scans first 5 rows of each extracted table to find the *true* data table, ignoring page headers.
-3.  **Calculated Fields**:
-    - `CALC_FOUND`: Found / Locs
-    - `CALC_ERECT`: Erect / Locs
-    - `CALC_STRING`: String / Length
-4.  **Data Population**:
-    - **Strict Match**: Updates existing rows where "Transmission Scope" matches exactly.
-    - **Fuzzy Match**: Updates rows where scope name is a substring.
-    - **Append**: Adds new rows for any unmapped source records.
-    - **Output Creation**: Copies template if output file doesn't exist.
+2.  **Hierarchical Extraction**:
+    *   **Parent Rows**: Detected via filled `SN` column. Contains Project Name.
+    *   **Child Rows**: Detected via empty `SN` column. Inherit context from Parent.
+    *   **Transmission Scheme (Col 4)**: Derived from Parent Project Name (Region + Phase + Part).
+    *   **Inter/Intra Element (Col 3)**: Derived from Parent Project Name (Region + Phase).
+    *   **Transmission Scope (Col 5)**: Extracted from Child Row `Scope` column.
+3.  **Scheme Parsing Strategy**:
+    *   **Regex Extraction**:
+        *   **Region**: Prioritized search (e.g., "Rajasthan REZ" > "Rajasthan"). Matches "KPS", "Ananthapuram-II", etc.
+        *   **Phase**: Handles "Phase-IV", "Ph-IV", "Phase V".
+        *   **Part**: Extract alphanumeric parts ("Part A", "Part B1, B2 & B3"). Excludes "Part of".
+    *   **Fallback Cleaning**: If regex fails, removes known prefixes ("Transmission system for...") and suffixes ("(SPV Name...)", "(3.5 GW)") to use cleaned text as Scheme.
+    *   **Strict Mode**: If no Region is found (and cleaning fails), returns empty string to filter out unrelated rows (e.g. "Goa Tamnar").
+4.  **Column Mappings**:
+    *   `Awarded To` (Col 15) <- `Exec. Agency` (PDF)
+    *   `Transmission Scope` (Col 5) <- `Name`/`Scope` (PDF Child Row)
+    *   `SPV Name` (Col 16) <- `SPV` (PDF)
+    *   Progress Columns (`Found`, `Erect`, `String`) mapped from respective PDF columns.
+5.  **Output Logic**:
+    *   Appends data to `Connectivity_Application_Data_TEST_ALL_SHEETS36.xlsx`.
+    *   Preserves existing template formatting.
 
 ---
 

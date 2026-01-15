@@ -33,16 +33,165 @@ class ElementStatusProcessor:
             'OrgSCOD': ['Target', 'Org'],
             'AntSCOD': ['Target', 'Anticipate'],
             'Remarks': ['Remarks'],
-            'Length': ['Lengt', 'h']
+            'Length': ['Lengt', 'h'],
+            'AwardedTo': ['Exec', 'Agenc']
         }
         
         # Absolute Column Indices (1-based) for the TARGET Excel
         self.mapping_rules = {
+            3: 'InterIntra', 4: 'Scheme',  # New derived columns
+            15: 'AwardedTo',  # PDF 'Exec. Agency' -> Excel 'Awarded To'
             16: 'SPV', 17: 'Length', 18: 'Locs', 19: 'Found', 20: 'Erect',
             21: 'String', 22: 'CALC_FOUND', 23: 'CALC_ERECT', 24: 'CALC_STRING',
             25: 'Civil', 26: 'EqptRec', 27: 'EqptEre', 28: 'OrgSCOD',
             29: 'AntSCOD', 30: 'Remarks'
         }
+
+    def extract_scheme_details(self, text):
+        """
+        Extract Region, Phase, and Part from Project Name.
+        Logic:
+          - Attempt specific regex extraction first.
+          - Fallback to generic cleaning if regex fails to find a Region.
+        """
+        if not text: return None, None
+        
+    def extract_scheme_details(self, text):
+        """
+        Extract Region, Phase, and Part from Project Name.
+        Logic:
+          - Attempt specific regex extraction for Region/Phase/Part.
+          - Construct Scheme from valid components if found.
+          - If no Region is found, return empty strings (Strict Mode).
+        """
+        if not text: return None, None
+        
+        original_text = text
+        text = text.replace('\n', ' ').strip()
+        
+        # 0. Clean SPV/Suffixes PRE-REGEX (Aggressive)
+        text = re.sub(r'\s*\(?SPV\s*[:].*?(?:\)|$)', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'\s*,\s*SPV.*', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'\s*\(SPV.*?\)', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'\s*\([\d\.]+\s*GW\)', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'\s*\(CKM.*?\)', '', text, flags=re.IGNORECASE)
+        # Remove (Part-X: ...) which usually denotes capacity, keeping (Part-X) if no colon
+        text = re.sub(r'\(Part\s*[-–]?\s*\d+\s*:.*?\)', '', text, flags=re.IGNORECASE)
+
+        # 1. Region Regex
+        # PRIORITIZE "Rajasthan REZ" / "Gujarat REZ" over subtations like Bhadla/Sikar
+        # Sort pattern by length descending to catch specific names first
+        regions_list = [
+            'Rajasthan REZ', 'Gujarat REZ', 'Khavda RE Park', 'Khavda',
+            'Rajasthan', 'Gujarat', 'Madhya Pradesh', 'MP', 'M.P.', 
+            'Karnataka', 'Tamil Nadu', 'TN', 'Andhra', 'Telangana',
+            'Ananthapuram', 'Kurnool', 'Bhadla', 'Sikar', 'Fatehgarh', 
+            'Kadeoni', 'Koppal', 'Gadag', 'Bidar', 'Rajnandgaon', 'Kallam', 
+            'KPS[0-9]*', 'KPS', 'Bikaner Complex', 'Bikaner'
+        ]
+        # Sort by length descending to match "Rajasthan REZ" before "Rajasthan"
+        regions_list.sort(key=len, reverse=True)
+        region_pattern = r'(' + '|'.join([re.escape(r) for r in regions_list]) + r')(?:[- ]?[IVX]+)?'
+        
+        # Find ALL matches, prioritize "Rajasthan/Gujarat" if "as part of" context?
+        # Actually, simpler: Search for "as part of X" first?
+        # Case: "from Bhadla-III PS as part of Rajasthan REZ"
+        part_of_match = re.search(r'as part of\s+(.*?Scheme|.*?REZ(?: Phase[- ]?[IVX]*)?)', text, re.IGNORECASE)
+        if part_of_match:
+             potential_scheme = part_of_match.group(1)
+             # Recursively call extract on this snippet to get region? 
+             # Or just use this text for region search
+             region_match = re.search(region_pattern, potential_scheme, re.IGNORECASE)
+        else:
+             region_match = re.search(region_pattern, text, re.IGNORECASE)
+             
+        region = region_match.group(1) if region_match else None
+        
+        # Normalize Region
+        if region:
+            if "M.P." in region or "MP" == region: region = "Madhya Pradesh"
+            if "KPS" in region.upper(): region = region.upper()
+            region = re.sub(r'REZ', 'REZ', region, flags=re.IGNORECASE)
+
+        if not region:
+             return "", ""
+
+        # 2. Extract Phase
+        # Handles: Ph-IV, Phase-II. 
+        # Exclude "REZPhase" fixes (done via pre-clean?)
+        text = re.sub(r'REZPhase', 'Phase', text, flags=re.IGNORECASE)
+        phase_match = re.search(r'((?:Phase|Ph)\s*[-–]?\s*[IVX0-9]+)', text, re.IGNORECASE)
+        phase = phase_match.group(1) if phase_match else ""
+        
+        # Normalize Phase
+        phase = re.sub(r'Ph\s*[-–]', 'Phase-', phase, flags=re.IGNORECASE) # Ph-IV -> Phase-IV
+        phase = re.sub(r'\s*[-–]\s*', '-', phase) 
+        phase = re.sub(r'\s+', ' ', phase)
+        
+        # 3. Extract Part
+        # Capture Parts outside parens first
+        # Regex: Part A, Part B1 & B2
+        # EXCLUDE "Part of" (e.g. "as part of Rajasthan...")
+        
+        # Find "Part X" where X is alphanumeric. 
+        # Added negative lookahead (?!\s+of\b) to exclude "Part of"
+        # Adjusted to allow "Part-A" (no space)
+        parts_candidates = re.finditer(r'(Part(?!\s+of\b)\s*[-–]?\s*[A-Z0-9]+(?:[\s,&]+[A-Z0-9]+)*)', text, re.IGNORECASE)
+        
+        clean_parts = []
+        for p in parts_candidates:
+            val = p.group(1)
+            # Normalize
+            val = re.sub(r'\s*[-–]\s*', ' ', val)
+            clean_parts.append(val)
+            
+        # Deduplication strategy:
+        # If text has "(Part-1)... Part A", clean_parts might have ["Part 1", "Part A"].
+        # But we want output: "Region Phase (Part-1) Part A".
+        # So we should capture "(Part-1)" explicitly as a token.
+        
+        parts_paren = re.findall(r'(\(Part\s*[-–]?\s*\d+\))', text, re.IGNORECASE)
+        
+        # Remove matched paren parts from clean_parts if they overlap?
+        # e.g. regex for clean_parts catches "Part 1" inside "(Part 1)".
+        # We filter out parts that are structurally identical to what we found in parens.
+        
+        final_parts = []
+        # Add paren parts first
+        for pp in parts_paren:
+            # Normalize pp for output? User kept (Part-1).
+            final_parts.append(pp)
+            
+        # Add non-paren parts if not similar
+        for cp in clean_parts:
+            # Check if 'cp' (e.g. Part 1) is contained in any paren part (Part-1)
+            is_duplicate = False
+            cp_norm = re.sub(r'\s', '', cp).lower()
+            for pp in parts_paren:
+                pp_norm = re.sub(r'[\(\)\-\s]', '', pp).lower()
+                if cp_norm in pp_norm: 
+                    is_duplicate = True
+            
+            if not is_duplicate:
+                final_parts.append(cp)
+        
+        part_str = " ".join(final_parts).strip()
+        
+        # 4. Construct Output
+        scheme_parts = [region]
+        if phase: scheme_parts.append(phase)
+        if part_str: scheme_parts.append(part_str)
+        
+        scheme = " ".join(scheme_parts).strip()
+        
+        # Inter/Intra
+        inter_intra = f"{region} {phase}".strip()
+        
+        # Final Whitespace Clean
+        scheme = re.sub(r'\s+', ' ', scheme)
+        inter_intra = re.sub(r'\s+', ' ', inter_intra)
+        
+        return inter_intra, scheme
 
     # --- Methods from PDFExtractor ---
     def is_number(self, s):
@@ -199,12 +348,68 @@ class ElementStatusProcessor:
             else: print(f"  [Element Status] Warning: Missing source col for {k} ({kw})")
 
         src_data = {}
-        for _, r in df_src.iterrows():
-            if 'Scope' in src_cols:
-                k_val = self.clean_text(r[src_cols['Scope']])
-                if k_val: src_data[k_val] = r
+        
+        # Parent Context State Machine
+        current_context = {
+            'Scheme': None,
+            'InterIntra': None,
+            'SPV': None
+        }
+        
+        # Source Column Identifiers
+        col_sn_name = self.find_col(df_src, ['SN']) 
+        if not col_sn_name: col_sn_name = self.find_col(df_src, ['S.N'])
+        if not col_sn_name: col_sn_name = self.find_col(df_src, ['Sl', 'No'])
+
+        col_scope_name = src_cols.get('Scope')
+        col_spv_name = src_cols.get('SPV')
+
+        for idx, r in df_src.iterrows():
+            if not col_scope_name: continue
             
-        print(f"  [Element Status] Loaded {len(src_data)} records from extracted tables.")
+            # Check if this is a Parent/Context Row (Has SN)
+            is_parent = False
+            sn_val = r[col_sn_name] if col_sn_name else None
+            # Check is non-empty SN
+            if sn_val and str(sn_val).strip() and str(sn_val).strip().lower() != 'nan':
+                 is_parent = True
+            
+            raw_scope_text = r[col_scope_name]
+            clean_scope_text = self.clean_text(raw_scope_text)
+            
+            if is_parent:
+                # Update Context
+                # 1. Parse Key Scheme Info
+                inter, scheme = self.extract_scheme_details(str(raw_scope_text))
+                current_context['InterIntra'] = inter
+                current_context['Scheme'] = scheme
+                
+                # 2. Capture SPV if present in this parent row
+                if col_spv_name:
+                    spv_val = r[col_spv_name]
+                    if spv_val and str(spv_val).strip():
+                        current_context['SPV'] = spv_val
+                
+                # Do NOT add parent row to src_data
+                continue
+            
+            # This is a Child/Data Row
+            if not clean_scope_text or len(clean_scope_text) < 3: continue
+            
+            # Enrich row with Context
+            r_enriched = r.copy()
+            r_enriched['InterIntra'] = current_context['InterIntra']
+            r_enriched['Scheme'] = current_context['Scheme']
+            # Only overwrite SPV if child doesn't have it (though usually child has empty SPV)
+            if col_spv_name:
+                child_spv = r[col_spv_name]
+                if not child_spv or pd.isna(child_spv):
+                    r_enriched[col_spv_name] = current_context['SPV']
+            
+            # Store by Scope Key
+            src_data[clean_scope_text] = r_enriched
+            
+        print(f"  [Element Status] Loaded {len(src_data)} records from extracted tables (using hierarchical logic).")
 
         # 3. Write to Excel
         if not os.path.exists(target_excel_path):
@@ -306,6 +511,12 @@ class ElementStatusProcessor:
                         
                         if den > 0: val = round(num/den, 2)
                     except: pass
+                if rule.startswith('CALC_'):
+                    pass # Handled above
+                elif rule == 'InterIntra':
+                    val = src_row.get('InterIntra')
+                elif rule == 'Scheme':
+                    val = src_row.get('Scheme')
                 else:
                     src_col_name = src_cols.get(rule)
                     if src_col_name:
@@ -349,6 +560,12 @@ class ElementStatusProcessor:
                             
                             if den > 0: val = round(num/den, 2)
                         except: pass
+                    if rule.startswith('CALC_'):
+                        pass # Handled above
+                    elif rule == 'InterIntra':
+                        val = src_row.get('InterIntra')
+                    elif rule == 'Scheme':
+                        val = src_row.get('Scheme')
                     else:
                         src_col_name = src_cols.get(rule)
                         if src_col_name: val = src_row[src_col_name]
