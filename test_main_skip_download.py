@@ -38,7 +38,8 @@ from field_mappings import (
     normalize_regional_hub_to_state,  # Add regional hub normalizer
     split_transformation_capacity_row,  # Add transformation capacity row splitter
     split_transformation_capacity_row,  # Add transformation capacity row splitter
-    replace_multiplication_patterns  # Add multiplication pattern replacer for capacity calculations
+    replace_multiplication_patterns,  # Add multiplication pattern replacer for capacity calculations
+    clean_application_quantum
 )
 from element_status_processor import ElementStatusProcessor  # Import the new processor
 import concurrent.futures
@@ -657,6 +658,134 @@ def process_sn1_quantum_value(quantum_str):
     return quantum_str, ""
 
 
+def parse_hybrid_capacity_breakup(quantum_str, nature_of_applicant=""):
+    """
+    Parse hybrid capacity breakup from quantum string.
+    
+    Detects hybrid from the quantum pattern itself - when it contains BOTH Solar and Wind values.
+    Examples:
+    - "360 (Solar-260, Wind-100)" -> solar=260, wind=100, hybrid=360
+    - "180 (Solar-130 Wind-50)" -> solar=130, wind=50, hybrid=180
+    - "989 (Solar-675MW, Wind:314MW)" -> solar=675, wind=314, hybrid=989
+    
+    Args:
+        quantum_str: Raw quantum string (e.g., "360 (Solar-260, Wind-100)")
+        nature_of_applicant: The nature/type of applicant (optional, used as hint)
+        
+    Returns:
+        Dict with keys: solar_mw, wind_mw, hybrid_mw (values are strings or None)
+    """
+    import re
+    
+    result = {
+        'solar_mw': None,
+        'wind_mw': None,
+        'hybrid_mw': None
+    }
+    
+    if not quantum_str or pd.isna(quantum_str):
+        return result
+    
+    quantum_str = str(quantum_str).strip()
+    
+    # Normalize whitespace and newlines
+    normalized = re.sub(r'\s+', ' ', quantum_str)
+    
+    # Check if the quantum string contains BOTH Solar and Wind patterns
+    # This is the primary detection method for hybrid capacity
+    has_solar = bool(re.search(r'solar', normalized, re.IGNORECASE))
+    has_wind = bool(re.search(r'wind', normalized, re.IGNORECASE))
+    
+    # Also check nature_of_applicant as a secondary hint
+    nature_lower = str(nature_of_applicant).lower() if nature_of_applicant else ""
+    has_hybrid_nature = 'hybrid' in nature_lower
+    
+    # Only process if we detect hybrid (both solar AND wind, or nature says hybrid)
+    if not (has_solar and has_wind) and not has_hybrid_nature:
+        return result
+    
+    # Extract Solar value - patterns: "Solar-260", "Solar 260", "Solar:260", "Solar-675MW"
+    solar_match = re.search(r'solar[\s\-:]*(\d+(?:\.\d+)?)', normalized, re.IGNORECASE)
+    if solar_match:
+        result['solar_mw'] = solar_match.group(1).strip()
+    
+    # Extract Wind value - patterns: "Wind-100", "Wind 100", "Wind:100", "Wind:314MW"
+    wind_match = re.search(r'wind[\s\-:]*(\d+(?:\.\d+)?)', normalized, re.IGNORECASE)
+    if wind_match:
+        result['wind_mw'] = wind_match.group(1).strip()
+    
+    # Extract total (hybrid) - the number at the beginning before parentheses or brackets
+    # Patterns: "360 (Solar...", "989 (Solar...", "327MW [Solar..."
+    total_match = re.match(r'^([\d.]+)\s*(?:MW)?\s*[\(\[]', normalized, re.IGNORECASE)
+    if total_match:
+        result['hybrid_mw'] = total_match.group(1).strip()
+    
+    # If we found solar and wind but no total, calculate total as sum
+    if result['solar_mw'] and result['wind_mw'] and not result['hybrid_mw']:
+        try:
+            total = float(result['solar_mw']) + float(result['wind_mw'])
+            result['hybrid_mw'] = str(int(total)) if total == int(total) else str(total)
+        except ValueError:
+            pass
+    
+    return result
+
+
+def parse_psp_capacity(quantum_str, nature_of_applicant=""):
+    """
+    Parse PSP (Pumped Storage) capacity values from quantum string.
+    
+    When nature_of_applicant contains "Pumped Storage" or "PSP", and the quantum has patterns like:
+    - "Connectivity:880 Max Injection: 800 Max Drawl:880"
+    
+    This function extracts:
+    - psp_injection_mw: The Max Injection value (e.g., 800)
+    - psp_drawl_mw: The Max Drawl value (e.g., 880)
+    - psp_mwh: Left empty as per requirement
+    
+    Args:
+        quantum_str: Raw quantum string (e.g., "Connectivity:880 Max Injection: 800 Max Drawl:880")
+        nature_of_applicant: The nature/type of applicant (e.g., "Standalone ESS (Pumped Storage)")
+        
+    Returns:
+        Dict with keys: psp_mwh, psp_injection_mw, psp_drawl_mw (values are strings or None)
+    """
+    import re
+    
+    result = {
+        'psp_mwh': None,  # Leave empty as per user requirement
+        'psp_injection_mw': None,
+        'psp_drawl_mw': None
+    }
+    
+    if not quantum_str or pd.isna(quantum_str):
+        return result
+    
+    quantum_str = str(quantum_str).strip()
+    
+    # Normalize nature_of_applicant - remove newlines before pattern matching
+    nature_normalized = re.sub(r'\s+', ' ', str(nature_of_applicant).lower()) if nature_of_applicant else ""
+    
+    # Only process if the nature contains "pumped storage" or "psp"
+    if 'pumped storage' not in nature_normalized and 'psp' not in nature_normalized:
+        return result
+    
+    # Normalize whitespace and newlines
+    normalized = re.sub(r'\s+', ' ', quantum_str)
+    
+    # Extract Max Injection value - patterns: "Max Injection: 800", "Max Injection:800"
+    injection_match = re.search(r'max\s*injection[\s:]*(\d+(?:\.\d+)?)', normalized, re.IGNORECASE)
+    if injection_match:
+        result['psp_injection_mw'] = injection_match.group(1).strip()
+    
+    # Extract Max Drawl value - patterns: "Max Drawl: 880", "Max Drawl:880"
+    drawl_match = re.search(r'max\s*drawl[\s:]*(\d+(?:\.\d+)?)', normalized, re.IGNORECASE)
+    if drawl_match:
+        result['psp_drawl_mw'] = drawl_match.group(1).strip()
+    
+    return result
+
+
 def extract_sn1_substation_from_text(pdf_text, developer_name):
     """
     Extract confirmed substation for a developer from PDF narrative text.
@@ -1107,13 +1236,23 @@ def extract_sn1_records_from_table(df, column_mapping, header_row_idx, canonical
             submission_date = str(row.iloc[4]).strip()
         record['application_date'] = submission_date
         
-        # Extract Nature of Applicant
+        # Extract Nature of Applicant (may be in column 5 or 6 depending on table structure)
         nature = ""
         nature_col = column_mapping.get('nature_applicant')
         if nature_col is not None and len(row) > nature_col and not pd.isna(row.iloc[nature_col]):
             nature = str(row.iloc[nature_col]).strip()
-        elif len(row) > 5 and not pd.isna(row.iloc[5]):
-            nature = str(row.iloc[5]).strip()
+        else:
+            # Check columns 5 and 6 for nature (sometimes merged with criterion column)
+            for col_idx in [5, 6]:
+                if len(row) > col_idx and not pd.isna(row.iloc[col_idx]):
+                    cell_val = str(row.iloc[col_idx]).strip()
+                    # Look for Generator/Renewable/Hybrid keywords
+                    if any(kw in cell_val.lower() for kw in ['generator', 'renewable', 'hybrid', 'applicant']):
+                        nature = cell_val
+                        break
+            # Fallback to column 5 if no keyword match
+            if not nature and len(row) > 5 and not pd.isna(row.iloc[5]):
+                nature = str(row.iloc[5]).strip()
         record['nature_of_applicant'] = nature
         
         # Extract Quantum (MW)
@@ -1127,6 +1266,25 @@ def extract_sn1_records_from_table(df, column_mapping, header_row_idx, canonical
         app_quantum, granted_quantum = process_sn1_quantum_value(quantum)
         record['application_quantum_mw'] = app_quantum
         record['granted_quantum_gna_lta_mw'] = granted_quantum
+        
+        # Parse hybrid capacity breakup (Solar/Wind/Hybrid columns)
+        # Only applies when nature_of_applicant contains "Hybrid"
+        hybrid_breakup = parse_hybrid_capacity_breakup(quantum, nature)
+        if hybrid_breakup['solar_mw']:
+            record['installed_breakup_solar_mw'] = hybrid_breakup['solar_mw']
+        if hybrid_breakup['wind_mw']:
+            record['installed_breakup_wind_mw'] = hybrid_breakup['wind_mw']
+        if hybrid_breakup['hybrid_mw']:
+            record['installed_breakup_hybrid_mw'] = hybrid_breakup['hybrid_mw']
+        
+        # Parse PSP (Pumped Storage) capacity values
+        # Only applies when nature_of_applicant contains "Pumped Storage" or "PSP"
+        psp_values = parse_psp_capacity(quantum, nature)
+        if psp_values['psp_injection_mw']:
+            record['psp_injection_mw'] = psp_values['psp_injection_mw']
+        if psp_values['psp_drawl_mw']:
+            record['psp_drawl_mw'] = psp_values['psp_drawl_mw']
+        # psp_mwh intentionally left empty as per user requirement
         
         # Extract Start Date of Connectivity
         start_date = ""
@@ -1197,7 +1355,7 @@ def extract_sn1_records_from_table(df, column_mapping, header_row_idx, canonical
 # --- Test Configuration ---
 BASE_DOWNLOAD_DIR = "downloaded_pdfs"
 TEMPLATE_EXCEL_FILE = "Connectivity Application Data.xlsx"
-OUTPUT_EXCEL_FILE = "Connectivity_Application_Data_TEST_ALL_SHEETS36.xlsx"
+OUTPUT_EXCEL_FILE = "Connectivity_Application_Data_TEST_ALL_SHEETS38.xlsx"
 MAX_WORKERS = 1  # Set to 1 to avoid pypdfium2 threading issues on Windows
 
 # Test Settings: Process multiple sheets from different sources
@@ -1305,9 +1463,39 @@ def process_pdf_file(pdf_path, sheet_name):
                 except Exception as text_err:
                     print(f"      [SN1] Warning: Could not extract text for substation matching: {text_err}")
                 
-                # Extract tables from pages 11 onwards (where data tables are located)
-                tables = camelot.read_pdf(pdf_path, pages='11-end', line_scale=40, suppress_stdout=True)
-                print(f"      [SN1] Camelot extracted {len(tables)} raw table(s) from pages 11-end")
+                # Extract tables from ALL pages using chunked approach to avoid memory issues
+                # Process pages in batches of 20 to manage memory
+                all_tables = []
+                try:
+                    # Get total page count using PyMuPDF (fresh open)
+                    import fitz as fitz_pages
+                    doc_pages = fitz_pages.open(pdf_path)
+                    total_pages = len(doc_pages)
+                    doc_pages.close()
+                    
+                    print(f"      [SN1] PDF has {total_pages} pages, extracting in chunks...")
+                    
+                    chunk_size = 20
+                    for start_page in range(1, total_pages + 1, chunk_size):
+                        end_page = min(start_page + chunk_size - 1, total_pages)
+                        page_range = f"{start_page}-{end_page}"
+                        try:
+                            chunk_tables = camelot.read_pdf(pdf_path, pages=page_range, line_scale=40, suppress_stdout=True)
+                            if chunk_tables and len(chunk_tables) > 0:
+                                all_tables.extend(chunk_tables)
+                                print(f"      [SN1] Pages {page_range}: extracted {len(chunk_tables)} table(s)")
+                        except Exception as chunk_err:
+                            if 'memory' in str(chunk_err).lower():
+                                print(f"      [SN1] Memory issue on pages {page_range}, skipping...")
+                            else:
+                                print(f"      [SN1] Error on pages {page_range}: {chunk_err}")
+                    
+                    tables = all_tables
+                    print(f"      [SN1] Total: extracted {len(tables)} table(s) from all pages")
+                except Exception as extract_err:
+                    print(f"      [SN1] Chunked extraction failed: {extract_err}, trying fallback...")
+                    tables = camelot.read_pdf(pdf_path, pages='1-30', line_scale=40, suppress_stdout=True)
+                    print(f"      [SN1] Fallback: extracted {len(tables)} table(s) from pages 1-30")
                 
                 if not tables or len(tables) == 0:
                     print(f"      [SN1] No tables found, returning empty result")
@@ -2473,7 +2661,20 @@ def process_pdf_file(pdf_path, sheet_name):
             print(f"      [*] Total records extracted: {len(records)}")
             
             # Auto-infer region from state if missing
-            for record in records:
+            for i, record in enumerate(records):
+                # Clean Application Quantum field
+                if 'application_quantum_mw' in record:
+                    original_val = record['application_quantum_mw']
+                    cleaned_val = clean_application_quantum(original_val)
+                    record['application_quantum_mw'] = cleaned_val
+                    if original_val != cleaned_val:
+                        print(f"      [DEBUG] Record {i}: Cleaned 'application_quantum_mw' from '{repr(original_val)}' to '{cleaned_val}'")
+                else:
+                    # Check if maybe it has a suffix?
+                    matching_keys = [k for k in record.keys() if 'application_quantum' in k]
+                    if matching_keys:
+                        print(f"      [DEBUG] Record {i}: Found related keys but not exact match: {matching_keys}")
+
                 if 'state' in record and ('region' not in record or not record.get('region')):
                     state_value = record.get('state')
                     if state_value:

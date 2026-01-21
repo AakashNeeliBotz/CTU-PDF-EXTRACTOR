@@ -40,6 +40,7 @@
 | **Dual-Source State Lookup** | Transformation Capacity | Try Margin first, then DTBC |
 | **Fuzzy Name Matching** | State lookup | Exact → Core name → Partial match |
 | **Substation Cache Optimization** | SN1 | Scan PDF text ONCE, cache developer→substation mappings |
+| **Hybrid/PSP Pattern Parsing** | Data to be captured | Extract Solar/Wind split and Injection/Drawl values |
 
 ### Context Tracking Techniques
 | Technique | Where Used | Description |
@@ -792,6 +793,8 @@ The processor maps source columns to these target fields:
     *   **Strict Mode**: If no Region is found (and cleaning fails), returns empty string to filter out unrelated rows (e.g. "Goa Tamnar").
 4.  **Column Mappings**:
     *   `Awarded To` (Col 15) <- `Exec. Agency` (PDF)
+    *   `MVA` (Col 6) <- `MVA` (PDF)
+    *   `Mode` (Col 9) <- `Impl. Mode` (PDF)
     *   `Transmission Scope` (Col 5) <- `Name`/`Scope` (PDF Child Row)
     *   `SPV Name` (Col 16) <- `SPV` (PDF)
     *   Progress Columns (`Found`, `Erect`, `String`) mapped from respective PDF columns.
@@ -1196,3 +1199,67 @@ python test_main_skip_download.py
 ---
 
 *Document generated for CTU Automated PDF Extraction Project*
+
+### 10.2 Advanced Capacity Parsing & Normalization (Jan 2025)
+
+#### 1. Hybrid Capacity Breakup
+**Challenge**: Identifying Solar vs Wind components in combined "Hybrid" applications.
+**Solution**:
+- **Pattern Recognition**: Detects "Solar-X, Wind-Y" pattern within the `application_quantum_mw` string.
+- **Fallback**: Checks `nature_of_applicant` for "Hybrid" keyword.
+- **Logic**:
+    - **Solar**: Extracts value after "Solar", "Solar:" or "Solar-".
+    - **Wind**: Extracts value after "Wind", "Wind:" or "Wind-".
+    - **Total**: Taken from main number or calculated as sum.
+**Example**:
+- Input: `360 (Solar-260, Wind-100)`
+- Output: `hybrid_mw: 360`, `solar_mw: 260`, `wind_mw: 100`
+
+#### 2. Pumped Storage (PSP) Parsing
+**Challenge**: Extracting specific "Injection" and "Drawl" values for storage projects.
+**Solution**:
+- **Scope**: Activates only when `nature_of_applicant` contains "Pumped Storage" or "PSP".
+- **Regex**:
+    - Injection: `Max Injection[:\s]*(\d+)`
+    - Drawl: `Max Drawl[:\s]*(\d+)`
+- **Output**: Populates `psp_injection_mw` and `psp_drawl_mw` columns.
+
+#### 3. Strict Developer Matching
+**Challenge**: Narrative extraction was incorrectly attributing generic status updates to wrong developers.
+**Solution**:
+- Implemented **strict token matching**: Requires defined keywords from the developer name to be present in the narrative sentence.
+- Prevents "M/s Adani" status being applied to "M/s ReNew" simply because they appear on the same page.
+
+#### 4. Roman Numeral Normalization
+**Challenge**: Inconsistent casing "Bhadla-ii" vs "Bhadla-II".
+**Solution**:
+- Regex-based replacement: `(-\s)([IiVvXx]+)(\s|$)` -> Uppercase.
+- Ensures distinct entities like "Bikaner-II" and "Bikaner-III" are correctly grouped.
+
+### 10.3 Element Status Framework & PSP Quantum Updates (Jan 2026)
+
+#### 1. Unified Element Status Processing
+**Challenge**: "Element Status" sheet required data from both `SN_TBCB` (existing) and `SN1` (new, unstructured Annexures).
+**Solution**:
+- **Dual-Source Logic**: Updated `ElementStatusProcessor` to iterate through both `SN_TBCB` and `SN1` directories.
+- **SN1 Annexure Extraction**: Implemented specialized regex to parse "Minutes of Meeting" Annexures:
+    - **Headers**: Detects "Transmission system for Connectivity under GNA...", "For connectivity at [Voltage]...", etc.
+    - **List Parsing**: Extracts numbered items (e.g., "1. 400kV D/C line...") as distinct elements.
+    - **Context**: Captures header context (e.g., "Connectivity at Bikaner") into the 'Remarks' field.
+
+#### 2. Unique Element Codes (`EL-XXXXX`)
+**Feature**: Assign a stable, unique identifier to every element in the "Element Status" sheet.
+**Implementation**:
+- **Format**: `EL-` + First 5 characters of MD5 hash of the normalized element name (uppercase).
+- **Example**: "Khetri-Narela 765kV D/C Line" -> `EL-89310`.
+- **Consistency**: Ensures the same text always yields the same code, enabling cross-referencing.
+- **Placement**: Mapped to **Column B (Index 2)** in the Excel output.
+
+#### 3. PSP Application Quantum Cleaning
+**Challenge**: "Application Quantum" field often contained extra text like "Connectivity: 880\nInjection: 880".
+**Solution**:
+- **Cleaning Function**: `clean_application_quantum(text)` introduced in `field_mappings.py`.
+- **Logic**: 
+    - Extracts the first valid numeric sequence.
+    - Ignores labels like "Connectivity:", "Injection:".
+- **Result**: "Connectivity: 880" -> `880`.

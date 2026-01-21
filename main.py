@@ -12,6 +12,7 @@ from excel_handler import write_to_excel
 from field_mappings import (
     normalize_header, 
     infer_region_from_state,
+    clean_application_quantum,
     DATA_TO_BE_CAPTURED_FIELDS
 )
 import concurrent.futures
@@ -214,7 +215,20 @@ def process_pdf_file(pdf_path, prompt_for_sheet, sheet_name):
             print(f"      [*] Total records extracted: {len(records)}")
             
             # Auto-infer region from state if missing
-            for record in records:
+            for i, record in enumerate(records):
+                # Clean Application Quantum field
+                if 'application_quantum_mw' in record:
+                    original_val = record['application_quantum_mw']
+                    cleaned_val = clean_application_quantum(original_val)
+                    record['application_quantum_mw'] = cleaned_val
+                    if original_val != cleaned_val:
+                        print(f"      [DEBUG] Record {i}: Cleaned 'application_quantum_mw' from '{repr(original_val)}' to '{cleaned_val}'")
+                else:
+                    # Check if maybe it has a suffix?
+                    matching_keys = [k for k in record.keys() if 'application_quantum' in k]
+                    if matching_keys:
+                        print(f"      [DEBUG] Record {i}: Found related keys but not exact match: {matching_keys}")
+
                 if 'state' in record and ('region' not in record or not record.get('region')):
                     state_value = record.get('state')
                     if state_value:

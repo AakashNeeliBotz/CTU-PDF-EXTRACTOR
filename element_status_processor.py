@@ -5,6 +5,8 @@ import pandas as pd
 import re
 import os
 import warnings
+import hashlib
+import fitz # PyMuPDF
 from openpyxl.utils import get_column_letter
 
 # Suppress pandas warnings
@@ -34,18 +36,45 @@ class ElementStatusProcessor:
             'AntSCOD': ['Target', 'Anticipate'],
             'Remarks': ['Remarks'],
             'Length': ['Lengt', 'h'],
-            'AwardedTo': ['Exec', 'Agenc']
+            'AwardedTo': ['Exec', 'Agenc'],
+            'MVA': ['MVA'],
+            'Mode': ['Impl', 'Mode']
         }
         
         # Absolute Column Indices (1-based) for the TARGET Excel
         self.mapping_rules = {
             3: 'InterIntra', 4: 'Scheme',  # New derived columns
+            6: 'MVA', 9: 'Mode',
             15: 'AwardedTo',  # PDF 'Exec. Agency' -> Excel 'Awarded To'
             16: 'SPV', 17: 'Length', 18: 'Locs', 19: 'Found', 20: 'Erect',
             21: 'String', 22: 'CALC_FOUND', 23: 'CALC_ERECT', 24: 'CALC_STRING',
             25: 'Civil', 26: 'EqptRec', 27: 'EqptEre', 28: 'OrgSCOD',
-            29: 'AntSCOD', 30: 'Remarks'
+            29: 'AntSCOD', 30: 'Remarks',
+            2: 'ElementCode' # Unique Element Code at column B (2)
         }
+
+    def generate_unique_code(self, element_name):
+        """
+        Generate a 5-character unique code hash for an element name.
+        Format: EL-XXXXX
+        """
+        if not element_name:
+            return None
+        
+        # Normalize: lowercase, remove special chars (except maybe alphanumeric) to ensure stability
+        # Keep it simple: remove non-alphanumeric chars
+        normalized = re.sub(r'[^a-z0-9]', '', str(element_name).lower())
+        
+        if not normalized:
+            return None
+            
+        # Compute MD5
+        hash_obj = hashlib.md5(normalized.encode())
+        
+        # Take first 5 chars and uppercase
+        hash_str = hash_obj.hexdigest()[:5].upper()
+        
+        return f"EL-{hash_str}"
 
     def extract_scheme_details(self, text):
         """
@@ -293,7 +322,118 @@ class ElementStatusProcessor:
         df = pd.DataFrame(data, columns=clean_headers)
         return df
 
-    # --- Methods from ExcelPopulator ---
+    def extract_sn1_data(self, pdf_path):
+        """
+        Extract Element records from SN1 (Minutes of Meeting) PDFs.
+        Target sections: Annexures with headers like "Transmission system for Connectivity..."
+        Returns: src_data dict {clean_scope: record_dict}
+        """
+        print(f"  [Element Status] Processing SN1 PDF: {os.path.basename(pdf_path)}")
+        src_data = {}
+        
+        try:
+            doc = fitz.open(pdf_path)
+        except Exception as e:
+            print(f"  [Element Status] Error opening SN1 PDF: {e}")
+            return {}
+
+        element_patterns = [
+            r"Transmission system for Connectivity under GNA at\s+(.*)",
+            r"For connectivity at.*?level of\s+(.*)",
+            r"Additional system for connectivity.*?level only of\s+(.*)"
+        ]
+        
+        current_context = None
+        capturing = False
+        buffer = []
+        
+        for page in doc:
+            # "text" mode is usually best for reading order in these documents
+            text = page.get_text("text")
+            lines = text.split('\n')
+            
+            for line in lines:
+                line = line.strip()
+                if not line: continue
+                
+                # Check for Headers
+                is_header = False
+                for pattern in element_patterns:
+                    match = re.search(pattern, line, re.IGNORECASE)
+                    if match:
+                        if capturing and buffer:
+                             # Process previous buffer
+                             self._process_sn1_buffer(buffer, current_context, src_data)
+                             buffer = []
+                        
+                        current_context = match.group(0).strip()
+                        capturing = True
+                        is_header = True
+                        break
+                
+                if is_header: continue
+                
+                if capturing:
+                    # Stop conditions
+                    if re.match(r'^Annexure', line, re.IGNORECASE):
+                        capturing = False
+                        if buffer:
+                            self._process_sn1_buffer(buffer, current_context, src_data)
+                            buffer = []
+                        continue
+                    
+                    # Filter logical breaks or end of list
+                    # (Heuristic: double newline or next big header? simplified for now)
+                    
+                    # Filter noise
+                    if re.match(r'^\d+$', line): continue
+                    if "page" in line.lower() and re.search(r'\d+', line): continue
+                    
+                    buffer.append(line)
+        
+        # Flush last buffer
+        if capturing and buffer:
+            self._process_sn1_buffer(buffer, current_context, src_data)
+            
+        doc.close()
+        return src_data
+
+    def _process_sn1_buffer(self, buffer, context, src_data):
+        """Helper to process a buffer of lines into element records"""
+        if not buffer: return
+        
+        # Simple list parsing: items starting with "1.", "2." etc.
+        # Or just take every line as an element if regex match fails? 
+        # Better: Join lines and split by number pattern?
+        
+        text_blob = " ".join(buffer)
+        
+        # Split by number list pattern "1.", "2."
+        # Lookbehind for space or start
+        items = re.split(r'(?:\s|^)\d+\.', text_blob)
+        
+        for item in items:
+            clean_item = item.strip()
+            if not clean_item or len(clean_item) < 5: continue
+            
+            # Create Record
+            element_code = self.generate_unique_code(clean_item)
+            clean_scope = self.clean_text(clean_item)
+            
+            record = {
+                'Scope': clean_item, # Raw text
+                'Scheme': context,
+                'ElementCode': element_code,
+                'Source': 'SN1',
+                # Populate other fields as None/Empty
+                'SPV': None, 'Locs': None, 'Found': None, 'Erect': None,
+                'String': None, 'Civil': None, 'EqptRec': None, 'EqptEre': None,
+                'OrgSCOD': None, 'AntSCOD': None, 'Remarks': f"From Annexure: {context}",
+                'MVA': None, 'Length': None, 'AwardedTo': None, 'Mode': 'TBCB',
+                'InterIntra': None # Derived from Scheme later if generic
+            }
+            
+            src_data[clean_scope] = record
     def clean_text(self, val):
         if pd.isna(val) or val is None: return None
         # Normalize: strip, replace newlines/tabs with space, collapse multiple spaces
@@ -315,101 +455,119 @@ class ElementStatusProcessor:
         return None
 
     def process_and_write(self, pdf_path, target_excel_path):
-        """
-        Main orchestration method:
-         1. Extract tables from PDF
-         2. Convert to intermediate DataFrame (Logic from Populator.sync loaded part)
-         3. Write to Target Excel (Logic from Populator.sync write part)
-        """
-        # 1. Extract Data
-        raw_tables = self.extract_from_pdf(pdf_path)
-        merged_data = self.merge_tables(raw_tables)
-        
-        if not merged_data:
-            print("  [Element Status] No data extracted from PDF.")
-            return
 
-        # 2. Prepare Source Data (in-memory)
-        # We need to map the raw extracted columns to our internal 'src_data' dict
-        # First, find the column names from the headers (first row of merged_data)
+        # 1. Determine Extraction Strategy based on PDF Path
+        is_sn1 = "SN1" in pdf_path and "SN_TBCB" not in pdf_path
         
-        if not merged_data: return
-        
-        # Create a temp DF for column mapping logic
-        headers = merged_data[0]
-        # print(f"  [DEBUG] Extracted Headers: {headers}")
-        df_src = pd.DataFrame(merged_data[1:], columns=headers)
-        
-        # Identical logic to Populator.sync for finding source columns
-        src_cols = {}
-        for k, kw in self.src_cols_map.items():
-            found = self.find_col(df_src, kw)
-            if found: src_cols[k] = found
-            else: print(f"  [Element Status] Warning: Missing source col for {k} ({kw})")
-
         src_data = {}
+        src_cols = {}
         
-        # Parent Context State Machine
-        current_context = {
-            'Scheme': None,
-            'InterIntra': None,
-            'SPV': None
-        }
+        if is_sn1:
+            # SN1 Extraction Path
+            src_data = self.extract_sn1_data(pdf_path)
+            
+            # Setup dummy src_cols map for SN1 (direct mapping)
+            for k in self.src_cols_map.keys():
+                src_cols[k] = k # Identity map
+            src_cols['ElementCode'] = 'ElementCode'
+            
+        else:
+            # Existing TBCB Extraction Path
+            
+            # 1. Extract Data
+            raw_tables = self.extract_from_pdf(pdf_path)
+            merged_data = self.merge_tables(raw_tables)
+            
+            if not merged_data:
+                print("  [Element Status] No data extracted from PDF.")
+                return
+
+            # 2. Prepare Source Data (in-memory)
+            # We need to map the raw extracted columns to our internal 'src_data' dict
+            # First, find the column names from the headers (first row of merged_data)
+            
+            if not merged_data: return
         
-        # Source Column Identifiers
-        col_sn_name = self.find_col(df_src, ['SN']) 
-        if not col_sn_name: col_sn_name = self.find_col(df_src, ['S.N'])
-        if not col_sn_name: col_sn_name = self.find_col(df_src, ['Sl', 'No'])
+            # Create a temp DF for column mapping logic
+            headers = merged_data[0]
+            # print(f"  [DEBUG] Extracted Headers: {headers}")
+            df_src = pd.DataFrame(merged_data[1:], columns=headers)
+            
+            # Identical logic to Populator.sync for finding source columns
+            for k, kw in self.src_cols_map.items():
+                found = self.find_col(df_src, kw)
+                if found: src_cols[k] = found
+                else: print(f"  [Element Status] Warning: Missing source col for {k} ({kw})")
 
-        col_scope_name = src_cols.get('Scope')
-        col_spv_name = src_cols.get('SPV')
+            # Parent Context State Machine
+            current_context = {
+                'Scheme': None,
+                'InterIntra': None,
+                'SPV': None
+            }
+            
+            # Source Column Identifiers
+            col_sn_name = self.find_col(df_src, ['SN']) 
+            if not col_sn_name: col_sn_name = self.find_col(df_src, ['S.N'])
+            if not col_sn_name: col_sn_name = self.find_col(df_src, ['Sl', 'No'])
 
-        for idx, r in df_src.iterrows():
-            if not col_scope_name: continue
-            
-            # Check if this is a Parent/Context Row (Has SN)
-            is_parent = False
-            sn_val = r[col_sn_name] if col_sn_name else None
-            # Check is non-empty SN
-            if sn_val and str(sn_val).strip() and str(sn_val).strip().lower() != 'nan':
-                 is_parent = True
-            
-            raw_scope_text = r[col_scope_name]
-            clean_scope_text = self.clean_text(raw_scope_text)
-            
-            if is_parent:
-                # Update Context
-                # 1. Parse Key Scheme Info
-                inter, scheme = self.extract_scheme_details(str(raw_scope_text))
-                current_context['InterIntra'] = inter
-                current_context['Scheme'] = scheme
+            col_scope_name = src_cols.get('Scope')
+            col_spv_name = src_cols.get('SPV')
+
+            for idx, r in df_src.iterrows():
+                if not col_scope_name: continue
                 
-                # 2. Capture SPV if present in this parent row
+                # Check if this is a Parent/Context Row (Has SN)
+                is_parent = False
+                sn_val = r[col_sn_name] if col_sn_name else None
+                # Check is non-empty SN
+                if sn_val and str(sn_val).strip() and str(sn_val).strip().lower() != 'nan':
+                     is_parent = True
+                
+                raw_scope_text = r[col_scope_name]
+                clean_scope_text = self.clean_text(raw_scope_text)
+                
+                if is_parent:
+                    # Update Context
+                    # 1. Parse Key Scheme Info
+                    inter, scheme = self.extract_scheme_details(str(raw_scope_text))
+                    current_context['InterIntra'] = inter
+                    current_context['Scheme'] = scheme
+                    
+                    # 2. Capture SPV if present in this parent row
+                    if col_spv_name:
+                        spv_val = r[col_spv_name]
+                        if spv_val and str(spv_val).strip():
+                            current_context['SPV'] = spv_val
+                    
+                    # Do NOT add parent row to src_data
+                    continue
+                
+                # This is a Child/Data Row
+                if not clean_scope_text or len(clean_scope_text) < 3: continue
+                
+                # Enrich row with Context
+                r_enriched = r.copy()
+                r_enriched['InterIntra'] = current_context['InterIntra']
+                r_enriched['Scheme'] = current_context['Scheme']
+                # Only overwrite SPV if child doesn't have it (though usually child has empty SPV)
                 if col_spv_name:
-                    spv_val = r[col_spv_name]
-                    if spv_val and str(spv_val).strip():
-                        current_context['SPV'] = spv_val
+                    child_spv = r[col_spv_name]
+                    if not child_spv or pd.isna(child_spv):
+                        r_enriched[col_spv_name] = current_context['SPV']
                 
-                # Do NOT add parent row to src_data
-                continue
+                # Generate Element Code
+                r_enriched['ElementCode'] = self.generate_unique_code(clean_scope_text)
+                
+                # Store by Scope Key
+                src_data[clean_scope_text] = r_enriched
             
-            # This is a Child/Data Row
-            if not clean_scope_text or len(clean_scope_text) < 3: continue
+            # Add ElementCode to src_cols for TBCB path so writer finds it
+            src_cols['ElementCode'] = 'ElementCode'
             
-            # Enrich row with Context
-            r_enriched = r.copy()
-            r_enriched['InterIntra'] = current_context['InterIntra']
-            r_enriched['Scheme'] = current_context['Scheme']
-            # Only overwrite SPV if child doesn't have it (though usually child has empty SPV)
-            if col_spv_name:
-                child_spv = r[col_spv_name]
-                if not child_spv or pd.isna(child_spv):
-                    r_enriched[col_spv_name] = current_context['SPV']
-            
-            # Store by Scope Key
-            src_data[clean_scope_text] = r_enriched
-            
-        print(f"  [Element Status] Loaded {len(src_data)} records from extracted tables (using hierarchical logic).")
+        print(f"  [Element Status] Loaded {len(src_data)} records (Source: {'SN1' if is_sn1 else 'TBCB'}).")
+
+        # 3. Write to Excel
 
         # 3. Write to Excel
         if not os.path.exists(target_excel_path):
@@ -438,6 +596,14 @@ class ElementStatusProcessor:
             print("  [Element Status] Error: 'Transmission Scope' column not found in row 2 of target sheet.")
             # Fallback or return? Let's return for safety.
             return
+
+        # Ensure "Element Code" header exists at Column 2 (B2) - The original Blue header column
+        if ws.cell(row=2, column=2).value != "Element Code":
+             ws.cell(row=2, column=2).value = "Element Code"
+             
+        # Clear duplicate "Element Code" from Column 1 (A2) if I created it previously
+        if ws.cell(row=2, column=1).value == "Element Code":
+            ws.cell(row=2, column=1).value = None
 
         updates, skips = 0, 0
         target_rows = list(ws.iter_rows(min_row=4))
@@ -518,9 +684,13 @@ class ElementStatusProcessor:
                 elif rule == 'Scheme':
                     val = src_row.get('Scheme')
                 else:
+
                     src_col_name = src_cols.get(rule)
                     if src_col_name:
                         val = src_row[src_col_name]
+                    elif rule == 'Mode':
+                        # Default to TBCB if Mode column is missing (common in TBCB reports)
+                        val = "TBCB"
                 
                 if val is not None and not pd.isna(val):
                     # Clean the value if string
@@ -569,6 +739,9 @@ class ElementStatusProcessor:
                     else:
                         src_col_name = src_cols.get(rule)
                         if src_col_name: val = src_row[src_col_name]
+                        elif rule == 'Mode':
+                            # Default to TBCB if Mode column is missing
+                            val = "TBCB"
 
                     if val is not None and not pd.isna(val):
                          if isinstance(val, str):
@@ -581,3 +754,4 @@ class ElementStatusProcessor:
                 
         wb.save(target_excel_path)
         print(f"  [Element Status] Completed. {updates} updates made.")
+

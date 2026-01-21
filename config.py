@@ -46,6 +46,6 @@ SHEET_CONFIG = {
         "sources": ["SN9"],
     },
     "Element Status": {
-        "sources": ["SN_TBCB"],  # Matches Report_TBCB_UC.pdf
+        "sources": ["SN_TBCB", "SN1"],  # Matches Report_TBCB_UC.pdf and now SN1 Annexures
     }
 }

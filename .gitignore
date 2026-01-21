@@ -162,3 +162,5 @@ Thumbs.db
 *.bak
 *.old
 test_output.log
+
+*.xlsx

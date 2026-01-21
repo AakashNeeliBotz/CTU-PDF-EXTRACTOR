@@ -1,0 +1,41 @@
+Extracted Headers: ['SN', 'Name of the Transmission Project &\nScope', 'Exec.\nAgenc\ny', 'Lengt\nh', 'MVA', 'Cost\n(Rs.\nCr)', 'SPV\nTransfe\nr Date', 'Target -\nOrg', 'Target -\nAnticipate\nd', 'Total\nLocs.\n(Nos)', 'Found\nation\n(Nos)', 'Erecti\non\n(Nos)', 'Stringin\ng (ckm)', 'Civil\nworks\n(%)', 'Eqpt.\nReceive\nd (%)', 'Eqpt.\nErectio\nn (%)', 'Remarks / Constraints & assistance required']
+
+Column Mapping Check:
+  Scope (['Name', 'Scope']): Found -> 'Name of the Transmission Project &
+Scope'
+  SPV (['SPV', 'Transfe']): Found -> 'SPV
+Transfe
+r Date'
+  Locs (['Total', 'Locs']): Found -> 'Total
+Locs.
+(Nos)'
+  Found (['Found', 'ation', 'Nos']): Found -> 'Found
+ation
+(Nos)'
+  Erect (['Erecti', 'on', 'Nos']): Found -> 'Erecti
+on
+(Nos)'
+  String (['Stringin', 'g']): Found -> 'Stringin
+g (ckm)'
+  Civil (['Civil', 'works']): Found -> 'Civil
+works
+(%)'
+  EqptRec (['Eqpt', 'Receive']): Found -> 'Eqpt.
+Receive
+d (%)'
+  EqptEre (['Eqpt', 'Erectio']): Found -> 'Eqpt.
+Erectio
+n (%)'
+  OrgSCOD (['Target', 'Org']): Found -> 'Target -
+Org'
+  AntSCOD (['Target', 'Anticipate']): Found -> 'Target -
+Anticipate
+d'
+  Remarks (['Remarks']): Found -> 'Remarks / Constraints & assistance required'
+  Length (['Lengt', 'h']): Found -> 'Lengt
+h'
+  AwardedTo (['Exec', 'Agenc']): Found -> 'Exec.
+Agenc
+y'
+  MVA (['MVA']): Found -> 'MVA'
+  Mode (['Impl', 'Mode']): MISSING

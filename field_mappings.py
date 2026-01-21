@@ -1340,3 +1340,36 @@ def split_transformation_capacity_row(row: dict) -> list:
     output_rows.sort(key=lambda x: x.get('voltage_level_kv') or 0, reverse=True)
     
     return output_rows
+
+
+def clean_application_quantum(value: str) -> str:
+    """
+    Clean Application Quantum field to extract only the connectivity value.
+    
+    Handles cases like:
+    "Connectivity:880\\nMax Injection: 800\\nMax Drawl:880" -> "880"
+    
+    Args:
+        value: Raw value from PDF extraction
+        
+    Returns:
+        Cleaned value (Connectivity quantum only)
+    """
+    import re
+    
+    if not value or not isinstance(value, str):
+        return value
+    
+    original = value.strip()
+    
+    # Check for "Connectivity:" pattern (common in PSP applications)
+    # Case insensitive match for "Connectivity:" followed by number
+    match = re.search(r'Connectivity\s*[:]\s*([\d\.]+)', original, re.IGNORECASE)
+    
+    if match:
+        # Return just the number found after Connectivity:
+        return match.group(1).strip()
+    
+    # If no specific pattern found, return original value
+    return original
+
