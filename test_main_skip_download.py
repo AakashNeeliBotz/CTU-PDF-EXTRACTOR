@@ -786,6 +786,157 @@ def parse_psp_capacity(quantum_str, nature_of_applicant=""):
     return result
 
 
+def parse_battery_values(quantum_str, nature_of_applicant=""):
+    """
+    Parse battery/BESS values from quantum string and nature.
+    
+    Extracts battery values from patterns like:
+    - "BESS:380 MWh)" -> battery_mwh: 380
+    - "ESS: 46" -> battery_mwh: 46
+    - "BESS-100MWh" -> battery_mwh: 100
+    
+    Args:
+        quantum_str: Raw quantum string (e.g., "Connectivity:200 (Solar:200 ESS: 46)")
+        nature_of_applicant: The nature/type of applicant (e.g., "Generator (Solar) with ESS")
+        
+    Returns:
+        Dict with keys: battery_mwh, battery_injection_mw, battery_drawl_mw (values are strings or None)
+    """
+    import re
+    
+    result = {
+        'battery_mwh': None,
+        'battery_injection_mw': None,
+        'battery_drawl_mw': None
+    }
+    
+    if not quantum_str:
+        return result
+    
+    quantum_str = str(quantum_str).strip()
+    normalized = re.sub(r'\s+', ' ', quantum_str).lower()
+    
+    # Look for BESS/ESS patterns
+    if 'bess' in normalized or 'ess' in normalized or 'battery' in normalized:
+        # Extract MWh value after BESS/ESS keywords
+        mwh_match = re.search(r'(?:bess|ess|battery)[^\d]*(\d+(?:\.\d+)?)\s*mwh', normalized)
+        if mwh_match:
+            result['battery_mwh'] = mwh_match.group(1)
+        
+        # If not found, look for number after BESS/ESS keywords
+        if not result['battery_mwh']:
+            mwh_match = re.search(r'(?:bess|ess|battery)[^\d]*(\d+(?:\.\d+)?)', normalized)
+            if mwh_match:
+                result['battery_mwh'] = mwh_match.group(1)
+        
+        # Look for injection/drawl patterns if nature suggests storage
+        nature_lower = str(nature_of_applicant).lower() if nature_of_applicant else ""
+        if 'storage' in nature_lower or 'ess' in nature_lower or 'bess' in nature_lower:
+            # Look for injection/drawl values in the quantum string
+            inj_match = re.search(r'injection[\s:]*(\d+(?:\.\d+)?)', normalized)
+            if inj_match:
+                result['battery_injection_mw'] = inj_match.group(1)
+            
+            drawl_match = re.search(r'drawl[\s:]*(\d+(?:\.\d+)?)', normalized)
+            if drawl_match:
+                result['battery_drawl_mw'] = drawl_match.group(1)
+    
+    return result
+
+
+def enhanced_parse_hybrid_capacity_breakup(quantum_str, nature_of_applicant=""):
+    """
+    Enhanced function to extract Solar, Wind, Hybrid MW values from quantum string and nature.
+    Covers more patterns than the original function.
+    
+    Args:
+        quantum_str: Raw quantum string (e.g., "360 (Solar-260, Wind-100)")
+        nature_of_applicant: The nature/type of applicant (optional, used as hint)
+        
+    Returns:
+        Dict with keys: solar_mw, wind_mw, hybrid_mw (values are strings or None)
+    """
+    import re
+    
+    result = {
+        'solar_mw': None,
+        'wind_mw': None,
+        'hybrid_mw': None
+    }
+    
+    if not quantum_str and not nature_of_applicant:
+        return result
+    
+    # Normalize input
+    normalized = ""
+    if quantum_str:
+        normalized += str(quantum_str) + " "
+    if nature_of_applicant:
+        normalized += str(nature_of_applicant)
+    
+    normalized = normalized.lower()
+    
+    # Check if this is a hybrid project
+    is_hybrid = ('hybrid' in normalized) or ('rhgs' in normalized)
+    
+    if not is_hybrid:
+        # Still check for solar/wind even if not marked as hybrid
+        solar_match = re.search(r'solar[^\d]*(\d+(?:\.\d+)?)', normalized)
+        if solar_match:
+            result['solar_mw'] = solar_match.group(1)
+        
+        wind_match = re.search(r'wind[^\d]*(\d+(?:\.\d+)?)', normalized)
+        if wind_match:
+            result['wind_mw'] = wind_match.group(1)
+        
+        # Extract main number if it exists
+        main_num_match = re.search(r'^(\d+(?:\.\d+)?)', str(quantum_str or ""))
+        if main_num_match:
+            result['hybrid_mw'] = main_num_match.group(1)
+    else:
+        # This is definitely a hybrid project
+        # Look for various patterns
+        solar_patterns = [
+            r'solar[^\d]*(\d+(?:\.\d+)?)mw',  # Solar-260MW
+            r'solar[^\d]*(\d+(?:\.\d+)?)',   # Solar-260, Solar:260, Solar 260
+            r'\(solar[^\d]*(\d+(?:\.\d+)?)', # (Solar-260
+            r'solar\s*-\s*(\d+(?:\.\d+)?)',  # Solar-260 (with dash)
+            r'solar\s*:\s*(\d+(?:\.\d+)?)',  # Solar:260
+        ]
+        
+        for pattern in solar_patterns:
+            match = re.search(pattern, normalized)
+            if match:
+                result['solar_mw'] = match.group(1)
+                break
+        
+        wind_patterns = [
+            r'wind[^\d]*(\d+(?:\.\d+)?)mw',   # Wind-100MW
+            r'wind[^\d]*(\d+(?:\.\d+)?)',    # Wind-100, Wind:100, Wind 100
+            r'\(wind[^\d]*(\d+(?:\.\d+)?)',  # (Wind-100
+            r'wind\s*-\s*(\d+(?:\.\d+)?)',   # Wind-100 (with dash)
+            r'wind\s*:\s*(\d+(?:\.\d+)?)',   # Wind:100
+        ]
+        
+        for pattern in wind_patterns:
+            match = re.search(pattern, normalized)
+            if match:
+                result['wind_mw'] = match.group(1)
+                break
+        
+        # Extract the total hybrid capacity
+        main_num_match = re.search(r'(\d+(?:\.\d+)?)\s*\(', str(quantum_str or ""))
+        if not main_num_match:
+            main_num_match = re.search(r'hybrid[^\d\(]*(\d+(?:\.\d+)?)', normalized)
+        if not main_num_match:
+            main_num_match = re.search(r'^(\d+(?:\.\d+)?)', str(quantum_str or ""))
+        
+        if main_num_match:
+            result['hybrid_mw'] = main_num_match.group(1)
+    
+    return result
+
+
 def extract_sn1_substation_from_text(pdf_text, developer_name):
     """
     Extract confirmed substation for a developer from PDF narrative text.
@@ -1268,8 +1419,8 @@ def extract_sn1_records_from_table(df, column_mapping, header_row_idx, canonical
         record['granted_quantum_gna_lta_mw'] = granted_quantum
         
         # Parse hybrid capacity breakup (Solar/Wind/Hybrid columns)
-        # Only applies when nature_of_applicant contains "Hybrid"
-        hybrid_breakup = parse_hybrid_capacity_breakup(quantum, nature)
+        # Enhanced parsing to catch more patterns
+        hybrid_breakup = enhanced_parse_hybrid_capacity_breakup(quantum, nature)
         if hybrid_breakup['solar_mw']:
             record['installed_breakup_solar_mw'] = hybrid_breakup['solar_mw']
         if hybrid_breakup['wind_mw']:
@@ -1280,6 +1431,15 @@ def extract_sn1_records_from_table(df, column_mapping, header_row_idx, canonical
         # Parse PSP (Pumped Storage) capacity values
         # Only applies when nature_of_applicant contains "Pumped Storage" or "PSP"
         psp_values = parse_psp_capacity(quantum, nature)
+        
+        # Parse Battery/BESS values
+        battery_values = parse_battery_values(quantum, nature)
+        if battery_values['battery_mwh']:
+            record['battery_mwh'] = battery_values['battery_mwh']
+        if battery_values['battery_injection_mw']:
+            record['battery_injection_mw'] = battery_values['battery_injection_mw']
+        if battery_values['battery_drawl_mw']:
+            record['battery_drawl_mw'] = battery_values['battery_drawl_mw']
         if psp_values['psp_injection_mw']:
             record['psp_injection_mw'] = psp_values['psp_injection_mw']
         if psp_values['psp_drawl_mw']:
@@ -1355,7 +1515,7 @@ def extract_sn1_records_from_table(df, column_mapping, header_row_idx, canonical
 # --- Test Configuration ---
 BASE_DOWNLOAD_DIR = "downloaded_pdfs"
 TEMPLATE_EXCEL_FILE = "Connectivity Application Data.xlsx"
-OUTPUT_EXCEL_FILE = "Connectivity_Application_Data_TEST_ALL_SHEETS38.xlsx"
+OUTPUT_EXCEL_FILE = "Connectivity_Application_Data_TEST_ALL_SHEETS39.xlsx"
 MAX_WORKERS = 1  # Set to 1 to avoid pypdfium2 threading issues on Windows
 
 # Test Settings: Process multiple sheets from different sources
@@ -1407,11 +1567,13 @@ def process_pdf_file(pdf_path, sheet_name):
                  processor.process_and_write(pdf_path, output_file)
                  print(f"      [OK] Element Status processing completed for {os.path.basename(pdf_path)}")
                  # Return empty DataFrame so main loop skips standard processing/writing
+                 import pandas as pd
                  return pd.DataFrame()
              except Exception as e:
                  print(f"      [!] Element Status specialized processing failed: {e}")
                  import traceback
                  traceback.print_exc()
+                 import pandas as pd
                  return pd.DataFrame()
 
         # Extract folder name from PDF path for folder-specific logic
@@ -1499,6 +1661,7 @@ def process_pdf_file(pdf_path, sheet_name):
                 
                 if not tables or len(tables) == 0:
                     print(f"      [SN1] No tables found, returning empty result")
+                    import pandas as pd
                     return pd.DataFrame()
                 
                 # Convert to DataFrames and fix column alignment
@@ -1535,12 +1698,14 @@ def process_pdf_file(pdf_path, sheet_name):
                 if all_records:
                     return ('camelot', all_records)
                 else:
+                    import pandas as pd
                     return pd.DataFrame()
                 
             except Exception as e:
                 print(f"      [SN1] Extraction error: {e}")
                 import traceback
                 traceback.print_exc()
+                import pandas as pd
                 return pd.DataFrame()
         
         # Extract using 3-tier approach (returns text AND tables)
@@ -1605,6 +1770,7 @@ def process_pdf_file(pdf_path, sheet_name):
             if skip_this_pdf:
                 # Return empty result to avoid processing
                 print(f"      [*] Skipping this PDF for sheet '{sheet_name}'")
+                import pandas as pd
                 return pd.DataFrame()  # Return empty DataFrame
             
             if len(tables) > 0 and not tables[0].empty:

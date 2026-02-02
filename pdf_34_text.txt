@@ -1,0 +1,3816 @@
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 1 of 67 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+The 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region (CMETS-NR) was held through VC on 
+20/09/2024. List of participants is enclosed at Annexure-XI 
+It was informed that minutes of the 32nd CMETS-NR meeting held on 10.07.2024 was issued vide letter dated 17.07.2024. No comments 
+were received, accordingly, minutes is confirmed as circulated. 
+It was informed that Minutes of the 33rd CMETS-NR meeting held on 05.08.2024 was issued vide letter dated 16.08.2024. No comments 
+were received on the minutes, however, following corrections may be noted: 
+(i). 
+At Page No. 23, for connectivity application of M/s Adani Renewable(2200000661), start date of connectivity was inadvertently mentioned 
+as 31.12.2030. The same may be corrected and read as 31.12.2028 as mentioned in earlier para of the minutes for the same application. 
+(ii). 
+At Page No. 42, for connectivity of M/s Renew Solar (2200000779), dedicated transmission line was mentioned as 400 kV S/c line. The 
+same may be corrected and read as 400 kV S/c line on D/c tower.  
+(iii). 
+At Page No. 49, for connectivity of M/s Adani Renewable(2200000810), dedicated transmission line was mentioned as 400 kV S/c line. The 
+same may be corrected and read as 400 kV S/c line on D/c tower. 
+(iv). 
+At Annexure- XI at Page No. 97, “Additional system for connectivity at 220kV level only of Sanchore PS” shall be deleted as it is already 
+covered in element no. 2 of “Transmission system for Connectivity under GNA at Sanchore PS” mentioned above in same page.  
+With the above corrections, minutes are confirmed. 
+A. Transition of 675 MW (200+350+125) Connectivity Granted to Soltown Infra at Bikaner-II PS 
+It was informed that Soltown Infra Private Limited was granted cumulative connectivity of 675 MW (App. No. 12000003889 – 200 MW, 
+0212100007 – 350 MW & 0212100008 – 125 MW) at Bikaner-II PS through 220 kV D/c line under Connectivity Regulations 2009. 
+CTUIL vide letter dated 05.04.2023 had revoked the entire 675 MW connectivity granted to M/s Soltown Infra Private Limited in light of 
+blacklisting of M/s Soltown Infra from obtaining any connectivity or open access from CTU. 
+Subsequently, M/s Soltown Infra filed petition with CERC for setting aside the blacklisting letter issued by CTUIL and quash the 
+revocation letter dated 05.04.2023. In the hearing held on 21.08.2023, the CERC directed the CTUIL not to allocate the revoked 
+capacity (675 MW) at Bikaner- II S/s to any other entity till the next date of hearing. Subsequently, the interim protection was continued 
+by the Commission till the issuance of Order. 
+CERC vide order dated 30.04.2024 on Petition No. 114/MP/2023 along with IA No. 28/2023 and 51/2023 set aside the CTUIL letter 
+dated 05.04.2023 vide which the 675 MW Connectivity granted to SIPL was revoked & directed CTUIL to allow the M/s Soltown Infra 
+to convert the 675 MW Connectivity, initially granted under the Connectivity Regulations, 2009, to Connectivity in compliance with the 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 2 of 67 
+ 
+Central Electricity Regulatory Commission (Connectivity and General Network Access to the inter-State Transmission System) 
+Regulations, 2022.  
+In view of the above order, CTUIL asked M/s Soltown Infra to opt/surrender of connectivity as pert 37.2 of GNA Regulations 2022 and 
+submit the necessary documents required for transition. Subsequently, M/s Soltown infra opted to convert the 675 MW connectivity 
+under GNA Regulations vide letter dated 20.08.2024 along with all necessary documents required for transition of connectivity.  In view 
+of the above, transition of 675 MW connectivity granted to Soltown Infra was taken up in the 34th CMETS NR meeting for deliberations. 
+As only Stage-II connectivity was applied & granted to M/s Soltown Infra, transition of connectivity granted to M/s Soltown shall be 
+treated under clause 37.2 of Connectivity & GNA Regulations 2022.  
+It was also informed that , CTUIL has filed a review petition 20 of 2024 in Petition No. 114/MP/2023 with CERC. Therefore, transition 
+of connectivity granted to M/s Soltown under GNA Regulations shall be subject to outcome of the above review petition. M/s Soltown 
+noted the same.  
+ 
+Further, M/s Soltown vide letter dated 06.09.2024 informed that due to unforeseen challenges, including land acquisition issues, their 
+solar park now comprises two separate land patches, one which can accommodate 350 MW and another of 325 MW.  Consequently, 
+in all cases two distinct transmission lines will be required, each originating from the respective land patches and running separately 
+to the PGCIL substation. Therefore, due to location constraints, instead of connectivity for the entire solar park through 220 kV D/c line 
+as granted earlier, M/s Soltown requested for Connectivity of 350 MW portion (App. No. 0212100007) through a 220 kV S/c line suitable 
+to carry 350 MW. For the remaining two applications of 125 MW (App. No. 0212100008) & 200 MW (App. No. 1200003889) they have 
+requested connectivity through a separated 220 kV S/c line suitable to carry 325 MW(125+200).  
+ CTU enquired status of land submitted by M/s Soltown at the application stage. M/s Soltown clarified that earlier land remains in their 
+possession. Soltown infra also clarified that due to land acquisition issues their project land is not contiguous and therefore they would 
+like to go with two separate S/c lines from each of their project locations. CTUIL informed that the implementing common pooling station 
+has many advantages including economics of scale like installation of S/s equipments, reactive compensation devices like SVG, filters 
+etc. Due to separation of pooling stations for 350 MW & 325 MW, Soltown infra may be required to install separate reactive 
+compensation devices, filters etc. at each generation pooling station. M/s Soltown infra agreed for the same and informed that they 
+shall not request for any change of DTL configuration in future after this. After deliberations, it was agreed to revise the DTL configuration 
+from D/c line to two separate S/c lines for 350 MW & 325 MW. Further, while granting connectivity, reserved capacity of 675 MW as 
+per CERC order was considered.  
+ 
+Accordingly, details of transition of Connectivity granted to M/s Soltown Infra under 37.2 is as below: 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 3 of 67 
+ 
+S. 
+No. 
+Applicant 
+Name 
+Application 
+No.(St-II) 
+Pooling 
+Station 
+Connectivity 
+(MW) 
+Bay 
+Scope  
+ 
+Start Date of 
+Connectivity as 
+per Stage-II 
+intimation
+Start Date 
+requested for 
+transition 
+under GNA
+Start Date of 
+Connectivity 
+under GNA 
+Conn BG Requirement  
+1.  
+Soltown 
+Infra 
+Private 
+Limited 
+1200003889
+Bikaner-II 
+PS 
+200 
+Applicant 
+ 
+30-06-2025 
+31-12-2025 
+31-12-2025 
+ Conn BG-1: Rs. 50 lakhs 
+ Conn BG-2: Nil (Bay under 
+applicant scope) 
+ Conn BG-3: Rs. 4 Cr. 
+It was informed that M/s Soltown has requested for Start date of connectivity from 31.12.2025 for the above application. Considering the same & expected 
+commissioning date of the transmission system (i.e. 27.12.2025), the start date of Connectivity under GNA shall be 31.12.2025 as requested.  
+ 
+M/s Soltown infra vide mail dated 30.09.2024 confirmed that the tower configuration for their S/c line shall be Single circuit line on double circuit tower.  
+ 
+Accordingly, it was agreed to transition connectivity of 200 MW granted to M/s Soltown Infra at Bikaner-II PS under GNA Regulations 2022. Details of 
+transmission system for Connectivity under GNA is as below:  
+   
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+Common Pooling Station of Soltown Infra Private Limited (0212100008-125 MW & 1200003889-200 MW) RE Power Parks – Bikaner-II 
+PS 220 kV S/c line on D/c tower(Suitable to carry minimum 325 MW at nominal voltage). 
+ 
+C. Transmission system for Connectivity under GNA:  
+ 
+1) 
+Augmentation of 1x500MVA (8th) 400/220 kV ICT at Bikaner –II PS  
+2) 
+Augmentation of 1x1500 MVA (4th) 765/400kV ICT at Bikaner (PG)  
+3) 
+Augmentation of 2x1500 MVA (3rd & 4th)765/400 kV ICTs at Bikaner-III Pooling Station  
+4) 
+Augmentation of 2x1500 MVA (3rd & 4th),765/400 kV ICTs at Neemrana-II S/s  
+5) 
+LILO of both ckts of 400 kV Bikaner(PG)-Bikaner-II D/c line (Quad) at Bikaner-III PS  
+6) 
+Bikaner-II PS – Bikaner-III PS 400 kV D/c line (Quad)  
+7) 
+Bikaner-III - Neemrana-II 765 kV D/c line along with 330 MVAr switchable line reactor for each circuit at each end  
+8) 
+Neemrana-II -Kotputli 400 kV D/c line (Quad)  
+9) 
+LILO of both ckts of 400 kV Gurgaon (PG) - Sohna Road (GPTL) D/c line (Quad) at Neemrana-II S/s  
+10) Bikaner-III - Neemrana-II 765 kV D/c line (2nd) along with 330 MVAr switchable line reactor for each circuit at each end  
+11) Neemrana-II- Bareilly (PG) 765 kV D/c line along with 330 MVAr switchable line reactor for each circuit at each end  
+12) Augmentation by 400/220 kV, 1x500 MVA ICT (3rd) at Kotputli (PG) 
+ 
+Start Date of Connectivity under GNA: 31-12-2025 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 4 of 67 
+ 
+S. 
+No. 
+Applicant 
+Name 
+Application 
+No.(St-II) 
+Pooling 
+Station 
+Connectivity 
+(MW) 
+Bay 
+Scope  
+ 
+Start Date of 
+Connectivity as 
+per Stage-II 
+intimation
+Start Date 
+requested for 
+transition 
+under GNA
+Start Date of 
+Connectivity 
+under GNA 
+Conn BG Requirement  
+2.  
+Soltown 
+Infra 
+Private 
+Limited 
+0212100007
+Bikaner-II 
+PS 
+350 
+Applicant 
+ 
+30-06-2025 
+31-10-2025 
+22.08.2026 
+ Conn BG-1: Rs. 50 lakhs 
+ Conn BG-2: Nil (Bay under 
+applicant scope) 
+ Conn BG-3: Rs. 7 Cr. 
+It was informed that M/s Soltown has requested for Start date of connectivity from 31.10.2025 for the above application. However, considering the same 
+& expected commissioning of the transmission system (i.e. 22.08.2026), the start date of Connectivity under GNA shall be 22.08.2026.  
+ 
+M/s Soltown infra vide mail dated 30.09.2024 confirmed that the tower configuration for their S/c line shall be Single circuit line on double circuit tower.  
+ 
+It was also informed that, as per the application priority, the NR-WR inter regional corridor is also required for grant of connectivity under GNA 
+Regulations 2022 for above application. 
+ 
+Accordingly, it was agreed to transition connectivity of 350 MW granted to M/s Soltown Infra at Bikaner-II PS under GNA Regulations 2022. Details of 
+transmission system for Connectivity under GNA is as below:  
+   
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+Soltown Infra Private Limited RE Power Park – Bikaner-II PS 220 kV S/c line on D/c tower (Suitable to carry minimum 350 MW at 
+nominal voltage). 
+ 
+C. Transmission system for Connectivity under GNA:  
+ 
+1) 
+Augmentation of 1x500MVA (9th) 400/220 kV ICT at Bikaner –II PS  
+2) 
+Augmentation of 1x1500 MVA (4th) 765/400kV ICT at Bikaner (PG)  
+3) 
+Augmentation of 2x1500 MVA (3rd & 4th)765/400 kV ICTs at Bikaner-III Pooling Station  
+4) 
+Augmentation of 2x1500 MVA (3rd & 4th),765/400 kV ICTs at Neemrana-II S/s  
+5) 
+LILO of both ckts of 400 kV Bikaner(PG)-Bikaner-II D/c line (Quad) at Bikaner-III PS  
+6) 
+Bikaner-II PS – Bikaner-III PS 400 kV D/c line (Quad)  
+7) 
+Bikaner-III - Neemrana-II 765 kV D/c line along with 330 MVAr switchable line reactor for each circuit at each end  
+8) 
+Neemrana-II -Kotputli 400 kV D/c line (Quad)  
+9) 
+LILO of both ckts of 400 kV Gurgaon (PG) - Sohna Road (GPTL) D/c line (Quad) at Neemrana-II S/s  
+10) Bikaner-III - Neemrana-II 765 kV D/c line (2nd) along with 330 MVAr switchable line reactor for each circuit at each end  
+11) Neemrana-II- Bareilly (PG) 765 kV D/c line along with 330 MVAr switchable line reactor for each circuit at each end  
+12) Augmentation by 400/220 kV, 1x500 MVA ICT (3rd) at Kotputli (PG)
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 5 of 67 
+ 
+S. 
+No. 
+Applicant 
+Name 
+Application 
+No.(St-II) 
+Pooling 
+Station 
+Connectivity 
+(MW) 
+Bay 
+Scope  
+ 
+Start Date of 
+Connectivity as 
+per Stage-II 
+intimation
+Start Date 
+requested for 
+transition 
+under GNA
+Start Date of 
+Connectivity 
+under GNA 
+Conn BG Requirement  
+ 
+Additional Transmission system for inter-regional power transfer: 
+ 
+1)     Establishment of 765 kV Mandsaur Pooling Station along with 2x330 MVAR (765 kV) Bus Reactors 
+2)     Beawar- Mandsaur PS 765 kV D/c line along with 240 MVAr switchable line reactor for each circuit at each end and 
+3a)   Mandsaur PS – Indore(PG) 765 kV D/c Line along with 1x330 MVAR switchable line reactor on each ckt at Mandsaur end of Mandsaur 
+PS – Indore(PG) 765 kV D/c Line 
+OR 
+ 
+3b)   Establishment of 765 kV Kurawar S/s with 2x330 MVAr 765 kV bus reactor 
+3c)   Mandsaur – Kurawar 765 kV D/c line along with 240 MVAr switchable line reactors on each ckt at both ends of Mandsaur – Kurawar 765 
+kV D/c line 
+3d)   LILO of Indore – Bhopal 765 kV S/c line at Kurawar 
+ 
+Start Date of Connectivity under GNA: 22-08-2026 
+ 
+S. 
+No. 
+Applicant 
+Name 
+Application 
+No.(St-II) 
+Pooling 
+Station 
+Connectivity 
+(MW) 
+Bay 
+Scope  
+ 
+Start Date of 
+Connectivity as 
+per Stage-II 
+intimation
+Start Date 
+requested for 
+transition 
+under GNA
+Start Date of 
+Connectivity 
+under GNA 
+Conn BG Requirement  
+3.  
+Soltown 
+Infra 
+Private 
+Limited 
+0212100008
+Bikaner-II 
+PS 
+125 
+Applicant 
+ 
+30-06-2025 
+31-12-2025 
+22.08.2026 
+ Conn BG-1: Rs. 50 lakhs 
+ Conn BG-2: Nil (Bay under 
+applicant scope) 
+ Conn BG-3: Rs. 2.5Cr. 
+It was informed that M/s Soltown has requested for Start date of connectivity from 31.12.2025 for the above application. However, considering the same 
+& expected commissioning of the transmission system (i.e. 22.08.2026), the start date of Connectivity under GNA shall be 22.08.2026.  
+ 
+It was also informed that, as per the application priority, the NR-WR inter regional corridor is also required for grant of connectivity under GNA 
+Regulations 2022 for above application. 
+ 
+Accordingly, it was agreed to transition connectivity of 125 MW granted to M/s Soltown Infra at Bikaner-II PS under GNA Regulations 2022. Details of 
+transmission system for Connectivity under GNA is as below:  
+   
+A. Associated Transmission System (ATS): NIL 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 6 of 67 
+ 
+S. 
+No. 
+Applicant 
+Name 
+Application 
+No.(St-II) 
+Pooling 
+Station 
+Connectivity 
+(MW) 
+Bay 
+Scope  
+ 
+Start Date of 
+Connectivity as 
+per Stage-II 
+intimation
+Start Date 
+requested for 
+transition 
+under GNA
+Start Date of 
+Connectivity 
+under GNA 
+Conn BG Requirement  
+B. Transmission System under applicant scope 
+ 
+(i). 
+Common Pooling Station of Soltown Infra Private Limited (0212100008-125 MW & 1200003889-200 MW) RE Power Parks – Bikaner-II 
+PS 220 kV S/c line on D/c tower (Suitable to carry minimum 325 MW at nominal voltage). 
+ 
+C. Transmission system for Connectivity under GNA:  
+ 
+1) 
+Augmentation of 1x500MVA (9th) 400/220 kV ICT at Bikaner–II PS  
+2) 
+Augmentation of 1x1500 MVA (4th) 765/400kV ICT at Bikaner (PG)  
+3) 
+Augmentation of 2x1500 MVA (3rd & 4th)765/400 kV ICTs at Bikaner-III Pooling Station  
+4) 
+Augmentation of 2x1500 MVA (3rd & 4th),765/400 kV ICTs at Neemrana-II S/s  
+5) 
+LILO of both ckts of 400 kV Bikaner(PG)-Bikaner-II D/c line (Quad) at Bikaner-III PS  
+6) 
+Bikaner-II PS – Bikaner-III PS 400 kV D/c line (Quad)  
+7) 
+Bikaner-III - Neemrana-II 765 kV D/c line along with 330 MVAr switchable line reactor for each circuit at each end  
+8) 
+Neemrana-II -Kotputli 400 kV D/c line (Quad)  
+9) 
+LILO of both ckts of 400 kV Gurgaon (PG) - Sohna Road (GPTL) D/c line (Quad) at Neemrana-II S/s  
+10) Bikaner-III - Neemrana-II 765 kV D/c line (2nd) along with 330 MVAr switchable line reactor for each circuit at each end  
+11) Neemrana-II- Bareilly (PG) 765 kV D/c line along with 330 MVAr switchable line reactor for each circuit at each end  
+12) Augmentation by 400/220 kV, 1x500 MVA ICT (3rd) at Kotputli (PG) 
+ 
+Additional Transmission system for inter-regional power transfer: 
+ 
+1)     Establishment of 765 kV Mandsaur Pooling Station along with 2x330 MVAR (765 kV) Bus Reactors 
+2)     Beawar- Mandsaur PS 765 kV D/c line along with 240 MVAr switchable line reactor for each circuit at each end and 
+  3a)   Mandsaur PS – Indore(PG) 765 kV D/c Line along with 1x330 MVAR switchable line reactor on each ckt at Mandsaur end of Mandsaur 
+PS – Indore(PG) 765 kV D/c Line 
+OR 
+3b)   Establishment of 765 kV Kurawar S/s with 2x330 MVAr 765 kV bus reactor 
+3c)   Mandsaur – Kurawar 765 kV D/c line along with 240 MVAr switchable line reactors on each ckt at both ends of Mandsaur – Kurawar 765 
+kV D/c line 
+3d)   LILO of Indore – Bhopal 765 kV S/c line at Kurawar 
+ 
+Start Date of Connectivity under GNA: 22-08-2026 
+ 
+It was informed that as per 37.2(d), in case the entity exercises the option to convert the Connectivity granted under the Connectivity 
+Regulations, 2009 as Connectivity under these Regulations in terms of option (i) of clause (a) of this regulation, the Nodal Agency shall, 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 7 of 67 
+ 
+within next 30 days, intimate the amount of Conn-BG1, Conn-BG2 and Conn-BG3, to be paid by such entity in terms of Regulation 8 
+of these regulations, after adjusting bank guarantee, if any, paid by such entity under the Connectivity Regulations, 2009. 
+As per 37.2(e) of GNA Regulations, entity need to submit applicable Conn BGs within 2 months of intimation by CTUIL.  
+As per 37.2(f), On furnishing of Conn-BG1, Conn-BG2 and Conn-BG3 under clause (e) of this Regulation, existing agreements between 
+the entity and the Nodal Agency shall be aligned with provisions of Regulation 10.3 of these regulations.  
+As per 37.2(g) On alignment of existing agreements under clause (f) of this Regulation, the entity shall become Connectivity grantee 
+for all purposes under these regulations. 
+Further, as per 37.2(h), 
+” In case the entity fails to furnish Conn-BG1, Conn-BG2 and ConnBG3 as intimated by the Nodal Agency in terms of clause (d) of this 
+Regulation, 
+(i) Connectivity granted to the entity under the Connectivity Regulations, 2009 shall be revoked by the Nodal Agency and 
+(ii) Conn-BG1 furnished, if any, under the Connectivity Regulations, 2009 shall be encashed and 
+(iii) Conn-BG2 furnished, if any under the Connectivity Regulations, 2009, shall be returned: 
+Provided that in case the construction of terminal bay has been awarded for implementation under ISTS through CTU, Conn-BG2 
+furnished under the Connectivity Regulations, 2009 shall be encashed “ 
+ 
+In view of the above, M/s Soltown need to submit the Conn BGs mentioned above within the stipulated timeline as per GNA Regulations 
+2022. Further, in the meeting, it was mentioned that transition of connectivity granted to M/s Soltown under GNA Regulations shall be 
+subject to outcome of the review petition filed by CTUIL. Subsequently, CERC vide order dated 30.09.2024 has disposed of the Review 
+petition No. 20/RP/2024 by CTUIL. 
+ 
+B. Application related matters in Northern Region  
+B1. RE Applications for Connectivity deferred in the 33rd CMETS NR meeting held on 05.08.2024 (Applications 
+received in May’24):  
+ 
+Sl. 
+No.
+Application 
+ID 
+Applicant 
+Project 
+Location
+Submission 
+Date 
+Nature of 
+Applicant
+Criterion 
+for 
+applying 
+Connectivity 
+Quantum 
+(MW) 
+Start Date of 
+Connectivity (As 
+per Application) 
+Connectivity
+Location (As per 
+Application) 
+Conn BGs requirement
+1. 2200000788 
+ACME 
+Solar 
+Holdings Limited 
+(erstwhile ACME 
+Solar 
+Holdings 
+Sirohi 
+distt., 
+Rajasthan
+07.05.2024 
+Generator 
+(Solar) 
+Land BG 
+Route 
+300 
+31.03.2027 
+Sirohi PS 
+NA 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 8 of 67 
+ 
+Sl. 
+No.
+Application 
+ID 
+Applicant 
+Project 
+Location
+Submission 
+Date 
+Nature of 
+Applicant
+Criterion 
+for 
+applying
+Connectivity 
+Quantum 
+(MW)
+Start Date of 
+Connectivity (As 
+per Application)
+Connectivity
+Location (As per 
+Application)
+Conn BGs requirement
+Private Limited)
+It was informed that M/s ACME vide mail dated 16.09.2024 has withdrawn the above application. Accordingly, the above application shall be closed as 
+per GNA Regulations. 
+2. 2200000793 SAEL Industries 
+Limited 
+Sirohi 
+distt., 
+Rajasthan
+10.05.2024 
+Generator 
+(Solar) 
+Land BG 
+Route 
+300 
+30.05.2026 
+Sirohi PS 
+NA 
+It was informed that M/s SAEL Industries vide mail dated 17.09.2024 has withdrawn their application. Accordingly, the above application shall be closed 
+as per GNA Regulations. 
+3. 2200000794 SAEL Industries 
+Limited 
+Sirohi 
+distt., 
+Rajasth
+an
+10.05.2024 
+Generator 
+(Solar) 
+Land BG 
+Route 
+300 
+30.05.2026 
+Sirohi PS 
+NA 
+It was informed that M/s SAEL Industries vide mail dated 17.09.2024 has withdrawn their application. Accordingly, the above application shall be closed 
+as per GNA Regulations. 
+4. 2200000827 
+Amplus Centaur 
+Solar Private 
+Limited 
+Sirohi 
+distt., 
+Rajasth
+an
+20.05.2024 
+Generator 
+(Solar) 
+Land BG 
+Route 
+350 
+30.04.2027 
+Sirohi PS 
+ Conn BG1: Rs. 50 Lakh 
+ Conn BG2: Rs. 3 Cr. 
+ Conn BG3: Rs. 2 lakh/MW 
+In the 33rd CMETS-NR meeting, it was informed that, in view of grant of 2100 MW connectivity at Sirohi PS, above application by M/s Amplus Centaur 
+shall be taken up for discussion for grant in the next CMETS NR meeting after identification of additional transmission system required for evacuation of 
+power beyond 2100 MW from Sirohi PS. It may be noted that transmission system for evacuation of power from Sirohi was planned for net evacuation 
+capacity of 2000 MW only. 
+ 
+From the studies, considering upcoming RE generation in Northern and Western region by 2028-29 timeframe, severe transmission constraints were 
+observed in Western region under N-1 contingency. Therefore, considering the severe evacuation constraints towards Western Region from Sirohi complex 
+as well as low Short Circuit Ratio at 220kV level of Sirohi PS, it was proposed to grant connectivity to subsequent applications in Sirohi complex at 
+proposed Sirohi (HVDC) PS (Sirohi-II) for which evacuation shall be through proposed Sirohi HVDC scheme.  
+ 
+Accordingly, it was proposed to grant connectivity to M/s Amplus Centaur at 220 kV Sirohi (HVDC) PS (Sirohi-II) through S/c line. M/s Amplus Centaur 
+enquired about any possibility of getting connectivity at Sirohi PS. CTUIL informed that as explained earlier, due to constraints in Western Region, there 
+is no margin available at Sirohi PS, therefore connectivity is being granted at Sirohi (HVDC) PS (Sirohi-II). M/s Amplus Centaur enquired if they can get 7 
+days time to decide on their application. Regarding this CTUIL informed that, soon they shall issue minutes and intimation. M/s Amplus Centaur in the 
+meantime may take a decision and inform the same to CTUIL. In case no communication is received from M/s Amplus Centaur for withdrawal of 
+connectivity, the intimation shall be issued as agreed in this CMETS meeting. M/s Amplus agreed for the same. 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 9 of 67 
+ 
+Sl. 
+No.
+Application 
+ID 
+Applicant 
+Project 
+Location
+Submission 
+Date 
+Nature of 
+Applicant
+Criterion 
+for 
+applying
+Connectivity 
+Quantum 
+(MW)
+Start Date of 
+Connectivity (As 
+per Application)
+Connectivity
+Location (As per 
+Application)
+Conn BGs requirement
+Applicant was asked to confirm the 220 kV bay scope at Sirohi (HVDC) PS (Sirohi-II) end and DTL tower configuration. M/s Amplus Centaur informed that 
+the 220 kV bay shall be under ISTS & DTL tower configuration shall be S/c line on D/c tower. The same was noted. 
+ 
+It was mentioned that, the transmission system for evacuation of power from Sirohi, Jalore & Sanchore complexes through Sirohi(HVDC) is presently 
+under evolution. Upon evolution, the scheme shall be discussed in a separate joint study meeting among CEA, CTUIL, Grid India & Stakeholders followed 
+by the subsequent CMETS meeting. The detailed transmission system shall be informed upon finalization and approval of the scheme. 
+ 
+It was also informed that M/s Amplus Centaur Solar Private Limited has requested Start Date of Connectivity under GNA from 30.04.2027. However, 
+considering the same and expected commissioning date of transmission system (i.e. 30.09.2030), the start date of Connectivity under GNA shall be 
+30.09.2030 (interim). M/s Amplus Centaur noted the same.  
+ 
+Accordingly, it was agreed to grant 350 MW connectivity to M/s Amplus Centaur Solar Private Limited at 220 kV Sirohi(HVDC) PS. Details of Transmission 
+system for connectivity of M/s Amplus Centaur Solar Private Limited under GNA is as below: 
+ 
+Details of Transmission system for Connectivity under GNA:  
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+M/s Amplus Centaur Solar Private Limited Solar Power Project– Sirohi (HVDC) PS (Sirohi-II) 220 kV S/c line on D/c tower (suitable to 
+carry minimum 350 MW at nominal voltage)   
+  
+C. Transmission system for Connectivity under GNA: As per Annexure-I 
+ 
+Start Date of Connectivity under GNA: 30.09.2030(Interim). Final date shall be confirmed upon award of the system 
+5. 2200000841 
+ACME Solar 
+Holdings Limited 
+(erstwhile ACME 
+Solar Holdings 
+Private Limited)
+Jodhpur 
+distt., 
+Rajasth
+an 
+31.05.2024 
+Generator 
+(Solar) 
+Land BG 
+Route 
+100 
+31.03.2027 
+Nagaur 
+(MERTA-II) PS 
+ Conn BG1: Rs. 50 Lakh 
+ Conn BG2: Nil(In sharing) 
+ Conn BG3: Rs. 2 lakh/MW 
+It was informed that M/s ACME vide mail dated 16.09.2024 has withdrawn the above application. Accordingly, the above application shall be closed as 
+per GNA Regulations. 
+6. 2200000891 
+Serentica 
+Renewables India
+Private Limited
+Udaipur 
+distt., 
+31.05.2024 
+Generator 
+(Solar) 
+Land BG 
+Route 
+400 
+30.06.2026 
+Rishabhdeo PS 
+NA  
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 10 of 67 
+ 
+Sl. 
+No.
+Application 
+ID 
+Applicant 
+Project 
+Location
+Submission 
+Date 
+Nature of 
+Applicant
+Criterion 
+for 
+applying
+Connectivity 
+Quantum 
+(MW)
+Start Date of 
+Connectivity (As 
+per Application)
+Connectivity
+Location (As per 
+Application)
+Conn BGs requirement
+Rajasth
+an
+It was informed that M/s Serentica vide mail dated 19.09.2024 has withdrawn the above application. Accordingly, the above application shall be closed 
+as per GNA Regulations. 
+7. 2200000860 Enren-III Energy 
+Private Limited 
+Nagaur 
+distt., 
+Rajasthan
+31.05.2024 
+Generator 
+(Solar) 
+Land BG 
+Route 
+300 
+31.01.2027 
+Nagaur 
+Complex 
+(Merta-II) PS 
+ Conn BG1: Rs. 50 Lakh 
+ Conn BG2: Rs. 3 Cr. 
+ Conn BG3: Rs. 2 lakh/MW 
+In the 33rd CMETS-NR meeting, it was informed that in view of grant of 2100 MW connectivity at Merta-II PS, the above applications by M/s Enren-III 
+Energy shall be taken up for discussion for grant in the next CMETS NR meeting after identification of additional transmission system required for 
+evacuation of power beyond 2100 MW from Merta-II PS. It may be noted that transmission system for evacuation of power from Merta-II PS was planned 
+for net evacuation capacity of 2000 MW only. 
+ 
+From the studies, considering upcoming RE generation in Northern and Western region by 2028-29 timeframe, severe transmission constraints were 
+observed in Western region under N-1 contingency. Therefore, considering the severe evacuation constraints in Western Region as well as low Short 
+Circuit Ratio of Merta-II PS, it was proposed to grant connectivity to subsequent applications in Merta/Nagaur complex at proposed Merta-III PS for which 
+evacuation shall be through proposed Beawar HVDC scheme.  
+ 
+Accordingly, it was proposed to grant connectivity to M/s Enren-III Energy at 220 kV Merta-III PS through S/c line. M/s Enren-III Energy agreed for the 
+same. Applicant was asked to confirm the 220 kV bay scope at Merta-III PS end and DTL tower configuration. M/s Enren-III Energy informed that the 220 
+kV bay shall be under ISTS & DTL tower configuration shall be S/c line on D/c tower. The same was noted. 
+ 
+It was mentioned that, the transmission system for evacuation of power from Nagaur(Merta) & Pali complexes through Beawer(HVDC) is presently under 
+evolution. Upon evolution, the scheme shall be discussed in a separate joint study meeting among CEA, CTUIL, Grid India & Stakeholders followed by 
+the subsequent CMETS meeting. The detailed transmission system shall be informed upon finalization and approval of the scheme. 
+ 
+It was also informed that M/s Enren-III Energy Private Limited has requested Start Date of Connectivity under GNA from 31.01.2027, However, considering 
+the same and expected commissioning date of transmission system (i.e. 31.03.2031), the start date of Connectivity under GNA shall be 31.03.2031
+(interim). M/s Enren-III Energy noted the same. 
+ 
+Accordingly, it was agreed to grant 300 MW connectivity to M/s Enren-III Energy Private Limited at 220 kV Merta-III PS. Details of Transmission system 
+for connectivity of M/s Enren-III Energy Private Limited under GNA is as below :   
+  
+Details of Transmission system for Connectivity under GNA:  
+A.
+Associated Transmission System (ATS): NIL
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 11 of 67 
+ 
+Sl. 
+No.
+Application 
+ID 
+Applicant 
+Project 
+Location
+Submission 
+Date 
+Nature of 
+Applicant
+Criterion 
+for 
+applying
+Connectivity 
+Quantum 
+(MW)
+Start Date of 
+Connectivity (As 
+per Application)
+Connectivity
+Location (As per 
+Application)
+Conn BGs requirement
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+M/s Enren-III Energy Private Limited Solar Power Project – Merta-III PS 220 kV S/c line on D/c tower(suitable to carry minimum 300 MW 
+at nominal voltage)   
+ 
+C. Transmission system for Connectivity under GNA: As per Annexure-II 
+ 
+Start Date of Connectivity under GNA: 31.03.2031(Interim). Final date shall be confirmed upon award of the system 
+8. 2200000894 
+Sindhari Solar 
+Power Private 
+Limited 
+Nagaur 
+distt., 
+Rajasth
+an 
+31.05.2024 
+Renewable 
+Power Park 
+developer 
+(Solar) 
+Land BG 
+Route 
+300 
+30.06.2027 
+Nagaur 
+ Conn BG1: Rs. 50 Lakh 
+ Conn BG2: As per bay 
+scope 
+ Conn BG3: Rs. 2 lakh/MW 
+M/s Sindhari Solar in the meeting informed that the timeline of Merta-III PS is not matching with their generation project timeline expected in 2027. 
+Accordingly,  they shall withdraw their application. CTUIL asked M/s Sindhari Solar to confirm the same in mail. Subsequently, M/s Sindhari Solar vide 
+mail dated 24.09.2024 confirmed their decision to withdraw the application. Accordingly, it was decided to close the above application as per the GNA 
+Regulations.  
+ 
+A2. RE Applications for Connectivity deferred in the 33rd CMETS NR meeting held on 05.08.2024 (Applications 
+received in June’24): 
+ 
+Sl. 
+No.
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant 
+Criterion 
+for 
+applying
+Connectivity 
+Quantum 
+(MW) 
+Start Date of 
+Connectivity 
+(As per 
+Application)
+Connectivity
+Location (As 
+per 
+Application)
+Conn BGs requirement
+1. 2200000832 
+Prespa Solar 
+Private 
+Limited 
+Nagaur 
+distt., 
+Rajasthan 
+04.06.2024 
+Renewable 
+Power Park 
+developer 
+(Solar)
+Land BG 
+Route 
+250 
+31.12.2026 
+Nagaur Complex 
+(Merta-II PS) 
+ Conn BG1: Rs. 50 Lakh 
+ Conn BG2: Rs. 3 Cr. 
+ Conn BG3: Rs. 2 lakh/MW
+In the 33rd CMETS-NR meeting, it was informed that in view of grant of 2100 MW connectivity at Merta-II PS, the above application by M/s Prespa 
+Solar shall be taken up for discussion for grant in the next CMETS NR meeting after identification of additional transmission system required for 
+evacuation of power beyond 2100 MW from Merta-II PS. It may be noted that transmission system for evacuation of power from Merta-II PS was 
+planned for net evacuation capacity of 2000 MW only. 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 12 of 67 
+ 
+Sl. 
+No.
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant 
+Criterion 
+for 
+applying
+Connectivity 
+Quantum 
+(MW) 
+Start Date of 
+Connectivity 
+(As per 
+Application)
+Connectivity
+Location (As 
+per 
+Application)
+Conn BGs requirement
+ 
+From the studies, considering upcoming RE generation in Northern and Western region by 2028-29 timeframe, severe transmission constraints were 
+observed in Western region under N-1 contingency. Therefore, considering the severe evacuation constraints in Western Region as well as low Short 
+Circuit Ratio of Merta-II PS, it was proposed to grant connectivity to subsequent applications in Merta/Nagaur complex at proposed Merta-III PS for 
+which evacuation shall be through proposed Beawer HVDC scheme.  
+ 
+Accordingly, it was proposed to grant connectivity to M/s Prespa Solar at 220 kV Merta-III PS through S/c line. M/s Prespa Solar agreed for the same.
+ 
+Applicant was asked to confirm the 220 kV bay scope at Merta-III PS end and DTL tower configuration. M/s Prespa Solar informed that the 220 kV 
+bay shall be under ISTS & DTL tower configuration shall be S/c line on D/c tower. The same was noted. 
+ 
+It was mentioned that, the transmission system for evacuation of power from Nagaur(Merta) & Pali complexes through Beawar(HVDC) is presently 
+under evolution. Upon evolution, the scheme shall be discussed in a separate joint study meeting among CEA, CTUIL, Grid India & Stakeholders 
+followed by the subsequent CMETS meeting. The detailed transmission system shall be informed upon finalization and approval of the scheme. 
+ 
+It was also informed that, M/s Prespa Solar Private Limited has requested Start Date of Connectivity under GNA from 31.12.2026, However, considering 
+the same and expected commissioning date of transmission system (i.e. 31.03.2031), the start date of Connectivity under GNA shall be 31.03.2031
+(interim). M/s Prespa Solar noted the same. 
+ 
+Accordingly, it was agreed to grant 250 MW connectivity to M/s Prespa Solar Private Limited at 220 kV Merta-III PS. Details of Transmission system 
+for connectivity of M/s Prespa Solar Private Limited under GNA is as below:   
+   
+Details of Transmission system for Connectivity under GNA:  
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+M/s Prespa Solar Private Limited Renewable Power Park – Merta-III PS 220 kV S/c line on D/c tower(suitable to carry minimum 300 
+MW at nominal voltage)    
+  
+C. Transmission system for Connectivity under GNA: As per Annexure-II 
+ 
+Start Date of Connectivity under GNA: 31.03.2031(Interim). Final date shall be confirmed upon award of the system 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 13 of 67 
+ 
+A3. Applications for Connectivity to ISTS under CERC (Connectivity and General Network Access to the inter-State Transmission 
+System) Regulations, 2022 received in July’24: 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant
+Criterion 
+for 
+applying
+Connectivity 
+Quantum 
+(MW) 
+Start Date of 
+Connectivity (As 
+per Application)
+Connectivity 
+location 
+(As per Application)
+Conn BGs requirement
+1.
+2200001021 
+Sunsure 
+Solarpark RJ 
+One Private 
+Limited
+Bikaner 
+distt., 
+Rajasthan 
+05.07.2024 
+Generator 
+(Solar) 
+Land BG 
+Route 
+350 
+31.03.2029 
+Bikaner-V PS 
+ Conn BG1: Rs. 50 Lakh  
+ Conn BG2:  Rs. 3 Cr.  
+ Conn BG3: Rs. 2 lakh/MW
+It was informed that M/s Sunsure Solarpark RJ One Private Limited has applied for connectivity for 350 MW at Bikaner-V PS. Accordingly, it was proposed 
+to grant connectivity at Bikaner-V PS at 220 kV level through 1 no. of bay. M/s Sunsure Solarpark agreed for the same. Applicant was asked to confirm the 
+220 kV bay scope at Bikaner-V PS end and the DTL tower configuration. M/s Sunsure informed that the 220 kV bay shall be under ISTS & DTL tower 
+configuration shall be S/c line on D/c tower. The same was noted. 
+ 
+It was mentioned that, the transmission system for evacuation of power from Bikaner-V PS is presently under discussion. The scheme is currently tentative, 
+which shall be finalized in a separate joint study meeting among CEA, CTUIL, Grid India & Stakeholders followed by the subsequent CMETS meeting. The 
+detailed transmission system shall be informed upon finalization and approval of the scheme.  
+ 
+It was also informed that M/s Sunsure Solarpark RJ One Private Limited has requested Start Date of Connectivity under GNA from 31.03.2029. However, 
+considering the same and expected commissioning date of transmission system (i.e. 31.03.2030), the start date of Connectivity under GNA shall be 
+31.03.2030 (interim). M/s Sunsure noted the same. 
+ 
+Accordingly, it was agreed to grant 350 MW connectivity to M/s Sunsure Solarpark RJ One Private Limited at 220 kV Bikaner-V PS. Details of Transmission 
+system for connectivity of M/s Sunsure Solarpark RJ One Private Limited under GNA is as below: 
+  
+Details of Transmission system for Connectivity under GNA:  
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+M/s Sunsure Solarpark RJ One Private Limited Solar Power Project – Bikaner-V PS 220 kV S/c line on D/c tower (suitable to carry 
+minimum 350 MW at nominal voltage)    
+  
+C. Transmission system for Connectivity under GNA: As per Annexure-III 
+ 
+Start Date of Connectivity under GNA: 31.03.2030(Interim). Final date shall be confirmed upon award of the system 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 14 of 67 
+ 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant 
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application) 
+Connectivity
+location 
+(As per 
+Application) 
+Conn BGs requirement
+2.
+2200000983 
+Sunbreeze 
+Renewables 
+Seven Private
+Limited 
+Ramgarh 
+distt., 
+Rajasthan 
+05.07.2024 
+Renewable Power 
+Park developer 
+(Solar) 
+Land Route
+400 
+31.03.2026 
+Ramgarh-
+Jaisalmer 
+ Conn BG1: Rs. 50 Lakh  
+ Conn BG2: Nil(Bay under 
+Applicant Scope) 
+ Conn BG3: Rs. 2 lakh/MW 
+It was informed that M/s Sunbreeze Renewables Seven Private Limited has applied for connectivity for 400 MW at Ramgarh PS. However, Ramgarh PS is 
+already closed for further grant. Further, Ramgarh-II PS was also closed for further grant (except enhancement available upto 100 MW in 220 kV bay granted 
+to RJS Renewable (150 MW)) in 33rd CMETS NR meeting held on 05.08.2024.  
+ 
+In the 33rd CMETS-NR meeting it was mentioned that, with total connectivity of 5010 MW granted at Ramgarh-II PS & considering additional 884 MW capacity
+granted at Ramgarh PS & being evacuated through Ramgarh-II HVDC system, total connectivity granted with Ramgarh-II HVDC system shall be about 5894 
+MW. Further, there is margin available at 220 kV bay allocated to M/s RJS Renewables (150 MW). As Ramgarh-II HVDC is planned for 6000 MW, Ramgarh-
+II PS shall be closed for further grant of connectivity except enhancements (upto 100 MW in 220 kV bay allocated to RJS Renewable). Accordingly, subsequent 
+applications in Ramgarh complex shall be considered for grant at subsequent pooling station (Ramgarh-III PS) in Ramgarh complex for which system is yet 
+to be evolved.  
+ 
+Recently M/s Juniper Green Energy Private Limited (App No. 2200000756:360MW) which was agreed for grant at Ramgarh-II PS in 33rd CMETS NR meeting 
+has withdrawn their connectivity application. However, even after considering the withdrawal of M/s Juniper, sufficient margin is not available for grant of 400
+MW connectivity at Ramgarh-II PS. Further, the applicant being an Renewable Power Park developer cannot opt to reduce the connectivity quantum as it is 
+mandated to obtain connectivity equal to the authorized quantum by State/Central government as applicable. Accordingly, it was proposed to grant 
+connectivity Ramgarh-III PS at 220 kV level through 1 no. of bay.  
+ 
+M/s Sunbreeze Renewables requested CTUIL whether they can be accommodated connectivity at Ramgarh-II PS as 360 MW connectivity is now withdrawn 
+and additional 100 MW margin is still available. CTUIL informed that in case 400 MW connectivity is granted at Ramgarh-II PS through a separate bay, then 
+the enhancement margin available in RJS Renewable (150 MW) bay is to be reduced from 100 MW to 60 MW. Therefore, total connectivity of 210 MW(150+60)
+can only be accommodated at RJS Renewable bay. However, in case of any margin being created at Ramgarh-II PS due to withdrawal/closure, as Conn-
+BGs are yet to be submitted by applicants at Ramgarh-II PS, the margin in this bay may be replenished. After deliberations with stakeholders, it was decided 
+that, considering that the Ramgarh-II substation is already closed for further grant, connectivity may be granted to M/s Sunbreeze Renewable at 220kV 
+Ramgarh-II PS through a S/c line. Further, the enhancement margin available in RJS Renewable Bay shall be reduced to 60 MW.  
+ 
+Applicant was asked to confirm the 220 kV bay scope at Ramgarh-II PS end and the tower configuration.  M/s Sunbreeze Renewable informed that the 220 
+kV bay shall be under ISTS & DTL tower configuration shall be S/c line on D/c tower. Subsequently, M/s Sunbreeze Renewable vide mail dated 27.09.2024 
+informed that they would like to keep 220 kV bay at Ramgarh-II PS end under the applicant scope. The same is noted. 
+ 
+It was mentioned that, the transmission system for evacuation of power from Ramgarh-II PS is presently under evolution. Upon evolution, the scheme shall 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 15 of 67 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant 
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application)
+Connectivity
+location 
+(As per 
+Application)
+Conn BGs requirement
+be discussed in a separate joint study meeting among CEA, CTUIL, Grid India & Stakeholders followed by the subsequent CMETS meeting. The detailed 
+transmission system shall be informed upon finalization and approval of the scheme. 
+ 
+It was also informed that, M/s Sunbreeze Renewables Seven Private Limited has requested Start Date of Connectivity under GNA from 31.03.2026. However, 
+considering the same and expected commissioning date of transmission system (i.e. 31.03.2030), the start date of Connectivity under GNA shall be 
+31.03.2030 (interim). M/s Sunbreeze Renewables noted the same. 
+ 
+Accordingly, it was agreed to grant 400 MW connectivity to M/s Sunbreeze Renewables Seven Private Limited at 220 kV Ramgarh-II PS. Details of 
+Transmission system for connectivity of M/s Sunbreeze Renewables Seven Private Limited under GNA is as below:   
+ 
+Details of Transmission system for Connectivity under GNA:  
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+M/s Sunbreeze Renewables Seven Private Limited Renewable Power Park – Ramgarh-II PS 220 kV S/c line on D/c tower (suitable to carry 
+minimum 400 MW at nominal voltage)    
+  
+C. Transmission system for Connectivity under GNA: As per Annexure-IV 
+ 
+Start Date of Connectivity under GNA: 31.03.2030(Interim). Final date shall be confirmed upon award of the system 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant 
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application)
+Connectivity
+location 
+(As per 
+Application)
+Conn BGs requirement
+3.
+2200001056 
+Juniper Green 
+Energy 
+Private 
+Limited
+Bikaner 
+distt., 
+Rajasthan 
+16.07.2024 
+Generator (Solar) 
+Land BG 
+Route 
+400 
+30.06.2029 
+Bikaner-IV PS 
+ Conn BG1: Rs. 50 Lakh  
+ Conn BG2: Rs. 3 Cr. 
+ Conn BG3: Rs. 2 lakh/MW 
+It was informed that M/s Juniper Green Energy Private Limited has applied for 400 MW connectivity at Bikaner-IV PS. However, there is no margin available 
+at Bikaner-IV PS. Accordingly, it was proposed to grant connectivity at Bikaner-V PS at 220 kV level through 1 no. of bay. M/s Juniper Green Energy agreed 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 16 of 67 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant 
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application)
+Connectivity
+location 
+(As per 
+Application)
+Conn BGs requirement
+for the same. Applicant was asked to confirm the 220 kV bay scope at Bikaner-V PS end and the DTL tower configuration. M/s Juniper Green Energy informed 
+that the 220 kV bay at Bikaner-V PS end shall be under ISTS & DTL tower configuration shall be S/c line on D/c tower. The same was noted. 
+ 
+It was mentioned that the transmission system for evacuation of power from Bikaner-V PS is presently under discussion. The scheme is currently tentative, 
+which shall be finalized in a separate joint study meeting among CEA, CTUIL, Grid India & Stakeholders followed by the subsequent CMETS meeting. The 
+detailed transmission system shall be informed upon finalization and approval of the scheme.  
+ 
+It was also informed that, M/s Juniper Green Energy Private Limited has requested Start Date of Connectivity under GNA from 30.06.2029. However, 
+considering the same and expected commissioning date of transmission system (i.e. 31.03.2030), the start date of Connectivity under GNA shall be 
+31.03.2030 (interim). M/s Juniper Green Energy noted the same.  
+ 
+Accordingly, it was agreed to grant 400 MW connectivity to M/s Juniper Green Energy Private Limited at 220 kV Bikaner-V PS. Details of Transmission system 
+for connectivity of M/s Juniper Green Energy Private Limited under GNA is as below:   
+  
+Details of Transmission system for Connectivity under GNA:  
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+M/s Juniper Green Energy Private Limited Solar Power Project – Bikaner-V PS 220 kV S/c line on D/c tower (suitable to carry minimum 400 
+MW at nominal voltage)     
+  
+C. Transmission system for Connectivity under GNA: As per Annexure-III 
+ 
+Start Date of Connectivity under GNA: 31.03.2030(Interim). Final date shall be confirmed upon award of the system 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application) 
+Connectivity
+location 
+(As per 
+Application) 
+Conn BGs requirement
+4.
+2200001057 
+Foxtrot Solar 
+Renewables Energy 
+Private Limited 
+Barmer 
+distt., 
+Rajasthan 
+17.07.2024 
+Generator 
+(Solar) 
+Land Route
+100 
+31.12.2030 
+Barmer II PS 
+ Conn BG1: Rs. 50 Lakh  
+ Conn BG2: Rs. 3 Cr. 
+ Conn BG3: Rs. 2 lakh/MW
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 17 of 67 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application)
+Connectivity
+location 
+(As per 
+Application)
+Conn BGs requirement
+It was informed that M/s Foxtrot Solar Renewables Energy Private Limited has applied for connectivity for 100 MW at Barmer-II PS. However, there is no 
+margin available at Barmer-II PS (except enhancement of 50 MW). Further, another application for connectivity of 80 MW by Foxtrot Solar Renewables Energy 
+Private Limited (App. No. 2200001088) at Barmer-II PS is also being taken up for discussion in this meeting as per application priority. Accordingly, it was
+proposed to grant connectivity at Barmer-III PS at 220 kV level through 220 kV S/c line for the combined capacity of 180 MW. M/s Foxtrot Solar agreed for 
+the same. Applicant was asked to confirm the 220kV bay scope at Barmer-III PS & DTL tower configuration. M/s Foxtrot Solar informed that the 220 kV bay 
+at Barmer-III PS end shall be under ISTS & DTL tower configuration shall be S/c line on D/c tower. The same was noted. 
+  
+It was mentioned that, the transmission system for evacuation of power from Barmer-III PS is presently under evolution. Upon evolution, the scheme shall be 
+discussed in a separate joint study meeting among CEA, CTUIL, Grid India & Stakeholders followed by the subsequent CMETS meeting. The detailed
+transmission system shall be informed upon finalization and approval of the scheme. 
+ 
+It was also informed that, M/s Foxtrot Solar Renewables Energy Private Limited has requested for Start Date of Connectivity under GNA from 31.12.2030.
+Considering the same and expected commissioning date of transmission system (i.e. 30.09.2030), the start date of Connectivity under GNA shall be 
+31.12.2030 (interim) as requested. M/s Foxtrot Solar noted the same. 
+ 
+Accordingly, it was agreed to grant 100 MW connectivity to M/s Foxtrot Solar Renewables at 220 kV Barmer-III PS. Details of Transmission system for 
+connectivity of M/s Foxtrot Solar Renewables Energy Private Limited under GNA is as below:  
+ 
+Details of Transmission system for Connectivity under GNA:  
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+Common Pooling station for M/s Foxtrot Solar Renewables Energy Private Limited (App. No. 2200001057 (100 MW) & 2200001088 (80MW) 
+Solar Power Project – Barmer-III PS 220 kV S/c line on D/c tower (Suitable to carry minimum 300 MW per circuit at nominal voltage)   
+ 
+C. Transmission system for Connectivity under GNA: As per Annexure-V 
+ 
+Start Date of Connectivity under GNA: 31.12.2030(Interim). Final date shall be confirmed upon award of the system 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 18 of 67 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application)
+Connectivity
+location 
+(As per 
+Application)
+Conn BGs requirement
+5.
+2200001065 
+ACME Cleantech 
+Solutions Private 
+Limited 
+Jaisalmer 
+distt., 
+Rajasthan 
+17.07.2024 
+Generator 
+(Solar) 
+Land BG 
+Route 
+150 
+31.10.2026 
+Fatehgarh-II PS
+ Conn BG1: Rs. 50 Lakh  
+ Conn BG2: Nil (Bay In sharing) 
+ Conn BG3: Rs. 2 lakh/MW 
+It was informed that M/s ACME Cleantech Solutions Private Limited has applied for connectivity of 150 MW at Fatehgarh-II PS. M/s ACME Cleantech is 
+already granted connectivity of 850 MW at Fatehgarh-II PS through 400 kV S/c line for its 2 nos. of applications (App. No. 2200000387(600 MW)
+2200000396(250 MW)).  
+ 
+It was also informed that Fatehgarh-II PS was earlier closed with total connectivity grant of 5460 MW. However, 1000 MW of connectivity was surrendered
+during the GNA transition process in 2023. Therefore, the margin of 1000 MW was available for grant at Fatehgarh-II PS. With 850 MW connectivity already 
+granted to M/s ACME, remaining margin at 400 kV Fatehgarh-II PS is 150 MW.  Accordingly, it was proposed to grant connectivity for the above application
+at Fatehgarh-II PS through same 400 kV S/c line in sharing with earlier granted applications of M/s ACME Cleantech Solutions Pvt Ltd. (App. No. 
+2200000387(600 MW) & 2200000396(250 MW)). M/s ACME agreed for the same. 
+ 
+Further, it was mentioned that M/s ACME Cleantech Solutions Pvt Ltd. has requested Start Date of Connectivity under GNA from 31.10.2026. However, 
+considering the same and expected commissioning date of transmission system (i.e. 31.03.2027), the start date of Connectivity under GNA shall be 
+31.03.2027 (interim). M/s ACME Cleantech noted the same.  
+ 
+Accordingly, it was agreed to grant 150 MW connectivity to M/s ACME Cleantech Solutions Private Limited at 400 kV Fatehgarh-II PS. Details of Transmission 
+system for connectivity of ACME Cleantech Solutions Pvt Ltd. under GNA is as below: 
+ 
+Details of Transmission system for Connectivity under GNA:  
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+Common Pooling Station for Acme Cleantech Solutions Pvt Ltd. (App. No. 2200000387(600 MW), 2200000396(250 MW) & 
+22000001065(150MW)) Solar Power Projects– Fatehgarh-II PS 400 kV S/c line on D/c tower (suitable to carry minimum 1000 MW per circuit 
+at nominal voltage)    
+ 
+C. Transmission system for Connectivity under GNA: As per Annexure-VI 
+ 
+Start Date of Connectivity under GNA: 31.03.2027(Interim). Final date shall be confirmed upon award of the system 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 19 of 67 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application)
+Connectivity
+location 
+(As per 
+Application)
+Conn BGs requirement
+It was also informed that, with this grant of 150 MW to M/s ACME Cleantech, total connectivity granted at Fatehgarh-II PS shall be 5460 MW. As available 
+margin at Fatehgarh-II PS is fully utilised, the Pooling station shall be closed for grant and no additional connectivity shall be granted at Fatehgarh-II PS. Any 
+subsequent application received for grant at Fatehgarh-II PS shall be considered for grant in other RE pooling stations in Fatehgarh-Barmer complex as per 
+application priority.  
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application)
+Connectivity
+location 
+(As per 
+Application)
+Conn BGs requirement
+6.
+2200001026 
+Renew Solar Power 
+Private Limited 
+Barmer 
+distt., 
+Rajasthan 
+19.07.2024 
+Generator 
+(Solar) 
+REMCL 
+LOA 
+200 
+30.09.2026 
+Barmer PS 
+ Conn BG1: Rs. 50 Lakh  
+ Conn BG2: Rs. 3 Cr. 
+ Conn BG3: Rs. 2 lakh/MW 
+It was informed that M/s Renew Solar Power Private Limited has applied for connectivity for 200 MW at Barmer PS. However, there is no margin available at 
+Barmer-I PS (except enhancement of 50 MW) & Barmer-II PS (except enhancement of 50 MW). Accordingly, it was proposed to grant connectivity at 220 kV 
+Barmer-III PS through 220 kV S/c line for the 200 MW capacity. M/s Renew agreed for the same. Applicant was asked to confirm the 220kV bay scope at 
+Barmer-III PS end and DTL tower configuration. M/s Renew Solar informed that the 220 kV bay at Barmer-III PS end shall be under ISTS & DTL tower 
+configuration shall be S/c line on D/c tower. The same was noted. 
+  
+It was mentioned that, the transmission system for evacuation of power from Barmer-III PS is presently under evolution. Upon evolution, the scheme shall 
+be discussed in a separate joint study meeting among CEA, CTUIL, Grid India & Stakeholders followed by the subsequent CMETS meeting. The detailed 
+transmission system shall be informed upon finalization and approval of the scheme. 
+ 
+It was also informed that, M/s Renew Solar Power Private Limited has requested Start Date of Connectivity under GNA from 30.09.2026. Considering the 
+same and expected commissioning date of transmission system (i.e. 30.09.2030), the start date of Connectivity under GNA shall be 30.09.2030 (interim). M/s 
+Renew Solar noted the same. 
+ 
+Accordingly, it was agreed to grant 200 MW connectivity to M/s Renew Solar Power Private Limited at 220 kV Barmer-III PS. Details of Transmission system 
+for connectivity of M/s Renew Solar Power Private Limited under GNA is as below:   
+ 
+Transmission system for connectivity of Renew Solar Power Private Limited under GNA is as below: 
+ 
+Details of Transmission system for Connectivity under GNA:  
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 20 of 67 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application)
+Connectivity
+location 
+(As per 
+Application)
+Conn BGs requirement
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+Renew Solar Power Private Limited Solar Power Project – Barmer-III PS 220 kV S/c line on D/c tower (Suitable to carry minimum 300 MW 
+per circuit at nominal voltage)    
+ 
+C. Transmission system for Connectivity under GNA: As per Annexure-V 
+ 
+Start Date of Connectivity under GNA: 30.09.2030(Interim). Final date shall be confirmed upon award of the system 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application)
+Connectivity
+location 
+(As per 
+Application)
+Conn BGs requirement
+7.
+2200001044 
+Adani Renewable 
+Energy Holding 
+Eighteen Limited 
+Phalodi 
+distt., 
+Rajasthan 
+24.07.2024 
+Generator 
+(Solar) 
+Land Route
+150 
+(Reduced to 
+50 MW) 
+15.06.2025 
+Bhadla - II PS 
+ Conn BG1: Rs. 50 Lakh  
+ Conn BG2: Nil (In sharing) 
+ Conn BG3: Rs. 2 lakh/MW 
+It was informed that M/s Adani Renewable Energy Holding Eighteen Limited has applied for connectivity of 150 MW at Bhadla-II PS. However, there is no 
+margin available for grant of connectivity of 150 MW at Bhadla-II PS (except enhancement of 50 MW) & Bhadla-III PS (except enhancement of 50 MW).  M/s 
+Adani Renewable Energy Holding Four Limited (App No. 2200000811) was earlier granted connectivity of 765 MW at of Bhadla-IV PS through 400kV S/c 
+line. Accordingly, it was proposed to grant connectivity of 150 MW to M/s Adani Renewable Energy Holding Eighteen Limited at 400 kV Bhadla-IV PS in 
+sharing with M/s Adani Renewable Energy Holding Four Limited (App No. 2200000811:765MW) solar power project.  
+ 
+M/s Adani in the meeting informed that they would opt to reduce the connectivity quantum to 50 MW if they can get connectivity at Bhadla-II at 400 kV in 
+sharing with Adani Renewable Energy Holding Four (500 MW).  
+ 
+Regarding the M/s Adani’s request, it was deliberated that out of a total of 350 MW margin vacated at Bhadla-II, 300 MW is already allocated to M/s Green 
+Infra. Therefore, total connectivity granted with Azure Bay is already 950 MW which is more than the requirement of 900 MW. As the bay is fully utilized there 
+is no issue in granting connectivity of 50 MW to M/s Adani Renewable Energy Holding Eighteen at 400 kV bay allocated to M/s Adani Renewable Energy 
+Holding Four Limited (500 MW), which is underutilized against its capacity of 900 MW. Accordingly, after discussion with stakeholders, it was agreed to grant 
+connectivity of 50 MW to M/s Adani Renewable Energy Holding Eighteen Ltd. at Bhadla-II PS in sharing with 400 kV bay allocated to M/s Adani Renewable 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 21 of 67 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application)
+Connectivity
+location 
+(As per 
+Application)
+Conn BGs requirement
+Energy Holding Four Limited (500 MW). M/s Adani was asked to confirm the reduction of connectivity quantum in mail/letter and submit the revised CEA 
+installed capacity certificate. M/s Adani agreed for the same. Subsequently, M/s Adani vide mail dated 24.09.2024 confirmed the request to reduce the 
+connectivity quantum from 150 MW to 50 MW along with the revised CEA installed capacity certificate. 
+ 
+It was also informed that M/s Adani Renewable Energy Holding Eighteen Limited has requested Start Date of Connectivity under GNA from 15.06.2025. 
+However, considering the same and expected commissioning date of transmission system (i.e. 31.03.2027), the start date of Connectivity under GNA shall 
+be 31.03.2027 (interim). M/s Adani Renewable noted the same. 
+ 
+Details of Transmission system for connectivity of M/s Adani Renewable Energy Holding Eighteen Limited under GNA is as below:   
+ 
+Details of Transmission system for Connectivity under GNA:  
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+Through sharing of dedicated transmission system of M/s Adani Renewable Energy Holding Four Limited (App. No. 1200003685 (500 MW)) 
+Solar Power Project – Bhadla-II PS 400 kV S/c line on D/c tower (suitable to carry minimum 900 MW at nominal voltage)  
+ 
+(ii). 
+Infrastructure required for sharing dedicated transmission system - under the scope of M/s Adani Renewable Energy Holding Eighteen Limited
+ 
+C. Transmission system for Connectivity under GNA: As per Annexure-X 
+ 
+Start Date of Connectivity under GNA: 31.03.2027(Interim). Final date shall be confirmed upon award of the system 
+ 
+It was also informed that, with this grant of 50 MW to M/s Adani, the margin available at Bhadla-II PS is completely exhausted. Accordingly, Bhadla-II PS 
+shall be closed for further grant including enhancements. 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 22 of 67 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location
+Submission 
+Date 
+Nature of 
+Applicant 
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application)
+Connectivity
+location 
+(As per 
+Application)
+Conn BGs requirement
+8.
+2200001089 
+TEQ Green 
+Power XV 
+Private Limited 
+Pali distt., 
+Rajasthan 
+26.07.2024 
+Renewable Power 
+Park developer 
+(Solar) 
+Land BG 
+Route 
+300 
+15.06.2027 
+Pali PS 
+ Conn BG1: Rs. 50 Lakh  
+ Conn BG2: Rs. 3 Cr 
+ Conn BG3: Rs. 2 lakh/MW 
+It was informed that M/s TEQ Green Power XV Private Limited has applied for connectivity of 300 MW at Pali PS.  Accordingly, it was proposed to grant
+connectivity at Pali PS at 220 kV level through 220 kV S/c line. M/s TEQ Green agreed for the same. Applicant was asked to confirm the 220kV bay scope at 
+Pali PS end & DTL tower configuration. M/s TEQ Green informed that the 220 kV bay at Pali PS end shall be under ISTS & DTL tower configuration shall be 
+S/c line on D/c tower. The same was noted. 
+ 
+It was mentioned that, the transmission system for evacuation of power from Nagaur(Merta) & Pali complexes through Beawar(HVDC) is presently under 
+evolution. Upon evolution, the scheme shall be discussed in a separate joint study meeting among CEA, CTUIL, Grid India & Stakeholders followed by the 
+subsequent CMETS meeting. The detailed transmission system shall be informed upon finalization and approval of the scheme. 
+ 
+It was also informed that M/s TEQ Green Power XV Private Limited has requested Start Date of Connectivity under GNA from 15.06.2027. However, 
+considering the same and expected commissioning date of transmission system (i.e. 31.03.2031), the start date of Connectivity under GNA shall be 
+31.03.2031 (interim). M/s TEQ Green noted the same. 
+ 
+Accordingly, it was agreed to grant 300 MW connectivity to M/s TEQ Green Power XV Private Limited at 220 kV Pali PS. Details of Transmission system for 
+connectivity of M/s TEQ Green Power XV Private Limited under GNA is as below:   
+     
+Details of Transmission system for Connectivity under GNA:  
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+M/s TEQ Green Power XV Private Limited Renewable Power Park – Pali PS 220 kV S/c line on D/c tower (suitable to carry minimum 300
+MW at nominal voltage)    
+  
+C. Transmission system for Connectivity under GNA: As per Annexure-VIII 
+ 
+Start Date of Connectivity under GNA: 31.03.2031(Interim). Final date shall be confirmed upon award of the system 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 23 of 67 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location
+Submission 
+Date 
+Nature of 
+Applicant 
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application)
+Connectivity
+location 
+(As per 
+Application)
+Conn BGs requirement
+9.
+2200001087 
+TEQ Green 
+Power XV 
+Private Limited 
+Jalore 
+distt., 
+Rajasthan 
+26.07.2024 
+Renewable Power 
+Park developer 
+(Solar) 
+Land BG 
+Route 
+300 
+15.06.2027 
+Jalore PS 
+ Conn BG1: Rs. 50 Lakh  
+ Conn BG2: Rs. 3 Cr.  
+ Conn BG3: Rs. 2 lakh/MW 
+It was informed that M/s TEQ Green Power XV Private Limited has applied for connectivity of 300 MW at Jalore PS. Accordingly, it was proposed to grant 
+connectivity at Jalore PS at 220 kV through 1 no. of 220 kV line bay. M/s TEQ Green agreed for the same. Applicant was asked to confirm the 220kV bay 
+scope at Jalore PS end & DTL tower configuration. M/s TEQ Green informed that the 220 kV bay at Jalore PS end shall be under ISTS & DTL tower 
+configuration shall be S/c line on D/c tower. The same was noted. 
+ 
+It was mentioned that the transmission system for evacuation of power from Sirohi, Jalore & Sanchore complexes through Sirohi(HVDC) is presently under 
+evolution. Upon evolution, the scheme shall be discussed in a separate joint study meeting among CEA, CTUIL, Grid India & Stakeholders followed by the 
+subsequent CMETS meeting. The detailed transmission system shall be informed upon finalization and approval of the scheme. 
+ 
+It was also informed that M/s TEQ Green Power XV Private Limited has requested Start Date of Connectivity under GNA from 15.06.2027. However, 
+considering the same and expected commissioning date of transmission system (i.e. 30.09.2030), the start date of Connectivity under GNA shall be 
+30.09.2030 (interim). M/s TEQ Green noted the same. 
+ 
+Accordingly, it was agreed to grant 300 MW connectivity to M/s TEQ Green Power XV Private Limited at 220 kV Jalore PS. Details of Transmission system 
+for connectivity of M/s TEQ Green Power XV Private Limited under GNA is as below:   
+ 
+Details of Transmission system for Connectivity under GNA:  
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+TEQ Green Power XV Private Limited Renewable Power Park – Jalore PS 220 kV S/c line on D/c tower (suitable to carry minimum 300 MW 
+per circuit at nominal voltage)  
+   
+C. Transmission system for Connectivity under GNA: As per Annexure-IX 
+ 
+Start Date of Connectivity under GNA: 30.09.2030(Interim). Final date shall be confirmed upon award of the system 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 24 of 67 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location
+Submission 
+Date 
+Nature of 
+Applicant 
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application)
+Connectivity
+location 
+(As per 
+Application)
+Conn BGs requirement
+10.
+2200001088 
+Foxtrot Solar 
+Renewables 
+Energy Private
+Limited
+Barmer 
+distt., 
+Rajasthan 
+26.07.2024 
+Generator (Solar) 
+Land Route
+80 
+31.12.2031 
+Barmer II PS 
+ Conn BG1: Rs. 50 Lakh  
+ Conn BG2: Nil(Bay In sharing)
+ Conn BG3: Rs. 2 lakh/MW 
+It was informed that M/s Foxtrot Solar Renewables Energy Private Limited has applied for connectivity for 80 MW at Barmer-II PS. As decided with the 
+previous application of M/s Foxtrot (App. No. 2200001057 – 100 MW), it was proposed to grant connectivity at Barmer-III PS at 220 kV level through same
+220 kV S/c line allocated with App. No. 2200001057. 
+ 
+It was mentioned that the transmission system for evacuation of power from Barmer-III is presently under evolution. Upon evolution, the scheme shall be 
+discussed in a separate joint study meeting among CEA, CTUIL, Grid India & Stakeholders followed by the subsequent CMETS meeting. The detailed 
+transmission system shall be informed upon finalization and approval of the scheme. 
+ 
+It was also informed that M/s Foxtrot Solar Renewables Energy Private Limited has requested Start Date of Connectivity under GNA from 31.12.2031.
+Considering the same and expected commissioning date of transmission system (i.e. 30.09.2030), the start date of Connectivity under GNA shall be 
+31.12.2031 (interim) as requested. M/s Foxtrot Solar noted the same. 
+ 
+Accordingly, it was agreed to grant 80 MW connectivity to M/s Foxtrot Solar Renewables at 220 kV Barmer-III PS. Details of Transmission system for 
+connectivity of Foxtrot Solar Renewables Energy Private Limited under GNA is as below: 
+  
+Details of Transmission system for Connectivity under GNA:  
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+Common Pooling station for M/s Foxtrot Solar Renewables Energy Private Limited (App. No. 2200001057 (100 MW) & 2200001088 (80MW) 
+Solar Power Project – Barmer-III PS 220 kV S/c line on D/c tower (Suitable to carry minimum 300 MW per circuit at nominal voltage)   
+ 
+C. Transmission system for Connectivity under GNA: As per Annexure-V 
+ 
+Start Date of Connectivity under GNA: 31.12.2031(Interim). Final date shall be confirmed upon award of the system 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 25 of 67 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant 
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application)
+Connectivity
+location 
+(As per 
+Application)
+Conn BGs requirement
+11.
+2200001085 
+Avaada 
+Energy Private
+Limited 
+Bikaner 
+distt., 
+Rajasthan 
+26.07.2024 
+Generator (Solar) 
+NHPC LOA 
+700 
+30.04.2026 
+Bhadla - III PS 
+ Conn BG1: Rs. 50 Lakh  
+ Conn BG2: Rs. 6 Cr. 
+ Conn BG3: Rs. 2 lakh/MW 
+It was informed that M/s Avaada Energy Private Limited has applied for connectivity of 700 MW at Bhadla-III PS. However, there is no margin available for 
+grant of connectivity of 700 MW at Bhadla-III PS. Accordingly, it was proposed to grant connectivity to M/s Avaada Energy at Bhadla-IV PS through 400 kV 
+bay (1 no.). M/s Avaada Energy enquired whether they can be granted connectivity at 220 kV voltage level. Regarding this, CTUIL informed that M/s Avaada 
+has applied single application for 700 MW connectivity quantum for which it is not optimal to grant connectivity at 220 kV as it would require additional 400/220 
+kV ICTs & incur additional losses in  ISTS. Further, from techno economical point of view, 700 MW Quantum can be granted at 400 kV in ISTS. Accordingly,
+it was proposed to grant connectivity at 400 kV. M/s Avaada noted the same.  
+ 
+Applicant was asked to confirm the 400 kV bay scope at Bhadla-IV PS end and the tower configuration.  M/s Avaada Energy informed that the 400 kV bay at 
+Bhadla-IV PS end shall be under ISTS & DTL tower configuration shall be S/c line on D/c tower. The same was noted. 
+ 
+It was mentioned that the transmission system for evacuation of power from Bhadla-IV is presently under evolution. Upon evolution, the scheme shall be 
+discussed in a separate joint study meeting among CEA, CTUIL, Grid India & Stakeholders followed by the subsequent CMETS meeting. The detailed 
+transmission system shall be informed upon finalization and approval of the scheme. 
+ 
+It was also informed that M/s Avaada Energy Private Limited has requested Start Date of Connectivity under GNA from 30.04.2026. However, considering 
+the same and expected commissioning date of transmission system (i.e. 31.03.2030), the start date of Connectivity under GNA shall be 31.03.2030 (interim). 
+M/s Avaada Energy noted the same. 
+ 
+Accordingly, it was agreed to grant 700 MW connectivity to M/s Avaada Energy at 400 kV Bhadla-IV PS. Details of Transmission system for connectivity of 
+M/s Avaada Energy Private Limited under GNA is as below:   
+ 
+Details of Transmission system for Connectivity under GNA:  
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). Avaada Energy Private Limited Solar Power Project – Bhadla-IV PS 400 kV S/c line on D/c tower (Suitable to carry minimum 900 MW at 
+nominal voltage)  
+ 
+C.
+Transmission system for Connectivity under GNA: As per Annexure-VII 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 26 of 67 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant 
+Criterion 
+for 
+applying 
+Injection at 
+ISTS point 
+(MW) 
+Start Date of 
+Connectivity
+(As per 
+Application)
+Connectivity
+location 
+(As per 
+Application)
+Conn BGs requirement
+ 
+Start Date of Connectivity under GNA: 31.03.2030(Interim). Final date shall be confirmed upon award of the system 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant 
+Criterion 
+for 
+applying 
+Injection 
+at ISTS 
+point 
+(MW) 
+Start Date of 
+Connectivity 
+(As per 
+Application) 
+Connectivity
+location 
+(As per 
+Application) 
+Conn BGs requirement
+12.
+2200001100 
+Diyos Three 
+Renewables Private 
+Limited 
+Pali distt., 
+Rajasthan 
+31.07.2024 
+Renewable 
+Power Park 
+developer (Solar)
+Land BG 
+Route 
+300 
+01.04.2031 
+Pali PS 
+ Conn BG1: Rs. 50 Lakh  
+ Conn BG2: Rs. 3 Cr. 
+ Conn BG3: Rs. 2 lakh/MW
+It was informed that M/s Diyos Three Renewables Private limited has applied for connectivity of 300 MW at Pali PS. Accordingly, it was proposed to grant
+connectivity at Pali PS at 220 kV level through 220 kV S/c line. M/s Diyos Three agreed for the same. Applicant was asked to confirm the 220kV bay scope 
+at Pali PS & DTL tower configuration. M/s Diyos Three informed that the 220 kV bay at Pali PS end shall be under ISTS & DTL tower configuration shall be 
+S/c line on D/c tower. The same was noted. 
+ 
+It was mentioned that that the transmission system for evacuation of power from Nagaur (Merta) & Pali complexes through Beawar (HVDC) is presently 
+under evolution. Upon evolution, the scheme shall be discussed in a separate joint study meeting among CEA, CTUIL, Grid India & Stakeholders followed 
+by the subsequent CMETS meeting. The detailed transmission system shall be informed upon finalization and approval of the scheme. 
+ 
+It was also informed that M/s Diyos Three Renewables Private limited has requested Start Date of Connectivity under GNA from 01.04.2031. Considering the 
+same and expected commissioning date of transmission system (i.e. 31.03.2031), the start date of Connectivity under GNA shall be 01.04.2031 (interim) as 
+requested. M/s Diyos Three noted the same. 
+ 
+Accordingly, it was agreed to grant 300 MW connectivity to M/s Diyos Three Renewables Private Limited at 220 kV Pali PS. Details of Transmission system 
+for connectivity of M/s Diyos Three Renewables Private limited under GNA is as below:   
+    
+Details of Transmission system for Connectivity under GNA:  
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 27 of 67 
+ 
+Sl. 
+No. 
+Application 
+ID 
+Applicant 
+Project 
+Location 
+Submission 
+Date 
+Nature of 
+Applicant 
+Criterion 
+for 
+applying 
+Injection 
+at ISTS 
+point 
+(MW)
+Start Date of 
+Connectivity 
+(As per 
+Application)
+Connectivity
+location 
+(As per 
+Application)
+Conn BGs requirement
+(i). 
+Diyos Three Renewables Private Limited Renewable Power Park – Pali PS 220 kV S/c line on D/c tower (suitable to carry minimum 300 MW 
+at nominal voltage)    
+   
+C. Transmission system for Connectivity under GNA: As per Annexure-VIII 
+ 
+Start Date of Connectivity under GNA: 01.04.2031(Interim). Final date shall be confirmed upon award of the system 
+ 
+B4. Application for Grant of GNARE to entities other than STU under Regulation 20.1, 20.3 and 20.4 to entities under 
+Regulation 17.1(ii), (iii), (v) and (vi): 
+Sl 
+No.
+Application 
+ID 
+Name of 
+the 
+Applicant
+Submission 
+Date 
+Region
+Nature of 
+applicant 
+GNARE 
+within 
+Region 
+(MW)
+GNARE 
+outside 
+Region 
+(MW)
+Total Quantum 
+(MW) of GNARE 
+Required 
+Start 
+date of 
+GNARE 
+End  
+Date of 
+GNARE 
+1.
+2200001060 
+Asian 
+Fine 
+Cements 
+Private Limited 
+17.07.2024 
+ 
+NR 
+ 
+Drawee entity 
+connected to Intra State 
+Transmission System 
+0 
+4 
+4 
+01.09.2024 
+31.03.2026 
+It was informed that, Asian Fine Cements Private Limited has applied for GNARE of 4 MW (Outside the region) as a drawee entity connected to Intra State 
+Transmission System of Punjab (PSTCL) at 220 kV Rajpura S/s. In this regard, Asian Fine cements has submitted NOC from PSTCL along with the 
+application.  
+It was mentioned that Punjab has been granted GNA of 5497 MW as per 18.1 of GNA regulation. Further, about 61 MW of GNA/GNARE is granted to intra 
+state connected entities of Punjab. Considering above, there is sufficient margin available in the existing ISTS system for drawl of additional 4 MW from 
+ISTS periphery of Punjab (PSTCL) network.  
+ 
+In view of the above, it was agreed to grant 4 MW of GNARE (outside the region) to Asian Fine Cements Private Limited for drawl of power from ISTS network. 
+It was also informed that M/s Asian Fine has requested for Start Date of GNARE from 01.09.2024. M/s Asian Fine Cements was asked to confirm the revised 
+start date as the date has already elapsed.  CTU also advised applicant to keep realistic start date of GNA to avoid such issues.  
+ 
+M/s Asian Fine Cements informed that they would like to revise their Start Date to 01.12.2024. CTUIL asked Asian Fine Cements to confirm the same in 
+mail. Subsequently, M/s Asian Fine Cements vide mail dated 20.09.2024 confirmed their start date as 01.12.2024. Accordingly, it was agreed to grant GNARE 
+of 4 MW (Outside Region) to M/s Asian Fine Cements through existing system with Start date from 01.12.2024. 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 28 of 67 
+ 
+ 
+Sl 
+No. 
+Applicatio
+n ID 
+Name of 
+the 
+Applicant
+Submission 
+Date 
+Region
+Nature of 
+applicant 
+GNARE 
+within 
+Region 
+(MW)
+GNARE 
+outside 
+Region 
+(MW)
+Total Quantum 
+(MW) of GNARE 
+Required 
+Start 
+date of 
+GNARE 
+End  
+Date of 
+GNARE 
+2. 
+ 
+2200001058 
+Ambuja 
+Cements 
+Limited
+17.07.2024 
+NR 
+Drawee entity 
+connected to Intra State 
+Transmission System
+0 
+10 
+10 
+01.09.2024 
+31.03.2026 
+It was informed that Ambuja Cements Limited has applied for GNARE of 10 MW (Outside the region) as a drawee entity connected to Intra State Transmission 
+System of PSTCL at 220 kV RTP Ropar S/s. In this regard, Ambuja cements Ltd. has submitted NOC from PSTCL along with the application.  
+ 
+It was mentioned that Punjab has been granted GNA of 5497 MW as per 18.1 of GNA regulation. Further, about 65 MW of GNA/GNARE is granted to intra 
+state connected entities of Punjab. Considering above, there is sufficient margin available in the existing ISTS system for drawl of additional 10 MW from 
+ISTS periphery of Punjab (PSTCL) network.  
+ 
+In view of the above, it was agreed to grant 10 MW of GNARE (outside the region) to Ambuja Cements Limited for drawl of power from ISTS network. M/s 
+Ambuja Cements Limited has requested for Start Date of GNARE from 01.09.2024.  However, as the requested start date has already passed, M/s Ambuja 
+Cements Limited was asked to re confirm the start date as it is already elapsed. CTU also advised applicant to keep realistic start date of GNA to avoid such 
+issues. 
+ 
+ M/s Ambuja Cements informed that they would like to revise their Start Date to 01.12.2024. CTUIL asked Ambuja Cements to confirm the same in mail. 
+Subsequently, M/s Ambuja Cements vide mail dated 20.09.2024 confirmed their start date as 01.12.2024. Accordingly, it was agreed to grant GNARE of 10 
+MW (Outside Region) to  M/s Ambuja Cements through existing system with Start date from 01.12.2024. 
+ 
+Sl 
+No.
+Application 
+ID 
+Name of 
+the 
+Applicant
+Submission 
+Date 
+Region
+Nature of 
+applicant 
+GNARE 
+within 
+Region 
+(MW)
+GNARE 
+outside 
+Region 
+(MW)
+Total Quantum 
+(MW) of GNARE 
+Required 
+Start 
+date of 
+GNARE 
+End  
+Date of 
+GNARE 
+3. 
+2200001059 
+Ambuja 
+Cements 
+Limited
+17.07.2024 
+NR 
+Drawee entity 
+connected to Intra State 
+Transmission System
+0 
+3 
+3 
+01.09.2024 
+31.03.2026 
+It was informed that Ambuja Cements Limited has applied for GNARE of 3 MW (Outside the region) as a drawee entity connected to Intra State Transmission 
+System of PSTCL at 66 kV Sub Station Malout Road (further connected to 220 kV Sub Station GNDTP Bathinda). In this regard, Ambuja Cements Limited 
+has submitted NOC from PSTCL along with the application.  
+ 
+It was mentioned that Punjab has been granted GNA of 5497 MW as per 18.1 of GNA regulation. Further, about 75 MW of GNA/GNARE is granted to intra 
+state connected entities of Punjab. Considering above, there is sufficient margin available in the existing ISTS system for drawl of additional 3 MW from ISTS 
+periphery of Punjab (PSTCL) network. 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 29 of 67 
+ 
+Sl 
+No.
+Application 
+ID 
+Name of 
+the 
+Applicant
+Submission 
+Date 
+Region
+Nature of 
+applicant 
+GNARE 
+within 
+Region 
+(MW)
+GNARE 
+outside 
+Region 
+(MW)
+Total Quantum 
+(MW) of GNARE 
+Required 
+Start 
+date of 
+GNARE 
+End  
+Date of 
+GNARE 
+ 
+In view of the above, it was agreed to grant 3 MW of GNARE(outside the region) to  Ambuja Cements Limited for drawl of power from ISTS network. M/s 
+Ambuja Cements Limited has requested for Start Date of GNARE from 01.09.2024.  However, as the requested start date has already passed, M/s  Ambuja 
+Cements Limited was asked to re confirm the start date as it is already elapsed. CTU also advised applicant to keep realistic start date of GNA to avoid such 
+issues. 
+ 
+M/s Ambuja Cements informed that they would like to revise their Start Date from 01.12.2024. CTUIL asked Ambuja Cements to confirm the same in mail. 
+Subsequently, M/s Ambuja Cements vide mail dated 20.09.2024 confirmed their start date as 01.12.2024. Accordingly, it was agreed to grant GNARE of 3 
+MW (Outside Region) to M/s Ambuja Cements through existing system with Start date from 01.12.2024 
+ 
+Sl 
+No. 
+Applicatio
+n ID 
+Name of 
+the 
+Applicant
+Submission 
+Date 
+Region
+Nature of 
+applicant 
+GNARE 
+within 
+Region 
+(MW)
+GNARE 
+outside 
+Region 
+(MW)
+Total Quantum 
+(MW) of GNARE 
+Required 
+Start 
+date of 
+GNARE 
+End  
+Date of 
+GNARE 
+4. 
+ 
+2200001081 
+ACC Limited 
+26.07.2024 
+NR 
+Drawee entity 
+connected to Intra State 
+Transmission System
+0 
+4.5 
+4.5 
+01.09.2024 
+31.03.2026 
+It was informed that ACC Limited has applied for GNARE of 4.5 MW (Outside the region) as a drawee entity connected to Intra State Transmission System 
+of UPPTCL at 132 kV 132 kV S/s Gauriganj. In this regard, Ambuja Cements Limited has submitted NOC from UPPTCL from along with the application.  
+ 
+It was mentioned that Uttar Pradesh has been granted GNA of 10339 MW. Further, 100 MW of GNA is granted to Noida Power(NPCL) as a drawee entity 
+connected to intra state connected entities of UP. Considering above, there is sufficient margin available in the existing ISTS system for drawl of additional 
+4.5 MW from ISTS periphery of Uttar Pradesh (UPPTCL) network.  
+ 
+In view of the above, it was agreed to grant 4.5 MW of GNARE (outside the region) to  ACC Limited for drawl of power from ISTS network. M/s ACC Limited 
+has requested for Start Date of GNARE from 01.09.2024. However, as the requested Start date has already passed, M/s ACC Limited was asked to re confirm 
+the start date as it is already elapsed. CTU also advised applicant to keep realistic start date of GNA to avoid such issues.  
+ 
+M/s ACC Limited informed that they would like to revise their Start Date from 01.12.2024. CTUIL asked ACC Limited to confirm the same in mail. 
+Subsequently, M/s ACC Limited vide mail dated 20.09.2024 confirmed their start date as 01.12.2024. Accordingly, it was agreed to grant GNARE of 4.5 MW 
+(Outside Region) to M/s ACC Limited through existing system with Start date from 01.12.2024 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 30 of 67 
+ 
+Sl 
+No. 
+Application 
+ID 
+Name of 
+the 
+Applicant
+Submission 
+Date 
+Region
+Nature of 
+applicant 
+GNARE 
+within 
+Region 
+(MW)
+GNARE 
+outside 
+Region 
+(MW)
+Total Quantum 
+(MW) of GNARE 
+Required 
+Start 
+date of 
+GNARE 
+End  
+Date of 
+GNARE 
+5. 
+ 
+2200001101 
+Ambuja 
+Cements 
+Limited
+31.07.2024 
+NR 
+ 
+Drawee entity 
+connected to Intra State 
+Transmission System
+0 
+5.85 
+5.85 
+01.09.2024
+31.03.2026 
+It was informed that Ambuja Cements Limited has applied for GNARE of 5.85 MW (Outside the region) as a drawee entity connected to Intra State 
+Transmission System of UPCL at 33/11 kV Raipur S/s of Discom, which is further connected to 132/33 kV S/s Bhagwanpur (PTCUL)). In this regard, Ambuja 
+Cements Limited has submitted NOC from along with the application.  
+ 
+It was mentioned that Uttarakhand has been granted GNA of 1402 MW as per 18.1 of GNA regulation. Further, 8 MW of GNARE is granted to intra state 
+connected entities of Uttarakhand (PTCUL). Considering above, there is sufficient margin available in the existing ISTS system for drawl of additional 5.85 
+MW from ISTS periphery of Uttarakhand (PTCUL) network.  
+ 
+In view of the above, it was agreed to grant 5.85 MW of GNARE (outside the region) to Ambuja Cements Limited for drawl of power from ISTS network. M/s 
+Ambuja Cements Limited has requested for Start Date of GNARE from 01.09.2024. However, as the of requested Start date has already passed, M/s Ambuja 
+Cements Limited was asked to re-confirm the start date as it is already elapsed. CTU also advised applicant to keep realistic start date of GNA to avoid such 
+issues.  
+ 
+M/s Ambuja Cements informed that they would like to revise their Start Date from 01.12.2024. CTUIL asked Ambuja Cements to confirm the same in mail. 
+Subsequently, M/s Ambuja Cements vide mail dated 20.09.2024 confirmed their start date as 01.12.2024. Accordingly, it was agreed to grant GNARE of 5.85 
+MW (Outside Region) to M/s Ambuja Cements through existing system with Start date from 01.12.2024 
+ 
+ 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 31 of 67 
+ 
+B. Network Expansion Scheme 
+B.1 Deletion of 400 kV Gopalpur and associated Transmission system for Connectivity/LTA/GNA  
+As part of Transmission system strengthening scheme for evacuation of power from solar energy zones in Rajasthan (8.1 GW) under 
+Phase-II- Part G1, following transmission scheme was approved in 6th meeting of NCT held in 30.09.19.  
+ 
+Removal of LILO of Bawana – Mandola 400kV D/c(Quad) line at Maharani Bagh /Gopalpur S/s. Extension of above LILO section 
+from Maharani Bagh/ Gopalpur upto Narela S/s so as to form Maharanibagh – Narela 400kV D/c(Quad) and Maharanibagh -
+Gopalpur-Narela 400kV D/c(Quad)lines 
+ 
+2 no of line bays at Narela each for Maharanibagh – Narela 400kV D/c (Quad) and Maharanibagh -Gopalpur-Narela 400kV 
+D/c(Quad) lines formed after removal of LILO of Bawana – Mandola 400kV D/c(Quad) line at Maharani Bagh/Gopalpur S/s and 
+Extension of above LILO section from Maharani Bagh/Gopalpur upto Narela S/s  
+        **Gopalpur Substation is under implementation by DTL by LILO of Bawana – Maharani Bagh 400kV D/c(Quad) at Gopalpur substation. 
+The Rajasthan SEZ Ph-II (8.1GW) Part G is under advance stage of implementation and 765/400kV Narela substation along with its 
+connectivity to Maharani Bagh is expected to be commissioned by Dep’24.  
+Earlier, in the 39th Meeting of the Standing Committee on Power System Planning of Northern Region held on 29-30th May’17, following 
+intra state transmission scheme was agreed for implementation by DTL 
+ 
+Establishment of 4x500MVA, 400/220kV GIS Substation at Gopalpur along with 125 MVAR bus reactor 
+ 
+LILO of Maharanibagh–Bawana 400 kV D/C line at Gopalpur 400/220kV substation on multicircuit towers  
+Subsequently, a meeting was held in CEA on 29.5.2019, wherein, DTL informed that works for Gopalpur 400 KV sub-station are 
+presently under tendering process and the substation is likely to be commissioned by 2021. In view of above system studies were 
+carried out considering Gopalpur substation and a new 765/400kV Narela substation (ISTS) was planned as part of transmission 
+scheme for Rajasthan SEZ Ph-II (8.1GW) transmission scheme considering connectivity with 400/220kV Gopalpur substation. The 
+scheme was agreed in 5th NRSCT meeting held on 13.09.19.   
+Further, in the 2nd Meeting of Northern Region Power Committee (Transmission Planning) (NRPCTP) held on 01.09.20, Chairperson, 
+CEA enquired about the status of Gopalpur S/s. DTL replied that the Gopalpur S/s is at tendering stage and will be commissioned by 
+2023. 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 32 of 67 
+ 
+As per latest information provided by DTL, the scheme is taken up for board approval with implementation schedule of 30 months from 
+award. The issue was also highlighted in the 209th OCC meeting held on 19.07.2023 and 69th NRPC meeting held on 27.09.23. In the 
+meeting it was deliberated that Gopalpur Sub-station is not even yet awarded by DTL. In absence of Gopalpur Substation, loadings on 
+400/220kV ICTs at Maharani Bagh may become critical in future in solar maximized scenario which may impact RE evacuation. In the 
+meeting, it was also suggested that in the meantime (till availability of Gopalpur S/s), DTL may explore load segregation at Maharani 
+Bagh Sub-station so as to contain ICT loadings in solar maximized scenario for 2024-25 & beyond till availability of Gopalpur S/s. 
+Subsequently NRPC also convened a meeting on above issue on 05/10/23.  
+CTU requested DTL to update the status of implementation of 400/220kV Gopalpur S/s and share how they will manage the load to 
+contain Maharani Bagh ICT loadings within permissible limit. DTL stated that approval for 400/220kV Gopalpur and associated 
+transmission system is going in next board meeting and award is expected by Mar’25 with 30 months schedule (Schedule: Sep’27). 
+CEA enquired plan for load management by DTL in absence of Gopalpur S/s. DTL further stated that load shall be segregated/radialized 
+among Maharani Bagh, Tughlakabad & Harsh Vihar S/s in future in such a way that Maharani Bagh ICT loadings does not not breach 
+N-1 limits. This feeder segregation/radialisation is already followed by DTL at many other 400kV sub stations to address the high 
+loading & same will be implemented in case of Maharani Bagh also to address the loading whenever required.     
+It was also requested that DTL may expedite the implementation of 400/220kV Gopalpur S/s and till its availability, ICT loadings at 
+Maharani Bagh S/s may be closely observed to not breach N-1 limits through measures in intra state transmission network i.e. load 
+segregation/radialization of feeders.  
+Based on above , it was agreed that availability of  transmission system i.e. 400kV Gopalpur S/s along with LILO of Maharanibagh–
+Bawana 400 kV D/C line at Gopalpur 400/220kV substation on multi circuit towers (thus forming Maharanibagh – Narela 400kV 
+D/c(Quad) and Maharanibagh -Gopalpur-Narela 400kV D/c(Quad) lines) shall not be the pre-requisite for effectiveness of LTA (now 
+Connectivity under GNA) to the RE grantees utilising Rajasthan Ph-II (8.1GW) transmission System and based on commissioning of 
+other transmission elements, Connectivity/GNA shall be made effective. 
+B.2 Augmentation of 1x500 MVA, 400/220 kV ICT at Bhadla-II PS (4th ICT at Section-1A) 
+It was stated that in the 8th CMETS-NR meeting held on 30.06.22 and 56th NRPC meeting held on 29.07.22, agenda for Implementation 
+of "N-1" contingency at RE pooling substations in NR was deliberated. In the meeting Augmentation with 400/220kV, 1x500MVA 
+Transformer at Bhadla-II PS (4th ICT at Section-1A) was agreed to be taken up for implementation with 15 months from the date of 
+allocation of project or evacuation requirement beyond 1000 MW at 220kV level of Bhadla-2(Section-1A) whichever is later 
+Further agenda for implementation of "N-1" contingency at RE pooling substations in NR was again deliberated in the 73rd NRPC 
+meeting held on 21.05.24.  In the meeting it was mentioned that under Connectivity Regulations 2009, Connectivity & LTA were different 
+products. However, subsequent to notification of GNA regulations, connectivity has become a single merged product which is granted 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 33 of 67 
+ 
+along with equal quantum of GNA. Furthermore, implementation timeframe for augmentation of ICT was kept as 18 months instead of 
+15 months due to practical issues.  
+In the NRPC meeting, it was deliberated that augmentation with 400/220kV, 1x500MVA Transformer at Bhadla-2 PS (4th ICT at Section-
+1A) shall be required to meet N-1 criteria. At present, trigger conditions for taking up implementation of above ICT are yet to be happen, 
+same was put up for approval for taking up implementation based on meeting the requirement stipulated as under:  
+ 
+Augmentation with 400/220kV, 1x500MVA Transformer at Bhadla-2 PS (4th ICT at Section-1A)  
+ 
+Implementation Timeframe: 18 months from the date of allocation of project (immediate evacuation requirement beyond 1000 
+MW at 220kV level of Bhadla-2(Section-1A)) 
+In the 73rd NRPC meeting, proposal was technically agreed for taking up implementation of 400/220kV, 1x500MVA Transformer at 
+Bhadla-2 PS (4th ICT at Section-1A) based on the trigger point requirement i.e. 18 months from the date of allocation of project 
+(immediate evacuation requirement beyond 1000 MW at 220kV level of Bhadla-2(Section-1A)) or N-1 implication, whichever condition 
+arrives earlier. It was agreed that above ICT will be taken up for implementation for which CTUIL will take up for the approval of above 
+ICT based on its delegation of power without approaching the NRPC forum. 
+At present Bhadla-II PS (Sec-1A) has 400/220 kV transformation capacity of 1500 MVA(3x500MVA) whereas connectivity granted is 
+1520 MW and all the connectivity grantees have already completed the transition requirement of connectivity from Connectivity 
+regulations 2009 to GNA Regulations 2022. As per manual on Transmission planning criteria 2023 “N-1’ reliability criteria may be 
+considered for ICTs at the ISTS / STU pooling stations for renewable energy based generation of more than 1000 MW after considering 
+the capacity factor of renewable generating stations”. Therefore, with 1520 MW of Connectivity at 220kV level of Bhadla-II PS(Sec-
+1A), implementation of 4th, 400/220 kV ICT needs to be taken up to meet N-1 reliability compliance at 220kV level.  
+In the meeting, NRLDC stated that considering 1520 MW of Connectivity at 220kV level of Bhadla-II PS(Sec-1A), 400/220 kV ICT 
+augmentation is required for N-1 reliability compliance. In view of above, following ICT augmentation scheme was agreed in ISTS:  
+ 
+Augmentation of 1x500 MVA, 400/220 kV ICT at Bhadla-II PS (4th ICT at Section-1A) along with associated transformer bays  
+ 
+Implementation Schedule: 18 months from allocation 
+ 
+B.3 Augmentation of 1x500 MVA, 400/220 kV ICT at Fatehgarh-III PS (6th ICT in Section-2) 
+It was stated that at present, total connectivity granted at Fatehgarh-III PS(Sec-II) is 5520 MW, out of this, 2070 MW is granted at 220 
+kV level along with 50MW additional margin (at 220kV level) and 3450 MW is granted at 400 kV level. Establishment of Fatehgarh-III 
+PS(Sec-II) and associated transmission system is currently under implementation as part of “Transmission system for evacuation of 
+power from REZ in Rajasthan (20GW) under Phase-III Part E1 & E2” and expected to be commissioned progressively from Mar’25.  
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 34 of 67 
+ 
+The above scheme involves establishment of 765/400/220 kV Fatehgarh-III PS(Sec-II) along with transformation capacity of 6x1500 
+MVA 765/400 kV ICTs & 5x500 MVA 400/220 kV ICTs. As per manual on Transmission planning criteria 2023 “N-1’ reliability criteria 
+may be considered for ICTs at the ISTS / STU pooling stations for renewable energy based generation of more than 1000 MW after 
+considering the capacity factor of renewable generating stations”. Considering the connectivity quantum of 2120 MW at 220 kV level 
+(Connectivity granted: 2070MW, connectivity margin:50MW) at Fatehgarh-III PS(Sec-II), augmentation of 1x500 MVA ICT is required 
+to be taken up to meet N-1 compliance.  
+In the meeting, NRLDC stated that considering the connectivity quantum (2120MW), augmentation with 400/220 kV, 315 MVA ICT may 
+be considered in place of 500MVA ICT at Fatehgarh-III PS(Sec-II).   
+CTU stated that RE generator sometimes over inject (3-4%) in solar peak hours and this may lead to further increase in 400/220kV 
+ICT loadings. Further with 315MVA ICT, total 400/220kV transformation capacity would be 2815MVA (2315 MVA in N-1) against 
+connectivity quantum of 2120 MW at 220 kV level, very less margin available during solar peak hours after account for RE over injection, 
+power factor & restricted over load capacity of ICTs in very high temperature condition of Rajasthan.  Further, it was also stated that 
+cost of 315MVA ICT is approx. 15-20% lower than 500MVA ICT. However, considering small difference in cost and homogeneity of all 
+all 500 MVA transformer units at Fatehgarh-III PS, it was recommended that transformer augmentation may be carried out with 400/220 
+kV, 500MVA ICT (6th ICT in Sec-2) at Fatehgarh-III PS(Sec-II). CEA endorsed the same.    
+Accordingly, the following ICT augmentation scheme is agreed at Fatehgarh-III PS(Sec-II) PS in ISTS:  
+ 
+Augmentation of 400/220 kV, 1x500 MVA (6th ICT in Sec-2) ICT at Fatehgarh-III PS(Sec-II) along with associated transformer 
+bays  
+ 
+Implementation Schedule: 18 months from allocation 
+ 
+B.4 Augmentation of 1x500 MVA(6th) , 400/220 kV ICT at Bikaner-III PS  
+It was stated that at present, total connectivity granted at Bikaner-III PS is 4667 MW, out of this, 2267 MW is granted at 220 kV level 
+and 2400 MW is granted at 400 kV level. Establishment of Bikaner-III PS and associated transmission system is currently under 
+implementation as part of “Transmission system for evacuation of power from Rajasthan REZ Ph-IV (Part-1) (Bikaner Complex)” and 
+is expected to be commissioned progressively from Dec’25.  
+The above scheme involves establishment of 765/400/220 kV Bikaner-III PS along with transformation capacity of 6x1500 MVA 765/400 
+kV ICTs & 5x500 MVA 400/220 kV ICTs. As per manual on Transmission planning criteria 2023 “N-1’ reliability criteria may be considered 
+for ICTs at the ISTS / STU pooling stations for renewable energy based generation of more than 1000 MW after considering the capacity 
+factor of renewable generating stations. Considering the connectivity granted of 2267 MW at 220 kV level at Bikaner-III PS, 
+augmentation of 1x500 MVA ICT is required to be taken up to meet N-1 compliance.  
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 35 of 67 
+ 
+Accordingly, the following ICT augmentation scheme is agreed at Bikaner-III PS in ISTS:  
+ 
+Augmentation of 400/220 kV, 1x500 MVA (6th) ICT at Bikaner-III PS along with associated transformer bays  
+ 
+Implementation Schedule: 18 months from allocation 
+ 
+B.5 Transmission System for connectivity of Pumped Storage Projects in Sonbhadra District in Uttar Pradesh: 
+It was stated that in the 31st CMETS-NR meeting held on 27.06.2, connectivity applications of cumulative quantum of 5152 MW from 
+two developers i.e. M/s Greenko (6 nos. of applications with cumulative quantum of 4032 MW) & M/s Avaada WB (1 application of 
+1120MW) near Robertganj area in Sonbhadra district, Uttar Pradesh was discussed. As per the schedule indicated in the applications, 
+these PSP projects are expected to be commissioned progressively from Nov’26 upto Mar’28. Details of applications are as under:  
+S.No 
+Applications 
+Connectivity 
+(MW) 
+Start Date of 
+Connectivity 
+(As per 
+Application)
+Maximum Injection 
+(MW)- As per 
+application 
+Maximum 
+Drawl (MW) – 
+As per 
+application
+1 
+Greenko UP01 IREP 
+Private Limited 
+672 
+16.11.2026 
+610 
+672 
+672
+01.02.2027
+610
+672
+672 
+16.04.2027 
+610 
+672 
+672
+16.04.2027
+610
+672
+672
+01.07.2027
+610
+672
+672 
+16.12.2027 
+610 
+672 
+2 
+Avaada 
+Waterbattery 
+Private Limited 
+1120 
+31.03.2028 
+900 
+1120 
+Total (MW)
+5152
+4560
+5152
+ 
+In the meeting, it was informed that to deliberate on planning of transmission System for evacuation of Power from Pumped Storage 
+Plants, a meeting under Chairmanship of Chairperson, CEA was held on 28.05.2024. In the above meeting, it was decided that CTUIL 
+while granting Connectivity to PSPs shall mention that PSPs shall not operate in generating mode during high RE generation period 
+and if required, PSPs may inject power during high RE generation period based on margin available in the system. However, detail 
+analysis must be done based on the combination of sources at that node. 
+M/s Greenko vide letter dated 21.05.24 informed that In the initial phases of PSP development, it is envisaged as a Stand-alone storage 
+project, which means the PSP project will draw power from renewable generation sources or conventional generation sources located 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 36 of 67 
+ 
+at different location(s) in the grid for charging the pump storage plant and thereafter power will be injected into the grid for supplying 
+power to the different beneficiaries connected to different location(s) in the grid. During PSP operation, typically during peak solar time 
+(mainly between 11AM to 2 PM), the PSP project shall be able to draw power to the extent of 4032 MW (6X672MW) corresponding to 
+pumping capacities of all six units. While, during generation hours which will be typically during non-solar or low solar hours, the 
+maximum generation possible shall be to the extent of 3660 MW (6x610MW). For evolving the transmission scheme, the above-
+mentioned maximum values of drawl and Generation may be considered. Same was also discussed in 31st CMETS-NR meeting.  
+CEA in the above CMETS-NR meeting confirmed that the Sonbhadra area may be considered as a potential zone for pumped storage 
+projects. Accordingly, the transmission system for connectivity of M/s Greenko & M/s Avaada at Roberstganj PS shall be considered 
+as common transmission system.  
+CEA also informed that TOR has been issued to M/s Greenko Sonbhadra PSP (3660 MW) and presently under S&I. M/s Avaada in the 
+meeting informed that the TOR of their project is approved and currently in pre DPR stage & they shall be submitting it to CEA for pre 
+DPR chapter approvals.  
+M/s Avaada & Greenko clarified in the meeting that they shall operate PSP units in synchronous condenser mode as per the reactive 
+power requirement of the grid. Further, M/s Greenko and M/s Avaada shall also keep future provision of Bus Reactor so that in case of 
+future requirement the same can be installed by the applicant. 
+Accordingly, in the above CMETS-NR meeting, connectivity applications of M/s Avaada & Greenko were agreed for grant, and it was 
+deliberated that the transmission scheme for Pump Storage plants in Sonbhadra district is presently under discussion. The scheme is 
+currently tentative, which shall be finalized in subsequent CMETS-NR and other region (ER) CMETS meeting among CEA, CTUIL, 
+Grid India & Stakeholders. The detailed transmission system shall be informed upon finalization and approval of the scheme.  
+Further, NR-WR inter regional scheme to relieve loading of 765 kV Vindhyachal – Varanasi D/c line shall also be required for 
+connectivity of Pumped Storage Projects in Sonbhadra district.  
+In view of the above, studies were carried out considering PSPs in drawl mode in Solar Max scenarios & injection mode in Peak load 
+scenarios (evening peak). All India Study files for various scenarios (solar maximized, evening peak and night off peak) were circulated 
+to NR stakeholders on 12.09.24.  
+Subsequently, M/s Greenko had submitted requisite Connectivity BGs only for three application (3x672MW), out of 6 nos. M/s Avaada 
+also submitted requisite Connectivity BGs for their 1120MW PSP project, therefore transmission scheme needs to be revised in view 
+of reduction in connectivity quantum by M/s Greenko.  
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 37 of 67 
+ 
+M/s Greenko vide letter 10.09.24 requested that as they are moving forward with three applications for their project, there may be a 
+change in the transmission scheme from the originally planned scheme involving six Grid Connectivity applications. During CTU's 
+review of this change in the transmission system, it may be necessary to consider including the bay implementation for terminating the 
+dedicated transmission line at Robertsganj substation under the ISTS scope 
+In view of schedule of generation projects and for optimal utilization of transmission scheme, comprehensive tr. scheme is planned 
+considering M/s Greenko and M/s Avaada PSP evacuation requirement (Maximum injection 3136MW, Maximum Drawl : 2730MW) 
+including future requirement. However, in view of transmission being lumped elements, the planned scheme can cater upto 4 GW PSP 
+connectivity quantum.   
+In the meeting, Grid-India stated to review the reactive compensation of 765kV Robertsganj PS – Prayagraj S/s D/c line. CTU stated 
+that with proposed line reactors (240MVAr line reactor on both ends), Reactive compensation is bit on higher sider (~90%), therefore 
+330MVAr line at one of the end may be considered for above line based on studies. Accordingly, 330MVAr line reactor is considered 
+at Robertsganj PS end for 765kV Robertsganj PS – Prayagraj S/s D/c line. On the query of direction of power flow from Varanasi to 
+Robertsganj and Gaya to Robertsganj in Solar peak hours, CTU stated that during solar peak hours, PSP may operate in pumping 
+mode and power will flow from Varanasi to Robertsganj PS and Robertsganj PS to Gaya S/s. 
+Grid-India enquired about line rating of 400kV Greenko- Robertsganj D/c line. CTU stated that considering three applications of 
+2016MW (3x672MW) of M/s Greenko, rating of dedicated line shall be considered commensurate to power transfer requirement under 
+N-1 contingency of PSP plant.   
+Grid-India enquired that line reactors may be reviewed w.r.t. line length of each sections formed after proposed LILO arrangements i.e. 
+LILO of 765 kV Fatehpur-Varanasi S/c line at Prayagraj & LILO of 765 kV Fatehpur-Sasaram S/c line at Prayagraj. Grid-India stated 
+that 765kV Fatehpur – Prayagraj section may get overcompensated with existing line reactor configuration. CTU stated that after 
+proposed LILO arrangement, reactive compensation is about 89% on 765kV Fatehpur – Prayagraj section (140 kms). Grid-India 
+enquired about feasibility of removing 330MVAr existing line reactor at Fatehpur end or its replacement with 240MVAr line reactor. CTU 
+stated that considering prevailing high voltage condition in NR (in some off peak scenarios), removal or replacement of 330MVAr line 
+reactor at Fatehpur end may worsen the high voltage problem, however line length is tentative and will be reviewed in Gati Shakti 
+portal. In the case of reduction of line length considerably, decision may be taken on removal/replacement of 330MVAr line reactor at 
+Fatehpur end of 765kV Fatehpur – Prayagraj section (140 kms). CTU further stated that on all other line sections formed after LILO 
+arrangement at Prayagraj S/s, reactive compensation is in order.  
+Grid-India enquired that whether PSP developers indicated their machine type i.e. fixed speed or variable speed type. M/s Greenko 
+informed that they have fixed  speed machines. M/s Avaada informed that they will revert on the same. M/s Greenko requested that  
+during finalization of the scheme, 400kV bays at Robertsganj end for termination of 400kV Greenko-Robertsganj D/c line may be 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 38 of 67 
+ 
+considered in ISTS scope. CTU stated that as the scheme is still under approval and being revised in this meeting, same will be 
+incorporated as part of comprehensive agreed transmission scheme and M/s Greenko shall have to fulfil Conn-BG2 requirement.  
+Grid-India also stated that 1200kV system may also be explored from above complex in future for evacuation of envisage PSP potential 
+due to its proximal location form WR and ER region and firm power flow in most of the scenarios.  
+CTU further stated that based on agreed scheme in meeting, transmission system under applicant scope as well as common 
+transmission system will be revised. It was also stated that M/s Avaada & Greenko shall operate PSP units in synchronous condenser 
+mode (minimum one unit) as per the reactive power requirement of the grid.    
+CEA stated that both the projects are under advance stage, however DPR is yet to approve. On the query of CEA on additional 
+generation considered at 400kV level, CTU informed that at present comprehensive scheme is planned for 4GW PSP potential and 
+with connectivity quantum more than 4GW, adequacy of agreed transmission scheme shall be reviewed further. CEA and UPPTCL 
+also agreed on the proposal  
+CTU enquired to UPPTCL about drawl requirement (220kV) from Robertsganj and Prayagraj S/s. UPPTCL stated that intra state 
+transmission system (tentative) is already planned for evacuation of thermal power projects in the vicinity and in receipt of PSP 
+application in future, new intra state schemes shall be planned. As part of above schemes, many new substations may be planned in 
+intra state and can be utilized for drawl purpose of UP. Based on above, it was decided that provision of 220kV scope shall be deleted 
+from future provisions at Robertsganj PS and Prayagraj PS, which was agreed by UPPTCL.  
+CTUIL in the meeting as well as their mail dated 20.09.24 requested POWERGRID to provide availability of OPGW on below lines so 
+that provision of OPGW may be kept as part of present agreed scheme in case of non-availability of OPGW system 
+ 
+765 kV Fatehpur-Varanasi S/c line (proposed to be LILOed at Prayagraj S/s) 
+ 
+765 kV Fatehpur-Sasaram S/c line (proposed to be LILOed at Prayagraj S/s)  
+ 
+765 kV Varanasi- Gaya 2xS/c line (proposed to be LILOed at Robertsganj PS) 
+As per the inputs received from POWERGRID, OPGW is not available on the existing 765 kV Fatehpur-Varanasi S/c line & 765 kV 
+Fatehpur-Sasaram S/c line which is proposed to be LILOed at Prayagraj S/s. Therefore, OPGW installation needs to be done to cater 
+voice/data/tele-protection requirement for the proposed new Prayagraj S/s in matching time frame of comprehensive transmission 
+scheme. Further as per above inputs, existing 765 kV Varanasi- Gaya 2xS/c line (proposed to be LILOed at Robertsganj PS), OPGW 
+is available on the 2nd S/c of above line, therefore on other S/c line OPGW is not required as existing OPGW can be used 
+for voice/data/tele-protection requirement for both the S/c lines as source and destination stations are same.  No other comments were 
+received.  
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 39 of 67 
+ 
+Based on above deliberations, following ISTS transmission system for evacuation of power from Pumped Storage Projects in 
+Sonbhadra District  was agreed :  
+ 
+Establishment of 4x1500 MVA 765/400 kV Robertsganj Pooling Station* near Robertsganj area in Sonbhadra distt. (Uttar 
+Pradesh) along with 2x240 MVAr 765 kV & 2x125 MVAr 400 kV bus reactors 
+Future provisions at Robertsganj PS (excl. scope for present scheme): Space for                  
+ 765/400kV ICTs along with bays- 2 nos.  
+ 765 kV line bays along with switchable line reactors – 6 nos.  
+ 765kV Bus Reactor along with bay: 1 no. 
+ 400 kV line bays along with switchable line reactor –6 nos. 
+ 400kV line bays : 4 nos.  
+ 400 kV Bus Reactor along with bays: 1 no. 
+ 400kV Sectionalization bay: 2 sets 
+    *along with provision of 80MVAr spare reactor (Single phase), 110MVAr (Single phase) & 500MVA spare transformer unit (Single 
+phase) 
+                   
+ 
+400kV line bays (4 nos.) for connectivity of PSP generation project (M/s Avaada & M/s Greenko) at Robertsganj PS  
+ 
+LILO of both circuits of 765 kV Varanasi- Gaya 2xS/c line at Robertsganj PS (~50 km) along with 240MVAr switchable line 
+reactor at each ckt of Robertsganj PS end of 765 kV Robertsganj PS - Gaya 2xS/c line (after LILO) 
+ 
+Establishment of 765 kV Prayagraj S/s* near Prayagraj(Uttar Pradesh) along with 2x330 MVAr 765 kV Bus reactors 
+Future provisions at Prayagraj S/s (excl. scope for present scheme): Space for                  
+ 765/400kV ICTs along with bays- 4 nos. 
+ 765 kV line bays along with switchable line reactors – 4 nos. 
+ 765kV Bus Reactor along with bay: 1 nos. 
+ 400 kV line bays along with switchable line reactor –4 nos. 
+ 400kv line bays : 2 nos.  
+ 400 kV Bus Reactor along with bays: 2 no. 
+ 400kV Sectionalization bay: 1 set 
+ 
+         *along with provision of 110MVAr spare reactor (Single phase) & 500MVA spare transformer unit (Single phase) 
+                    
+ 
+ 
+LILO of 765 kV Fatehpur-Varanasi S/c line at Prayagraj (~30 km) 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 40 of 67 
+ 
+ 
+LILO of 765 kV Fatehpur-Sasaram S/c line at Prayagraj (~30 km) 
+ 
+Robertsganj PS – Prayagraj S/s 765 kV D/c line along with 330 MVAr line reactor at each circuit of Robertsganj end  of 
+Robertsganj PS – Prayagraj S/s 765 kV D/c line (~200 km) 
+From the studies, it was observed that considering drawl by PSPs in Peak RE hours (10AM to 2 PM), there is a requirement of additional 
+inter-regional corridors towards WR which shall be discussed in subsequent section. However, it was gathered from Pump Storage 
+project developers that they shall tie up with RE developers for drawing power in peak RE hours and shall be injecting power back in 
+non RE peak hours(mainly during peak load period).  
+ 
+ 
+Further, Inter-regional (NR-WR) transmission System to relieve the loading of 765kV Vindhyachal-Varanasi D/c line was discussed and 
+agreed in present meeting in subsequent section. This Inter regional transmission scheme is also required for evacuation of power 
+from above Pumped Storage Projects in Sonbhadra District.  
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 41 of 67 
+ 
+Transmission system for connectivity of M/s Greenko UP01 IREP Private Limited for its 6 nos. of connectivity applications ((App. No. 
+220000527-672 MW, 220000529-672 MW, 220000524-672 MW, 220000525-672 MW, 220000526-672 MW & 220000528-672 MW 
+under GNA was agreed in 31st CMETS-NR meeting held on 27.06.24, which is as under:  
+ 
+Details of Transmission system for Connectivity under GNA:  
+ 
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+Common Pooling station for Pumped Storage Projects of M/s Greenko UP01 IREP Private Limited (App. No. 220000527-672 MW, 
+220000529-672 MW, 220000524-672 MW, 220000525-672 MW, 220000526-672 MW & 220000528-672 MW) – Robertsganj 
+Pooling Station 400 kV 2xD/c line(suitable to carry minimum 1400 MW per circuit at nominal voltage)* 
+ 
+*Minimum One unit to operate in Synchronous Condenser mode as per the requirement of the grid 
+C. Transmission system for Connectivity under GNA (Tentative): 
+ 
+(i). 
+Establishment of 5x1500 MVA 765/400 kV Robertsganj Pooling Station near Robertsganj area in Sonbhadra distt. Uttar Pradesh 
+(ii). 
+LILO of both circuits of 765 kV Varanasi- Gaya 2xSc line at Robertsganj Pooling Station 
+(iii). 
+Establishment of 765/400 kV 2x1500 MVA Prayagraj substation near Prayagraj(Uttar Pradesh) 
+(iv). 
+Prayagraj – Sohawal 400 kV D/c line (Quad) 
+(v). 
+LILO of 765 kV Fatehpur-Varanasi S/c line at Prayagraj S/s 
+(vi). 
+LILO of 765 kV Fatehpur-Sasaram S/c line at Prayagraj S/s 
+(vii). 
+Robertsganj PS – Prayagraj S/s 765 kV D/c line along with 240 MVAr line reactor for each circuit at Robertsganj end. 
+ 
+D. Additional Inter regional (WR-NR)Transmission system for Connectivity under GNA (Tentative):  
+ 
+(i). 
+765kV Vindhyachal Pool - Prayagraj D/c line along with 240MVAr line reactor (switchable) at Prayagraj end on each ckt of 765kV 
+Vindhyachal Pool - Prayagraj D/c line 
+(ii). 
+Bypassing of both ckts of 765kV Sasan – Vindhyachal Pool 2xS/c line at Vindhyachal Pool and connecting it with 765kV Vindhyachal 
+Pool - Prayagraj D/c line, thus forming 765kV Sasan - Prayagraj D/c line  
+ 
+Start Date of Connectivity: 01.07.2027(interim). Final date shall be confirmed upon award of the system 
+Subsequently, as discussed above, M/s Greenko had submitted requisite Connectivity BGs only for three projects ((App No. 220000524-
+672 MW, 220000525-672 MW, 220000526-672 MW), out of 6 nos. of applications. In view of that revised transmission system for 
+connectivity for three nos. of applications of M/s Greenko UP01 ((App No. 220000524-672 MW, 220000525-672 MW, 220000526-672 
+MW) is as under :  
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 42 of 67 
+ 
+Details of Transmission system for Connectivity under GNA:  
+ 
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope  
+ 
+(ii). 
+Common Pooling station for Pumped Storage Projects of M/s Greenko UP01 IREP Private Limited (App. No. 220000524-672 MW, 
+220000525-672 MW, 220000526-672 MW) – Robertsganj Pooling Station 400 kV D/c line(suitable to carry minimum 2016 MW per 
+circuit at nominal voltage)* 
+ 
+*Minimum One unit to operate in Synchronous Condenser mode as per the requirement of the grid 
+ 
+C. Transmission system for Connectivity under GNA (Tentative): 
+ 
+(i). 
+Establishment of 4x1500 MVA 765/400 kV Robertsganj Pooling Station near Robertsganj area in Sonbhadra distt. (Uttar Pradesh) 
+along with 2x240 MVAr 765 kV & 2x125 MVAr 400 kV Bus reactors 
+(ii). 
+LILO of both circuits of 765 kV Varanasi- Gaya 2XS/c line at Robertsganj Pooling Station along with 240MVAr switchable line reactor 
+at each ckt of Robertsganj PS end of 765 kV Robertsganj PS - Gaya 2xS/c line 
+(iii). 
+Establishment of 765kV Prayagraj substation near Prayagraj(Uttar Pradesh) along with 2x330 MVAr 765 kV Bus reactors 
+(iv). 
+LILO of 765 kV Fatehpur-Varanasi S/c line at Prayagraj S/s 
+(v). 
+LILO of 765 kV Fatehpur-Sasaram S/c line at Prayagraj S/s 
+(vi). 
+Robertsganj PS – Prayagraj 765 kV D/c line along with 330 MVAr line reactor at each circuit of Robertsganj end of Robertsganj PS 
+– Prayagraj 765 kV D/c line  
+D. Additional Inter regional (WR-NR) Transmission system for Connectivity under GNA (Tentative):  
+ 
+(i). 
+765kV Vindhyachal Pool - Prayagraj D/c line along with 330MVAr line reactor (switchable) at Prayagraj end on each ckt of 765kV 
+Vindhyachal Pool - Prayagraj D/c line  
+(ii). 
+Bypassing of both ckts of 765kV Sasan – Vindhyachal Pool 2xS/c line at Vindhyachal Pool and connecting it with 765kV 
+Vindhyachal Pool - Prayagraj D/c line, thus forming 765kV Sasan - Prayagraj D/c line  
+ 
+Start Date of Connectivity: 30.06.2027(interim). Final date shall be confirmed upon award of the system 
+Further, Transmission system for connectivity of M/s Avaada Waterbattery Private Limited under GNA, was also agreed in 31st CMETS-
+NR meeting held on 27.06.24, which is as under:  
+ 
+Details of Transmission system for Connectivity under GNA:  
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 43 of 67 
+ 
+ 
+(i). 
+M/s Avaada Waterbattery Private Limited Pumped Storage Project– Robertsganj Pooling Station 400 kV D/c line (Quad moose or 
+equivalent conductor suitable to carry 1716 MW per circuit at nominal voltage) 
+ 
+C. Transmission system for Connectivity under GNA: (Tentative) 
+(i). 
+Establishment of 5x1500 MVA 765/400 kV Robertsganj Pooling Station near Robertsganj area in Sonbhadra distt. Uttar Pradesh 
+(ii). 
+LILO of both circuits of 765 kV Varanasi- Gaya 2xSc line at Robertsganj Pooling Station 
+(iii). 
+Establishment of 765/400 kV 2x1500 MVA Prayagraj substation near Prayagraj(Uttar Pradesh) 
+(iv). 
+Prayagraj – Sohawal 400 kV D/c line (Quad) 
+(v). 
+LILO of 765 kV Fatehpur-Varanasi S/c line at Prayagraj S/s 
+(vi). 
+LILO of 765 kV Fatehpur-Sasaram S/c line at Prayagraj S/s 
+ 
+D. Additional Inter regional (WR-NR) Transmission system for Connectivity under GNA (Tentative):  
+ 
+(i). 
+765kV Vindhyachal Pool - Prayagraj D/c line along with 240MVAr line reactor (switchable) at Prayagraj end on each ckt of 765kV 
+Vindhyachal Pool - Prayagraj D/c line 
+(ii). 
+Bypassing of both ckts of 765kV Sasan – Vindhyachal Pool 2xS/c line at Vindhyachal Pool and connecting it with 765kV 
+Vindhyachal Pool - Prayagraj D/c line, thus forming 765kV Sasan - Prayagraj D/c line  
+ 
+Start Date of Connectivity: 31.12.2028(interim). Final date shall be confirmed upon award of the system 
+In view of that revised transmission system for connectivity application of M/s Avaada Waterbattery ((App No. 220000553-1120 MW) is 
+as under:  
+ 
+Details of Revised Transmission system for Connectivity under GNA:  
+A. Associated Transmission System (ATS): NIL 
+ 
+B. Transmission System under applicant scope 
+ 
+(i). 
+M/s Avaada Waterbattery Private Limited Pumped Storage Project– Robertsganj Pooling Station 400 kV D/c line (Quad moose or 
+equivalent conductor suitable to carry minimum 1716 MW per circuit at nominal voltage) 
+ 
+C. Transmission system for Connectivity under GNA (Tentative): 
+ 
+(i). 
+Establishment of 4x1500 MVA 765/400 kV Robertsganj Pooling Station near Robertsganj area in Sonbhadra distt. (Uttar Pradesh) 
+along with 2x240 MVAr 765 kV & 2x125 MVAr 400 kV Bus reactors 
+(ii). 
+LILO of both circuits of 765 kV Varanasi- Gaya 2xSc line at Robertsganj Pooling Station along with 240MVAr switchable line reactor 
+at each ckt of Robertsganj PS end of 765 kV Robertsganj PS - Gaya 2xS/c line 
+(iii). 
+Establishment of 765kV Prayagraj substation near Prayagraj(Uttar Pradesh) along with 2x330 MVAr 765 kV Bus reactors 
+(iv). 
+LILO of 765 kV Fatehpur-Varanasi S/c line at Prayagraj S/s 
+(v). 
+LILO of 765 kV Fatehpur-Sasaram S/c line at Prayagraj S/s 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 44 of 67 
+ 
+(vi). 
+Robertsganj PS – Prayagraj 765 kV D/c line along with 330 MVAr line reactor at each circuit of Robertsganj end of Robertsganj PS 
+– Prayagraj 765 kV D/c line  
+D. Additional Inter regional (WR-NR) Transmission system for Connectivity under GNA (Tentative):  
+ 
+(i). 
+765kV Vindhyachal Pool - Prayagraj D/c line along with 330MVAr line reactor (switchable) at Prayagraj end on each ckt of 765kV 
+Vindhyachal Pool - Prayagraj D/c line  
+(ii). 
+Bypassing of both ckts of 765kV Sasan – Vindhyachal Pool 2xS/c line at Vindhyachal Pool and connecting it with 765kV Vindhyachal 
+Pool - Prayagraj D/c line, thus forming 765kV Sasan - Prayagraj D/c line  
+ 
+Start Date of Connectivity: 31.12.2028(interim). Final date shall be confirmed upon award of the system 
+B.5 Inter-regional (NR-WR) Transmission System strengthening to relieve the loading of 765kV Vindhyachal-Varanasi D/c line 
+It was stated that in 220th NR-OCC meeting held on 19.06.24, it was deliberated that at the time of high demand in UP, it is being 
+observed that the flow on WR-NR corridor is very high and issues related to high loading of 765 kV Vindhyachal – Varanasi D/C during 
+high NR Import are being observed in real-time: 
+ 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 45 of 67 
+ 
+Further, due to this high loading of 765kV Vindhyachal-Varanasi D/c, violation of WR-NR ATC and NR simultaneous import is also 
+being observed in real-time. WR-NR ATC violations in real-time would lead to situation wherein NR states would not be able to draw 
+further power from Western region and as a result, may need to resort to over drawl or load shedding in case internal generation in NR 
+is not available 
+The issue was also highlighted by Grid-India in the meeting chaired by Addl. Secretary (MOP) on 29.05.24 & subsequent meeting in 
+CEA regarding transmission constraints in Inter state and Intra state transmission system. It was deliberated that N-1 contingency of 
+one ckt of 765kV Vindhayachal-Varanasi D/c line will over load the other ckt. In the meeting CTU stated that line loadings will be 
+reviewed along with transmission scheme to be planned with PSP generation  
+In view of that studies were carried out  and scheme was evolved to resolve critical loading of 765kV Vindhyachal-Varanasi D/c line in 
+N-1 Contingency condition as well as for evacuation of PSP projects in UP.  
+In the meeting, UPPTCL stated that 765/400kV Fatehpur S/s is being implemented as part of Bhadla-III – Fatehpur HVDC transmission 
+system. UPPTCL requested to explore feasibility of interconnection of Fatehpur S/s with Sasan/Vindhyachal PS to relieve high loading. 
+CTU stated that as deliberated earlier, loading of 765kV Vindhyachal-Varanasi D/c line is already high and with envisaged PSP 
+generation, loadings will further increase in 2027-28 time frame. CTU further stated that 765/400kV Fatehpur S/s will only be available 
+in 2029 timeframe and about 300kms from Sasan S/s. Considering above it is not feasible to utilize Fatehpur S/s for WR-NR inter 
+regional link. CTU informed that in planning of future ISTS transmission schemes, utilization of 765/400kV Fatehpur S/s (being 
+implemented as part of HVDC scheme) shall be explored with additional envisaged PSP potential (beyond 4GW). Grid-India and CEA 
+agreed on the proposal. It was also agreed that above strengthening scheme is required urgently to relive the loading of 765kV 
+Vindhyachal-Varanasi D/c line. The NR-WR inter regional strengthening scheme was also discussed and agreed in 32nd CMETS-WR 
+meeting held on 24.09.24 
+Based on above deliberations, following WR-NR Inter regional corridor is agreed in ISTS :   
+ 
+765kV Vindhyachal Pool - Prayagraj D/c line along with 330MVAr line reactor (switchable) at Prayagraj end on each ckt of 
+765kV Vindhyachal Pool - Prayagraj D/c line  
+ 
+Bypassing of both ckts of 765kV Sasan – Vindhyachal Pool 2xS/c line at Vindhyachal Pool and connecting it with 765kV 
+Vindhyachal Pool - Prayagraj D/c line, thus forming 765kV Sasan - Prayagraj D/c line  
+ 
+Implementation Schedule: 24 months from allocation 
+ 
+B.6 Requirement of additional 1x500 MVA (5th), 400/220kV ICT at Maharani Bagh (PG) Substation  
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 46 of 67 
+ 
+It was stated that at present 400/220kV Maharani Bagh has transformation capacity of 1630MVA (2x315MVA+2x500 MVA). From the 
+loading pattern of Maharani Bagh ICTs as provided by Grid-India, it is observed that maximum loading on 400/220 kV ICTs is about 
+1397 MW (ICT-1-274MW, ICT-2-274MW, ICT-3-412 MW, ICT-4-437 MW) in past one year. From the analysis, it emerged that peak 
+loading of ICTs are breaching N-1 limit (about 1300 MW) in summer season (May’24-Jul’24) for shorter duration of time. The loading 
+pattern of Maharani Bagh ICTs for past one year is as below in fig:   
+                                           
+ 
+Fig : Loading of 400/220kV Maharani Bagh ICTs of Past one year (Source: Grid-India) 
+Transmission system strengthening scheme for evacuation of power from solar energy zones in Rajasthan (8.1 GW) under phase-II 
+Part G &G1 is under implementation (revised Schedule: Dec’24) comprising establishment of 765/400kv Narela S/s along with 765kV 
+Khetri -Narela D/c line. The scheme also comprises removal of LILO of Bawana – Mandola 400kV D/c(Quad) line at Maharani Bagh 
+/Gopalpur S/s & Extension of above LILO section from Maharani Bagh/ Gopalpur upto Narela S/s to form Maharanibagh – Narela 
+400kV D/c(Quad) and Maharanibagh -Gopalpur-Narela 400kV D/c(Quad) lines.  
+Further as part of Transmission system for evacuation of power from REZ in Rajasthan (20GW) under Phase-III Part D, 765kV Sikar-
+II-Narela D/c line is under implementation (Sch. Aug’25). As discussed earlier, Gopalpur S/s is not even yet awarded by DTL and may 
+be available by 2027-28, loadings on 400/220kV ICTs at Maharani Bagh may further increase (through interconnection of 400kV Narela-
+Maharani Bagh 2xD/c lines) with commissioning of Rajasthan Ph-II & Ph-III schemes which may impact RE evacuation.  
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 47 of 67 
+ 
+In 2022-23 and 2023-24, Delhi had peak demand of about 7.5GW whereas in 2024-25 it witnessed exceptionally higher demand of 
+8.6GW (about 16% higher than 2023-24 peak demand). From the expected demand figures (as per 20th EPS), it is envisaged that 
+Delhi demand may grow at about 5% (CAGR) and will rise to 9.5 GW by 2027.  
+POWERGRID vide letter dated 27.08.2024 to CTU also requested to review the requirement of additional ICTs at some of the 
+substations (including Maharani Bagh S/s) of Northern region due to non-compliance of N-1 contingency. In the letter POWERGRID 
+stated that, it has been observed that ICTs in few of the substations in Northern region are having high utilization and violating N-1 
+contingency criteria. POWERGRID highlighted that from the loading data at Maharani Bagh S/s (April-June 2024), it may be seen that 
+ICTs Peak Utilization of 86% in June’24. POWERGRID vide mail dated 08.11.2023 confirmed space availability for Augmentation of 
+400/220 kV transformer (5th, 500MVA) along with transformer bays at 400/220kV Maharani Bagh (PG) S/s. 
+In the meeting, NRLDC stated that at present 400/220kV ICTs at Maharani Bagh are not violating N-1 criteria, however ICTs breached 
+N-1 limit (about 1300 MW) in the event of tower outage of 400kV Dadri-Harsh Vihar D/c (In May’24). In view of that option for 
+replacement of 2x315MVA ICTs with 2X500MVA ICTs may also be explored. CTU stated that at present Maharani Bagh S/s has 
+common 400kV common bus with two nos. 220kV sections having 2x500MVA ICTs in one section and 2X315MVA ICTs in other section 
+connected through bus coupler. As per the information received from DTL, 220kV sectionalizer is proposed at Maharani Bagh S/s  and 
+both 220kV sections may operate separately in future. From the studies it is envisaged that with growing load & upcoming Narela 
+transmission system, loading on 2x500MVA ICTs may increase more rapidly and may become N-1 non-compliant. Considering that 
+ICT augmentation is required in the same section having 2x500MVA ICTs.  
+DTL stated they will require 400/220kV ICT augmentation at Maharani Bagh S/s as early as possible. DTL stated that for new 500MVA 
+ICT augmentation, there may be space constraint for 220kV bay side. DTL also stated that 220kV Bus extension works at Maharani 
+Bagh S/s is under tendering with 24 months schedule (from award). With above extension works 2 nos. 220kV bays will be available 
+and may be utilized for above ICT augmentation, however schedule of above extension works may not align with ICT augmentation 
+requirement and therefore site visit can be done to explore space availability of 220kV transformer bays or any interim arrangement at 
+220kV side for above proposed augmentation.  
+DTL also stated that additional load will be fed from Maharani Bagh S/s through proposed 2 nos. of 220/66kV & 3 nos. of 220/33kV 
+transformers as part of 220kV bus extension scheme. CTU stated that DTL may ensure that with proposed additional load drawl from 
+Maharani Bagh S/s, ICT loading remain balanced (in both 220kV sections) & within limit even with after proposed 400/220kV ICT 
+augmentation. DTL agreed for the same.    
+POWERGRID confirmed that 315MVA ICTs only completed 17 years of life and working in healthy condition. POWERGRID stated that 
+Prima facia space is available for 220kV transformer bay at DTL switchyard.  
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 48 of 67 
+ 
+CEA enquired about incremental Maharani Bagh ICT loading without Gopalpur and associated transmission system. CTU stated that 
+considering Rajasthan Ph-II & Ph-III transmission system and without Gopalpur transmission scheme, ICT loadings shall further 
+increase to about 300MW-350MW (on 1630MVA) in solar maximized scenario in next 2.5-3 years and may become N-1 non-compliant.     
+CEA agreed for augmentation of Maharani Bagh ICT augmentation. CEA enquired about short circuit level of Maharani Bagh S/s. CTU 
+replied that short circuit level of 400kV Maharani Bagh S/s is 44kA (designed capacity: 40kA) and with proposed ICT augmentation, 
+short circuit capacity will increase to 0.5kA. CEA suggested that 400kV bus splitting arrangement may be explored in consultation with 
+POWERGRID/DTL with balanced load on each section. 
+Considering growing demand of Delhi (incl. additional load to be fed by Maharani Bagh S/s in 2027 timeframe) and delay in 
+implementation of 400/220kV Gopalpur S/s by DTL, following ICT augmentation scheme is agreed in ISTS to meet N-1 compliance   
+ 
+Augmentation of 400/220 kV ,1x500 MVA (5th) ICT at Maharani Bagh (PG) S/s along with associated transformer bays  
+ 
+GIB duct at 400kV and 220kV level and cable at 220kV level   
+ 
+However, schedule of ICT will be finalized based on DTL confirmation (after site visit) on space availability of 220kV transformer bay 
+as well as possibility of interim arrangement for 220kV side ICT bay space.  
+In case there is space constraint at 220kV side, schedule of above ICT augmentation will have to be aligned with 220kV bay extension 
+works (24 months from award) being implemented by DTL as part of intra state scheme, for which award shall have to be confirmed 
+by DTL for schedule alignment.  
+B.7 Requirement of additional 1x500 MVA (3rd), 400/220kV ICT at Lucknow (PG) Substation  
+It was stated that in 50th TCC & 74th NRPC Meeting held on 28-29th June 2024, NRLDC agenda for N-1 non-compliance of 400/220kV 
+Lucknow (PG) ICT was deliberated. In the meeting it was informed that, for 400/220kV Lucknow (PG) ICT augmentation, confirmation 
+from UPPTCL to be provided as Mohanlalganj is also commissioned near Lucknow. UPPTCL agreed to study requirement of ICT 
+augmentation at 400/220kV Lucknow (PG) and revert before next NRPC meeting. 
+Further, in the Grid-India Quarterly operational feedback report (Q1 2024-25) of July 2024, issue of N-1 non compliance of ICTs at 
+Lucknow (PG) S/s was highlighted. In the report it was mentioned that during high demand season, ICTs loading (750- 800MW) become 
+N-1 non-compliant (N-1 loading limit of ICTs is 710MW) for sometimes in the month of Jun’24. The loading pattern of 400/220kV 
+Lucknow (PG) ICTs for Q1 (2024-25) is as below fig. 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 49 of 67 
+ 
+ 
+Fig : Loading of  Lucknow (PG) ICTs of Q1 (2024-25) (Source: Grid-India Quarterly operational feedback report) 
+In 221st OCC meeting held 19.07.2024, POWERGRID agenda for increasing capacity of various ICT’s incl. 400/220kV Lucknow(PG), 
+in Northern region was deliberated. In the meeting POWERGRID apprised forum that 400/220kV Lucknow (PG) ICT are not complying 
+N-1 contingency criteria under the peak loading scenario. Further POWERGRID mentioned that regarding addition of new ICT at 
+Lucknow S/s, space requirement was identified and observed that space for new ICT is available at 400/220kV Lucknow (PG) (with 
+provision of outdoor GIS bays). NRPC asked UPPTCL to give their inputs on the said matter to CTU in next 10 days.  
+Further, UPPTCL vide letter dated 30.08.2024 stated that, load flow study is done on various Substations in UP and accordingly 
+additional 500 MVA ICT is required at Lucknow PG S/s. In the minutes of meeting (dated 05.09.24) of 222nd OCC-NR meeting held on 
+14.08.24 it is mentioned that that UPPTCL vide letter dated 30.08.2024 submitted its views/observation on the cited matter to NRPC, 
+CEA and CTU & CTU to take up the issue in its next CMETS meeting.   
+POWERGRID vide mail 13.09.24 informed that 400/220kV ICT-3 at Lucknow S/s is feasible with optimized space. However, following 
+constraints/ issues to be taken care while approval of scheme. 
+ 
+As there is no space in the existing 400kV yard, hence, Proposed 400kV ICT bay shall be Outdoor GIS type 
+ 
+Further Connectivity for 400kV Bus Extension to GIS Bays is to be achieved through GIB Duct having  multiple road crossings 
+in duct route from 400kV Bus to GIS bay  
+220kV Side of ICT-3 bay shall be  AIS type [Future Extension of 220kV Bays will be limited to 2 numbers future feeders]. 
+Further, High Voltage Test of 400kV GIS bay may require complete shut Down of bus 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 50 of 67 
+ 
+UPPTCL reiterated the requirement of Augmentation of 400/220 kV ,1x500 MVA (3rd) ICT at Lucknow (PG) S/s as load of Lucknow ICT 
+will not be shared by other 400kV substations nearby. In the meeting, UPPTCL also stated that 2 nos. of 220kV line bays (future space) 
+at Lucknow (PG) S/s are sufficient to meet their future drawl requirement from above S/s as they are already planning for new 400kV 
+S/s at Barapanki and Sitapur in near vicinity to serve the future demand requirement. CEA & NRLDC agreed on the proposal.      
+In view of above, following ICT augmentation scheme was agreed in ISTS:  
+ 
+Augmentation of 400/220 kV ,1x500 MVA (3rd) ICT at 400/220kV Lucknow (PG) S/s along with associated transformer bays (1 
+no. additional 400kV line bay is also being implemented for GIS diameter completion) 
+ 
+400kV ICT bay shall be Outdoor GIS type & 220kV ICT bay shall be AIS type 
+ 
+Connectivity for 400kV Bus Extension to GIS Bays is to be achieved through GIB Duct having multiple road crossings in duct 
+route from 400kV Bus to GIS bay  
+ 
+B.8 PSTCL proposal for LILO of both ckts of 220 kV Jalandhar(BBMB)- Jamalpur (BBMB) D/c line (owned by BBMB) at 220 kV 
+Goraya S/s (PSTCL) Substation  
+It was stated that PSTCL vide mail & letter dated 14.08.24 to CTUIL sent their agenda for approval of LILO of both ckts of 220 kV 
+Jalandhar (BBMB)- Jamalpur (BBMB) D/c line (line owned by BBMB) at 220 kV Goraya S/s for taking up in upcoming CMETS-NR 
+meeting. 
+ 
+In the letter, it was stated that 220 kV Goraya S/s is currently connected to 220kV Jamsher (PSTCL) and 220 kV Jadala by LILO of 
+GGSSTP Ropar- Jamsher line. Further, 220 kV Jamalpur  is a very critical substation as it feeds the power supply to  Ludhiana industry 
+area. The Jamalpur S/s draws power mainly from Bhakhra and Ganguwal and supplies power to Dhandari Kalan-l and Dhandari Kalan-
+2. These two stations (Dhandari Kalan-l and Dhandari Kalan-2) take power from 400kV Ludhiana (PG) also. This power drawl becomes 
+even more prominent during non-paddy scenario since the load in Ludhiana area (being industrial load) invariably remains the same 
+but the hydel generation availability in Punjab is reduced.  
+Further, 220 kV substation Nurmehal is connected to 400 kV Nakodar S/s in radial mode and there is an urgent need to connect 220kV 
+substation Nurmehal to another source to enhance reliability of the system for which new 220kV link between Nurmehal and Goraya 
+has already been planned in the current MYT 2023-26. So, with the 220kV connectivity of Goraya with Nurmehal through D/c and LILO 
+of Jalandhar-Jamalpur line at Goraya S/s, Jamalpur S/s will gain an additional source of power from 400kV Nakodar S/s via Nakodar 
+– Nurmehal-Goraya route, thus enhancing the reliability of power supply. 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 51 of 67 
+ 
+PSTCL mentioned that to cater the ever-growing demand of the industry, LILO of one circuit of Dhandari Kalan I-Jamalpur at Sherpur 
+(2x160MVA) is under progress and the work is likely to be completed by Oct’24. Apart from this a new 220kV station with a capacity of 
+2x160MVA at Giaspura is also planned with LILO of 220kV Ludhiana(PG) -Dhandari Kalan circuit. So, there is urgent need to cater the 
+ever-growing upcoming load within the sources available with PSTCL as there are serious issues of ROW in Ludhiana city area. PSTCL 
+intends to use capacity available at 400 KV Nakodar through BBMB Jamalpur during the period of low Hydel Generation of BBMB, 
+which becomes all the more necessary as Himachal Pradesh shall be using some power at Tahliwal from the line connecting Jamalpur- 
+Bhakra. 
+The proposed LILO of 220 kV Jalandhar—Jamalpur line at 220 kV Goraya S/s (which is presently bisecting the yard area of 220 kV 
+Goraya) and erection of D/c line from 220 kV Nurmehal to 220 kV Goraya will resolve the above-mentioned issues as 220 kV Jamalpur 
+will then draw substantial amount of power from 400 kV Nakodar via Nakodar—Nurmehal—Goraya route as well, thus giving relief to 
+ICTs at 400 kV Ludhiana (in low hydro scenario) as well as increasing the reliability of the transmission system with now an additional 
+source feeding Jamalpur. 
+PSTCL also stated that, a committee comprising of officers of PSTCL was also constituted to deliberate on the matter and visited 220kV 
+Goraya S/s and following was emerged after discussion 
+ 
+220 kV BBMB Jalandhar—Jamalpur D/c line passing through the yard may be LILOed (both circuits) at 220 kV substation Goraya. 
+ 
+substation Goraya may be connected with 220 kV substation Nurmehal with 220 kV D/c line. 
+ 
+No additional 100 MVA, 220/66 kV transformer needs to be installed at 220 kV substation Goraya for N-1 contingency. 
+ 
+Suitable space is to be provided between the existing 100 MVA 220/132 kV and 100 MVA 220/66 kV transformers at 220 kV substation 
+Goraya by shifting the existing 100 MVA 220/132 kV for constructing firewall between them. 
+ 
+SHB shall be required to extend suitably. 
+Further, if the LILO of 220 kV Jalandhar—Jamalpur D/c line at 220 kV Goraya is approved, the 4 Nos. 220 kV bays required at 220 
+kV substation Goraya for carrying out the above mentioned LILO shall be constructed by PSTCL and shall be the asset of PSTCL. 
+PSTCL in the letter stated that an agenda on the subject matter was put up initially in the 145th Power Sub Committee meeting dated 
+12.07.2022. However, after various deliberations in the meeting, BBMB opined that power flow wise there seems no requirement of 
+LILO at Goraya Substation. In response, PSTCL provided its comments vide memo no. 586 dated 07.09.2022, asserting that with 
+the LILO of 220kV Jalandhar-Jamalpur line D/c at Goraya and D/C line from 220kV Nurmehal to Goraya, Jamalpur will draw power 
+from 400kV Nakodar via Nakodar—Nurmehal— Goraya corridor.  
+CTU vide mail 18.01.23 to stakeholders (CEA, NRLDC & BBMB) requested to provide observation on PSTCL proposal at the earliest. 
+In reply, BBMB vide mail 08.02.23 intimated that Load Flow Sheets enclosed along with the subject cited proposal are not showing 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 52 of 67 
+ 
+overall scenario of Jamalpur station regarding drawl of power after its interconnections with 400kV Nakodar via Nakodar-Nurmehal-
+Goraya route as well as power drawn by 220kV Goraya station after LILO of 220kV Jalandhar-Jamalpur D/c Line is not forthcoming 
+on record. BBMB requested that comprehensive Load Flow Study with n-1 contingency along with Load Flow Study report from 
+NRLDC is required to be taken up for further necessary action in the matter . As far as strengthening of 220kV Sub-station, Goraya 
+is concerned there is no hindrance from 220kV Jalandhar-Jamalpur D/c Line which is passing through the 220kV Goraya Sub-station 
+as ample space is available at 220kV Goraya Sub-station to run through 220kV Jalandhar-Jamalpur D/C Line on the Gantries without 
+LILO of the said line. 
+Further CTU in its mail 03.05.24 to BBMB informed that PSTCL vide letter 04.09.23 requested to take-up the agenda for LILO of 
+both ckts of 220kV Jalandhar – Jamalpur line D/c line (Owned by BBMB) at 220kV Goraya (PSTCL) S/s in CMETS-NR meeting, 
+however as per the PSTCL letter BBMB opined that there is no urgent need of proposed  LILO of both ckts of 220kV Jalandhar – 
+Jamalpur line D/c line at Goraya Sub-Station. As per the letter, BBMB also declared that there will not be any significant advantage 
+to Punjab on account of power flows with LILO of 220kV Jalandhar-Jamalpur line (D/C) at 220kV S/S Goraya. PSTCL also informed 
+that revised studies were also discussed with BBMB in Sep/Oct'23 and Jan'24  
+In this regard, CTU requested BBMB to provide comments on PSTCL revised studies and their observations on proposed LILO so 
+that proposal can be deliberated in CMETS-NR meeting followed by SCSTPPSP-NR meeting for stakeholder consultation. BBMB 
+vide letter dated 09.05.24 intimated that .sld and .sav cases provided by PSTCL cannot be accessed by BBMB and it may be sent 
+in pdf format, however with the available N-1 condition, load flow studies received following feeders are found to be overloaded i.e. 
+Jamalpur-Dhandari Kalan-1, Dhandari Kalan-1-Ludhiana, Ganguwal- Jamalpur D/c etc. To discuss upon BBMB observations, PSTCL 
+vide mail 12.07.24 requested to convene a meeting among CTU, CEA, BBMB, and PSTCL to deliberate on the subject matter and 
+address pertinent issues.  
+PSTCL also stated in letter (14.08.24) that recently, the matter was also discussed in a meeting held on 02.08.2024 with BBMB 
+which was chaired by Member (Power), BBMB and where Engineer-in-Chief/TS, PSTCL and Chief Engineer/TS, BBMB were also 
+present. BBMB agreed in-principle to the proposal in the meeting and recommended that the agenda may be taken up in the 
+upcoming CMETS and NRPC meetings. NRPC vide mail 16.08.24 to CTUIL also forwarded the PSTCL proposal for discussion.  
+From loading pattern of 220 kV Jalandhar—Jamalpur D/c line, it emerged that loading on above line is 50-100MW/ckt in summer 
+season (Apr-Jul) and below 50MW rest of the year. Loading pattern of 220 kV Jalandhar(BBMB)—Jamalpur(BBMB) D/c line is as under 
+:  
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 53 of 67 
+ 
+ 
+ 
+Fig : Loading of 220kV Jalandhar-Jamalpur D/c line (ckt1) (Source: Grid-India) 
+CTUIL also carried out studies on above proposal. As per the CTUIL studies, with proposed scheme i.e. LILO of 220 kV Jalandhar—
+Jamalpur D/c line at Goraya S/s (PSTCL), loadings are in order, whereas Ludhiana ICT (3x500+1x315MVA) loading is marginally 
+increased (15-20MW/ICT).  
+BBMB stated that they already agreed in-principally on the proposal and from load flow studies there is not much loading increase 
+on 220 kV Jalandhar (BBMB)- Jamalpur (BBMB) D/c line. PSTCL stated that LILO along with 4 nos. of 220kV line bays shall be 
+implemented by PSTCL along with necessary communication requirement.   
+NRLDC stated that Jalandhar/Jamalpur area is mainly fed from 400kV Ludhiana, Ropar as well as Nakodar S/s. NRLDC requested 
+PSTCL to update on 400/220kV Nakodar ICT augmentation. PSTCL stated that 400/220kV, 1x500MVA Nakodar ICT will be 
+commissioned by 30.09.24 and total transformation capacity would be 1130MVA (2x315+1x500) by Dec’24. NRLDC stated that 
+loading of 400/220kV Ludhiana ICT is also on higher side. PSTCL stated that with commissioning of 400/220kV, 1x500MVA ICT 
+(2nd) at Dhanansu S/s which is expected in Dec’24, 400/220kV Ludhiana ICT may get relieved. NRLDC agreed for the above PSTCL 
+proposal on LILO of both ckts of 220 kV Jalandhar (BBMB)- Jamalpur (BBMB) line D/c at 220 kV Goraya S/s (PSTCL) S/s.      
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 54 of 67 
+ 
+PSTCL stated that they have sent another agenda on 20.09.24 (today) for replacement of 2 nos. 220/66kV, 100MVA ICTs with 160MVA 
+at 220kV Jalandhar (BBMB) S/s for which BBMB also given in principal approval in Joint meeting with BBMB & PSTCL. PSTCL stated 
+the 220/66kV ICTs at Jalandhar (BBMB) S/s are critically loaded and N-1 non-compliant in peak load scenario. PSTCL requested to 
+take up the agenda in present CMETS-NR meeting for approval.  
+On the CTU enquiry about ownership of 220/66kV ICTs at Jalandhar (BBMB) S/s, PSTCL stated that ICTs are owned by BBMB, 
+however 160MVA ICT will be implemented by PSTCL as part of intra state scheme. CTU stated that the ownership of ICTs will change 
+from interstate (BBMB) to Intra state (PSTCL), therefore BBMB and PSTCL may mutually discuss on utilization of 100MVA ICT or 
+Dismantle/Decapitalization of 100MVA ICT based on its useful life. PSTCL stated that modalities for Dismantle/Decapitalization of 
+100MVA ICTs will be discussed with BBMB in their next power sub-committee meeting 
+CTU stated that BBMB confirmation for replacement of 2 nos. 220/66kV, 100MVA ICTs with 160MVA ICTs at 220kV Jalandhar (BBMB) 
+S/s along with treatment of existing 100MVA ICTs after replacement with 160MVA ICTs is required.  
+CTU stated that as agenda is received today only, they will seek comments from stakeholders through mail and based on their 
+observations and subcommittee decision on existing 100MVA ICT treatment, agenda will be taken up in next CMETS-NR meeting.    
+Based on above deliberations, following intra state scheme was agreed to be implemented by PSTCL along with necessary 
+communication infrastructure.  
+  
+ 
+LILO of both ckts of 220 kV Jalandhar (BBMB)- Jamalpur (BBMB) D/c line at 220 kV Goraya S/s (PSTCL)  
+ 
+ 
+ 
+ 
+ 
+                                                                               -------------x------------- 
+ 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 55 of 67 
+ 
+Annexure-I 
+Transmission system for Connectivity under GNA at Sirohi-II PS (tentative):  
+ 
+1. Establishment of 5x500 MVA, 400/220kV S/s at a suitable location near Sirohi(HVDC) PS (Sirohi-II) 
+2. Sirohi(HVDC) PS (Sirohi-II) – Sirohi PS 400 kV D/c line(Quad) 
+3. Sirohi(HVDC) PS (Sirohi-II) – Bhinmal(PG) 400 kV D/c line(Quad) 
+4. Establishment of 6000 MW, Sirohi(HVDC) terminal station (4x1500 MW) at a suitable location near Sirohi(HVDC) substation  
+5. Establishment of 6000 MW, HVDC terminal station (4x1500 MW) at suitable location in WR/SR/ER 
+6. HVDC line between Sirohi (HVDC) & HVDC terminal station in WR/SR/ER (with Dedicated Metallic Return) 
+7. Associated EHVAC system strengthening in WR/SR/ER 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 56 of 67 
+ 
+ 
+Annexure-II 
+Transmission system for Connectivity under GNA at Merta-III S/s (tentative):  
+ 
+1. Establishment of 400/220 kV, 5x500 MVA S/s at suitable location near Merta (Merta-III Substation) along with 2x125 MVAr bus reactor 
+2. Merta-III PS – Merta-II PS 400 kV D/c line(Quad) 
+3. Establishment of 400 kV Beawar (HVDC) S/s at a suitable location near Beawar 
+4. Merta-III PS – Beawar(HVDC) PS 400 kV D/c line (Quad) 
+5. Beawar(HVDC) PS – Beawar 400 kV D/c line(Quad) 
+6. Establishment of 6000 MW, Beawar (HVDC) terminal station (4x1500 MW) at a suitable location near Beawar (HVDC) substation  
+7. Establishment of 6000 MW, HVDC terminal station (4x1500 MW) at suitable location in WR/SR/ER 
+8. HVDC line between Beawar (HVDC) & HVDC terminal station in WR/SR/ER (with Dedicated Metallic Return) 
+9. Associated EHVAC system strengthening in WR/SR/ER 
+ 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 57 of 67 
+ 
+Annexure-III 
+Transmission system for Connectivity under GNA at Bikaner-V PS(Tentative) 
+ 
+1. Establishment of 765/400kV, 4x1500 MVA pooling station at suitable location near Bikaner (Bikaner-V PS) along with 2x125 MVAr & 2x240 
+MVAr bus reactor 
+2. 400/220kV, 5x500 MVA ICTs at Bikaner-V PS 
+3. LILO of both ckts of 400kV Bikaner-II PS- Khetri D/c line at Bikaner-V PS  
+4. 765kV Bhadla-IV PS – Bikaner-V PS D/c line  
+5. Establishment of 6000 MW, ± 800 kV Bikaner-V (HVDC) terminal station (4x1500 MW) at suitable location near Bikaner 
+6. Establishment of 6000 MW, ±800 kV Begunia (HVDC) terminal station (4x1500 MW) at Begunia (Distt. Khordha), Orissa (ER) 
+7. ±800 kV HVDC line between Bikaner-V (HVDC) & Begunia (HVDC) (with Dedicated Metallic Return)  
+8. Establishment of 765/400kV, 5x1500 MVA S/s substation station at Begunia along with 2x125 MVAr & 2x240 MVAr bus reactor 
+9. Begunia – Paradeep (ISTS) 765kV D/c line along with associated bays at both ends 
+10. Begunia – Gopalpur (ISTS) 765kV D/c line along with associated bays at both ends along with 240MVAr switchable line reactor for each 
+circuit at Begunia end of Begunia –Gopalpur (ISTS) 765kV D/c line 
+11. Begunia – Khuntuni (OPTCL) 765kV D/c line 
+ 
+ 
+ 
+ 
+ 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 58 of 67 
+ 
+Annexure-IV 
+ 
+Transmission system for Connectivity under GNA at Ramgarh-II PS (Tentative) 
+ 
+1. 
+Establishment of 2x1500 MVA, 765/400 kV Ramgarh-II Pooling Station at a suitable location near Ramgarh along with 2x125 MVAr & 2x240 
+MVAr bus reactor 
+2. 
+Ramgarh-II PS – Bhadla-IV PS 765 kV D/c line along with 240 MVAr switchable line reactor for each circuit at Ramgarh-II PS end 
+3. 
+Ramgarh PS – Ramgarh-II PS 400 kV D/c line (Quad) 
+4. 
+LILO of both ckts of 765kV Ramgarh PS – Bhadla-III PS D/c line at Ramgarh-II PS along with 240 MVAr switchable line reactor for each 
+circuit at Ramgarh-II PS end 
+5. 
+Establishment of 6000 MW, Ramgarh(HVDC) terminal station (4x1500 MW) at a suitable location near Ramgarh-II substation 
+6. 
+Establishment of 6000 MW, HVDC terminal station (4x1500 MW) at suitable location in WR/SR/ER 
+7. 
+HVDC line between Ramgarh (HVDC) & HVDC terminal station in WR/SR/ER (with Dedicated Metallic Return) 
+8. 
+Associated EHVAC system strengthening in WR/SR/ER 
+9. 
+2x[+]300/(-)150MVAr Synchronous condenser at 400kV level of Ramgarh-II PS 
+ 
+Additional system for connectivity at 220kV level only of Ramgarh-II PS 
+1. 
+400/220kV, 3x500 MVA ICTs at Ramgarh-II PS 
+ 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 59 of 67 
+ 
+Annexure-V 
+ 
+Transmission system for Connectivity under GNA at Barmer-III PS(Tentative) 
+ 
+For connectivity at 220kV or 400kV level of Barmer-III PS 
+ 
+1. Establishment of 400/220kV 5x500MVA Pooling Station at suitable location near Barmer (Barmer-III PS) along with 2x125 MVAr bus reactor 
+2. LILO of both ckts of 400kV Barmer-I PS – Barmer-II PS D/c line (Quad) at Barmer-III PS 
+3. Establishment of 6000 MW, Barmer-III(HVDC) terminal station (4x1500 MW) at a suitable location near Barmer-III PS  
+4. Establishment of 6000 MW, HVDC terminal station (4x1500 MW) at suitable location in WR/SR/ER 
+5. HVDC line between Barmer-III (HVDC) & HVDC terminal station in WR/SR/ER (with Dedicated Metallic Return) 
+6. Associated EHVAC system strengthening in WR/SR/ER 
+7. 2x[+]300/(-)150MVAr Synchronous condenser at 400kV level of Barmer-III PS 
+ 
+ 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 60 of 67 
+ 
+Annexure-VI 
+ 
+ 
+Transmission system for Connectivity under GNA at Fatehgarh -II PS(Tentative) 
+ 
+For connectivity at 400kV level of Fatehgarh-II PS 
+ 
+1. Augmentation with 765/400kV, 2x1500 MVA Transformer (6th & 7th) at Fatehgarh-II PS  
+2. Bhadla-II PS – Sikar-II 765kV D/c line(2nd)  
+3. Sikar-II – Khetri 765 kV D/c line  
+4. Sikar-II – Narela 765 kV D/c line along with 240 MVAr Switchable line reactor for each circuit at each end of Sikar-II – Narela 765 kV D/c 
+line  
+5. Jhatikara – Dwarka 400kV D/c line (Twin HTLS*)  
+6. Augmentation of 1x1500 MVA ICT (3rd), 765/400kV ICT at Jhatikara Substation (Bamnoli/Dwarka section)  
+7. Sirohi – Mandsaur PS 765KV D/c line along with 240 MVAr switchable line reactor at Sirohi S/s end 330MVAr switchable line reactor at 
+Mandsaur PS end for each circuit of Sirohi – Mandsaur PS 765KV D/c line 
+8. Mandsaur PS – Khandwa (New) 765kV D/c line along with 240MVAr switchable line reactor for each circuit at each end of Mandsaur PS – 
+Khandwa (New) 765kV D/c line  
+ 
+* with minimum capacity of 2100 MVA/ckt at nominal voltage 
+ 
+ 
+ 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 61 of 67 
+ 
+Annexure-VII 
+ 
+ 
+Transmission system for Connectivity under GNA at Bhadla-IV PS(Tentative) 
+ 
+For connectivity at 220kV or 400kV level of Bhadla-IV PS 
+ 
+1. Establishment of 765/400kV, 4x1500 MVA, 400/220kV, 4x500 MVA ICTs pooling station at suitable location near Bhadla (Bhadla-IV PS) 
+along with 2x125 MVAr & 2x240 MVAr bus reactor along with 2x125 MVAr & 2x240 MVAr bus reactor 
+2. Bhadla-IV PS – Bhadla-III PS 400kV D/c line (Quad)  
+3. 765kV Bhadla-IV PS – Bikaner-V PS D/c line  
+4. Establishment of 6000 MW, ± 800 kV Bhadla-IV (HVDC) terminal station (4x1500 MW) at suitable location near Bhadla 
+5. Establishment of 6000 MW, ±800 kV terminal station (4x1500 MW) at suitable location in WR/ER 
+6. ±800 kV HVDC line between Bhadla-IV (HVDC) & Suitable location in WR/ER (with Dedicated Metallic Return)  
+7. Establishment of 765/400kV, 2x1500 MVA S/s substation station at Suitable location in WR/ER along with 2x125 MVAr & 2x240 MVAr bus 
+reactor 
+8. Associated transmission system in WR/ER for onwards dispersal of power 
+ 
+Additional system for connectivity at 220kV level only of Bhadla-IV PS 
+ 
+1. 400/220kV, 4x500 MVA ICTs at Bhadla-IV PS 
+ 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 62 of 67 
+ 
+Annexure-VIII 
+Transmission system for Connectivity under GNA at Pali PS (tentative):  
+ 
+1. Establishment of 400/220 kV, 5x500 MVA S/s at suitable location near Pali (Pali PS) along with 2x125 MVAr bus reactor 
+2. Pali PS – Beawar (HVDC) S/s 400 kV D/c line(Quad) 
+3. Establishment of 400 kV Beawar (HVDC) S/s at a suitable location near Beawar 
+4. Beawar(HVDC) PS – Beawar 400 kV D/c line(Quad) 
+5. Establishment of 6000 MW, Beawar (HVDC) terminal station (4x1500 MW) at a suitable location near Beawar (HVDC) substation  
+6. Establishment of 6000 MW, HVDC terminal station (4x1500 MW) at suitable location in WR/SR/ER 
+7. HVDC line between Beawar (HVDC) & HVDC terminal station in WR/SR/ER (with Dedicated Metallic Return) 
+8. Associated EHVAC system strengthening in WR/SR/ER 
+ 
+ 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 63 of 67 
+ 
+Annexure-IX 
+Transmission system for Connectivity under GNA at Jalore PS (tentative):  
+ 
+1. 5x500 MVA, 400/220kV ICTs at Jalore PS 
+2. Establishment of 400 kV Sirohi(HVDC) PS (Sirohi-II) at a suitable location near Sirohi 
+3. Establishment of 400/220 kV Jalore PS at a suitable location near Jalore 
+4. Sirohi(HVDC) PS (Sirohi-II) – Sirohi PS 400 kV D/c line(Quad)  
+5. Sirohi(HVDC) PS(Sirohi-II)  – Bhinmal(PG) 400 kV D/c line(Quad) 
+6. Jalore PS – Merta-II PS 400 kV D/c line(Quad) 
+7. Jalore PS – Sirohi(HVDC) PS (Sirohi-II)  400 kV 2xD/c line(Quad) 
+8. Establishment of 6000 MW, Sirohi(HVDC) terminal station (4x1500 MW) at a suitable location near Sirohi(HVDC) substation  
+9. Establishment of 6000 MW, HVDC terminal station (4x1500 MW) at suitable location in WR/SR/ER 
+10. HVDC line between Sirohi (HVDC) & HVDC terminal station in WR/SR/ER (with Dedicated Metallic Return) 
+11. Associated EHVAC system strengthening in WR/SR/ER   
+ 
+ 
+ 
+ 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 64 of 67 
+ 
+Annexure-X 
+ 
+ 
+Transmission system for Connectivity under GNA at Bhadla-II PS 
+ 
+For connectivity at 400kV level of Bhadla-II PS 
+ 
+1. Augmentation with 765/400kV, 1x1500 MVA Transformer (5th) at Bhadla-II PS  
+2. Bhadla-II PS – Sikar-II 765kV D/c line(2nd)  
+3. Sikar-II – Khetri 765 kV D/c line  
+4. Sikar-II – Narela 765 kV D/c line along with 240 MVAr Switchable line reactor for each circuit at each end of Sikar-II – Narela 765 kV D/c 
+line  
+5. Jhatikara – Dwarka 400kV D/c line (Twin HTLS*)  
+6. Augmentation of 1x1500 MVA ICT (3rd), 765/400kV ICT at Jhatikara Substation (Bamnoli/Dwarka section)  
+7. Sirohi – Mandsaur PS 765KV D/c line along with 240 MVAr switchable line reactor at Sirohi S/s end 330MVAr switchable line reactor at 
+Mandsaur PS end for each circuit of Sirohi – Mandsaur PS 765KV D/c line 
+8. Mandsaur PS – Khandwa (New) 765kV D/c line along with 240MVAr switchable line reactor for each circuit at each end of Mandsaur PS – 
+Khandwa (New) 765kV D/c line  
+ 
+* with minimum capacity of 2100 MVA/ckt at nominal voltage 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 65 of 67 
+ 
+Annexure-XI 
+List of Participants of 34th Consultation meeting for Evolving Transmission Schemes in NR held on 20.09.2024 
+CEA 
+ 
+Shri Nitin Deswal                            
+Deputy Director 
+Shri Kanhaiya Singh Kushwaha 
+Assistant Director 
+ 
+ 
+Grid India 
+ 
+Shri Priyam Jain 
+Ch. Manager 
+Shri Gaurav Malviya 
+Manager 
+Shri Gaurav dash 
+Dy. Manager 
+Shri Raj Kishan 
+Assistant Manager 
+ 
+ 
+CTU 
+ 
+Shri V Thiagarajan                         
+Sr. GM  
+Shri Kashish Bhambhani               
+GM  
+Shri Sandeep Kumawat  
+ 
+  
+DGM 
+Shri Tej Prakash Verma 
+DGM  
+Shri R Narendra Sathvik  
+ 
+  
+Ch. Manager  
+Shri Yatin Sharma                          
+Manager   
+Shri Madhusudan Meena 
+ 
+ 
+Engineer  
+ 
+ 
+POWERGRID 
+ 
+Shri Gunjan Agrawal 
+GM 
+Shri Rohit Kumar Jain 
+DGM 
+ 
+ 
+DTL 
+ 
+Shri Pramod Kumar 
+Dy. Manager 
+ 
+ 
+RVPNL 
+ 
+Dr. Om Prakash Mahela           
+XEN(PP&D) 
+ 
+ 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 66 of 67 
+ 
+PTCUL 
+ 
+Shri Ashok Kumar          
+EE 
+Shri Neeraj Pathak 
+SE 
+Shri Amit Kumar Singh 
+SE 
+Shri Sanjeev Kumar Gupta 
+SE 
+Shri Ravi Shankar 
+SE 
+ 
+ 
+PSTCL 
+ 
+Shri Sanjeev Sood 
+EIC/TS 
+ 
+HVPNL 
+ 
+Shri Deepak Sarit 
+XEN SS 
+Shri Sanjay verma
+SE 
+ 
+ 
+UPPTCL 
+ 
+Shri Satyendra Kumar 
+SE 
+ 
+ 
+BBMB 
+ 
+Shri Jagjeet Singh 
+ 
+Shri R.K.Goyal 
+Dy. CE 
+ 
+ 
+Connectivity/GNA Applicants 
+ 
+Shri Yogesh Sanklecha 
+ACME Solar Holdings Private Limited 
+Shri Lokesh Yadav 
+ACME Solar Holdings Private Limited 
+Shri Angshuman Rudra 
+Avaada Energy Private Limited 
+Smt. Shipra Arora 
+Avaada Energy Private Limited 
+Shri Ranjan Kumar 
+Ambuja Cements Limited, ACC Limited & Asian Fine Cements Pvt. Ltd. 
+Shri Rahul Malik 
+Amplus Centaur Solar Private Limited 
+Shri Devendra Sikarwar 
+Amplus Centaur Solar Private Limited 
+Shri Mahendra Singh Dabi 
+Adani Renewable Energy Holding Eighteen Limited 
+Shri Rajesh Kumar Gupta 
+Adani Renewable Energy Holding Eighteen Limited 
+Mr. Md Fahim Alam 
+Diyos Three Renewables Private Limited 
+Minutes of 34th Consultation Meeting for Evolving Transmission Schemes in Northern Region held on 20.09.2024 
+ 
+Page 67 of 67 
+ 
+Smt. Rasika Ghongade 
+Enren-III Energy Private Limited 
+Shri Saurabh Gupta 
+Enren-III Energy Private Limited 
+Shri Rohit Gera 
+Foxtrot Solar Renewables Energy Private Limited 
+Shri Sharul Khan 
+Foxtrot Solar Renewables Energy Private Limited 
+Smt. Priyanka Raj 
+Juniper Green Energy Private Limited 
+Shri Deepak Kumar Prajapat 
+Juniper Green Energy Private Limited 
+Shri Ravinder Kumar Rana 
+Prespa Solar Private Limited 
+Shri Mohit Jain 
+Renew Solar Power Private Limited 
+Smt. Aakanksha Naresh Bhisikar 
+Serentica Renewables India Private Limited 
+Shri Sirin Dutta Chowdhury 
+Serentica Renewables India Private Limited 
+Shri Shashank Gupta 
+Sunsure Solarpark RJ One Private Limited 
+Shri Rahul Choudhary 
+Sunbreeze Renewables Seven Private Limited 
+Shri Shatrughan Kushwaha 
+Sunbreeze Renewables Seven Private Limited 
+Shri Ajay Kumar 
+Sunbreeze Renewables Seven Private Limited 
+Shri Navneet Mairal 
+Sunbreeze Renewables Seven Private Limited 
+Shri Vikas Tiwary 
+Sindhari Solar Power Private Limited 
+Shri Sudhanshu Vishwakarma 
+Sindhari Solar Power Private Limited 
+Shri Abhishek Dhaka 
+Soltown Infra Private Limited 
+Shri Rahul Gupta 
+Soltown Infra Private Limited 
+Shri Shubham Verma 
+SAEL Industries Limited 
+Shri K A Vishwanath 
+TEQ Green Power XV Private Limited 
+Shri Pushpinder Hira 
+Greenko Rj01 Irep Private Limited 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

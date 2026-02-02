@@ -1,67 +1,66 @@
 sr_no,region,state,substation,coordinates,name_of_developers,group,gna_st_ii_application_id,lta_application_id,application_id_enhancement_5_2_or_revision,cmets_gna_approved,cmets_lta_approved,cmets_gna_meeting_date,cmets_lta_meeting_date,type,application_quantum_mw,granted_quantum_gna_lta_mw,installed_breakup_solar_mw,installed_breakup_wind_mw,installed_breakup_hybrid_mw,battery_mwh,battery_injection_mw,battery_drawl_mw,psp_mwh,psp_injection_mw,psp_drawl_mw,commissioned_tgna,commissioned_gna,application_date,mode,applied_start_of_connectivity,gna_operationalization,gna_operationalization_yes_no,date_for_additional_capacity,nature_of_applicant,status_of_application,voltage_level_kv,bay_no,cts_element_unique_code,ats_element_unique_code,dtl_element_unique_code
 1,NR,Rajasthan,Bhadla-III PS,,"Renew Solar 
 Power Private 
-Limited",,2200000516,,,,,,,,300,,,,,,,,,,,,,25.01.2024,SECI LOA,30.09.2026,,,,"Generator 
+Limited",,2200000516,,,,,,,,300,,,,300,,,,,,,,,25.01.2024,SECI LOA,30.09.2026,,,,"Generator 
 (Solar)",,,,,,
 2,NR,Rajasthan,Bhadla-III PS,,"Renew Solar 
 Power Private 
 Limited",,2200000521,,,,,,,,"Connectivity:200 
 (Solar:200 
-ESS: 46)",,,,,,,,,,,,,25.01.2024,SJVN LOA,31.05.2026,,,,"Generator 
+ESS: 46)",,200,,,46,,,,,,,,25.01.2024,SJVN LOA,31.05.2026,,,,"Generator 
 (Solar) with 
 ESS",,,,,,
 3,NR,Rajasthan,Bhadla-III PS,,"Renew Solar 
 Power Private 
-Limited",,2200000522,,,,,,,,300,,,,,,,,,,,,,25.01.2024,SJVN LOA,31.05.2026,,,,"Generator 
+Limited",,2200000522,,,,,,,,300,,,,300,,,,,,,,,25.01.2024,SJVN LOA,31.05.2026,,,,"Generator 
 (Solar)",,,,,,
 4,NR,Rajasthan,Fatehgarh-IV PS  Not Applicable,,"NTPC 
 Renewable 
 Energy Limited",,,"2200000564 
  
-(Enhancement)",,,,,,,200,,,,,,,,,,,,,15.02.2024,SECI LOA,16.04.2026,,,,Generator (Solar),Withdrawn,,,,,
+(Enhancement)",,,,,,,200,,,,200,,,,,,,,,15.02.2024,SECI LOA,16.04.2026,,,,Generator (Solar),Withdrawn,,,,,
 1,,,,,"2200000740  Ambuja Cements 
-Limited",,,,,,,,,,25,,,,,,,,,,,,,,,"01.06.2024 
+Limited",,,,,,,,,,25,,,,25,,,,,,,,,,,"01.06.2024 
 (revised to 
 01.09.2024)",,,,"03.05.2024  Drawee entity connected to Intra 
 State Transmission System",,,,,,
 2,,,,,"2200000739  Ambuja Cements 
-Limited",,,,,,,,,,7,,,,,,,,,,,,,,,01.06.2024,,,,"03.05.2024  Drawee entity connected to Intra 
+Limited",,,,,,,,,,7,,,,7,,,,,,,,,,,01.06.2024,,,,"03.05.2024  Drawee entity connected to Intra 
 State Transmission System",,,,,,
 3,,,Chamakri Substation,,"2200000770  Ambuja Cements 
-Limited",,,,,,,,,,15,,,,,,,,,,,,,,,"01.06.2024 
+Limited",,,,,,,,,,15,,,,15,,,,,,,,,,,"01.06.2024 
 (revised to 
 01.09.2024)",,,,"07.05.2024  Drawee entity connected to Intra 
 State Transmission System",,,,,,
 4,,,,,"2200000768  Ambuja Cements 
-Limited",,,,,,,,,,8.5,,,,,,,,,,,,,,,"01.06.2024 
+Limited",,,,,,,,,,8.5,,,,8.5,,,,,,,,,,,"01.06.2024 
 (revised to 
 01.09.2024)",,,,"07.05.2024  Drawee entity connected to Intra 
 State Transmission System",,,,,,
-5,,,,,,,,2200000772  ACC Limited,,,,,,,27,,,,,,,,,,,,,,,"01.06.2024 
+5,,,,,,,,2200000772  ACC Limited,,,,,,,27,,,,27,,,,,,,,,,,"01.06.2024 
 (revised to 
 01.09.2024)",,,,"07.05.2024  Drawee entity connected to Intra 
 State Transmission System",,,,,,
-1,,,,,"2200000740  Ambuja Cements 
-Limited",,,,,,,,,,25,,,,,,,,,,,,,,,"01.06.2024 
+1,,03.05.2024  Drawee entity connected to Intra,,,"2200000740  Ambuja Cements 
+Limited",,,,,,,,,,25,,,,25,,,,,,,,,03.05.2024  Drawee entity connected to Intra,,"01.06.2024 
 (revised to 
-01.09.2024)",,,,"03.05.2024  Drawee entity connected to Intra 
-State Transmission System",Granted,,,,,
+01.09.2024)",,,,State Transmission System,Granted,,,,,
 2,,,Chamakri Substation,,"Cements 
-Limited",,,2200000739  Ambuja,,,,,,,7,,,,,,,,,,,,,,,"01.06.2024 
+Limited",,,2200000739  Ambuja,,,,,,,7,,,,7,,,,,,,,,,,"01.06.2024 
 (revised to 
 01.09.2024)",,,,"03.05.2024  Drawee entity connected to Intra 
 State Transmission System",Granted,,,,,
 3,,,Chamakri Substation,,"Cements 
-Limited",,,2200000770  Ambuja,,,,,,,15,,,,,,,,,,,,,,,"01.06.2024 
+Limited",,,2200000770  Ambuja,,,,,,,15,,,,15,,,,,,,,,,,"01.06.2024 
 (revised to 
 01.09.2024)",,,,"07.05.2024  Drawee entity connected to Intra 
 State Transmission System",Granted,,,,,
 4,,,Chamakri Substation,,"Cements 
-Limited",,,2200000768  Ambuja,,,,,,,8.5,,,,,,,,,,,,,,,"01.06.2024 
+Limited",,,2200000768  Ambuja,,,,,,,8.5,,,,8.5,,,,,,,,,,,"01.06.2024 
 (revised to 
 01.09.2024)",,,,"07.05.2024  Drawee entity connected to Intra 
 State Transmission System",Granted,,,,,
-5,,,,,,,,2200000772  ACC Limited,,,,,,,27,,,,,,,,,,,,,,,"01.06.2024 
+5,,,,,,,,2200000772  ACC Limited,,,,,,,27,,,,27,,,,,,,,,,,"01.06.2024 
 (revised to 
 01.09.2024)",,,,"07.05.2024  Drawee entity connected to Intra 
 State Transmission System",,,,,,
@@ -72,140 +71,140 @@ Max Drawl:880",,,,,,,,,800,880,,,04.04.2024,,15.10.2026,,,,"Standalone ESS
 (Pumped 
 Storage)",,,,,,
 1,NR,Rajasthan,Fatehgarh-IV PS,,"NTPC Renewable Energy 
-Limited",,2200000567,,,,,,,,300,,,,,,,,,,,,,01.03.2024,"Land 
+Limited",,2200000567,,,,,,,,300,,,,300,,,,,,,,,01.03.2024,"Land 
 Route",31.03.2026,,,,Generator (Solar),,,,,,
 2,NR,Rajasthan,Barmer-I PS,,"Avaada Energy Private 
 Limited",,,"2200000580 
-(Enhancement)",,,,,,,200,,,,,,,,,,,,,02.03.2024,"NTPC 
+(Enhancement)",,,,,,,200,,,,200,,,,,,,,,02.03.2024,"NTPC 
 LOA",26.03.2026,,,,Generator (Solar),,,,,,
-3,NR,Rajasthan,Bikaner-IV PS,,Jade Hybren Private Limited,,2200000616,,,,,,,,300,,,,,,,,,,,,,06.03.2024,"Land BG 
+3,NR,Rajasthan,Bikaner-IV PS,,Jade Hybren Private Limited,,2200000616,,,,,,,,300,,,,300,,,,,,,,,06.03.2024,"Land BG 
 Route",30.06.2026,,,,Generator (Solar),,,,,,
 4,NR,Rajasthan,Ramgarh PS,,"Migos Hybren Private 
-Limited",,2200000618,,,,,,,,600,,,,,,,,,,,,,06.03.2024,"Land BG 
+Limited",,2200000618,,,,,,,,600,,,,600,,,,,,,,,06.03.2024,"Land BG 
 Route",31.12.2026,,,,Generator (Solar),,,,,,
 5,NR,Rajasthan,Bhadla-II PS,,"Kyros Hybren Private 
-Limited",,2200000624,,,,,,,,100,,,,,,,,,,,,,07.03.2024,"Land BG 
+Limited",,2200000624,,,,,,,,100,,,,100,,,,,,,,,07.03.2024,"Land BG 
 Route",30.06.2025,,,,Generator (Solar),,,,,,
 6,NR,Rajasthan,bhadla-IV ps,,"Aravalli Surya (Project 1) 
-Private Limited",,2200000605,,,,,,,,335,,,,,,,,,,,,,07.03.2024,"Land 
+Private Limited",,2200000605,,,,,,,,335,,,,335,,,,,,,,,07.03.2024,"Land 
 Route",31.12.2027,,,,Generator (Solar),,,,,,
 7,NR,Rajasthan,Ramgarh PS,,"Adani Renewable Energy 
-Holding Four Limited",,2200000598,,,,,,,,500,,,,,,,,,,,,,13.03.2024,"Land 
+Holding Four Limited",,2200000598,,,,,,,,500,,,,500,,,,,,,,,13.03.2024,"Land 
 Route",15.06.2025,,,,Generator (Solar),,,,,,
 8,NR,Rajasthan,Ramgarh PS,,"Adani Renewable Energy 
-Holding Four Limited",,2200000599,,,,,,,,500,,,,,,,,,,,,,13.03.2024,"Land 
+Holding Four Limited",,2200000599,,,,,,,,500,,,,500,,,,,,,,,13.03.2024,"Land 
 Route",15.06.2025,,,,Generator (Solar),,,,,,
 9,NR,Rajasthan,sirohi ps,,"Serentica Renewables India 
-Private Limited",,2200000644,,,,,,,,300,,,,,,,,,,,,,14.03.2024,"Land BG 
+Private Limited",,2200000644,,,,,,,,300,,,,300,,,,,,,,,14.03.2024,"Land BG 
 Route",30.06.2026,,,,Generator (Solar),,,,,,
 10,NR,Rajasthan,Ramgarh PS,,"Adani Renewable Energy 
-Park Rajasthan Limited",,2200000600,,,,,,,,1000,,,,,,,,,,,,,14.03.2024,"Land 
+Park Rajasthan Limited",,2200000600,,,,,,,,1000,,,,1000,,,,,,,,,14.03.2024,"Land 
 Route",15.06.2025,,,,"Renewable Power 
 Park developer 
 (Solar)",,,,,,
 11,NR,Rajasthan,Ramgarh PS,,"Adani Renewable Energy 
-Park Rajasthan Limited",,2200000601,,,,,,,,1000,,,,,,,,,,,,,14.03.2024,"Land 
+Park Rajasthan Limited",,2200000601,,,,,,,,1000,,,,1000,,,,,,,,,14.03.2024,"Land 
 Route",15.06.2025,,,,"Renewable Power 
 Park developer 
 (Solar)",,,,,,
 12,NR,Rajasthan,sirohi ps,,"Illuminate Hybren Private 
-Limited",,2200000646,,,,,,,,300,,,,,,,,,,,,,15.03.2024,"Land BG 
+Limited",,2200000646,,,,,,,,300,,,,300,,,,,,,,,15.03.2024,"Land BG 
 Route",30.06.2026,,,,Generator (Solar),,,,,,
 13,NR,Rajasthan,Barmer-I PS,,"Avaada Energy Private 
-Limited",,2200000636,,,,,,,,450,,,,,,,,,,,,,19.03.2024,SJVN LOA,30.09.2026,,,,Generator (Solar),,,,,,
+Limited",,2200000636,,,,,,,,450,,,,450,,,,,,,,,19.03.2024,SJVN LOA,30.09.2026,,,,Generator (Solar),,,,,,
 14,NR,Rajasthan,Barmer-I PS,,"Green Infra Wind Energy 
-Limited",,2200000654,,,,,,,,300,,,,,,,,,,,,,27.03.2024,SJVN LOA,30.06.2027,,,,Generator (Solar),,,,,,
+Limited",,2200000654,,,,,,,,300,,,,300,,,,,,,,,27.03.2024,SJVN LOA,30.06.2027,,,,Generator (Solar),,,,,,
 15,NR,Rajasthan,Ramgarh PS,,"Adani Renewable Energy 
 Holding Four Limited",,,"2200000661 
-(Enhancement)",,,,,,,250,,,,,,,,,,,,,28.03.2024,SECI LOA,01.10.2025,,,,Generator (Solar),,,,,,
+(Enhancement)",,,,,,,250,,,,250,,,,,,,,,28.03.2024,SECI LOA,01.10.2025,,,,Generator (Solar),,,,,,
 16,NR,Rajasthan,Ramgarh PS,,"Adani Renewable Energy 
 Holding Four Limited",,,"2200000662 
-(Enhancement)",,,,,,,284,,,,,,,,,,,,,28.03.2024,SECI LOA,01.10.2026,,,,Generator (Solar),,,,,,
+(Enhancement)",,,,,,,284,,,,284,,,,,,,,,28.03.2024,SECI LOA,01.10.2026,,,,Generator (Solar),,,,,,
 17,NR,Rajasthan,merta-II ps,,"Juniper Green Energy 
 Private Limited",,2200000668,,,,,,,,180,(Solar-130 Wind-50),130,50,180,,,,,,,,,28.03.2024,Generator (Hybrid)  SJVN LOA,30.06.2026,,,,,,,,,,
 18,NR,Rajasthan,Ramgarh PS,,"Tata Power Renewable 
-Energy Limited",,2200000672,,,,,,,,600,,,,,,,,,,,,,29.03.2024,"Land BG 
+Energy Limited",,2200000672,,,,,,,,600,,,,600,,,,,,,,,29.03.2024,"Land BG 
 Route",30.06.2028,,,,Generator (Solar),,,,,,
-19,NR,Rajasthan,Barmer-I PS,,Sprng Urja Private Limited,,2200000681,,,,,,,,1000,,,,,,,,,,,,,30.03.2024,"Land BG 
+19,NR,Rajasthan,Barmer-I PS,,Sprng Urja Private Limited,,2200000681,,,,,,,,1000,,,,1000,,,,,,,,,30.03.2024,"Land BG 
 Route",30.06.2029,,,,"Renewable Power 
 Park developer 
 (Solar)",,,,,,
 1,NR,Rajasthan,Fatehgarh-IV PS,,"NTPC 
 Renewable 
-Energy Limited",,2200000567,,,,,,,,300,,,,,,,,,,,,,01.03.2024,Land Route,31.03.2026,,,,"Generator 
+Energy Limited",,2200000567,,,,,,,,300,,,,300,,,,,,,,,01.03.2024,Land Route,31.03.2026,,,,"Generator 
 (Solar)",Granted,,,,,
 2,NR,Rajasthan,Barmer-I PS,,"Avaada Energy 
 Private Limited",,,"2200000580 
  
-(Enh)",,,,,,,200,,,,,,,,,,,,,02.03.2024,NTPC LOA,26.03.2026,,,,"Generator 
+(Enh)",,,,,,,200,,,,200,,,,,,,,,02.03.2024,NTPC LOA,26.03.2026,,,,"Generator 
 (Solar)",Granted,,,,,
 3,NR,Rajasthan,Bikaner-IV PS,,"Jade Hybren 
-Private Limited",,2200000616,,,,,,,,300,,,,,,,,,,,,,06.03.2024,"Land BG 
+Private Limited",,2200000616,,,,,,,,300,,,,300,,,,,,,,,06.03.2024,"Land BG 
 Route",30.06.2026,,,,"Generator 
 (Solar)",,,,,,
 4,NR,Rajasthan,Ramgarh PS,,"Migos Hybren 
-Private Limited",,2200000618,,,,,,,,600,,,,,,,,,,,,,06.03.2024,"Land BG 
+Private Limited",,2200000618,,,,,,,,600,,,,600,,,,,,,,,06.03.2024,"Land BG 
 Route",31.12.2026,,,,"Generator 
 (Solar)",Granted,,,,,
 5,NR,Rajasthan,Bhadla-II PS,,"Kyros Hybren 
-Private Limited",,2200000624,,,,,,,,100,,,,,,,,,,,,,07.03.2024,"Land BG 
+Private Limited",,2200000624,,,,,,,,100,,,,100,,,,,,,,,07.03.2024,"Land BG 
 Route",30.06.2025,,,,"Generator 
 (Solar)",Withdrawn,,,,,
 6,NR,Rajasthan,bhadla-IV ps,,"Aravalli Surya 
 (Project 1) 
-Private Limited",,2200000605,,,,,,,,335,,,,,,,,,,,,,07.03.2024,Land Route,31.12.2027,,,,"Generator 
+Private Limited",,2200000605,,,,,,,,335,,,,335,,,,,,,,,07.03.2024,Land Route,31.12.2027,,,,"Generator 
 (Solar)",Granted,,,,,
 7,NR,Rajasthan,Ramgarh PS,,"Adani 
 Renewable 
 Energy Holding 
-Four Limited",,2200000598,,,,,,,,500,,,,,,,,,,,,,13.03.2024,Land Route,15.06.2025,,,,"Generator 
+Four Limited",,2200000598,,,,,,,,500,,,,500,,,,,,,,,13.03.2024,Land Route,15.06.2025,,,,"Generator 
 (Solar)",,,,,,
 8,NR,Rajasthan,Ramgarh PS,,"Adani 
 Renewable 
 Energy Holding 
-Four Limited",,2200000599,,,,,,,,500,,,,,,,,,,,,,13.03.2024,Land Route,15.06.2025,,,,"Generator 
+Four Limited",,2200000599,,,,,,,,500,,,,500,,,,,,,,,13.03.2024,Land Route,15.06.2025,,,,"Generator 
 (Solar)",,,,,,
 9,NR,Rajasthan,sirohi ps,,"Serentica 
 Renewables 
 India Private 
-Limited",,2200000644,,,,,,,,300,,,,,,,,,,,,,14.03.2024,"Land BG 
+Limited",,2200000644,,,,,,,,300,,,,300,,,,,,,,,14.03.2024,"Land BG 
 Route",30.06.2026,,,,"Generator 
 (Solar)",Granted,,,,,
 10,NR,Rajasthan,Ramgarh PS,,"Adani Renewable 
 Energy Park 
-Rajasthan Ltd.",,2200000600,,,,,,,,1000,,,,,,,,,,,,,14.03.2024,"Land 
+Rajasthan Ltd.",,2200000600,,,,,,,,1000,,,,1000,,,,,,,,,14.03.2024,"Land 
 Route",15.06.2025,,,,"Renewable Power 
 Park developer 
 (Solar)",,,,,,
 11,NR,Rajasthan,Ramgarh PS,,"Adani Renewable 
 Energy Park 
-Rajasthan Ltd.",,2200000601,,,,,,,,1000,,,,,,,,,,,,,14.03.2024,Land Route,15.06.2025,,,,"Renewable Power 
+Rajasthan Ltd.",,2200000601,,,,,,,,1000,,,,1000,,,,,,,,,14.03.2024,Land Route,15.06.2025,,,,"Renewable Power 
 Park developer 
 (Solar)",Granted,,,,,
 12,NR,Rajasthan,sirohi ps,,"Illuminate 
 Hybren Private 
-Limited",,2200000646,,,,,,,,300,,,,,,,,,,,,,15.03.2024,"Land BG 
+Limited",,2200000646,,,,,,,,300,,,,300,,,,,,,,,15.03.2024,"Land BG 
 Route",30.06.2026,,,,"Generator 
 (Solar)",Granted,,,,,
 13,NR,Rajasthan,Barmer-I PS,,"Avaada Energy  
-Private Limited",,2200000636,,,,,,,,450,,,,,,,,,,,,,19.03.2024,"SJVN 
+Private Limited",,2200000636,,,,,,,,450,,,,450,,,,,,,,,19.03.2024,"SJVN 
 LOA",30.09.2026,,,,"Generator 
 (Solar)",Granted,,,,,
 14,NR,Rajasthan,Barmer-I PS,,"Sembcorp Green Infra 
 Private Limited (erstwhile 
 Green Infra Wind Energy 
-Limited)",,2200000654,,,,,,,,300,,,,,,,,,,,,,27.03.2024,SJVN LOA,30.06.2027,,,,"Generator 
+Limited)",,2200000654,,,,,,,,300,,,,300,,,,,,,,,27.03.2024,SJVN LOA,30.06.2027,,,,"Generator 
 (Solar)",Withdrawn,,,,,
 15,NR,Rajasthan,Ramgarh PS,,"Adani Renewable 
 Energy Holding 
 Four Limited",,,"2
 200000661 
-(Enh)",,,,,,,250,,,,,,,,,,,,,28.03.2024,"SECI 
+(Enh)",,,,,,,250,,,,250,,,,,,,,,28.03.2024,"SECI 
 LOA",01.10.2025,,,,"Generator 
 (Solar)",Granted,,,,,
 16,NR,Rajasthan,Ramgarh PS,,"Adani Renewable 
 Energy Holding 
-Four Limited",,2200000662,,,,,,,,284,,,,,,,,,,,,,28.03.2024,SECI LOA,01.10.2026,,,,"Generator 
+Four Limited",,2200000662,,,,,,,,284,,,,284,,,,,,,,,28.03.2024,SECI LOA,01.10.2026,,,,"Generator 
 (Solar)",Granted,,,,,
 17,NR,Rajasthan,Barmer-I PS,,"Juniper Green 
 Energy Private 
@@ -213,64 +212,64 @@ Limited",,2200000668,,,,,,,,180,(Solar-130 Wind-50),130,50,180,,,,,,,,,28.03.202
 (Hybrid)",Withdrawn,,,,,
 18,NR,Rajasthan,Ramgarh PS,,"Tata Power 
 Renewable 
-Energy Limited",,2200000672,,,,,,,,600,,,,,,,,,,,,,29.03.2024,"Land BG 
+Energy Limited",,2200000672,,,,,,,,600,,,,600,,,,,,,,,29.03.2024,"Land BG 
 Route",30.06.2028,,,,"Generator 
 (Solar)",Granted,,,,,
 19,NR,Rajasthan,Barmer-I PS,,"Sprng Urja 
-Private Limited",,2200000681,,,,,,,,1000,,,,,,,,,,,,,30.03.2024,"Land BG 
+Private Limited",,2200000681,,,,,,,,1000,,,,1000,,,,,,,,,30.03.2024,"Land BG 
 Route",30.06.2029,,,,"Renewable Power 
 Park developer 
 (Solar)",Granted,,,,,
-1,NR,Rajasthan,Ramgarh PS,,JSW Neo Energy Limited,,2200000706,,,,,,,,700,,,,,,,,,,,,,12.04.2024,"SJVN 
+1,NR,Rajasthan,Ramgarh PS,,JSW Neo Energy Limited,,2200000706,,,,,,,,700,,,,700,,,,,,,,,12.04.2024,"SJVN 
 LOA",01.09.2025,,,,Generator (Solar),,,,,,
-2,NR,Rajasthan,Ramgarh PS,,JSW Neo Energy Limited,,2200000689,,,,,,,,700,,,,,,,,,,,,,12.04.2024,"SJVN 
+2,NR,Rajasthan,Ramgarh PS,,JSW Neo Energy Limited,,2200000689,,,,,,,,700,,,,700,,,,,,,,,12.04.2024,"SJVN 
 LOA",01.03.2027,,,,Generator (Solar),,,,,,
 3,NR,Rajasthan,Barmer-I PS,,"Amaresha Renawables India 
-Project Private Limited",,2200000715,,,,,,,,300,,,,,,,,,,,,,15.04.2024,"Land BG 
+Project Private Limited",,2200000715,,,,,,,,300,,,,300,,,,,,,,,15.04.2024,"Land BG 
 Route",01.04.2027,,,,"Renewable Power Park 
 Developer (Solar)",,,,,,
 4,NR,Rajasthan,Bikaner-IV PS,,"NTPC Renewable Energy 
-Limited",,2200000726,,,,,,,,1000,,,,,,,,,,,,,23.04.2024,"Land 
+Limited",,2200000726,,,,,,,,1000,,,,1000,,,,,,,,,23.04.2024,"Land 
 Route",31.12.2026,,,,Generator (Solar),,,,,,
 5,NR,Rajasthan,merta-II ps,,"Juniper Green Energy Private 
 Limited",,2200000756,,,,,,,,360,"(Solar-260, Wind-100)",260,100,360,,,,,,,,,25.04.2024,"NTPC 
 LOA",30.06.2026,,,,Generator (Hybrid),,,,,,
 6,NR,Rajasthan,Sirohi PS,,"Vayuna Renewables India 
-Project Private Limited",,2200000758,,,,,,,,300,,,,,,,,,,,,,25.04.2024,Land BG,01.04.2027,,,,"Renewable Power Park 
+Project Private Limited",,2200000758,,,,,,,,300,,,,300,,,,,,,,,25.04.2024,Land BG,01.04.2027,,,,"Renewable Power Park 
 Developer (Solar)",,,,,,
 7,NR,Rajasthan,"Bhadla IV/Bikaner 
 V PS",,"Kantida Renewables India 
-Project Private Limited",,2200000761,,,,,,,,300,,,,,,,,,,,,,25.04.2024,"Land BG 
+Project Private Limited",,2200000761,,,,,,,,300,,,,300,,,,,,,,,25.04.2024,"Land BG 
 Route",01.04.2028,,,,"Renewable Power Park 
 Developer (Solar)",,,,,,
-8,NR,Rajasthan,sirohi ps,,Izhma Solar Private Limited,,2200000743,,,,,,,,200,,,,,,,,,,,,,26.04.2024,"Land BG 
+8,NR,Rajasthan,sirohi ps,,Izhma Solar Private Limited,,2200000743,,,,,,,,200,,,,200,,,,,,,,,26.04.2024,"Land BG 
 Route",31.03.2028,,,,Generator (Solar),,,,,,
 9,NR,Rajasthan,Ramgarh PS,,"Renew Solar Power Private 
-Limited",,2200000777,,,,,,,,400,,,,,,,,,,,,,30.04.2024,"NTPC 
+Limited",,2200000777,,,,,,,,400,,,,400,,,,,,,,,30.04.2024,"NTPC 
 LOA",30.06.2027,,,,Generator (Solar),,,,,,
 10,NR,Rajasthan,Barmer-I PS,,"Renew Solar Power Private 
-Limited",,2200000778,,,,,,,,300,,,,,,,,,,,,,30.04.2024,"SECI 
+Limited",,2200000778,,,,,,,,300,,,,300,,,,,,,,,30.04.2024,"SECI 
  LOA",31.12.2026,,,,Generator (Solar),,,,,,
 11,NR,Rajasthan,Sirohi PS,,"Renew Solar Power Private 
-Limited",,2200000779,,,,,,,,300,,,,,,,,,,,,,30.04.2024,"NTPC 
+Limited",,2200000779,,,,,,,,300,,,,300,,,,,,,,,30.04.2024,"NTPC 
 LOA",30.06.2027,,,,Generator (Solar),,,,,,
 1,NR,Rajasthan,Ramgarh PS,,"JSW Neo 
-Energy Limited",,2200000706,,,,,,,,700,,,,,,,,,,,,,12.04.2024,SJVN LOA,01.09.2025,,,,"Generator 
+Energy Limited",,2200000706,,,,,,,,700,,,,700,,,,,,,,,12.04.2024,SJVN LOA,01.09.2025,,,,"Generator 
 (Solar)",Granted,,,,,
 2,NR,Rajasthan,Ramgarh PS,,"JSW Neo 
-Energy Limited",,2200000689,,,,,,,,700,,,,,,,,,,,,,12.04.2024,SJVN LOA,01.09.2025,,,,"Generator 
+Energy Limited",,2200000689,,,,,,,,700,,,,700,,,,,,,,,12.04.2024,SJVN LOA,01.09.2025,,,,"Generator 
 (Solar)",,,,,,
 3,NR,Rajasthan,Barmer-I PS,,"Amaresha 
 Renawables 
 India Project 
-Private Limited",,2200000715,,,,,,,,300,,,,,,,,,,,,,15.04.2024,"Land BG 
+Private Limited",,2200000715,,,,,,,,300,,,,300,,,,,,,,,15.04.2024,"Land BG 
 Route",01.04.2027,,,,"Renewable 
 Power Park 
 Developer 
 (Solar)",Granted,,,,,
 4,NR,Rajasthan,Bikaner-IV PS,,"NTPC 
 Renewable 
-Energy Limited",,2200000726,,,,,,,,1000,,,,,,,,,,,,,23.04.2024,"Land 
+Energy Limited",,2200000726,,,,,,,,1000,,,,1000,,,,,,,,,23.04.2024,"Land 
 Route",31.12.2026,,,,"Generator 
 (Solar)",,,,,,
 5,NR,Rajasthan,merta-II ps,,"Juniper Green 
@@ -280,7 +279,7 @@ Limited",,2200000756,,,,,,,,360,"(Solar-260, Wind-100)",260,100,360,,,,,,,,,25.0
 6,NR,Rajasthan,Sirohi PS,,"Vayuna 
 Renewables 
 India Project 
-Private Limited",,2200000758,,,,,,,,300,,,,,,,,,,,,,25.04.2024,Land BG,01.04.2027,,,,"Renewable 
+Private Limited",,2200000758,,,,,,,,300,,,,300,,,,,,,,,25.04.2024,Land BG,01.04.2027,,,,"Renewable 
 Power Park 
 Developer 
 (Solar)",Granted,,,,,
@@ -288,125 +287,125 @@ Developer
 V PS",,"Kantida 
 Renewables 
 India Project 
-Private Limited",,2200000761,,,,,,,,300,,,,,,,,,,,,,25.04.2024,"Land BG 
+Private Limited",,2200000761,,,,,,,,300,,,,300,,,,,,,,,25.04.2024,"Land BG 
 Route",01.04.2028,,,,"Renewable 
 Power Park 
 Developer 
 (Solar)",Granted,,,,,
 8,NR,Rajasthan,sirohi ps,,"Izhma Solar 
-Private Limited",,2200000743,,,,,,,,200,,,,,,,,,,,,,26.04.2024,"Land BG 
+Private Limited",,2200000743,,,,,,,,200,,,,200,,,,,,,,,26.04.2024,"Land BG 
 Route",31.03.2028,,,,"Generator 
 (Solar)",Granted,,,,,
 9,NR,Rajasthan,Ramgarh PS,,"Renew Solar 
 Power Private 
-Limited",,2200000777,,,,,,,,400,,,,,,,,,,,,,30.04.2024,NTPC LOA,30.06.2027,,,,"Generator 
+Limited",,2200000777,,,,,,,,400,,,,400,,,,,,,,,30.04.2024,NTPC LOA,30.06.2027,,,,"Generator 
 (Solar)",Granted,,,,,
 10,NR,Rajasthan,Barmer-I PS,,"Renew Solar 
 Power Private 
-Limited",,2200000778,,,,,,,,300,,,,,,,,,,,,,30.04.2024,"SECI 
+Limited",,2200000778,,,,,,,,300,,,,300,,,,,,,,,30.04.2024,"SECI 
  LOA",31.12.2026,,,,"Generator 
 (Solar)",Granted,,,,,
 11,NR,Rajasthan,Sirohi PS,,"Renew Solar 
 Power Private 
-Limited",,2200000779,,,,,,,,300,,,,,,,,,,,,,30.04.2024,NTPC LOA,30.06.2027,,,,"Generator 
+Limited",,2200000779,,,,,,,,300,,,,300,,,,,,,,,30.04.2024,NTPC LOA,30.06.2027,,,,"Generator 
 (Solar)",,,,,,
 1,NR,Rajasthan,Bikaner-III PS,,"SA Renewable Infra Private 
-Limited",,2200000755,,,,,,,,100,,,,,,,,,,,,,04.05.2024,Land Route,31.03.2026,,,,Generator (Solar),,,,,,
+Limited",,2200000755,,,,,,,,100,,,,100,,,,,,,,,04.05.2024,Land Route,31.03.2026,,,,Generator (Solar),,,,,,
 2,NR,Rajasthan,bikaner-V ps,,"Vena Energy Vindhya Wind 
-Power Private Limited",,2200000796,,,,,,,,300,,,,,,,,,,,,,06.05.2024,"Land BG 
+Power Private Limited",,2200000796,,,,,,,,300,,,,300,,,,,,,,,06.05.2024,"Land BG 
 Route",01.10.2027,,,,Generator (Solar),,,,,,
 3,NR,Rajasthan,merta-II ps,,"ACME Solar Holdings Private 
-Limited",,2200000788,,,,,,,,300,,,,,,,,,,,,,07.05.2024,"Land BG 
+Limited",,2200000788,,,,,,,,300,,,,300,,,,,,,,,07.05.2024,"Land BG 
 Route",31.03.2027,,,,Generator (Solar),,,,,,
-4,NR,Rajasthan,Sirohi PS,,SAEL Industries Limited,,2200000793,,,,,,,,300,,,,,,,,,,,,,10.05.2024,"Land BG 
+4,NR,Rajasthan,Sirohi PS,,SAEL Industries Limited,,2200000793,,,,,,,,300,,,,300,,,,,,,,,10.05.2024,"Land BG 
 Route",30.05.2026,,,,Generator (Solar),,,,,,
-5,NR,Rajasthan,Sirohi PS,,SAEL Industries Limited,,2200000794,,,,,,,,300,,,,,,,,,,,,,10.05.2024,"Land BG 
+5,NR,Rajasthan,Sirohi PS,,SAEL Industries Limited,,2200000794,,,,,,,,300,,,,300,,,,,,,,,10.05.2024,"Land BG 
 Route",30.05.2026,,,,Generator (Solar),,,,,,
 6,NR,Rajasthan,Bhadla-II PS,,"Adani Renewable Energy 
-Holding Four Limited",,2200000811,,,,,,,,765,,,,,,,,,,,,,10.05.2024,SECI LOA,31.03.2025,,,,Generator (Solar),,,,,,
+Holding Four Limited",,2200000811,,,,,,,,765,,,,765,,,,,,,,,10.05.2024,SECI LOA,31.03.2025,,,,Generator (Solar),,,,,,
 7,NR,Rajasthan,Fatehgarh-III PS,,"Adani Renewable Energy 
-Holding Four Limited",,2200000810,,,,,,,,717,,,,,,,,,,,,,10.05.2024,SECI LOA,31.03.2025,,,,Generator (Solar),,,,,,
+Holding Four Limited",,2200000810,,,,,,,,717,,,,717,,,,,,,,,10.05.2024,SECI LOA,31.03.2025,,,,Generator (Solar),,,,,,
 8,NR,Rajasthan,ramgarh-II ps,,"RJS Renewables Private 
-Limited",,2200000782,,,,,,,,150,,,,,,,,,,,,,12.05.2024,Land Route,20.04.2028,,,,Generator (Wind),,,,,,
-9,NR,Rajasthan,Ramgarh PS,,JSW Neo Energy Limited,,2200000797,,,,,,,,700,,,,,,,,,,,,,13.05.2024,NTPC LOA,01.05.2027,,,,Generator (Solar),,,,,,
+Limited",,2200000782,,,,,,,,150,,,,150,,,,,,,,,12.05.2024,Land Route,20.04.2028,,,,Generator (Wind),,,,,,
+9,NR,Rajasthan,Ramgarh PS,,JSW Neo Energy Limited,,2200000797,,,,,,,,700,,,,700,,,,,,,,,13.05.2024,NTPC LOA,01.05.2027,,,,Generator (Solar),,,,,,
 10,NR,Rajasthan,Nagaur PS,,"Green Infra Wind Energy Private 
-Limited",,2200000812,,,,,,,,300,,,,,,,,,,,,,14.05.2024,"Land BG 
+Limited",,2200000812,,,,,,,,300,,,,300,,,,,,,,,14.05.2024,"Land BG 
 Route",31.05.2027,,,,Generator (Solar),,,,,,
 11,NR,Rajasthan,Nagaur PS,,"Green Infra Wind Energy Private 
-Limited",,2200000813,,,,,,,,300,,,,,,,,,,,,,14.05.2024,"Land BG 
+Limited",,2200000813,,,,,,,,300,,,,300,,,,,,,,,14.05.2024,"Land BG 
 Route",31.05.2027,,,,Generator (Solar),,,,,,
-12,NR,Rajasthan,merta-II ps,,Banyan Energy Private Limited,,2200000823,,,,,,,,300,,,,,,,,,,,,,18.05.2024,"Land BG 
+12,NR,Rajasthan,merta-II ps,,Banyan Energy Private Limited,,2200000823,,,,,,,,300,,,,300,,,,,,,,,18.05.2024,"Land BG 
 Route",30.06.2026,,,,Generator (Solar),,,,,,
 13,NR,Rajasthan,Sirohi PS,,"Amplus Centaur Solar Private 
-Limited",,2200000827,,,,,,,,350,,,,,,,,,,,,,20.05.2024,"Land BG 
+Limited",,2200000827,,,,,,,,350,,,,350,,,,,,,,,20.05.2024,"Land BG 
 Route",30.04.2027,,,,Generator (Solar),,,,,,
 14,NR,Rajasthan,Barmer-I PS,,"Adani Renewable Energy Two 
-Limited",,2200000807,,,,,,,,600,,,,,,,,,,,,,21.05.2024,Land Route,31.03.2025,,,,Generator (Wind,,,,,,
+Limited",,2200000807,,,,,,,,600,,,,600,,,,,,,,,21.05.2024,Land Route,31.03.2025,,,,Generator (Wind,,,,,,
 15,NR,Rajasthan,Barmer-I PS,,"Adani Renewable Energy Two 
-Limited",,2200000809,,,,,,,,595,,,,,,,,,,,,,21.05.2024,Land Route,31.03.2025,,,,Generator (Wind),,,,,,
+Limited",,2200000809,,,,,,,,595,,,,595,,,,,,,,,21.05.2024,Land Route,31.03.2025,,,,Generator (Wind),,,,,,
 16,NR,Rajasthan,merta-II ps,,"Acme Solar Holdings Private 
-Limited",,2200000840,,,,,,,,300,,,,,,,,,,,,,25.05.2024,"Land BG 
+Limited",,2200000840,,,,,,,,300,,,,300,,,,,,,,,25.05.2024,"Land BG 
 Route",31.03.2027,,,,Generator (Solar),,,,,,
 17,NR,Rajasthan,merta-II ps,,"Purvah Green Power Private 
-Limited",,2200000842,,,,,,,,300,,,,,,,,,,,,,25.05.2024,"Land BG 
+Limited",,2200000842,,,,,,,,300,,,,300,,,,,,,,,25.05.2024,"Land BG 
 Route",01.06.2027,,,,Generator (Solar),,,,,,
 18,NR,Rajasthan,merta-II ps,,"Hexa Climate Solutions Private 
-Limited",,2200000848,,,,,,,,300,,,,,,,,,,,,,25.05.2024,"Land BG 
+Limited",,2200000848,,,,,,,,300,,,,300,,,,,,,,,25.05.2024,"Land BG 
 Route",31.03.2027,,,,"Generator (Solar with 
 ESS)",,,,,,
 19,NR,Rajasthan,Jalore PS,,"Renew Solar Power Private 
-Limited",,2200000850,,,,,,,,300,,,,,,,,,,,,,27.05.2024,NTPC LOA,30.11.2026,,,,Generator (Solar),,,,,,
+Limited",,2200000850,,,,,,,,300,,,,300,,,,,,,,,27.05.2024,NTPC LOA,30.11.2026,,,,Generator (Solar),,,,,,
 20,NR,Rajasthan,merta-II ps,,"Hexa Climate Solutions Private 
-Limited",,2200000854,,,,,,,,50,,,,,,,,,,,,,27.05.2024,"Land BG 
+Limited",,2200000854,,,,,,,,50,,,,50,,,,,,,,,27.05.2024,"Land BG 
 Route",30.06.2025,,,,"Generator (Solar with 
 ESS)",,,,,,
 21,NR,Rajasthan,Barmer PS,,"Serentica Renewables 
-India 11 Private Limited",,2200000856,,,,,,,,250,,,,,,,,,,,,,28.05.2024,NTPC LOA,31.12.2027,,,,"Generator (Solar with 
+India 11 Private Limited",,2200000856,,,,,,,,250,,,,250,,,,,,,,,28.05.2024,NTPC LOA,31.12.2027,,,,"Generator (Solar with 
 ESS)",,,,,,
 22,NR,Rajasthan,bikaner-V ps,,"Solarcraft Power India 8 Private 
-Limited",,2200000866,,,,,,,,300,,,,,,,,,,,,,30.05.2024,"LOA or 
+Limited",,2200000866,,,,,,,,300,,,,300,,,,,,,,,30.05.2024,"LOA or 
 PPA",29.06.2026,,,,Generator (Solar),,,,,,
 23,NR,Rajasthan,bhadla-IV ps,,"Demeter Sun Power Private 
-Limited",,2200000875,,,,,,,,300,,,,,,,,,,,,,30.05.2024,Land Route,31.12.2027,,,,Generator (Solar),,,,,,
+Limited",,2200000875,,,,,,,,300,,,,300,,,,,,,,,30.05.2024,Land Route,31.12.2027,,,,Generator (Solar),,,,,,
 24,NR,Rajasthan,merta-II ps,,"Juniper Green Energy Private 
-Limited",,2200000879,,,,,,,,300,,,,,,,,,,,,,30.05.2024,"Land BG 
+Limited",,2200000879,,,,,,,,300,,,,300,,,,,,,,,30.05.2024,"Land BG 
 Route",31.12.2027,,,,Generator (Solar),,,,,,
 25,NR,Rajasthan,merta-II ps,,"Acme Solar Holdings Private 
-Limited",,2200000841,,,,,,,,100,,,,,,,,,,,,,31.05.2024,"Land BG 
+Limited",,2200000841,,,,,,,,100,,,,100,,,,,,,,,31.05.2024,"Land BG 
 Route",31.03.2027,,,,Generator (Solar),,,,,,
 26,NR,Rajasthan,sirohi ps,,"Serentica Renewables India 
-Private Limited",,2200000891,,,,,,,,400,,,,,,,,,,,,,31.05.2024,"Land BG 
+Private Limited",,2200000891,,,,,,,,400,,,,400,,,,,,,,,31.05.2024,"Land BG 
 Route",30.06.2026,,,,Generator (Solar),,,,,,
 27,NR,Rajasthan,Jalore PS,,"Renew Solar Power Private 
-Limited",,2200000886,,,,,,,,100,,,,,,,,,,,,,31.05.2024,"Land BG 
+Limited",,2200000886,,,,,,,,100,,,,100,,,,,,,,,31.05.2024,"Land BG 
 Route",31.12.2027,,,,Generator (Solar),,,,,,
 28,NR,Rajasthan,Jalore PS,,"Renew Solar Power Private 
-Limited",,2200000887,,,,,,,,200,,,,,,,,,,,,,31.05.2024,"Land BG 
+Limited",,2200000887,,,,,,,,200,,,,200,,,,,,,,,31.05.2024,"Land BG 
 Route",31.07.2027,,,,Generator (Solar),,,,,,
 29,NR,Rajasthan,Jalore PS,,"Renew Solar Power Private 
-Limited",,2200000888,,,,,,,,200,,,,,,,,,,,,,31.05.2024,"Land BG 
+Limited",,2200000888,,,,,,,,200,,,,200,,,,,,,,,31.05.2024,"Land BG 
 Route",30.09.2027,,,,Generator (Solar),,,,,,
 30,NR,Rajasthan,Jalore PS,,"Renew Solar Power Private 
-Limited",,2200000889,,,,,,,,100,,,,,,,,,,,,,31.05.2024,"Land BG 
+Limited",,2200000889,,,,,,,,100,,,,100,,,,,,,,,31.05.2024,"Land BG 
 Route",31.10.2027,,,,Generator (Solar),,,,,,
 31,NR,Rajasthan,Jalore PS,,"Renew Solar Power Private 
-Limited",,2200000890,,,,,,,,100,,,,,,,,,,,,,31.05.2024,"Land BG 
+Limited",,2200000890,,,,,,,,100,,,,100,,,,,,,,,31.05.2024,"Land BG 
 Route",30.11.2027,,,,Generator (Solar),,,,,,
 32,NR,Rajasthan,"Nagaur Complex 
-(Merta-II) PS",,Enren-III Energy Private Limited,,2200000860,,,,,,,,300,,,,,,,,,,,,,31.05.2024,"Land BG 
+(Merta-II) PS",,Enren-III Energy Private Limited,,2200000860,,,,,,,,300,,,,300,,,,,,,,,31.05.2024,"Land BG 
 Route",31.01.2027,,,,Generator (Solar),,,,,,
 33,NR,Rajasthan,Merta-II PS,,"Sindhari Solar Power Private 
-Limited",,2200000894,,,,,,,,300,,,,,,,,,,,,,31.05.2024,"Land BG 
+Limited",,2200000894,,,,,,,,300,,,,300,,,,,,,,,31.05.2024,"Land BG 
 Route",30.06.2027,,,,"Renewable Power Park 
 developer (Solar)",,,,,,
 1,NR,Rajasthan,Bikaner-III PS,,"SA Renewable 
 Infra Private 
-Limited",,2200000755,,,,,,,,100,,,,,,,,,,,,,04.05.2024,"Land 
+Limited",,2200000755,,,,,,,,100,,,,100,,,,,,,,,04.05.2024,"Land 
 Route",31.03.2026,,,,"Generator 
 (Solar)",Granted,,,,,
 2,NR,Rajasthan,bikaner-V ps,,"Vena Energy Vindhya 
 Wind Power Private 
-Limited",,2200000796,,,,,,,,300,,,,,,,,,,,,,06.05.2024,"Land BG 
+Limited",,2200000796,,,,,,,,300,,,,300,,,,,,,,,06.05.2024,"Land BG 
 Route",01.10.2027,,,,"Generator 
 (Solar)",Granted,,,,,
 3,NR,Rajasthan,merta-II ps,,"ACME Solar 
@@ -414,32 +413,32 @@ Holdings
 Limited(erstwhile 
 ACME Solar 
 Holdings Private 
-Limited)",,2200000788,,,,,,,,300,,,,,,,,,,,,,07.05.2024,"Land BG 
+Limited)",,2200000788,,,,,,,,300,,,,300,,,,,,,,,07.05.2024,"Land BG 
 Route",31.03.2027,,,,"Generator 
 (Solar)",,,,,,
 4,NR,Rajasthan,Sirohi PS,,"SAEL Industries 
-Limited",,2200000793,,,,,,,,300,,,,,,,,,,,,,10.05.2024,"Land BG 
+Limited",,2200000793,,,,,,,,300,,,,300,,,,,,,,,10.05.2024,"Land BG 
 Route",30.05.2026,,,,"Generator 
 (Solar)",,,,,,
 5,NR,Rajasthan,Sirohi PS,,"SAEL Industries 
-Limited",,2200000794,,,,,,,,300,,,,,,,,,,,,,10.05.2024,"Land BG 
+Limited",,2200000794,,,,,,,,300,,,,300,,,,,,,,,10.05.2024,"Land BG 
 Route",30.05.2026,,,,"Generator 
 (Solar)",,,,,,
 6,NR,Rajasthan,Bhadla-II PS,,"Adani Renewable 
 Energy Holding Four 
-Limited",,2200000811,,,,,,,,765,,,,,,,,,,,,,10.05.2024,"SECI 
+Limited",,2200000811,,,,,,,,765,,,,765,,,,,,,,,10.05.2024,"SECI 
 LOA",31.03.2025,,,,"Generator 
 (Solar)",Granted,,,,,
 7,NR,Rajasthan,Fatehgarh-III PS,,"Adani Renewable 
 Energy Holding 
-Four Limited",,2200000810,,,,,,,,717,,,,,,,,,,,,,10.05.2024,SECI LOA,31.03.2025,,,,"Generator 
+Four Limited",,2200000810,,,,,,,,717,,,,717,,,,,,,,,10.05.2024,SECI LOA,31.03.2025,,,,"Generator 
 (Solar)",Granted,,,,,
 8,NR,Rajasthan,Ramgarh PS,,"RJS 
 Renewables 
-Private Limited",,2200000782,,,,,,,,150,,,,,,,,,,,,,12.05.2024,Land Route,20.04.2028,,,,"Generator 
+Private Limited",,2200000782,,,,,,,,150,,,,150,,,,,,,,,12.05.2024,Land Route,20.04.2028,,,,"Generator 
 (Wind)",Withdrawn,,,,,
 9,NR,Rajasthan,Ramgarh PS,,"JSW Neo 
-Energy Limited",,2200000797,,,,,,,,700,,,,,,,,,,,,,13.05.2024,NTPC LoA,01.05.2027,,,,"Generator 
+Energy Limited",,2200000797,,,,,,,,700,,,,700,,,,,,,,,13.05.2024,NTPC LoA,01.05.2027,,,,"Generator 
 (Solar)",,,,,,
 10,NR,Rajasthan,Nagaur PS,,"Sembcorp  Green 
 Infra 
@@ -449,7 +448,7 @@ Ltd
 Green 
 Infra 
 Wind 
-Energy Pvt. Ltd.)",,2200000812,,,,,,,,300,,,,,,,,,,,,,14.05.2024,"Land BG 
+Energy Pvt. Ltd.)",,2200000812,,,,,,,,300,,,,300,,,,,,,,,14.05.2024,"Land BG 
 Route",31.05.2027,,,,"Generator 
 (Solar)",,,,,,
 11,NR,Rajasthan,Nagaur PS,,"Sembcorp  Green 
@@ -458,26 +457,26 @@ Pvt.Ltd.(erstwhile
 Green 
 Infra 
 Wind 
-Energy Pvt. Ltd.)",,2200000813,,,,,,,,300,,,,,,,,,,,,,14.05.2024,"Land BG 
+Energy Pvt. Ltd.)",,2200000813,,,,,,,,300,,,,300,,,,,,,,,14.05.2024,"Land BG 
 Route",31.05.2027,,,,"Generator 
 (Solar)",Granted,,,,,
 12,NR,Rajasthan,merta-II ps,,"Banyan Energy 
-Private Limited",,2200000823,,,,,,,,300,,,,,,,,,,,,,18.05.2024,"Land BG 
+Private Limited",,2200000823,,,,,,,,300,,,,300,,,,,,,,,18.05.2024,"Land BG 
 Route",30.06.2026,,,,"Generator 
 (Solar)",Granted,,,,,
 13,NR,Rajasthan,Sirohi PS,,"Amplus Centaur 
 Solar Private 
-Limited",,2200000827,,,,,,,,350,,,,,,,,,,,,,20.05.2024,"Land BG 
+Limited",,2200000827,,,,,,,,350,,,,350,,,,,,,,,20.05.2024,"Land BG 
 Route",30.04.2027,,,,"Generator 
 (Solar)",,,,,,
 14,NR,Rajasthan,Barmer-I PS,,"Adani Renewable 
 Energy Two 
-Limited",,2200000807,,,,,,,,600,,,,,,,,,,,,,21.05.2024,"Land 
+Limited",,2200000807,,,,,,,,600,,,,600,,,,,,,,,21.05.2024,"Land 
 Route",31.03.2025,,,,"Generator 
 (Wind)",Granted,,,,,
 15,NR,Rajasthan,Barmer-I PS,,"Adani Renewable 
 Energy Two 
-Limited",,2200000809,,,,,,,,595,,,,,,,,,,,,,21.05.2024,"Land 
+Limited",,2200000809,,,,,,,,595,,,,595,,,,,,,,,21.05.2024,"Land 
 Route",31.03.2025,,,,"Generator 
 (Wind)",Granted,,,,,
 16,NR,Rajasthan,merta-II ps,,"ACME Solar 
@@ -485,180 +484,180 @@ Holdings
 Limited(erstwhile 
 ACME Solar 
 Holdings Private 
-Limited)",,2200000840,,,,,,,,300,,,,,,,,,,,,,25.05.2024,"Land BG 
+Limited)",,2200000840,,,,,,,,300,,,,300,,,,,,,,,25.05.2024,"Land BG 
 Route",31.03.2027,,,,"Generator 
 (Solar)",Granted,,,,,
 17,NR,Rajasthan,merta-II ps,,"Purvah Green 
 Power Private 
-Limited",,2200000842,,,,,,,,300,,,,,,,,,,,,,25.05.2024,"Land BG 
+Limited",,2200000842,,,,,,,,300,,,,300,,,,,,,,,25.05.2024,"Land BG 
 Route",01.06.2027,,,,"Generator 
 (Solar)",Granted,,,,,
 18,NR,Rajasthan,merta-II ps,,"Hexa Climate 
 Solutions 
-Private Limited",,2200000848,,,,,,,,300,,,,,,,,,,,,,25.05.2024,Land BG Route,31.03.2027,,,,"Generator 
+Private Limited",,2200000848,,,,,,,,300,,,,300,,,,,,,,,25.05.2024,Land BG Route,31.03.2027,,,,"Generator 
 (Solar with 
 ESS)",,,,,,
 19,NR,Rajasthan,Jalore PS,,"Renew Solar 
-Power Private",,2200000850,,,,,,,,300,,,,,,,,,,,,,27.05.2024,NTPC LOA,30.11.2026,,,,"Generator 
+Power Private",,2200000850,,,,,,,,300,,,,300,,,,,,,,,27.05.2024,NTPC LOA,30.11.2026,,,,"Generator 
 (Solar)",,,,,,
 20,NR,Rajasthan,merta-II ps,,"Hexa Climate 
 Solutions 
-Private Limited",,2200000854,,,,,,,,50,,,,,,,,,,,,,27.05.2024,"Land BG 
+Private Limited",,2200000854,,,,,,,,50,,,,50,,,,,,,,,27.05.2024,"Land BG 
 Route",30.06.2025,,,,"Generator 
 (Solar with 
 ESS)",Granted,,,,,
 21,NR,Rajasthan,Barmer PS,,"Serentica 
 Renewables 
 India 11 Private 
-Limited",,2200000856,,,,,,,,250,,,,,,,,,,,,,28.05.2024,NTPC LOA,31.12.2027,,,,"Generator 
+Limited",,2200000856,,,,,,,,250,,,,250,,,,,,,,,28.05.2024,NTPC LOA,31.12.2027,,,,"Generator 
 (Solar with 
 ESS)",Granted,,,,,
 22,NR,Rajasthan,bikaner-V ps,,"Solarcraft 
 Power India 8 
-Private Limited",,2200000866,,,,,,,,300,,,,,,,,,,,,,30.05.2024,LOA or PPA,29.06.2026,,,,"Generator 
+Private Limited",,2200000866,,,,,,,,300,,,,300,,,,,,,,,30.05.2024,LOA or PPA,29.06.2026,,,,"Generator 
 (Solar)",Granted,,,,,
 23,NR,Rajasthan,bhadla-IV ps,,"Demeter Sun 
 Power Private 
-Limited",,2200000875,,,,,,,,300,,,,,,,,,,,,,30.05.2024,Land Route,31.12.2027,,,,"Generator 
+Limited",,2200000875,,,,,,,,300,,,,300,,,,,,,,,30.05.2024,Land Route,31.12.2027,,,,"Generator 
 (Solar)",Granted,,,,,
 24,NR,Rajasthan,merta-II ps,,"Juniper Green 
 Energy Private 
-Limited",,2200000879,,,,,,,,300,,,,,,,,,,,,,30.05.2024,"Land BG 
+Limited",,2200000879,,,,,,,,300,,,,300,,,,,,,,,30.05.2024,"Land BG 
 Route",31.12.2027,,,,"Generator 
 (Solar)",Granted,,,,,
 25,NR,Rajasthan,merta-II ps,,"ACME Solar 
 Holdings Limited 
 (erstwhile ACME 
 Solar Holdings 
-Private Limited)",,2200000841,,,,,,,,100,,,,,,,,,,,,,31.05.2024,"Land BG 
+Private Limited)",,2200000841,,,,,,,,100,,,,100,,,,,,,,,31.05.2024,"Land BG 
 Route",31.03.2027,,,,"Generator 
 (Solar)",Granted,,,,,
 26,NR,Rajasthan,sirohi ps,,"Serentica 
 Renewables 
 India Private 
-Limited",,2200000891,,,,,,,,400,,,,,,,,,,,,,31.05.2024,"Land BG 
+Limited",,2200000891,,,,,,,,400,,,,400,,,,,,,,,31.05.2024,"Land BG 
 Route",30.06.2026,,,,"Generator 
 (Solar)",,,,,,
 27,NR,Rajasthan,Jalore PS,,"Renew Solar 
 Power Private 
-Limited",,2200000886,,,,,,,,100,,,,,,,,,,,,,31.05.2024,Land BG Route,31.12.2027,,,,"Generator 
+Limited",,2200000886,,,,,,,,100,,,,100,,,,,,,,,31.05.2024,Land BG Route,31.12.2027,,,,"Generator 
 (Solar)",,,,,,
 28,NR,Rajasthan,Jalore PS,,"Renew Solar 
 Power Private 
-Limited",,2200000887,,,,,,,,200,,,,,,,,,,,,,31.05.2024,Land BG Route,31.07.2027,,,,"Generator 
+Limited",,2200000887,,,,,,,,200,,,,200,,,,,,,,,31.05.2024,Land BG Route,31.07.2027,,,,"Generator 
 (Solar)",,,,,,
 29,NR,Rajasthan,Jalore PS,,"Renew Solar 
 Power Private 
-Limited",,2200000888,,,,,,,,200,,,,,,,,,,,,,31.05.2024,Land BG Route,30.09.2027,,,,"Generator 
+Limited",,2200000888,,,,,,,,200,,,,200,,,,,,,,,31.05.2024,Land BG Route,30.09.2027,,,,"Generator 
 (Solar)",,,,,,
 30,NR,Rajasthan,Jalore PS,,"Renew Solar 
 Power Private 
-Limited",,2200000889,,,,,,,,100,,,,,,,,,,,,,31.05.2024,Land BG Route,31.10.2027,,,,"Generator 
+Limited",,2200000889,,,,,,,,100,,,,100,,,,,,,,,31.05.2024,Land BG Route,31.10.2027,,,,"Generator 
 (Solar)",,,,,,
 31,NR,Rajasthan,Jalore PS,,"Renew Solar 
 Power Private 
-Limited",,2200000890,,,,,,,,100,,,,,,,,,,,,,31.05.2024,Land BG Route,30.11.2027,,,,"Generator 
+Limited",,2200000890,,,,,,,,100,,,,100,,,,,,,,,31.05.2024,Land BG Route,30.11.2027,,,,"Generator 
 (Solar)",Granted,,,,,
 32,NR,Rajasthan,"Nagaur 
 Complex 
 (Merta-II) PS",,"Enren-III Energy 
-Private Limited",,2200000860,,,,,,,,300,,,,,,,,,,,,,31.05.2024,"Land BG 
+Private Limited",,2200000860,,,,,,,,300,,,,300,,,,,,,,,31.05.2024,"Land BG 
 Route",31.01.2027,,,,"Generator 
 (Solar)",Granted,,,,,
 33,NR,Rajasthan,Merta-II PS,,"Sindhari Solar 
 Power Private 
-Limited",,2200000894,,,,,,,,300,,,,,,,,,,,,,31.05.2024,"Land BG 
+Limited",,2200000894,,,,,,,,300,,,,300,,,,,,,,,31.05.2024,"Land BG 
 Route",30.06.2027,,,,"Renewable 
 Power Park 
 developer 
 (Solar)",Granted,,,,,
 1,NR,Rajasthan,"Nagaur Complex 
-(Merta-II PS)",,Prespa Solar Private Limited,,2200000832,,,,,,,,250,,,,,,,,,,,,,04.06.2024,"Land BG 
+(Merta-II PS)",,Prespa Solar Private Limited,,2200000832,,,,,,,,250,,,,250,,,,,,,,,04.06.2024,"Land BG 
 Route",31.12.2026,,,,"Renewable Power Park 
 developer (Solar)",,,,,,
 2,NR,Rajasthan,Bhadla-IV PS,,"Vismaya Four Renewables 
-Private Limited",,2200000910,,,,,,,,250,,,,,,,,,,,,,06.06.2024,"Land BG 
+Private Limited",,2200000910,,,,,,,,250,,,,250,,,,,,,,,06.06.2024,"Land BG 
 Route",01.04.2030,,,,Generator (Solar),,,,,,
 3,NR,Rajasthan,Jalore PS,,"Sunsure Solarpark RJ One 
-Private Limited",,2200000943,,,,,,,,300,,,,,,,,,,,,,18.06.2024,"Land BG 
+Private Limited",,2200000943,,,,,,,,300,,,,300,,,,,,,,,18.06.2024,"Land BG 
 Route",31.12.2027,,,,Generator (Solar),,,,,,
 4,NR,Rajasthan,Fatehgarh-IV PS,,"NTPC Renewable Energy 
 Limited",,,"2200000906 
  
-(Enhancement)",,,,,,,500,,,,,,,,,,,,,19.06.2024,Land Route,30.10.2026,,,,Generator (Solar),,,,,,
+(Enhancement)",,,,,,,500,,,,500,,,,,,,,,19.06.2024,Land Route,30.10.2026,,,,Generator (Solar),,,,,,
 5,NR,Rajasthan,Jalore PS,,"HR Saraswati Energy 
-Private Limited",,2200000945,,,,,,,,300,,,,,,,,,,,,,20.06.2024,"Land BG 
+Private Limited",,2200000945,,,,,,,,300,,,,300,,,,,,,,,20.06.2024,"Land BG 
 Route",30.07.2027,,,,Generator (Solar),,,,,,
 6,NR,Rajasthan,barmer-III ps,,"Vismaya Five Renewables 
-Private Limited",,2200000954,,,,,,,,250,,,,,,,,,,,,,21.06.2024,"Land BG 
+Private Limited",,2200000954,,,,,,,,250,,,,250,,,,,,,,,21.06.2024,"Land BG 
 Route",31.10.2030,,,,Generator (Solar),,,,,,
 7,NR,Rajasthan,merta-II ps,,"Acme Solar Holdings Private 
-Limited",,2200000955,,,,,,,,500,,,,,,,,,,,,,21.06.2024,"Land BG 
+Limited",,2200000955,,,,,,,,500,,,,500,,,,,,,,,21.06.2024,"Land BG 
 Route",31.03.2027,,,,Generator (Solar),,,,,,
 8,NR,Rajasthan,Sanchore PS,,"HR Saraswati Energy 
-Private Limited",,2200000946,,,,,,,,300,,,,,,,,,,,,,22.06.2024,"Land BG 
+Private Limited",,2200000946,,,,,,,,300,,,,300,,,,,,,,,22.06.2024,"Land BG 
 Route",30.06.2026,,,,Generator (Solar),,,,,,
 9,NR,Rajasthan,Fatehgarh-IV PS,,"NTPC Renewable Energy 
 Limited",,,"2200000973 
  
-(Enhancement)",,,,,,,100,,,,,,,,,,,,,24.06.2024,Land Route,31.03.2027,,,,Generator (Solar),,,,,,
+(Enhancement)",,,,,,,100,,,,100,,,,,,,,,24.06.2024,Land Route,31.03.2027,,,,Generator (Solar),,,,,,
 10,NR,Rajasthan,Jalore PS,,"Sprng Vaayu Urja Private 
-Limited",,2200001006,,,,,,,,600,,,,,,,,,,,,,29.06.2024,"Land BG 
+Limited",,2200001006,,,,,,,,600,,,,600,,,,,,,,,29.06.2024,"Land BG 
 Route",31.12.2029,,,,"Renewable Power Park 
 developer (Solar)",,,,,,
 1,NR,Rajasthan,"Nagaur Complex 
 (Merta-II PS)",,"Prespa Solar 
-Private Limited",,2200000832,,,,,,,,250,,,,,,,,,,,,,04.06.2024,"Land BG 
+Private Limited",,2200000832,,,,,,,,250,,,,250,,,,,,,,,04.06.2024,"Land BG 
 Route",31.12.2026,,,,"Renewable 
 Power Park 
 developer (Solar)",Granted,,,,,
 2,NR,Rajasthan,Bhadla-IV PS,,"Vismaya Four 
 Renewables 
-Private Limited",,2200000910,,,,,,,,250,,,,,,,,,,,,,06.06.2024,"Land BG 
+Private Limited",,2200000910,,,,,,,,250,,,,250,,,,,,,,,06.06.2024,"Land BG 
 Route",01.04.2030,,,,"Generator 
 (Solar)",,,,,,
 3,NR,Rajasthan,Jalore PS,,"Sunsure Solarpark 
 RJ One Private 
-Limited",,2200000943,,,,,,,,300,,,,,,,,,,,,,18.06.2024,"Land BG 
+Limited",,2200000943,,,,,,,,300,,,,300,,,,,,,,,18.06.2024,"Land BG 
 Route",31.12.2027,,,,"Generator 
 (Solar)",Granted,,,,,
 4,NR,Rajasthan,Fatehgarh-IV PS,,"NTPC Renewable 
 Energy Limited",,,"2200000906 
  
-(Enhancement)",,,,,,,500,,,,,,,,,,,,,19.06.2024,"Land 
+(Enhancement)",,,,,,,500,,,,500,,,,,,,,,19.06.2024,"Land 
 Route",30.10.2026,,,,"Generator 
 (Solar)",Withdrawn,,,,,
 5,NR,Rajasthan,Jalore PS,,"HR Saraswati 
 Energy Private 
-Limited",,2200000945,,,,,,,,300,,,,,,,,,,,,,20.06.2024,"Land BG 
+Limited",,2200000945,,,,,,,,300,,,,300,,,,,,,,,20.06.2024,"Land BG 
 Route",30.07.2027,,,,"Generator 
 (Solar)",,,,,,
 6,NR,Rajasthan,"Barmer II/ 
 Ramgarh II/ Pali 
 PS",,"Vismaya Five 
 Renewables 
-Private Limited",,2200000954,,,,,,,,250,,,,,,,,,,,,,21.06.2024,"Land BG 
+Private Limited",,2200000954,,,,,,,,250,,,,250,,,,,,,,,21.06.2024,"Land BG 
 Route",31.10.2030,,,,"Generator 
 (Solar)",Withdrawn,,,,,
 7,NR,Rajasthan,merta-II ps,,"Acme Solar 
 Holdings Private 
-Limited",,2200000955,,,,,,,,500,,,,,,,,,,,,,21.06.2024,"Land BG 
+Limited",,2200000955,,,,,,,,500,,,,500,,,,,,,,,21.06.2024,"Land BG 
 Route",31.03.2027,,,,"Generator 
 (Solar)",,,,,,
 8,NR,Rajasthan,Sanchore PS,,"HR Saraswati 
 Energy Private 
-Limited",,2200000946,,,,,,,,300,,,,,,,,,,,,,22.06.2024,"Land BG 
+Limited",,2200000946,,,,,,,,300,,,,300,,,,,,,,,22.06.2024,"Land BG 
 Route",30.06.2026,,,,"Generator 
 (Solar)",Granted,,,,,
 9,NR,Rajasthan,Fatehgarh-IV PS,,"NTPC 
 Renewable 
 Energy Limited",,,"2200000973 
  
-(Enhancement)",,,,,,,100,,,,,,,,,,,,,24.06.2024,Land Route,31.03.2027,,,,"Generator 
+(Enhancement)",,,,,,,100,,,,100,,,,,,,,,24.06.2024,Land Route,31.03.2027,,,,"Generator 
 (Solar)",Withdrawn,,,,,
 10,NR,Rajasthan,Jalore PS,,"Sprng Vaayu 
 Urja Private 
-Limited",,2200001006,,,,,,,,600,,,,,,,,,,,,,29.06.2024,"Land BG 
+Limited",,2200001006,,,,,,,,600,,,,600,,,,,,,,,29.06.2024,"Land BG 
 Route",31.12.2029,,,,"Renewable 
 Power Park 
 developer (Solar)",Granted,,,,,
@@ -686,41 +685,41 @@ Private
 Limited",,,"Soltown 
 Infra 
 Private 
-Limited",,,,,,,31-12-2025,,,,,,,,,,,,,200,,31-12-2025,,,,Applicant,Granted,,,,,
+Limited",,,,,,,31-12-2025,,,,31,,,,,,,,,200,,31-12-2025,,,,Applicant,Granted,,,,,
 2,NR,Rajasthan,Bikaner-II PS,,"Soltown 
 Infra 
 Private 
 Limited",,,"Soltown 
 Infra 
 Private 
-Limited",,,,,,,31-10-2025,,,,,,,,,,,,,350,,22.08.2026,,,,Applicant,Granted,,,,,
+Limited",,,,,,,31-10-2025,,,,31,,,,,,,,,350,,22.08.2026,,,,Applicant,Granted,,,,,
 3,NR,Rajasthan,Bikaner-II PS,,"Soltown 
 Infra 
 Private 
 Limited",,,"Soltown 
 Infra 
 Private 
-Limited",,,,,,,31-12-2025,,,,,,,,,,,,,125,,22.08.2026,,,,Applicant,Granted,,,,,
+Limited",,,,,,,31-12-2025,,,,31,,,,,,,,,125,,22.08.2026,,,,Applicant,Granted,,,,,
 1,NR,Rajasthan,Sirohi PS,,"ACME 
 Solar 
 Holdings 
 Limited 
 (erstwhile  ACME 
 Solar 
-Holdings",,2200000788,,,,,,,,300,,,,,,,,,,,,,07.05.2024,"Land BG 
+Holdings",,2200000788,,,,,,,,300,,,,300,,,,,,,,,07.05.2024,"Land BG 
 Route",31.03.2027,,,,"Generator 
 (Solar)",Withdrawn,,,,,
 2,NR,Rajasthan,Sirohi PS,,"SAEL Industries 
-Limited",,2200000793,,,,,,,,300,,,,,,,,,,,,,10.05.2024,"Land BG 
+Limited",,2200000793,,,,,,,,300,,,,300,,,,,,,,,10.05.2024,"Land BG 
 Route",30.05.2026,,,,"Generator 
 (Solar)",Withdrawn,,,,,
 3,NR,Rajasthan,Sirohi PS,,"SAEL Industries 
-Limited",,2200000794,,,,,,,,300,,,,,,,,,,,,,10.05.2024,"Land BG 
+Limited",,2200000794,,,,,,,,300,,,,300,,,,,,,,,10.05.2024,"Land BG 
 Route",30.05.2026,,,,"Generator 
 (Solar)",Withdrawn,,,,,
 4,NR,Rajasthan,Sirohi PS,,"Amplus Centaur 
 Solar Private 
-Limited",,2200000827,,,,,,,,350,,,,,,,,,,,,,20.05.2024,"Land BG 
+Limited",,2200000827,,,,,,,,350,,,,350,,,,,,,,,20.05.2024,"Land BG 
 Route",30.04.2027,,,,"Generator 
 (Solar)",Granted,,,,,
 5,NR,Rajasthan,"Nagaur 
@@ -728,23 +727,23 @@ Route",30.04.2027,,,,"Generator
 Holdings Limited 
 (erstwhile ACME 
 Solar Holdings 
-Private Limited)",,2200000841,,,,,,,,100,,,,,,,,,,,,,31.05.2024,"Land BG 
+Private Limited)",,2200000841,,,,,,,,100,,,,100,,,,,,,,,31.05.2024,"Land BG 
 Route",31.03.2027,,,,"Generator 
 (Solar)",Withdrawn,,,,,
 6,NR,Rajasthan,Rishabhdeo PS,,"Serentica 
 Renewables India 
-Private Limited",,2200000891,,,,,,,,400,,,,,,,,,,,,,31.05.2024,"Land BG 
+Private Limited",,2200000891,,,,,,,,400,,,,400,,,,,,,,,31.05.2024,"Land BG 
 Route",30.06.2026,,,,"Generator 
 (Solar)",Withdrawn,,,,,
 7,NR,Rajasthan,"Nagaur 
 Complex 
 (Merta-II) PS",,"Enren-III Energy 
-Private Limited",,2200000860,,,,,,,,300,,,,,,,,,,,,,31.05.2024,"Land BG 
+Private Limited",,2200000860,,,,,,,,300,,,,300,,,,,,,,,31.05.2024,"Land BG 
 Route",31.01.2027,,,,"Generator 
 (Solar)",Granted,,,,,
 8,NR,Rajasthan,,,"Sindhari Solar 
 Power Private 
-Limited",,2200000894,,,,,,,,300,,,,,,,,,,,,,31.05.2024,"Land BG 
+Limited",,2200000894,,,,,,,,300,,,,300,,,,,,,,,31.05.2024,"Land BG 
 Route",30.06.2027,,,,"Renewable 
 Power Park 
 developer 
@@ -752,7 +751,7 @@ developer
 1,NR,Rajasthan,"Nagaur Complex 
 (Merta-II PS)",,"Prespa Solar 
 Private 
-Limited",,2200000832,,,,,,,,250,,,,,,,,,,,,,04.06.2024,"Land BG 
+Limited",,2200000832,,,,,,,,250,,,,250,,,,,,,,,04.06.2024,"Land BG 
 Route",31.12.2026,,,,"Renewable 
 Power Park 
 developer 
@@ -760,84 +759,84 @@ developer
 1,NR,Rajasthan,bikaner-V ps,,"Sunsure 
 Solarpark RJ 
 One Private 
-Limited",,2200001021,,,,,,,,350,,,,,,,,,,,,,05.07.2024,"Land BG 
+Limited",,2200001021,,,,,,,,350,,,,350,,,,,,,,,05.07.2024,"Land BG 
 Route",31.03.2029,,,,"Generator 
 (Solar)",Granted,,,,,
 2,NR,Rajasthan,Ramgarh-II PS,,"Sunbreeze 
 Renewables 
 Seven Private 
-Limited",,2200000983,,,,,,,,400,,,,,,,,,,,,,05.07.2024,Land Route,31.03.2026,,,,"Renewable Power 
+Limited",,2200000983,,,,,,,,400,,,,400,,,,,,,,,05.07.2024,Land Route,31.03.2026,,,,"Renewable Power 
 Park developer 
 (Solar)",Withdrawn,,,,,
 3,NR,Rajasthan,Bikaner-IV PS,,"Juniper Green 
 Energy 
 Private 
-Limited",,2200001056,,,,,,,,400,,,,,,,,,,,,,16.07.2024,"Land BG 
+Limited",,2200001056,,,,,,,,400,,,,400,,,,,,,,,16.07.2024,"Land BG 
 Route",30.06.2029,,,,Generator (Solar),Granted,,,,,
 4,NR,Rajasthan,Barmer II PS,,"Foxtrot Solar 
 Renewables Energy 
-Private Limited",,2200001057,,,,,,,,100,,,,,,,,,,,,,17.07.2024,Land Route,31.12.2030,,,,"Generator 
+Private Limited",,2200001057,,,,,,,,100,,,,100,,,,,,,,,17.07.2024,Land Route,31.12.2030,,,,"Generator 
 (Solar)",,,,,,
 5,NR,Rajasthan,Fatehgarh-II PS,,"ACME Cleantech 
 Solutions Private 
-Limited",,2200001065,,,,,,,,150,,,,,,,,,,,,,17.07.2024,"Land BG 
+Limited",,2200001065,,,,,,,,150,,,,150,,,,,,,,,17.07.2024,"Land BG 
 Route",31.10.2026,,,,"Generator 
 (Solar)",Withdrawn,,,,,
 6,NR,Rajasthan,Barmer PS,,"Renew Solar Power 
-Private Limited",,2200001026,,,,,,,,200,,,,,,,,,,,,,19.07.2024,"REMCL 
+Private Limited",,2200001026,,,,,,,,200,,,,200,,,,,,,,,19.07.2024,"REMCL 
 LOA",30.09.2026,,,,"Generator 
 (Solar)",Granted,,,,,
 7,NR,Rajasthan,Bhadla - II PS,,"Adani Renewable 
 Energy Holding 
-Eighteen Limited",,2200001044,,,,,,,,150,(Reduced to 50 MW),,,,,,,,,,,,24.07.2024,Land Route,15.06.2025,,,,"Generator 
+Eighteen Limited",,2200001044,,,,,,,,150,(Reduced to 50 MW),,,150,,,,,,,,,24.07.2024,Land Route,15.06.2025,,,,"Generator 
 (Solar)",Granted,,,,,
 8,NR,Rajasthan,Pali PS,,"TEQ Green 
 Power XV 
-Private Limited",,2200001089,,,,,,,,300,,,,,,,,,,,,,26.07.2024,"Land BG 
+Private Limited",,2200001089,,,,,,,,300,,,,300,,,,,,,,,26.07.2024,"Land BG 
 Route",15.06.2027,,,,"Renewable Power 
 Park developer 
 (Solar)",Granted,,,,,
 9,NR,Rajasthan,Jalore PS,,"TEQ Green 
 Power XV 
-Private Limited",,2200001087,,,,,,,,300,,,,,,,,,,,,,26.07.2024,"Land BG 
+Private Limited",,2200001087,,,,,,,,300,,,,300,,,,,,,,,26.07.2024,"Land BG 
 Route",15.06.2027,,,,"Renewable Power 
 Park developer 
 (Solar)",Granted,,,,,
 10,NR,Rajasthan,Barmer II PS,,"Foxtrot Solar 
 Renewables 
 Energy Private 
-Limited",,2200001088,,,,,,,,80,,,,,,,,,,,,,26.07.2024,Land Route,31.12.2031,,,,Generator (Solar),Granted,,,,,
+Limited",,2200001088,,,,,,,,80,,,,80,,,,,,,,,26.07.2024,Land Route,31.12.2031,,,,Generator (Solar),Granted,,,,,
 11,NR,Rajasthan,bhadla-IV ps,,"Avaada 
 Energy Private 
-Limited",,2200001085,,,,,,,,700,,,,,,,,,,,,,26.07.2024,NHPC LOA,30.04.2026,,,,Generator (Solar),Granted,,,,,
+Limited",,2200001085,,,,,,,,700,,,,700,,,,,,,,,26.07.2024,NHPC LOA,30.04.2026,,,,Generator (Solar),Granted,,,,,
 12,NR,Rajasthan,Pali PS,,"Diyos Three 
 Renewables Private 
-Limited",,2200001100,,,,,,,,300,,,,,,,,,,,,,31.07.2024,"Land BG 
+Limited",,2200001100,,,,,,,,300,,,,300,,,,,,,,,31.07.2024,"Land BG 
 Route",01.04.2031,,,,"Renewable 
 Power Park 
 developer (Solar)",Granted,,,,,
 1,,NR,,,"Asian 
 Fine 
 Cements 
-Private Limited",,2200001060,,,,,,,,4,,,,,,,,,,,,,17.07.2024,,01.09.2024,,,,"Drawee entity 
+Private Limited",,2200001060,,,,,,,,4,,,,4,,,,,,,,,17.07.2024,,01.09.2024,,,,"Drawee entity 
 connected to Intra State 
 Transmission System",Granted,,,,,
 2,,NR,,,"Ambuja 
 Cements 
-Limited",,2200001058,,,,,,,,10,,,,,,,,,,,,,17.07.2024,,01.09.2024,,,,"Drawee entity 
+Limited",,2200001058,,,,,,,,10,,,,10,,,,,,,,,17.07.2024,,01.09.2024,,,,"Drawee entity 
 connected to Intra State 
 Transmission System",Granted,,,,,
 3,,NR,,,"Ambuja 
 Cements 
-Limited",,2200001059,,,,,,,,3,,,,,,,,,,,,,17.07.2024,,01.09.2024,,,,"Drawee entity 
+Limited",,2200001059,,,,,,,,3,,,,3,,,,,,,,,17.07.2024,,01.09.2024,,,,"Drawee entity 
 connected to Intra State 
 Transmission System",Granted,,,,,
-4,,NR,,,ACC Limited,,2200001081,,,,,,,,4.5,,,,,,,,,,,,,26.07.2024,,01.09.2024,,,,"Drawee entity 
+4,,NR,,,ACC Limited,,2200001081,,,,,,,,4.5,,,,4.5,,,,,,,,,26.07.2024,,01.09.2024,,,,"Drawee entity 
 connected to Intra State 
 Transmission System",Granted,,,,,
 5,,NR,,,"Ambuja 
 Cements 
-Limited",,2200001101,,,,,,,,5.85,,,,,,,,,,,,,31.07.2024,,01.09.2024,,,,"Drawee entity 
+Limited",,2200001101,,,,,,,,5.85,,,,5.85,,,,,,,,,31.07.2024,,01.09.2024,,,,"Drawee entity 
 connected to Intra State 
 Transmission System",Granted,,,,,
 1,,16.11.2026,,,672,,,"Greenko  UP01 
