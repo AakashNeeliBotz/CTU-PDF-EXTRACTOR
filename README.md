@@ -1,86 +1,91 @@
-# CTU Automated PDF Data Extraction
+# CMETS NR Extractor
 
-This project automates the extraction of renewable energy and power grid data from PDF documents published by CTU (Central Transmission Utility of India) and CEA. It scrapes websites, downloads PDFs, extracts complex tables (using Camelot), and consolidates the data into structured Excel reports.
+## Overview
 
-## Prerequisites
+This repository now uses a flattened root layout.
 
-- **Python**: Version 3.10 or higher recommended.
-- **Tools**: pip
+The active pipeline is the single integrated extractor:
+- `extract_42nd_cmets.py`
 
-## Setup
+It produces one workbook run covering:
+- `Data to be captured`
+- `Bulk Consumers`
+- `Margin`
+- `Element Status`
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/AakashNeeliBotz/CTU-PDF-EXTRACTOR.git
-    cd CTU-PDF-EXTRACTOR
-    ```
+## Current Coverage
 
-2.  **Create a virtual environment:**
-    ```bash
-    python -m venv myvenv
-    ```
+`Data to be captured` source meetings:
+- `43rd`
+- `42nd`
+- `41st`
+- `40th`
+- `39th`
+- `38th`
+- `37th`
+- `36th`
+- `35th`
+- `34th`
 
-3.  **Activate the virtual environment:**
-    *   **Windows**:
-        ```bash
-        .\myvenv\Scripts\activate
-        ```
-    *   **Linux/Mac**:
-        ```bash
-        source myvenv/bin/activate
-        ```
+Current extraction order:
+- `43rd -> 42nd -> 41st -> 40th -> 39th -> 38th -> 37th -> 36th -> 35th -> 34th`
 
-4.  **Install dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-    *Note: Ghostscript is required for Camelot. If you encounter issues, ensure Ghostscript is installed on your system.*
+Notes:
+- `41st` is wired into the run but currently contributes `0` `Data to be captured` rows with the existing parser logic.
+- `Bulk Consumers` is populated from GNARE tables across the supported CMETS PDFs.
+- `Margin` is populated from the dedicated SN9 Margin PDFs.
+- `Element Status` is populated from TBCB, RTM, 35th NCT, and CMETS-derived ATS/DTL/CTS elements.
 
-## Usage
+## Repository Layout
 
-### 🚀 Recommended Method: Skip Download (Fastest)
+- `extract_42nd_cmets.py`
+  - integrated extraction pipeline
+- `Data to be captured PDFs/`
+  - CMETS meeting PDFs plus RE-effectiveness PDFs
+- `Margin PDFs/`
+  - SN9 Connectivity Margin PDFs
+- `Element Status PDFs/`
+  - TBCB, RTM, and 35th NCT source PDFs
+- `update.md`
+  - detailed handoff and session memory
+- `documentation.md`
+  - current architecture and validated output summary
+- `Connectivity Application Data.xlsx`
+  - root workbook template used to create the output workbook
 
-To run the extraction pipeline **without re-downloading PDFs** (using the provided/existing PDFs in `downloaded_pdfs/`), run:
+## Key Rules To Preserve
+
+- Withdrawn rows must keep blank voltage.
+- `42nd` Reg. 5.2 rows must keep `granted_quantum_mw == application_quantum_mw`.
+- RE lookup priority is `Oct first`, `Sept fallback`, `Dec last-resort detail fallback`.
+- LTA to multi-ST-II expansion keeps the first expanded row full and later rows partial.
+- Empty granted quantum is filled only for the documented cases.
+
+## Current Outputs
+
+- Workbook: `42nd_34th_CMETS_Extracted_Data_VoltageFix.xlsx`
+- CSV: `extracted_data.csv`
+
+Latest documented validated counts:
+- `Data to be captured = 254`
+- `Bulk Consumers = 27`
+- `Margin = 232`
+
+## How To Run
+
+Preferred interpreter:
 
 ```bash
-python test_main_skip_download.py
+"/mnt/c/Users/Admin/Documents/CTU-automated-pdf-extraction/myvenv/Scripts/python.exe" extract_42nd_cmets.py
 ```
 
-**Why this is recommended:**
-- It is significantly faster as it skips the scraping and downloading steps.
-- It ensures you are testing against the exact same set of PDFs committed to the repo.
-- It includes the latest logic for extracting "Agreed Substations" and other recent fixes.
+If the workbook is open in Excel, close it before rerunning the extractor.
 
-### Full Pipeline (Production)
+## Working Notes
 
-To run the full end-to-end pipeline (Scrape Links -> Download PDFs -> Extract Data -> Generate Excel):
+- Treat `update.md` as the source of truth for recent changes and handoff state.
+- Treat `refactor.md` as the dedicated continuity file for the architecture redesign.
+- Treat `documentation.md` as the concise architecture and output summary.
+- After any substantial extractor change, update `update.md`.
 
-```bash
-python main.py
-```
-*Warning: This will attempt to download fresh PDFs from the source websites, which may take time.*
-
-## Output Validation
-
-After running the script, check the following files:
-
-1.  **Main Output**: `Connectivity_Application_Data_TEST_ALL_SHEETS{N}.xlsx` (e.g., `...SHEETS31.xlsx`)
-    *   This is the consolidated Excel file containing all extracted sheets.
-    *   Compare this file against expectations.
-
-2.  **Intermediate CSVs**: Located in `extraction_output/`
-    *   `Data_to_be_captured_extracted_data.csv`
-    *   `Margin_extracted_data.csv`
-    *   `Transformation_Capacity_extracted_data.csv`
-    *   `Non_RE_proposed_RE_Integration_extracted_data.csv`
-    *   `Element_Status_extracted_data.csv`
-
-## Project Structure
-
-- `downloaded_pdfs/`: Contains the raw PDF files (now tracked in git).
-- `extraction_output/`: Contains intermediate CSVs.
-- `models/`: Contains model-related data (if any).
-- `PROJECT_DOCUMENTATION.md`: Detailed technical documentation of the extraction logic.
-- `field_mappings.py`: Definitions for column headers and data parsing rules.
-- `pdf_processor.py`: Core logic for Camelot and PyMuPDF extraction.
-- `element_status_processor.py`: Specialized processor for the "Element Status" sheet.
+Last updated: `2026-03-24`
