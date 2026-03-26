@@ -18,15 +18,87 @@ That root file is now a compatibility shim. New business logic should go into th
 
 ## Run The Extractor
 
-Preferred command:
+### Prerequisites
+
+- **Python 3.10+**
+- Dependencies: `pip install -r requirements.txt`
+  - Key packages: `camelot-py[cv]`, `opencv-python`, `PyMuPDF`, `pandas`, `openpyxl`, `pdfplumber`, `pytesseract`, `Pillow`, `fuzzywuzzy`, `python-Levenshtein`
+- The existing project venv is at `myvenv/` in the repo root
+- **Always close the output Excel workbook** before running to avoid `PermissionError`
+
+### Option A: WSL (using the existing Windows venv) — RECOMMENDED
 
 ```bash
+cd /mnt/c/Users/Admin/Documents/CTU-automated-pdf-extraction
 "/mnt/c/Users/Admin/Documents/CTU-automated-pdf-extraction/myvenv/Scripts/python.exe" extract_42nd_cmets.py
 ```
 
+WSL-specific notes:
+- The Windows venv may emit `ESC[6n` (cursor-position query) in a PTY. Reply with `ESC[1;1R` and keep the session alive.
+- Do not treat `UtilBindVsockAnyPort:307: socket failed 1` as a pipeline failure — it is WSL interop noise.
+- If the script appears to hang after the first output, it is likely waiting for the PTY handshake — not stuck.
+
+### Option B: Native Windows (CMD)
+
+```cmd
+cd C:\Users\Admin\Documents\CTU-automated-pdf-extraction
+myvenv\Scripts\activate.bat
+python extract_42nd_cmets.py
+```
+
+### Option C: Native Windows (PowerShell)
+
+```powershell
+cd C:\Users\Admin\Documents\CTU-automated-pdf-extraction
+.\myvenv\Scripts\Activate.ps1
+python extract_42nd_cmets.py
+```
+
+If you get an execution policy error: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+
+### Option D: Fresh Linux / macOS Setup
+
+```bash
+cd CTU-automated-pdf-extraction
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip setuptools wheel
+pip install -r requirements.txt
+python3 -c "import camelot, fitz, pandas, openpyxl; print('All imports OK')"
+python3 extract_42nd_cmets.py
+```
+
+System dependencies for Camelot and Tesseract:
+- Ubuntu/Debian: `sudo apt-get install -y ghostscript python3-tk tesseract-ocr`
+- Fedora/RHEL: `sudo dnf install -y ghostscript python3-tkinter tesseract`
+- macOS (Homebrew): `brew install ghostscript tcl-tk tesseract`
+
+### Option E: Fresh WSL Setup (no existing venv)
+
+```bash
+sudo apt-get update
+sudo apt-get install -y python3.12-venv python3-pip ghostscript python3-tk tesseract-ocr
+cd /mnt/c/Users/Admin/Documents/CTU-automated-pdf-extraction
+python3 -m venv .venv_wsl
+source .venv_wsl/bin/activate
+pip install --upgrade pip setuptools wheel
+pip install -r requirements.txt
+python3 extract_42nd_cmets.py
+```
+
+### Quick Reference
+
+| Environment | Run Command |
+|---|---|
+| WSL + Windows venv | `"/mnt/c/.../myvenv/Scripts/python.exe" extract_42nd_cmets.py` |
+| Windows CMD | `myvenv\Scripts\activate.bat && python extract_42nd_cmets.py` |
+| Windows PowerShell | `.\myvenv\Scripts\Activate.ps1; python extract_42nd_cmets.py` |
+| Linux / macOS | `source .venv/bin/activate && python3 extract_42nd_cmets.py` |
+| WSL native venv | `source .venv_wsl/bin/activate && python3 extract_42nd_cmets.py` |
+
 Operational notes:
-- In this WSL/Codex setup, the Windows venv may emit `ESC[6n` in a PTY. Reply with `ESC[1;1R` and keep the session alive.
 - If the main workbook is open in Excel, the pipeline will fall back to a timestamped temporary workbook instead of failing the whole run.
+
 
 ## Architecture At A Glance
 
