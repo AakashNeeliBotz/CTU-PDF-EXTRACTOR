@@ -4,6 +4,11 @@ import os
 from dataclasses import dataclass
 from datetime import datetime
 
+import cmets_extractor.config as config
+import cmets_extractor.domain.meetings.hybrid as hybrid_meetings
+import cmets_extractor.domain.meetings.legacy_stage as legacy_stage_meetings
+import cmets_extractor.domain.meetings.legacy_transition as legacy_transition_meetings
+
 from cmets_extractor.adapters.csv import save_to_csv
 from cmets_extractor.adapters.element_status_workbook import (
     populate_element_status_sheet_from_cmets as _populate_element_status_sheet_from_cmets_impl,
@@ -202,10 +207,43 @@ def run_pipeline(
     context = run_context if run_context is not None else build_run_context()
     context.reset()
 
+    ordered_meeting_labels = [
+        "43rd",
+        "42nd",
+        "41st",
+        "40th",
+        "39th",
+        "38th",
+        "37th",
+        "36th",
+        "35th",
+        "34th",
+        "33rd",
+        "32nd",
+        "31st",
+        "30th",
+        "29th",
+        "28th",
+        "27th",
+        "26th",
+        "25th",
+        "24th",
+        "23rd",
+        "22nd",
+        "21st",
+        "20th",
+        "19th",
+        "18th",
+        "17th",
+        "16th",
+        "15th",
+        "14th",
+    ]
+
     print("=" * 60)
     print(
-        "43rd/42nd/41st/40th/39th/38th/37th/36th/35th/34th "
-        "CMETS + Bulk Consumers + Margin + Element Status - Data Extraction"
+        f"{'/'.join(ordered_meeting_labels)} CMETS + Bulk Consumers + Margin + "
+        "Element Status - Data Extraction"
     )
     print("=" * 60)
 
@@ -331,121 +369,102 @@ def run_pipeline(
         context,
     )
 
-    all_records = (
-        records_by_meeting["43rd"]
-        + records_by_meeting["42nd"]
-        + records_by_meeting["41st"]
-        + records_by_meeting["40th"]
-        + records_by_meeting["39th"]
-        + records_by_meeting["38th"]
-        + records_by_meeting["37th"]
-        + records_by_meeting["36th"]
-        + records_by_meeting["35th"]
-        + records_by_meeting["34th"]
-    )
+    older_meeting_extractors = [
+        ("33rd", hybrid_meetings.extract_33rd_all_data, config.PDF_PATH_33RD),
+        ("32nd", hybrid_meetings.extract_32nd_all_data, config.PDF_PATH_32ND),
+        ("31st", hybrid_meetings.extract_31st_all_data, config.PDF_PATH_31ST),
+        ("30th", hybrid_meetings.extract_30th_all_data, config.PDF_PATH_30TH),
+        ("29th", hybrid_meetings.extract_29th_all_data, config.PDF_PATH_29TH),
+        ("28th", hybrid_meetings.extract_28th_all_data, config.PDF_PATH_28TH),
+        ("27th", hybrid_meetings.extract_27th_all_data, config.PDF_PATH_27TH),
+        ("26th", hybrid_meetings.extract_26th_all_data, config.PDF_PATH_26TH),
+        ("25th", hybrid_meetings.extract_25th_all_data, config.PDF_PATH_25TH),
+        ("24th", legacy_transition_meetings.extract_24th_all_data, config.PDF_PATH_24TH),
+        ("23rd", legacy_transition_meetings.extract_23rd_all_data, config.PDF_PATH_23RD),
+        ("22nd", legacy_transition_meetings.extract_22nd_all_data, config.PDF_PATH_22ND),
+        ("21st", hybrid_meetings.extract_21st_all_data, config.PDF_PATH_21ST),
+        ("20th", hybrid_meetings.extract_20th_all_data, config.PDF_PATH_20TH),
+        ("19th", hybrid_meetings.extract_19th_all_data, config.PDF_PATH_19TH),
+        ("18th", legacy_stage_meetings.extract_18th_all_data, config.PDF_PATH_18TH),
+        ("17th", legacy_stage_meetings.extract_17th_all_data, config.PDF_PATH_17TH),
+        ("16th", legacy_stage_meetings.extract_16th_all_data, config.PDF_PATH_16TH),
+        ("15th", legacy_stage_meetings.extract_15th_all_data, config.PDF_PATH_15TH),
+        ("14th", legacy_stage_meetings.extract_14th_all_data, config.PDF_PATH_14TH),
+    ]
+    for label, extractor, pdf_path in older_meeting_extractors:
+        records_by_meeting[label] = extractor()
+        records_by_meeting[label] = apply_re_effectiveness_rules_hybrid(
+            records_by_meeting[label],
+            label=label,
+            lookup=re_lookup,
+        )
+        records_by_meeting[label] = apply_cmets_element_codes_for_meeting(
+            records_by_meeting[label],
+            pdf_path,
+            label,
+            context,
+        )
+
+    all_records = []
+    for label in ordered_meeting_labels:
+        all_records.extend(records_by_meeting.get(label, []))
     all_records = fill_empty_granted_quantum(all_records)
     all_records = apply_known_output_normalizations(all_records)
 
-    bulk_records_by_meeting = {
-        "43rd": extract_bulk_consumers_from_pdf(
-            PDF_PATH_43RD,
-            CMETS_43RD_MEETING_NUMBER,
-            CMETS_43RD_MEETING_DATE,
-            "43rd",
-        ),
-        "42nd": extract_bulk_consumers_from_pdf(
-            PDF_PATH,
-            CMETS_MEETING_NUMBER,
-            CMETS_MEETING_DATE,
-            "42nd",
-        ),
-        "41st": extract_bulk_consumers_from_pdf(
-            PDF_PATH_41ST,
-            CMETS_41ST_MEETING_NUMBER,
-            CMETS_41ST_MEETING_DATE,
-            "41st",
-        ),
-        "40th": extract_bulk_consumers_from_pdf(
-            PDF_PATH_40TH,
-            CMETS_40TH_MEETING_NUMBER,
-            CMETS_40TH_MEETING_DATE,
-            "40th",
-        ),
-        "39th": extract_bulk_consumers_from_pdf(
-            PDF_PATH_39TH,
-            CMETS_39TH_MEETING_NUMBER,
-            CMETS_39TH_MEETING_DATE,
-            "39th",
-        ),
-        "38th": extract_bulk_consumers_from_pdf(
-            PDF_PATH_38TH,
-            CMETS_38TH_MEETING_NUMBER,
-            CMETS_38TH_MEETING_DATE,
-            "38th",
-        ),
-        "37th": extract_bulk_consumers_from_pdf(
-            PDF_PATH_37TH,
-            CMETS_37TH_MEETING_NUMBER,
-            CMETS_37TH_MEETING_DATE,
-            "37th",
-        ),
-        "36th": extract_bulk_consumers_from_pdf(
-            PDF_PATH_36TH,
-            CMETS_36TH_MEETING_NUMBER,
-            CMETS_36TH_MEETING_DATE,
-            "36th",
-        ),
-        "35th": extract_bulk_consumers_from_pdf(
-            PDF_PATH_35TH,
-            CMETS_35TH_MEETING_NUMBER,
-            CMETS_35TH_MEETING_DATE,
-            "35th",
-        ),
-        "34th": extract_bulk_consumers_from_pdf(
-            PDF_PATH_34TH,
-            CMETS_34TH_MEETING_NUMBER,
-            CMETS_34TH_MEETING_DATE,
-            "34th",
-        ),
-    }
-    bulk_records = (
-        bulk_records_by_meeting["43rd"]
-        + bulk_records_by_meeting["42nd"]
-        + bulk_records_by_meeting["41st"]
-        + bulk_records_by_meeting["40th"]
-        + bulk_records_by_meeting["39th"]
-        + bulk_records_by_meeting["38th"]
-        + bulk_records_by_meeting["37th"]
-        + bulk_records_by_meeting["36th"]
-        + bulk_records_by_meeting["35th"]
-        + bulk_records_by_meeting["34th"]
-    )
+    bulk_meeting_specs = [
+        ("43rd", PDF_PATH_43RD, CMETS_43RD_MEETING_NUMBER, CMETS_43RD_MEETING_DATE),
+        ("42nd", PDF_PATH, CMETS_MEETING_NUMBER, CMETS_MEETING_DATE),
+        ("41st", PDF_PATH_41ST, CMETS_41ST_MEETING_NUMBER, CMETS_41ST_MEETING_DATE),
+        ("40th", PDF_PATH_40TH, CMETS_40TH_MEETING_NUMBER, CMETS_40TH_MEETING_DATE),
+        ("39th", PDF_PATH_39TH, CMETS_39TH_MEETING_NUMBER, CMETS_39TH_MEETING_DATE),
+        ("38th", PDF_PATH_38TH, CMETS_38TH_MEETING_NUMBER, CMETS_38TH_MEETING_DATE),
+        ("37th", PDF_PATH_37TH, CMETS_37TH_MEETING_NUMBER, CMETS_37TH_MEETING_DATE),
+        ("36th", PDF_PATH_36TH, CMETS_36TH_MEETING_NUMBER, CMETS_36TH_MEETING_DATE),
+        ("35th", PDF_PATH_35TH, CMETS_35TH_MEETING_NUMBER, CMETS_35TH_MEETING_DATE),
+        ("34th", PDF_PATH_34TH, CMETS_34TH_MEETING_NUMBER, CMETS_34TH_MEETING_DATE),
+        ("33rd", config.PDF_PATH_33RD, config.CMETS_33RD_MEETING_NUMBER, config.CMETS_33RD_MEETING_DATE),
+        ("32nd", config.PDF_PATH_32ND, config.CMETS_32ND_MEETING_NUMBER, config.CMETS_32ND_MEETING_DATE),
+        ("31st", config.PDF_PATH_31ST, config.CMETS_31ST_MEETING_NUMBER, config.CMETS_31ST_MEETING_DATE),
+        ("30th", config.PDF_PATH_30TH, config.CMETS_30TH_MEETING_NUMBER, config.CMETS_30TH_MEETING_DATE),
+        ("29th", config.PDF_PATH_29TH, config.CMETS_29TH_MEETING_NUMBER, config.CMETS_29TH_MEETING_DATE),
+        ("28th", config.PDF_PATH_28TH, config.CMETS_28TH_MEETING_NUMBER, config.CMETS_28TH_MEETING_DATE),
+        ("27th", config.PDF_PATH_27TH, config.CMETS_27TH_MEETING_NUMBER, config.CMETS_27TH_MEETING_DATE),
+        ("26th", config.PDF_PATH_26TH, config.CMETS_26TH_MEETING_NUMBER, config.CMETS_26TH_MEETING_DATE),
+        ("25th", config.PDF_PATH_25TH, config.CMETS_25TH_MEETING_NUMBER, config.CMETS_25TH_MEETING_DATE),
+        ("24th", config.PDF_PATH_24TH, config.CMETS_24TH_MEETING_NUMBER, config.CMETS_24TH_MEETING_DATE),
+        ("23rd", config.PDF_PATH_23RD, config.CMETS_23RD_MEETING_NUMBER, config.CMETS_23RD_MEETING_DATE),
+        ("22nd", config.PDF_PATH_22ND, config.CMETS_22ND_MEETING_NUMBER, config.CMETS_22ND_MEETING_DATE),
+        ("21st", config.PDF_PATH_21ST, config.CMETS_21ST_MEETING_NUMBER, config.CMETS_21ST_MEETING_DATE),
+        ("20th", config.PDF_PATH_20TH, config.CMETS_20TH_MEETING_NUMBER, config.CMETS_20TH_MEETING_DATE),
+        ("19th", config.PDF_PATH_19TH, config.CMETS_19TH_MEETING_NUMBER, config.CMETS_19TH_MEETING_DATE),
+        ("18th", config.PDF_PATH_18TH, config.CMETS_18TH_MEETING_NUMBER, config.CMETS_18TH_MEETING_DATE),
+        ("17th", config.PDF_PATH_17TH, config.CMETS_17TH_MEETING_NUMBER, config.CMETS_17TH_MEETING_DATE),
+        ("16th", config.PDF_PATH_16TH, config.CMETS_16TH_MEETING_NUMBER, config.CMETS_16TH_MEETING_DATE),
+        ("15th", config.PDF_PATH_15TH, config.CMETS_15TH_MEETING_NUMBER, config.CMETS_15TH_MEETING_DATE),
+        ("14th", config.PDF_PATH_14TH, config.CMETS_14TH_MEETING_NUMBER, config.CMETS_14TH_MEETING_DATE),
+    ]
+    bulk_records_by_meeting = {}
+    for label, pdf_path, meeting_number, meeting_date in bulk_meeting_specs:
+        bulk_records_by_meeting[label] = extract_bulk_consumers_from_pdf(
+            pdf_path,
+            meeting_number,
+            meeting_date,
+            label,
+        )
+
+    bulk_records = []
+    for label in ordered_meeting_labels:
+        bulk_records.extend(bulk_records_by_meeting.get(label, []))
 
     margin_records = extract_margin_data()
 
     print(f"\n{'=' * 60}")
     print(f"COMBINED TOTAL: {len(all_records)} records")
-    print(f"  43rd CMETS: {len(records_by_meeting['43rd'])} records")
-    print(f"  42nd CMETS: {len(records_by_meeting['42nd'])} records")
-    print(f"  41st CMETS: {len(records_by_meeting['41st'])} records")
-    print(f"  40th CMETS: {len(records_by_meeting['40th'])} records")
-    print(f"  39th CMETS: {len(records_by_meeting['39th'])} records")
-    print(f"  38th CMETS: {len(records_by_meeting['38th'])} records")
-    print(f"  37th CMETS: {len(records_by_meeting['37th'])} records")
-    print(f"  36th CMETS: {len(records_by_meeting['36th'])} records")
-    print(f"  35th CMETS: {len(records_by_meeting['35th'])} records")
-    print(f"  34th CMETS: {len(records_by_meeting['34th'])} records")
+    for label in ordered_meeting_labels:
+        print(f"  {label} CMETS: {len(records_by_meeting.get(label, []))} records")
     print(f"  Bulk Consumers: {len(bulk_records)} records")
-    print(f"    43rd CMETS: {len(bulk_records_by_meeting['43rd'])} records")
-    print(f"    42nd CMETS: {len(bulk_records_by_meeting['42nd'])} records")
-    print(f"    41st CMETS: {len(bulk_records_by_meeting['41st'])} records")
-    print(f"    40th CMETS: {len(bulk_records_by_meeting['40th'])} records")
-    print(f"    39th CMETS: {len(bulk_records_by_meeting['39th'])} records")
-    print(f"    38th CMETS: {len(bulk_records_by_meeting['38th'])} records")
-    print(f"    37th CMETS: {len(bulk_records_by_meeting['37th'])} records")
-    print(f"    36th CMETS: {len(bulk_records_by_meeting['36th'])} records")
-    print(f"    35th CMETS: {len(bulk_records_by_meeting['35th'])} records")
-    print(f"    34th CMETS: {len(bulk_records_by_meeting['34th'])} records")
+    for label in ordered_meeting_labels:
+        print(f"    {label} CMETS: {len(bulk_records_by_meeting.get(label, []))} records")
     print(f"  Margin sheet: {len(margin_records)} records")
     print(f"{'=' * 60}")
 

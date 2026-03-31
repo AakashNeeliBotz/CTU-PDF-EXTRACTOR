@@ -74,6 +74,7 @@ extract_42nd_cmets.py           ← thin CLI shim (entrypoint)
 | `Element Status PDFs/` | TBCB, RTM, and 35th NCT source PDFs |
 | `Connectivity Application Data.xlsx` | Template workbook (provides sheet structure) |
 | `tests/` | Smoke, regression, rule characterization, and architecture tests |
+| `business_logic.md` | Consolidated business rules, formulas, edge cases, and output invariants |
 | `kt_document.md` | Knowledge Transfer document for handoff |
 | `documentation.md` | Detailed architecture and code map |
 | `update.md` | Continuity notes and session handoff |
@@ -202,10 +203,11 @@ python3 tests/run_test_suite.py
 |---|---|
 | `update.md` | **First** — current baseline and latest changes |
 | `refactor.md` | Architecture redesign history and risk notes |
+| `business_logic.md` | Current formulas, business rules, edge cases, and row-level overrides |
 | `documentation.md` | Detailed code map and module guide |
 | `kt_document.md` | Full knowledge transfer for new team members |
 | `AGENTS.md` | Rules for AI assistants working on this repo |
 
 **New session reading order**: `update.md` → `refactor.md` → `README.md` → `extract_42nd_cmets.py`
 
-Last updated: `2026-03-26`
+Last updated: `2026-03-27`

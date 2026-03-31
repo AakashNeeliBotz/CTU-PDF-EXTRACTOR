@@ -26,6 +26,9 @@ def read_camelot_lattice_tables_chunked(pdf_path, chunk_size=20, start_page=1, e
     Falls back to smaller page ranges when Camelot fails on a chunk.
     """
     page_count = get_pdf_page_count(pdf_path)
+    if page_count > 100 and chunk_size > 5:
+        # Very large scans have been unstable with wide pdfium lattice ranges on Windows.
+        chunk_size = 5
     start_page = max(1, int(start_page))
     end_page = page_count if end_page is None else min(page_count, int(end_page))
     if start_page > end_page:

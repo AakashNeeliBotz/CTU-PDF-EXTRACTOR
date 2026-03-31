@@ -6,6 +6,8 @@ from datetime import datetime
 
 from cmets_extractor.adapters.pdf import read_camelot_lattice_tables_chunked
 from cmets_extractor.config import (
+    CMETS_19TH_MEETING_DATE,
+    CMETS_19TH_MEETING_NUMBER,
     CMETS_35TH_MEETING_DATE,
     CMETS_35TH_MEETING_NUMBER,
     CMETS_36TH_MEETING_DATE,
@@ -20,8 +22,42 @@ from cmets_extractor.config import (
     CMETS_40TH_MEETING_NUMBER,
     CMETS_41ST_MEETING_DATE,
     CMETS_41ST_MEETING_NUMBER,
+    CMETS_20TH_MEETING_DATE,
+    CMETS_20TH_MEETING_NUMBER,
+    CMETS_21ST_MEETING_DATE,
+    CMETS_21ST_MEETING_NUMBER,
+    CMETS_25TH_MEETING_DATE,
+    CMETS_25TH_MEETING_NUMBER,
+    CMETS_26TH_MEETING_DATE,
+    CMETS_26TH_MEETING_NUMBER,
+    CMETS_27TH_MEETING_DATE,
+    CMETS_27TH_MEETING_NUMBER,
+    CMETS_28TH_MEETING_DATE,
+    CMETS_28TH_MEETING_NUMBER,
+    CMETS_29TH_MEETING_DATE,
+    CMETS_29TH_MEETING_NUMBER,
+    CMETS_30TH_MEETING_DATE,
+    CMETS_30TH_MEETING_NUMBER,
+    CMETS_31ST_MEETING_DATE,
+    CMETS_31ST_MEETING_NUMBER,
+    CMETS_32ND_MEETING_DATE,
+    CMETS_32ND_MEETING_NUMBER,
+    CMETS_33RD_MEETING_DATE,
+    CMETS_33RD_MEETING_NUMBER,
     CMETS_43RD_MEETING_DATE,
     CMETS_43RD_MEETING_NUMBER,
+    PDF_PATH_19TH,
+    PDF_PATH_20TH,
+    PDF_PATH_21ST,
+    PDF_PATH_25TH,
+    PDF_PATH_26TH,
+    PDF_PATH_27TH,
+    PDF_PATH_28TH,
+    PDF_PATH_29TH,
+    PDF_PATH_30TH,
+    PDF_PATH_31ST,
+    PDF_PATH_32ND,
+    PDF_PATH_33RD,
     PDF_PATH_35TH,
     PDF_PATH_36TH,
     PDF_PATH_37TH,
@@ -218,7 +254,58 @@ def _detect_hybrid_connectivity_layout(table_df):
             "preserve_original_on_reduced": True,
         }
 
+    if (
+        "date of application" in header
+        and "connectivity sought" in header
+        and "generation schedule" in header
+        and "criterion" in header
+    ):
+        return {
+            "app_idx": 1,
+            "applicant_idx": 2,
+            "project_idx": 3,
+            "submission_date_idx": 4,
+            "nature_idx": 6,
+            "capacity_idx": None,
+            "mode_idx": 8,
+            "quantum_idx": None,
+            "start_idx": None,
+            "location_idx": 9,
+            "preserve_original_on_reduced": False,
+            "combined_quantum_date_idx": 5,
+            "generation_schedule_idx": 7,
+        }
+
     return None
+
+
+def _parse_legacy_connectivity_sought(value):
+    """Parse older 'Connectivity Sought (MW)/date' cells used in 19th-21st meetings."""
+    text = clean_text(value)
+    if not text:
+        return None, None
+
+    quantum = None
+    date_text = None
+
+    match = re.search(
+        r"(\d+(?:\.\d+)?)\s*/\s*([0-3]?\d[\./-][01]?\d[\./-]\d{2,4})",
+        text,
+    )
+    if match:
+        quantum = parse_numeric_value(match.group(1))
+        date_text = normalize_output_date_text(match.group(2))
+        return quantum, date_text
+
+    numbers = re.findall(r"\d+(?:\.\d+)?", text)
+    if numbers:
+        quantum = parse_numeric_value(numbers[0])
+
+    dates = re.findall(r"[0-3]?\d[\./-][01]?\d[\./-]\d{2,4}", text)
+    if dates:
+        date_text = normalize_output_date_text(dates[-1])
+
+    return quantum, date_text
 
 
 def _row_has_embedded_serial_and_app(app_cell):
@@ -625,7 +712,11 @@ def extract_hybrid_connectivity_records(pdf_path, meeting_number, meeting_date, 
                 "application_date": app_date,
                 "name_of_developers": clean_text(row.iloc[layout["applicant_idx"]]),
                 "mode_criteria": clean_text(row.iloc[layout["mode_idx"]]),
-                "applied_start_date": clean_text(row.iloc[layout["start_idx"]]),
+                "applied_start_date": (
+                    clean_text(row.iloc[layout["start_idx"]])
+                    if layout.get("start_idx") is not None
+                    else None
+                ),
             }
 
             if is_lta_application_id(app_id):
@@ -657,11 +748,23 @@ def extract_hybrid_connectivity_records(pdf_path, meeting_number, meeting_date, 
             record["nature_of_applicant"] = nature
             is_psp_row = is_pumped_storage_nature(nature_raw)
 
-            quantum_raw = clean_text(row.iloc[layout["quantum_idx"]])
-            app_quantum, granted_quantum = parse_34th_quantum(
-                quantum_raw,
-                preserve_original_on_reduced=bool(layout.get("preserve_original_on_reduced")),
+            quantum_raw = (
+                clean_text(row.iloc[layout["quantum_idx"]])
+                if layout.get("quantum_idx") is not None
+                else None
             )
+            if layout.get("combined_quantum_date_idx") is not None:
+                combined_raw = clean_text(row.iloc[layout["combined_quantum_date_idx"]])
+                combined_quantum, combined_start_date = _parse_legacy_connectivity_sought(combined_raw)
+                app_quantum = combined_quantum
+                granted_quantum = None
+                if combined_start_date:
+                    record["applied_start_date"] = combined_start_date
+            else:
+                app_quantum, granted_quantum = parse_34th_quantum(
+                    quantum_raw,
+                    preserve_original_on_reduced=bool(layout.get("preserve_original_on_reduced")),
+                )
             raw_app_quantum = parse_numeric_value(app_quantum)
             psp_injection, psp_drawl = parse_pumped_storage_quantum_details(quantum_raw, nature_raw)
             if psp_injection is not None:
@@ -692,6 +795,11 @@ def extract_hybrid_connectivity_records(pdf_path, meeting_number, meeting_date, 
                 if layout.get("capacity_idx") is not None
                 else None
             )
+            generation_schedule_text = (
+                clean_text(row.iloc[layout["generation_schedule_idx"]])
+                if layout.get("generation_schedule_idx") is not None
+                else None
+            )
             cap_info = parse_type_capacity(table_capacity_text)
             nature_cap_info = parse_type_capacity(nature_raw)
             text_cap_info = parse_type_capacity(delib_text) if delib_text and layout.get("capacity_idx") is not None else None
@@ -708,6 +816,9 @@ def extract_hybrid_connectivity_records(pdf_path, meeting_number, meeting_date, 
                 record["_capacity_headline_total"] = cap_info.get("headline_total")
             if is_psp_row:
                 record["type"] = "PSP"
+
+            if not record.get("applied_start_date") and generation_schedule_text:
+                record["applied_start_date"] = get_latest_date(generation_schedule_text)
 
             precise_capacity_total = capacity_total_from_parsed(cap_info)
             current_app_quantum = parse_numeric_value(record.get("application_quantum_mw"))
@@ -1045,7 +1156,7 @@ def extract_hybrid_connectivity_records(pdf_path, meeting_number, meeting_date, 
     return records
 
 
-def extract_hybrid_meeting_data(pdf_path, meeting_number, meeting_date, label):
+def extract_hybrid_meeting_data(pdf_path, meeting_number, meeting_date, label, include_reg52=True):
     """Run connectivity-style and Reg. 5.2 extraction for one hybrid meeting."""
     print("\n" + "=" * 60)
     print(f"{label} CMETS NR Meeting - Hybrid Data Extraction")
@@ -1068,13 +1179,15 @@ def extract_hybrid_meeting_data(pdf_path, meeting_number, meeting_date, label):
         deliberation_dict,
         full_text,
     )
-    reg52_records = extract_hybrid_reg52_records(
-        pdf_path,
-        meeting_number,
-        meeting_date,
-        deliberation_dict,
-        full_text,
-    )
+    reg52_records = []
+    if include_reg52:
+        reg52_records = extract_hybrid_reg52_records(
+            pdf_path,
+            meeting_number,
+            meeting_date,
+            deliberation_dict,
+            full_text,
+        )
     all_records = connectivity_records + reg52_records
     print(f"\n{'=' * 60}")
     print(f"{label} CMETS TOTAL RECORDS: {len(all_records)}")
@@ -1156,6 +1269,126 @@ def extract_36th_all_data():
     )
 
 
+def extract_33rd_all_data():
+    return extract_hybrid_meeting_data(
+        PDF_PATH_33RD,
+        CMETS_33RD_MEETING_NUMBER,
+        CMETS_33RD_MEETING_DATE,
+        "33rd",
+        include_reg52=False,
+    )
+
+
+def extract_32nd_all_data():
+    return extract_hybrid_meeting_data(
+        PDF_PATH_32ND,
+        CMETS_32ND_MEETING_NUMBER,
+        CMETS_32ND_MEETING_DATE,
+        "32nd",
+        include_reg52=False,
+    )
+
+
+def extract_31st_all_data():
+    return extract_hybrid_meeting_data(
+        PDF_PATH_31ST,
+        CMETS_31ST_MEETING_NUMBER,
+        CMETS_31ST_MEETING_DATE,
+        "31st",
+        include_reg52=False,
+    )
+
+
+def extract_30th_all_data():
+    return extract_hybrid_meeting_data(
+        PDF_PATH_30TH,
+        CMETS_30TH_MEETING_NUMBER,
+        CMETS_30TH_MEETING_DATE,
+        "30th",
+        include_reg52=False,
+    )
+
+
+def extract_29th_all_data():
+    return extract_hybrid_meeting_data(
+        PDF_PATH_29TH,
+        CMETS_29TH_MEETING_NUMBER,
+        CMETS_29TH_MEETING_DATE,
+        "29th",
+        include_reg52=False,
+    )
+
+
+def extract_28th_all_data():
+    return extract_hybrid_meeting_data(
+        PDF_PATH_28TH,
+        CMETS_28TH_MEETING_NUMBER,
+        CMETS_28TH_MEETING_DATE,
+        "28th",
+        include_reg52=False,
+    )
+
+
+def extract_27th_all_data():
+    return extract_hybrid_meeting_data(
+        PDF_PATH_27TH,
+        CMETS_27TH_MEETING_NUMBER,
+        CMETS_27TH_MEETING_DATE,
+        "27th",
+        include_reg52=False,
+    )
+
+
+def extract_26th_all_data():
+    return extract_hybrid_meeting_data(
+        PDF_PATH_26TH,
+        CMETS_26TH_MEETING_NUMBER,
+        CMETS_26TH_MEETING_DATE,
+        "26th",
+        include_reg52=False,
+    )
+
+
+def extract_25th_all_data():
+    return extract_hybrid_meeting_data(
+        PDF_PATH_25TH,
+        CMETS_25TH_MEETING_NUMBER,
+        CMETS_25TH_MEETING_DATE,
+        "25th",
+        include_reg52=False,
+    )
+
+
+def extract_21st_all_data():
+    return extract_hybrid_meeting_data(
+        PDF_PATH_21ST,
+        CMETS_21ST_MEETING_NUMBER,
+        CMETS_21ST_MEETING_DATE,
+        "21st",
+        include_reg52=False,
+    )
+
+
+def extract_20th_all_data():
+    return extract_hybrid_meeting_data(
+        PDF_PATH_20TH,
+        CMETS_20TH_MEETING_NUMBER,
+        CMETS_20TH_MEETING_DATE,
+        "20th",
+        include_reg52=False,
+    )
+
+
+def extract_19th_all_data():
+    return extract_hybrid_meeting_data(
+        PDF_PATH_19TH,
+        CMETS_19TH_MEETING_NUMBER,
+        CMETS_19TH_MEETING_DATE,
+        "19th",
+        include_reg52=False,
+    )
+
+
 __all__ = [
     "_detect_hybrid_connectivity_layout",
     "_detect_hybrid_reg52_layout",
@@ -1167,6 +1400,18 @@ __all__ = [
     "extract_40th_all_data",
     "extract_41st_all_data",
     "extract_43rd_all_data",
+    "extract_33rd_all_data",
+    "extract_32nd_all_data",
+    "extract_31st_all_data",
+    "extract_30th_all_data",
+    "extract_29th_all_data",
+    "extract_28th_all_data",
+    "extract_27th_all_data",
+    "extract_26th_all_data",
+    "extract_25th_all_data",
+    "extract_21st_all_data",
+    "extract_20th_all_data",
+    "extract_19th_all_data",
     "extract_hybrid_connectivity_records",
     "extract_hybrid_meeting_data",
     "extract_hybrid_reg52_records",

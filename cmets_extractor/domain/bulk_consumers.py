@@ -104,85 +104,106 @@ def _find_bulk_consumer_header_index(headers, keyword_groups):
 
 
 def _detect_bulk_consumers_layout(table_df):
-    """Identify GNARE tables that should populate the Bulk Consumers sheet."""
+    """Identify Bulk Consumers source layouts supported by the workbook."""
     if table_df is None or len(table_df) == 0 or table_df.shape[1] < 7:
         return None
 
     headers = _build_combined_table_headers(table_df, max_rows=3)
     header_text = " ".join(headers)
-    if not (
+    is_gnare_layout = (
         ("gnare" in header_text or "gna" in header_text)
         and "applicant" in header_text
         and "total" in header_text
-    ):
-        return None
+    )
+    if is_gnare_layout:
+        layout = {
+            "app_idx": _find_bulk_consumer_header_index(
+                headers,
+                [
+                    ("application", "date"),
+                    ("application", "id"),
+                ],
+            ),
+            "applicant_idx": _find_bulk_consumer_header_index(
+                headers,
+                [
+                    ("name", "applicant"),
+                    ("name", "developer"),
+                ],
+            ),
+            "within_idx": _find_bulk_consumer_header_index(
+                headers,
+                [
+                    ("gnare", "within", "region"),
+                    ("gna", "within", "region"),
+                ],
+            ),
+            "outside_idx": _find_bulk_consumer_header_index(
+                headers,
+                [
+                    ("gnare", "outside", "region"),
+                    ("gna", "outside", "region"),
+                ],
+            ),
+            "total_idx": _find_bulk_consumer_header_index(
+                headers,
+                [
+                    ("total", "gnare", "required"),
+                    ("total", "gna", "required"),
+                    ("total", "quantum", "gnare"),
+                    ("total", "quantum", "gna"),
+                    ("total", "gnare", "applied"),
+                    ("total", "gna", "applied"),
+                ],
+            ),
+            "nature_idx": _find_bulk_consumer_header_index(
+                headers,
+                [
+                    ("nature", "applicant"),
+                ],
+            ),
+            "start_idx": _find_bulk_consumer_header_index(
+                headers,
+                [
+                    ("start", "date", "gnare"),
+                    ("start", "date", "gna"),
+                ],
+            ),
+            "end_idx": _find_bulk_consumer_header_index(
+                headers,
+                [
+                    ("end", "date", "gnare"),
+                    ("end", "date", "gna"),
+                ],
+            ),
+        }
 
-    layout = {
-        "app_idx": _find_bulk_consumer_header_index(
-            headers,
-            [
-                ("application", "date"),
-                ("application", "id"),
-            ],
-        ),
+        required_fields = ("app_idx", "applicant_idx", "within_idx", "outside_idx", "total_idx")
+        if not any(layout.get(field) is None for field in required_fields):
+            layout["kind"] = "gnare"
+            return layout
+
+    legacy_layout = {
+        "kind": "legacy_simple",
+        "app_idx": _find_bulk_consumer_header_index(headers, [("application", "id")]),
         "applicant_idx": _find_bulk_consumer_header_index(
             headers,
             [
                 ("name", "applicant"),
-                ("name", "developer"),
+                ("name", "of", "applicant"),
             ],
         ),
-        "within_idx": _find_bulk_consumer_header_index(
-            headers,
-            [
-                ("gnare", "within", "region"),
-                ("gna", "within", "region"),
-            ],
-        ),
-        "outside_idx": _find_bulk_consumer_header_index(
-            headers,
-            [
-                ("gnare", "outside", "region"),
-                ("gna", "outside", "region"),
-            ],
-        ),
-        "total_idx": _find_bulk_consumer_header_index(
-            headers,
-            [
-                ("total", "gnare", "required"),
-                ("total", "gna", "required"),
-                ("total", "quantum", "gnare"),
-                ("total", "quantum", "gna"),
-                ("total", "gnare", "applied"),
-                ("total", "gna", "applied"),
-            ],
-        ),
-        "nature_idx": _find_bulk_consumer_header_index(
-            headers,
-            [
-                ("nature", "applicant"),
-            ],
-        ),
-        "start_idx": _find_bulk_consumer_header_index(
-            headers,
-            [
-                ("start", "date", "gnare"),
-                ("start", "date", "gna"),
-            ],
-        ),
-        "end_idx": _find_bulk_consumer_header_index(
-            headers,
-            [
-                ("end", "date", "gnare"),
-                ("end", "date", "gna"),
-            ],
-        ),
+        "type_idx": _find_bulk_consumer_header_index(headers, [("application", "type")]),
+        "submission_idx": _find_bulk_consumer_header_index(headers, [("submission", "date")]),
+        "region_idx": _find_bulk_consumer_header_index(headers, [("region",)]),
+        "project_idx": _find_bulk_consumer_header_index(headers, [("project", "location")]),
+        "start_idx": _find_bulk_consumer_header_index(headers, [("start", "date", "connectivity")]),
+        "total_idx": _find_bulk_consumer_header_index(headers, [("quantum", "mw")]),
     }
-
-    required_fields = ("app_idx", "applicant_idx", "within_idx", "outside_idx", "total_idx")
-    if any(layout.get(field) is None for field in required_fields):
+    legacy_required = ("app_idx", "applicant_idx", "submission_idx", "project_idx", "start_idx", "total_idx")
+    if any(legacy_layout.get(field) is None for field in legacy_required):
         return None
-    return layout
+    return legacy_layout
 
 
 def _extract_bulk_consumer_context(app_id, deliberation_dict, full_text):
@@ -411,6 +432,69 @@ def _extract_bulk_consumer_status(app_id, deliberation_dict, full_text):
     return extract_status_from_deliberation(app_id, {app_id: context})
 
 
+def _extract_legacy_bulk_consumer_context(applicant_name, full_text):
+    """Find one applicant-local text window for old simple Bulk Consumer rows."""
+    if not applicant_name or not full_text:
+        return ""
+
+    candidates = [clean_text(applicant_name) or ""]
+    significant_tokens = [
+        token
+        for token in re.findall(r"[A-Za-z]+", applicant_name)
+        if len(token) >= 4 and token.lower() not in {"private", "limited", "solar", "energy"}
+    ]
+    if significant_tokens:
+        candidates.append(" ".join(significant_tokens[:2]))
+        candidates.extend(significant_tokens[:3])
+
+    lower_full_text = full_text.lower()
+    for candidate in candidates:
+        anchor = clean_text(candidate)
+        if not anchor:
+            continue
+        pos = lower_full_text.find(anchor.lower())
+        if pos < 0:
+            continue
+        start = max(0, pos - 800)
+        end = min(len(full_text), pos + 5000)
+        return full_text[start:end]
+    return ""
+
+
+def _extract_legacy_bulk_consumer_voltage_substation(context, clean_substation_value):
+    """Parse older Bulk Consumer discussion text for voltage/substation clues."""
+    if not context:
+        return None, None
+
+    patterns = [
+        r"bulk\s+consumer\s+at\s+(\d+(?:/\d+)?)\s*kV\s+([A-Za-z0-9()\- ]+?)(?:\s+(?:substation|s/s|ps)\b)",
+        r"grant\s+connectivity[^.]{0,220}?at\s+(\d+(?:/\d+)?)\s*kV\s+([A-Za-z0-9()\- ]+?)(?:\s+(?:substation|s/s|ps)\b)",
+        r"drawl\s+of\s+\d+(?:\.\d+)?\s*MW[^.]{0,220}?at\s+([A-Za-z0-9()\- ]+?)(?:\s+(?:substation|s/s)\b)",
+        r"[-–]\s*([A-Za-z0-9()\- ]+\(PG\))\s+(\d+)\s*kV",
+    ]
+
+    for pattern in patterns:
+        match = re.search(pattern, context, re.IGNORECASE)
+        if not match:
+            continue
+        if match.lastindex == 2 and match.group(1) and re.search(r"\d", match.group(1)):
+            voltage = parse_numeric_value(match.group(1).split("/")[-1])
+            substation = clean_substation_value(match.group(2))
+            return voltage, substation
+        if match.lastindex == 2 and match.group(2) and re.search(r"\d", match.group(2)):
+            voltage = parse_numeric_value(match.group(2))
+            substation = clean_substation_value(match.group(1))
+            return voltage, substation
+        substation = clean_substation_value(match.group(1))
+        return None, substation
+
+    for station in ("Kankroli (PG)", "Jind (PG)"):
+        if station.lower() in context.lower():
+            return None, clean_substation_value(station)
+
+    return None, None
+
+
 def extract_bulk_consumers_from_pdf(
     pdf_path,
     meeting_number,
@@ -481,84 +565,131 @@ def extract_bulk_consumers_from_pdf(
             continue
 
         matched_tables += 1
+        layout_label = "GNARE" if layout.get("kind") == "gnare" else "legacy"
         print(
-            f"  Bulk Consumers GNARE table detected on page "
+            f"  Bulk Consumers {layout_label} table detected on page "
             f"{getattr(table, 'page', '?')} with shape {table_df.shape}"
         )
 
         data_start_row = 1
-        for row_idx in range(min(6, len(table_df))):
-            row_text = " ".join(clean_text(x) or "" for x in table_df.iloc[row_idx].tolist())
-            if re.search(r"\b22\d{8}\b", row_text):
-                data_start_row = row_idx
-                break
+        if layout.get("kind") == "gnare":
+            for row_idx in range(min(6, len(table_df))):
+                row_text = " ".join(clean_text(x) or "" for x in table_df.iloc[row_idx].tolist())
+                if re.search(r"\b22\d{8}\b", row_text):
+                    data_start_row = row_idx
+                    break
 
         for row_idx in range(data_start_row, len(table_df)):
             row = table_df.iloc[row_idx]
             row_text = " ".join(clean_text(x) or "" for x in row.tolist())
-            if not row_text or not re.search(r"\b22\d{8}\b", row_text):
-                continue
-
             app_cell = row.iloc[layout["app_idx"]]
             app_id, _ = parse_application_no_and_date(app_cell)
-            if not app_id:
-                app_match = re.search(r"\b(22\d{8})\b", row_text)
-                app_id = app_match.group(1) if app_match else None
-            if not app_id:
-                continue
+            if layout.get("kind") == "gnare":
+                if not row_text or not re.search(r"\b22\d{8}\b", row_text):
+                    continue
+                if not app_id:
+                    app_match = re.search(r"\b(22\d{8})\b", row_text)
+                    app_id = app_match.group(1) if app_match else None
+                if not app_id:
+                    continue
 
-            if app_id not in records_by_app_id:
-                ordered_app_ids.append(app_id)
+                if app_id not in records_by_app_id:
+                    ordered_app_ids.append(app_id)
 
-            context = _extract_bulk_consumer_context(app_id, deliberation_dict, full_text)
-            substation = None
-            if context:
-                substation = _extract_bulk_consumer_substation_from_text(
+                context = _extract_bulk_consumer_context(app_id, deliberation_dict, full_text)
+                substation = None
+                if context:
+                    substation = _extract_bulk_consumer_substation_from_text(
+                        context,
+                        extract_section_text=extract_section_text,
+                        parse_raw_connectivity_location=parse_raw_connectivity_location,
+                        clean_substation_value=clean_substation_value,
+                        normalize_substation_candidate=normalize_substation_candidate,
+                        extract_pooling_station_substation=extract_pooling_station_substation,
+                    )
+                if not substation and context:
+                    _, substation = extract_voltage_from_deliberation(app_id, {app_id: context})
+                state, region = parse_project_location(context, substation=substation)
+
+                record = {
+                    "region": region,
+                    "state": state,
+                    "substation": substation,
+                    "name_of_developers": clean_text(row.iloc[layout["applicant_idx"]]),
+                    "group": None,
+                    "gna_application_id": app_id,
+                    "cmets_gna_approved": meeting_number,
+                    "cmets_gna_meeting_date": meeting_date,
+                    "gna_type": None,
+                    "quantum_within_region_mw": parse_numeric_value(row.iloc[layout["within_idx"]]),
+                    "quantum_outside_region_mw": parse_numeric_value(row.iloc[layout["outside_idx"]]),
+                    "total_quantum_mw": parse_numeric_value(row.iloc[layout["total_idx"]]),
+                    "nature_of_applicant": (
+                        clean_text(row.iloc[layout["nature_idx"]])
+                        if layout.get("nature_idx") is not None
+                        else None
+                    ),
+                    "status_of_application": _extract_bulk_consumer_status(
+                        app_id,
+                        deliberation_dict,
+                        full_text,
+                    ),
+                    "start_date_of_gna": (
+                        normalize_output_date_text(row.iloc[layout["start_idx"]])
+                        if layout.get("start_idx") is not None
+                        else None
+                    ),
+                    "end_date_of_gna": (
+                        normalize_output_date_text(row.iloc[layout["end_idx"]])
+                        if layout.get("end_idx") is not None
+                        else None
+                    ),
+                }
+            else:
+                if not row_text or not re.match(r"^\d+\.?$", clean_text(row.iloc[0]) or ""):
+                    continue
+                if not app_id:
+                    app_match = re.search(r"\b(\d{10})\b", row_text)
+                    app_id = app_match.group(1) if app_match else None
+                if not app_id:
+                    continue
+                if app_id not in records_by_app_id:
+                    ordered_app_ids.append(app_id)
+
+                applicant_name = clean_text(row.iloc[layout["applicant_idx"]])
+                context = _extract_legacy_bulk_consumer_context(applicant_name, full_text)
+                voltage, substation = _extract_legacy_bulk_consumer_voltage_substation(
                     context,
-                    extract_section_text=extract_section_text,
-                    parse_raw_connectivity_location=parse_raw_connectivity_location,
                     clean_substation_value=clean_substation_value,
-                    normalize_substation_candidate=normalize_substation_candidate,
-                    extract_pooling_station_substation=extract_pooling_station_substation,
                 )
-            if not substation and context:
-                _, substation = extract_voltage_from_deliberation(app_id, {app_id: context})
-            state, region = parse_project_location(context, substation=substation)
+                state, region = parse_project_location(
+                    clean_text(row.iloc[layout["project_idx"]]),
+                    substation=substation,
+                )
+                explicit_region = clean_text(row.iloc[layout["region_idx"]]) if layout.get("region_idx") is not None else None
+                if explicit_region:
+                    region = explicit_region
 
-            record = {
-                "region": region,
-                "state": state,
-                "substation": substation,
-                "name_of_developers": clean_text(row.iloc[layout["applicant_idx"]]),
-                "group": None,
-                "gna_application_id": app_id,
-                "cmets_gna_approved": meeting_number,
-                "cmets_gna_meeting_date": meeting_date,
-                "gna_type": None,
-                "quantum_within_region_mw": parse_numeric_value(row.iloc[layout["within_idx"]]),
-                "quantum_outside_region_mw": parse_numeric_value(row.iloc[layout["outside_idx"]]),
-                "total_quantum_mw": parse_numeric_value(row.iloc[layout["total_idx"]]),
-                "nature_of_applicant": (
-                    clean_text(row.iloc[layout["nature_idx"]])
-                    if layout.get("nature_idx") is not None
-                    else None
-                ),
-                "status_of_application": _extract_bulk_consumer_status(
-                    app_id,
-                    deliberation_dict,
-                    full_text,
-                ),
-                "start_date_of_gna": (
-                    normalize_output_date_text(row.iloc[layout["start_idx"]])
-                    if layout.get("start_idx") is not None
-                    else None
-                ),
-                "end_date_of_gna": (
-                    normalize_output_date_text(row.iloc[layout["end_idx"]])
-                    if layout.get("end_idx") is not None
-                    else None
-                ),
-            }
+                record = {
+                    "region": region,
+                    "state": state,
+                    "substation": substation,
+                    "name_of_developers": applicant_name,
+                    "group": None,
+                    "gna_application_id": app_id,
+                    "cmets_gna_approved": meeting_number,
+                    "cmets_gna_meeting_date": meeting_date,
+                    "gna_type": None,
+                    "quantum_within_region_mw": None,
+                    "quantum_outside_region_mw": None,
+                    "total_quantum_mw": parse_numeric_value(row.iloc[layout["total_idx"]]),
+                    "nature_of_applicant": clean_text(row.iloc[layout["type_idx"]]),
+                    "status_of_application": "Granted",
+                    "start_date_of_gna": normalize_output_date_text(row.iloc[layout["start_idx"]]),
+                    "end_date_of_gna": None,
+                }
+                if voltage is not None:
+                    record["voltage_level_kv"] = voltage
 
             if not clean_text(record.get("name_of_developers")):
                 continue

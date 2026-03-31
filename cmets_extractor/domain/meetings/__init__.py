@@ -1,5 +1,17 @@
 from cmets_extractor.domain.meetings.forty_second import extract_a1_a4_tables, extract_all_data, process_table
 from cmets_extractor.domain.meetings.hybrid import (
+    extract_19th_all_data,
+    extract_20th_all_data,
+    extract_21st_all_data,
+    extract_25th_all_data,
+    extract_26th_all_data,
+    extract_27th_all_data,
+    extract_28th_all_data,
+    extract_29th_all_data,
+    extract_30th_all_data,
+    extract_31st_all_data,
+    extract_32nd_all_data,
+    extract_33rd_all_data,
     extract_35th_all_data,
     extract_36th_all_data,
     extract_37th_all_data,
@@ -11,6 +23,18 @@ from cmets_extractor.domain.meetings.hybrid import (
     extract_hybrid_connectivity_records,
     extract_hybrid_meeting_data,
     extract_hybrid_reg52_records,
+)
+from cmets_extractor.domain.meetings.legacy_stage import (
+    extract_14th_all_data,
+    extract_15th_all_data,
+    extract_16th_all_data,
+    extract_17th_all_data,
+    extract_18th_all_data,
+)
+from cmets_extractor.domain.meetings.legacy_transition import (
+    extract_22nd_all_data,
+    extract_23rd_all_data,
+    extract_24th_all_data,
 )
 from cmets_extractor.domain.meetings.thirty_fourth import (
     build_34th_page_text_map,
@@ -26,6 +50,26 @@ from cmets_extractor.domain.meetings.thirty_fourth import (
 __all__ = [
     "build_34th_page_text_map",
     "build_connectivity_record_from_page_text",
+    "extract_14th_all_data",
+    "extract_15th_all_data",
+    "extract_16th_all_data",
+    "extract_17th_all_data",
+    "extract_18th_all_data",
+    "extract_19th_all_data",
+    "extract_20th_all_data",
+    "extract_21st_all_data",
+    "extract_22nd_all_data",
+    "extract_23rd_all_data",
+    "extract_24th_all_data",
+    "extract_25th_all_data",
+    "extract_26th_all_data",
+    "extract_27th_all_data",
+    "extract_28th_all_data",
+    "extract_29th_all_data",
+    "extract_30th_all_data",
+    "extract_31st_all_data",
+    "extract_32nd_all_data",
+    "extract_33rd_all_data",
     "extract_34th_all_data",
     "extract_34th_row_segment_from_full_text",
     "extract_34th_row_segment_from_page_text",
